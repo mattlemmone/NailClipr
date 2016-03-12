@@ -1,0 +1,132 @@
+public System.Windows.Forms.Form NailClipr;
+public System.Windows.Forms.CheckBox ChkBox_Maint;
+public System.Windows.Forms.Button Btn_ZUp;
+public System.Windows.Forms.Button Btn_ZDown;
+public System.Windows.Forms.TrackBar Bar_Speed;
+public System.Windows.Forms.Label Lbl_Speed;
+public System.Windows.Forms.Label Lbl_SpeedVar;
+
+private string Main()
+{   
+	InitializeComponent();
+	//Maint: 31
+	//Normal: 0
+	$P.PlayerStatus = 0;
+    return "1";
+}
+
+
+private void InitializeComponent()
+{
+	this.NailClipr = new Form();
+    this.ChkBox_Maint = new System.Windows.Forms.CheckBox();
+    this.Btn_ZUp = new System.Windows.Forms.Button();
+    this.Btn_ZDown = new System.Windows.Forms.Button();
+    this.Bar_Speed = new System.Windows.Forms.TrackBar();
+    this.Lbl_Speed = new System.Windows.Forms.Label();
+    this.Lbl_SpeedVar = new System.Windows.Forms.Label();
+    ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).BeginInit();
+    //this.SuspendLayout();
+   // 
+    // ChkBox_Maint
+    // 
+    this.ChkBox_Maint.AutoSize = true;
+    this.ChkBox_Maint.Location = new System.Drawing.Point(13, 13);
+    this.ChkBox_Maint.Name = "ChkBox_Maint";
+    this.ChkBox_Maint.Size = new System.Drawing.Size(118, 17);
+    this.ChkBox_Maint.TabIndex = 0;
+    this.ChkBox_Maint.Text = "Maintenance Mode";
+    this.ChkBox_Maint.UseVisualStyleBackColor = true;
+    this.ChkBox_Maint.CheckedChanged += new System.EventHandler(this.ChkBox_Maint_CheckedChanged);
+    // 
+    // Btn_ZUp
+    // 
+    this.Btn_ZUp.Location = new System.Drawing.Point(13, 37);
+    this.Btn_ZUp.Name = "Btn_ZUp";
+    this.Btn_ZUp.Size = new System.Drawing.Size(75, 23);
+    this.Btn_ZUp.TabIndex = 1;
+    this.Btn_ZUp.Text = "+ Z";
+    this.Btn_ZUp.UseVisualStyleBackColor = true;
+    this.Btn_ZUp.Click += new System.EventHandler(this.Btn_ZUp_Click);
+    // 
+    // Btn_ZDown
+    // 
+    this.Btn_ZDown.Location = new System.Drawing.Point(13, 66);
+    this.Btn_ZDown.Name = "Btn_ZDown";
+    this.Btn_ZDown.Size = new System.Drawing.Size(75, 23);
+    this.Btn_ZDown.TabIndex = 2;
+    this.Btn_ZDown.Text = "- Z";
+    this.Btn_ZDown.UseVisualStyleBackColor = true;
+    this.Btn_ZDown.Click += new System.EventHandler(this.Btn_ZDown_Click);
+    // 
+    // Bar_Speed
+    // 
+    this.Bar_Speed.Location = new System.Drawing.Point(103, 53);
+    this.Bar_Speed.Name = "Bar_Speed";
+    this.Bar_Speed.Size = new System.Drawing.Size(169, 45);
+    this.Bar_Speed.TabIndex = 3;
+    this.Bar_Speed.Scroll += new System.EventHandler(this.Bar_Speed_Scroll);
+    // 
+    // Lbl_Speed
+    // 
+    this.Lbl_Speed.AutoSize = true;
+    this.Lbl_Speed.Location = new System.Drawing.Point(167, 37);
+    this.Lbl_Speed.Name = "Lbl_Speed";
+    this.Lbl_Speed.Size = new System.Drawing.Size(41, 13);
+    this.Lbl_Speed.TabIndex = 4;
+    this.Lbl_Speed.Text = "Speed:";
+    // 
+    // Lbl_SpeedVar
+    // 
+    this.Lbl_SpeedVar.AutoSize = true;
+    this.Lbl_SpeedVar.Location = new System.Drawing.Point(215, 37);
+    this.Lbl_SpeedVar.Name = "Lbl_SpeedVar";
+    this.Lbl_SpeedVar.Size = new System.Drawing.Size(22, 13);
+    this.Lbl_SpeedVar.TabIndex = 5;
+    this.Lbl_SpeedVar.Text = "1.0";
+    // 
+    // NailClipr
+    // 
+    this.NailClipr.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+    this.NailClipr.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+    this.NailClipr.ClientSize = new System.Drawing.Size(284, 105);
+    this.NailClipr.Controls.Add(this.Lbl_SpeedVar);
+    this.NailClipr.Controls.Add(this.Lbl_Speed);
+    this.NailClipr.Controls.Add(this.Bar_Speed);
+    this.NailClipr.Controls.Add(this.Btn_ZDown);
+    this.NailClipr.Controls.Add(this.Btn_ZUp);
+    this.NailClipr.Controls.Add(this.ChkBox_Maint);
+    this.NailClipr.Name = "NailClipr";
+    this.NailClipr.Text = "NailClipr";
+   // this.NailClipr.Load += new System.EventHandler(this.NailClipr_Load);
+    ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).EndInit();
+    this.NailClipr.ResumeLayout(false);
+    this.NailClipr.PerformLayout();
+    this.NailClipr.ShowDialog();
+
+}
+
+private void ChkBox_Maint_CheckedChanged(object sender, EventArgs e)
+{
+	MessageBox.Show("TY");
+}
+
+private void Btn_ZUp_Click(object sender, EventArgs e)
+{
+
+}
+
+private void NailClipr_Load(object sender, EventArgs e)
+{
+
+}
+
+private void Btn_ZDown_Click(object sender, EventArgs e)
+{
+
+}
+
+private void Bar_Speed_Scroll(object sender, EventArgs e)
+{
+
+}

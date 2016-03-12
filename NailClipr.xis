@@ -8,6 +8,8 @@ public System.Windows.Forms.Label Lbl_SpeedVar;
 
 public byte oldStatus = 0;
 public const byte MAINT_MODE = 31;
+public const float Z_INC = 5.0f;
+public const float defaultSpeed = 5f;
 
 private string Main()
 {   
@@ -121,20 +123,22 @@ private void ChkBox_Maint_CheckedChanged(object sender, EventArgs e)
 
 private void Btn_ZUp_Click(object sender, EventArgs e)
 {
-
-}
-
-private void NailClipr_Load(object sender, EventArgs e)
-{
-
+	float Z = $P.PlayerPosCurrentZ;
+	MessageBox.Show(Z + "");
+	$P.PlayerPosCurrentZ = Z + Z_INC;
 }
 
 private void Btn_ZDown_Click(object sender, EventArgs e)
 {
-
+	float Z = $P.PlayerPosCurrentZ;
+	$P.PlayerPosCurrentZ = Z - Z_INC;
 }
 
 private void Bar_Speed_Scroll(object sender, EventArgs e)
 {
-
+	float barVal = Bar_Speed.Value / 4.0f; 
+	float speed = barVal + defaultSpeed;
+	$P.PlayerSpeed = speed;
+	Lbl_SpeedVar.Text = $P.PlayerSpeed / defaultSpeed + "";
+	
 }

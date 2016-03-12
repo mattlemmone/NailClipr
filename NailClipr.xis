@@ -6,6 +6,9 @@ public System.Windows.Forms.TrackBar Bar_Speed;
 public System.Windows.Forms.Label Lbl_Speed;
 public System.Windows.Forms.Label Lbl_SpeedVar;
 
+public byte oldStatus = 0;
+public const byte MAINT_MODE = 31;
+
 private string Main()
 {   
 	InitializeComponent();
@@ -108,7 +111,12 @@ private void InitializeComponent()
 
 private void ChkBox_Maint_CheckedChanged(object sender, EventArgs e)
 {
-	MessageBox.Show("TY");
+	if (ChkBox_Maint.Checked){
+		oldStatus = $P.PlayerStatus;		
+		$P.PlayerStatus = MAINT_MODE;
+	} else {				
+		$P.PlayerStatus = oldStatus;
+	}
 }
 
 private void Btn_ZUp_Click(object sender, EventArgs e)

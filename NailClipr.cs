@@ -10,17 +10,27 @@ namespace WindowsFormsApplication1
     public partial class NailClipr : Form
     {
         private static EliteAPI api;
-        public uint oldStatus = 0;
-        public const float Z_INC = 3.0f;
         private BackgroundWorker bw = new BackgroundWorker();
+        private Status playerStatus = new Status();
 
-        public struct Status
+        struct Position
         {
+            public const float INC = 2.0f;
+        }
+
+        struct Status
+        {
+            private uint oldStatus;
+            public uint old
+            {
+                get { return oldStatus; }
+                set { oldStatus = value; }
+            }
             public const uint DEFAULT = 0;
             public const uint MAINT = 31;
         }
 
-        public struct Speed
+        struct Speed
         {
             public const float DEFAULT = 5f;
             public const float DIVISOR = 4f;
@@ -45,6 +55,7 @@ namespace WindowsFormsApplication1
                 this.Text = "N/A";
             }
             #endregion
+
             // Start the background worker..
             bw.DoWork += new DoWorkEventHandler(bw_DoWork);
             bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
@@ -56,11 +67,12 @@ namespace WindowsFormsApplication1
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-            while(worker.CancellationPending != true)
+            while (worker.CancellationPending != true)
             {
                 System.Threading.Thread.Sleep(100);
-                bw.ReportProgress(1);
+                bw.ReportProgress(0);
 
+                //Constantly write maintenance mode in case it gets overwritten.
                 if (ChkBox_Maint.Checked == true)
                 {
                     if (api.Player.Status != Status.MAINT)
@@ -71,11 +83,21 @@ namespace WindowsFormsApplication1
 
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            Lbl_Z.Text = api.Player.Y + "";
+
+            Lbl_Z.Text = Math.Round(api.Player.Y, 2) + "";
+
             Lbl_Status.Text = api.Player.Status + "";
+            Lbl_Zone.Text = api.Player.ZoneId + "";
+
+            //Speed
             Lbl_SpeedVar.Text = api.Player.Speed / Speed.DEFAULT + "";
             float f = (api.Player.Speed - Speed.DEFAULT) * Speed.DIVISOR;
-            Bar_Speed.Value = (int)Math.Ceiling(f);
+            int barSpeed = (int)Math.Ceiling(f);
+
+            //If we aren't zoning...
+            if (barSpeed > 0)
+                Bar_Speed.Value = (int)Math.Ceiling(f);
+
         }
 
         private void ChkBox_Maint_CheckedChanged(object sender, EventArgs e)
@@ -85,17 +107,17 @@ namespace WindowsFormsApplication1
                 //Save status before switching.
                 if (api.Player.Status == Status.MAINT)
                 {
-                    oldStatus = Status.DEFAULT;
+                    playerStatus.old = Status.DEFAULT;
                 }
                 else {
-                    oldStatus = api.Player.Status;
+                    playerStatus.old = api.Player.Status;
                 }
 
                 //Maint on.
                 api.Player.Status = Status.MAINT;
             }
             else {
-                api.Player.Status = oldStatus;
+                api.Player.Status = playerStatus.old;
             }
         }
 
@@ -107,18 +129,6 @@ namespace WindowsFormsApplication1
                 this.TopMost = false;
         }
 
-        private void Btn_ZUp_Click(object sender, EventArgs e)
-        {
-            float Z = api.Player.Z;
-            api.Player.Z = Z - Z_INC;
-        }
-
-        private void Btn_ZDown_Click(object sender, EventArgs e)
-        {
-            float Z = api.Player.Z;
-            api.Player.Z = Z + Z_INC;
-        }
-
         private void Bar_Speed_Scroll(object sender, EventArgs e)
         {
             float barVal = Bar_Speed.Value / Speed.DIVISOR;
@@ -127,7 +137,43 @@ namespace WindowsFormsApplication1
             Lbl_SpeedVar.Text = api.Player.Speed / Speed.DEFAULT + "";
         }
 
+        private void Btn_ZUp_Click(object sender, EventArgs e)
+        {
+            float Z = api.Player.Z;
+            api.Player.Z = Z - Position.INC;
+        }
 
+        private void Btn_ZDown_Click(object sender, EventArgs e)
+        {
+            float Z = api.Player.Z;
+            api.Player.Z = Z + Position.INC;
+        }
+
+        private void Btn_XUp_Click(object sender, EventArgs e)
+        {
+            float X = api.Player.X;
+            api.Player.X = X - Position.INC;
+        }
+
+        private void Btn_XDown_Click(object sender, EventArgs e)
+        {
+            float X = api.Player.X;
+            api.Player.X = X + Position.INC;
+
+        }
+
+        private void Btn_YUp_Click(object sender, EventArgs e)
+        {
+            float Y = api.Player.Y;
+            api.Player.Y = Y - Position.INC;
+        }
+
+        private void Btn_YDown_Click(object sender, EventArgs e)
+        {
+            float Y = api.Player.Y;
+            api.Player.Y = Y + Position.INC;
+
+        }
     }
 
 

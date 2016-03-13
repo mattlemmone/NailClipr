@@ -12,13 +12,18 @@ namespace WindowsFormsApplication1
         private static EliteAPI api;
         public uint oldStatus = 0;
         public const float Z_INC = 3.0f;
-        public const float defaultSpeed = 5f;
         private BackgroundWorker bw = new BackgroundWorker();
 
-        public struct Statuses
+        public struct Status
         {
             public const uint DEFAULT = 0;
             public const uint MAINT = 31;
+        }
+
+        public struct Speed
+        {
+            public const float DEFAULT = 5f;
+            public const float DIVISOR = 4f;
         }
 
 
@@ -46,7 +51,6 @@ namespace WindowsFormsApplication1
             bw.WorkerSupportsCancellation = true;
             bw.WorkerReportsProgress = true;
             bw.RunWorkerAsync();
-
         }
 
         private void bw_DoWork(object sender, DoWorkEventArgs e)
@@ -59,8 +63,8 @@ namespace WindowsFormsApplication1
 
                 if (ChkBox_Maint.Checked == true)
                 {
-                    if (api.Player.Status != Statuses.MAINT)
-                        api.Player.Status = Statuses.MAINT;
+                    if (api.Player.Status != Status.MAINT)
+                        api.Player.Status = Status.MAINT;
                 }
             }
         }
@@ -69,6 +73,9 @@ namespace WindowsFormsApplication1
         {
             Lbl_Z.Text = api.Player.Y + "";
             Lbl_Status.Text = api.Player.Status + "";
+            Lbl_SpeedVar.Text = api.Player.Speed / Speed.DEFAULT + "";
+            float f = (api.Player.Speed - Speed.DEFAULT) * Speed.DIVISOR;
+            Bar_Speed.Value = (int)Math.Ceiling(f);
         }
 
         private void ChkBox_Maint_CheckedChanged(object sender, EventArgs e)
@@ -76,16 +83,16 @@ namespace WindowsFormsApplication1
             if (ChkBox_Maint.Checked)
             {
                 //Save status before switching.
-                if (api.Player.Status == Statuses.MAINT)
+                if (api.Player.Status == Status.MAINT)
                 {
-                    oldStatus = Statuses.DEFAULT;
+                    oldStatus = Status.DEFAULT;
                 }
                 else {
                     oldStatus = api.Player.Status;
                 }
 
                 //Maint on.
-                api.Player.Status = Statuses.MAINT;
+                api.Player.Status = Status.MAINT;
             }
             else {
                 api.Player.Status = oldStatus;
@@ -114,10 +121,10 @@ namespace WindowsFormsApplication1
 
         private void Bar_Speed_Scroll(object sender, EventArgs e)
         {
-            float barVal = Bar_Speed.Value / 4.0f;
-            float speed = barVal + defaultSpeed;
+            float barVal = Bar_Speed.Value / Speed.DIVISOR;
+            float speed = barVal + Speed.DEFAULT;
             api.Player.Speed = speed;
-            Lbl_SpeedVar.Text = api.Player.Speed / defaultSpeed + "";
+            Lbl_SpeedVar.Text = api.Player.Speed / Speed.DEFAULT + "";
         }
 
 

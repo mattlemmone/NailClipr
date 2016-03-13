@@ -4,10 +4,6 @@ namespace WindowsFormsApplication1
 {
     partial class NailClipr
     {
-        private EliteAPI api;
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
@@ -38,7 +34,6 @@ namespace WindowsFormsApplication1
             this.Lbl_Speed = new System.Windows.Forms.Label();
             this.Lbl_SpeedVar = new System.Windows.Forms.Label();
             this.ChkBox_StayTop = new System.Windows.Forms.CheckBox();
-            this.Lbl_Player = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).BeginInit();
             this.SuspendLayout();
             // 
@@ -110,21 +105,11 @@ namespace WindowsFormsApplication1
             this.ChkBox_StayTop.UseVisualStyleBackColor = true;
             this.ChkBox_StayTop.CheckedChanged += new System.EventHandler(this.ChkBox_StayTop_CheckedChanged);
             // 
-            // Lbl_Player
-            // 
-            this.Lbl_Player.AutoSize = true;
-            this.Lbl_Player.Location = new System.Drawing.Point(236, 83);
-            this.Lbl_Player.Name = "Lbl_Player";
-            this.Lbl_Player.Size = new System.Drawing.Size(36, 13);
-            this.Lbl_Player.TabIndex = 7;
-            this.Lbl_Player.Text = "Player";
-            // 
             // NailClipr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 105);
-            this.Controls.Add(this.Lbl_Player);
             this.Controls.Add(this.ChkBox_StayTop);
             this.Controls.Add(this.Lbl_SpeedVar);
             this.Controls.Add(this.Lbl_Speed);
@@ -134,7 +119,6 @@ namespace WindowsFormsApplication1
             this.Controls.Add(this.ChkBox_Maint);
             this.Name = "NailClipr";
             this.Text = "NailClipr";
-            this.Load += new System.EventHandler(this.NailClipr_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -150,7 +134,6 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.Label Lbl_Speed;
         private System.Windows.Forms.Label Lbl_SpeedVar;
         private System.Windows.Forms.CheckBox ChkBox_StayTop;
-        private System.Windows.Forms.Label Lbl_Player;
     }
 }
 

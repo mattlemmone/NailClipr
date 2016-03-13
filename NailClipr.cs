@@ -8,13 +8,21 @@ namespace WindowsFormsApplication1
 {
     public partial class NailClipr : Form
     {
-        private EliteAPI core;
+        private EliteAPI api;
+        public uint oldStatus = 0;
+        public const float Z_INC = 5.0f;
+        public const float defaultSpeed = 5f;
 
-        public void MainWindow(EliteAPI core)
+        public struct Statuses
         {
-            InitializeComponent();
-            api = core;
+            public const uint DEFAULT = 31;
+            public const uint MAINT = 31;
+        }
 
+        public NailClipr(EliteAPI core)
+        {
+            this.api = core;
+            InitializeComponent();
             #region Final Fantasy XI [POL]
             var data = Process.GetProcessesByName("pol");
 
@@ -23,57 +31,66 @@ namespace WindowsFormsApplication1
                 var proc = Process.GetProcessesByName("pol").First().Id;
                 api = new EliteAPI(proc);
 
-                Lbl_Player.Text = api.Entity.GetLocalPlayer().Name;
+                this.Text = "NailClipr - " + api.Entity.GetLocalPlayer().Name;
             }
             else
             {
-                Lbl_Player.Text = "N/A";
+                this.Text = "N/A";
             }
             #endregion
-
-            
-        }
-
-        public NailClipr(EliteAPI core)
-        {
-            this.core = core;
-            MainWindow(core);
-            InitializeComponent();
         }
 
         private void ChkBox_Maint_CheckedChanged(object sender, EventArgs e)
         {
-            
-           // Console.Write(api.Player.Status);
-        }
+            if (ChkBox_Maint.Checked)
+            {
+                //Save status before switching.
+                if (api.Player.Status == Statuses.MAINT)
+                {
+                    oldStatus = Statuses.DEFAULT;
+                }
+                else {
+                    oldStatus = api.Player.Status;
+                }
 
-        private void Btn_ZUp_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void NailClipr_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Btn_ZDown_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Bar_Speed_Scroll(object sender, EventArgs e)
-        {
-
+                //Maint on.
+                api.Player.Status = Statuses.MAINT;
+            }
+            else {
+                api.Player.Status = oldStatus;
+            }
         }
 
         private void ChkBox_StayTop_CheckedChanged(object sender, EventArgs e)
         {
+            if (ChkBox_StayTop.Checked)
+                this.TopMost = true;
+            else
+                this.TopMost = false;
+        }
 
+        private void Btn_ZUp_Click(object sender, EventArgs e)
+        {
+            float Z = api.Player.Z;
+            api.Player.Z = Z - Z_INC;
+        }
+
+        private void Btn_ZDown_Click(object sender, EventArgs e)
+        {
+            float Z = api.Player.Z;
+            api.Player.Z = Z + Z_INC;
+        }
+
+        private void Bar_Speed_Scroll(object sender, EventArgs e)
+        {
+            float barVal = Bar_Speed.Value / 4.0f;
+            float speed = barVal + defaultSpeed;
+	        api.Player.Speed = speed;
+            Lbl_SpeedVar.Text = api.Player.Speed / defaultSpeed + "";
         }
 
 
     }
 
-  
+
 }

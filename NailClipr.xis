@@ -1,3 +1,5 @@
+
+
 public System.Windows.Forms.Form NailClipr;
 public System.Windows.Forms.CheckBox ChkBox_Maint;
 public System.Windows.Forms.CheckBox ChkBox_StayTop;
@@ -8,10 +10,16 @@ public System.Windows.Forms.Label Lbl_Speed;
 public System.Windows.Forms.Label Lbl_SpeedVar;
 
 public byte oldStatus = 0;
-public const byte DEFAULT_STATUS = 31;
-public const byte MAINT_STATUS = 31;
 public const float Z_INC = 5.0f;
 public const float defaultSpeed = 5f;
+
+
+
+public struct Statuses
+{	
+	public const byte DEFAULT = 31;
+	public const byte MAINT = 31;
+}
 
 private string Main()
 {   
@@ -20,7 +28,6 @@ private string Main()
 	//Normal: 0
     return "1";
 }
-
 
 private void InitializeComponent()
 {
@@ -127,11 +134,13 @@ private void InitializeComponent()
 private void ChkBox_Maint_CheckedChanged(object sender, EventArgs e)
 {
 	if (ChkBox_Maint.Checked){
-		if ($P.PlayerStatus == MAINT_STATUS)
-			oldStatus = DEFAULT_STATUS;
+		if ($P.PlayerStatus == Statuses.MAINT)
+			oldStatus = Statuses.DEFAULT;
 		else
-			oldStatus = $P.PlayerStatus;		
-		$P.PlayerStatus = MAINT_STATUS;
+			oldStatus = $P.PlayerStatus;
+		while (ChkBox_Maint.Checked)
+			if ($P.PlayerStatus != Statuses.MAINT)
+				$P.PlayerStatus = Statuses.MAINT;
 	} else {				
 		$P.PlayerStatus = oldStatus;
 	}

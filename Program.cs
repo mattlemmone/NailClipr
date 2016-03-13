@@ -10,7 +10,6 @@ namespace WindowsFormsApplication1
 {
     static class Program
     {
-        private static EliteAPI core;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -19,7 +18,7 @@ namespace WindowsFormsApplication1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new NailClipr(core));           
+            Application.Run(new NailClipr());           
         }
     }
 }

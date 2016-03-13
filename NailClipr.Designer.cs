@@ -1,4 +1,5 @@
 ﻿using EliteMMO.API;
+using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {
@@ -34,6 +35,10 @@ namespace WindowsFormsApplication1
             this.Lbl_Speed = new System.Windows.Forms.Label();
             this.Lbl_SpeedVar = new System.Windows.Forms.Label();
             this.ChkBox_StayTop = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.Lbl_Z = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.Lbl_Status = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,7 +75,7 @@ namespace WindowsFormsApplication1
             // 
             // Bar_Speed
             // 
-            this.Bar_Speed.Location = new System.Drawing.Point(103, 48);
+            this.Bar_Speed.Location = new System.Drawing.Point(103, 60);
             this.Bar_Speed.Name = "Bar_Speed";
             this.Bar_Speed.Size = new System.Drawing.Size(169, 45);
             this.Bar_Speed.TabIndex = 3;
@@ -79,7 +84,7 @@ namespace WindowsFormsApplication1
             // Lbl_Speed
             // 
             this.Lbl_Speed.AutoSize = true;
-            this.Lbl_Speed.Location = new System.Drawing.Point(167, 37);
+            this.Lbl_Speed.Location = new System.Drawing.Point(166, 108);
             this.Lbl_Speed.Name = "Lbl_Speed";
             this.Lbl_Speed.Size = new System.Drawing.Size(41, 13);
             this.Lbl_Speed.TabIndex = 4;
@@ -88,7 +93,7 @@ namespace WindowsFormsApplication1
             // Lbl_SpeedVar
             // 
             this.Lbl_SpeedVar.AutoSize = true;
-            this.Lbl_SpeedVar.Location = new System.Drawing.Point(215, 37);
+            this.Lbl_SpeedVar.Location = new System.Drawing.Point(213, 108);
             this.Lbl_SpeedVar.Name = "Lbl_SpeedVar";
             this.Lbl_SpeedVar.Size = new System.Drawing.Size(22, 13);
             this.Lbl_SpeedVar.TabIndex = 5;
@@ -97,7 +102,7 @@ namespace WindowsFormsApplication1
             // ChkBox_StayTop
             // 
             this.ChkBox_StayTop.AutoSize = true;
-            this.ChkBox_StayTop.Location = new System.Drawing.Point(138, 13);
+            this.ChkBox_StayTop.Location = new System.Drawing.Point(188, 13);
             this.ChkBox_StayTop.Name = "ChkBox_StayTop";
             this.ChkBox_StayTop.Size = new System.Drawing.Size(84, 17);
             this.ChkBox_StayTop.TabIndex = 6;
@@ -105,11 +110,51 @@ namespace WindowsFormsApplication1
             this.ChkBox_StayTop.UseVisualStyleBackColor = true;
             this.ChkBox_StayTop.CheckedChanged += new System.EventHandler(this.ChkBox_StayTop_CheckedChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 92);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(17, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Z:";
+            // 
+            // Lbl_Z
+            // 
+            this.Lbl_Z.AutoSize = true;
+            this.Lbl_Z.Location = new System.Drawing.Point(31, 92);
+            this.Lbl_Z.Name = "Lbl_Z";
+            this.Lbl_Z.Size = new System.Drawing.Size(13, 13);
+            this.Lbl_Z.TabIndex = 8;
+            this.Lbl_Z.Text = "0";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 108);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(40, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Status:";
+            // 
+            // Lbl_Status
+            // 
+            this.Lbl_Status.AutoSize = true;
+            this.Lbl_Status.Location = new System.Drawing.Point(51, 108);
+            this.Lbl_Status.Name = "Lbl_Status";
+            this.Lbl_Status.Size = new System.Drawing.Size(16, 13);
+            this.Lbl_Status.TabIndex = 10;
+            this.Lbl_Status.Text = "-1";
+            // 
             // NailClipr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 105);
+            this.ClientSize = new System.Drawing.Size(284, 127);
+            this.Controls.Add(this.Lbl_Status);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.Lbl_Z);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.ChkBox_StayTop);
             this.Controls.Add(this.Lbl_SpeedVar);
             this.Controls.Add(this.Lbl_Speed);
@@ -134,6 +179,10 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.Label Lbl_Speed;
         private System.Windows.Forms.Label Lbl_SpeedVar;
         private System.Windows.Forms.CheckBox ChkBox_StayTop;
+        private System.Windows.Forms.Label label1;
+        private Label Lbl_Z;
+        private Label Lbl_Status;
+        private Label label2;
     }
 }
 

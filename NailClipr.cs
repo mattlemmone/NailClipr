@@ -11,14 +11,14 @@ namespace WindowsFormsApplication1
     {
         private static EliteAPI api;
         private BackgroundWorker bw = new BackgroundWorker();
-        private Status playerStatus = new Status();
+        public Player player = new Player();
 
-        struct Position
+        public struct Position
         {
             public const float INC = 2.0f;
         }
 
-        struct Status
+        public struct Status
         {
             private uint oldStatus;
             public uint old
@@ -30,12 +30,23 @@ namespace WindowsFormsApplication1
             public const uint MAINT = 31;
         }
 
-        struct Speed
+        public struct Speed
         {
+            private float e;
+            public float expected
+            {
+                get { return e; }
+                set { e = value; }
+            }
             public const float DEFAULT = 5f;
             public const float DIVISOR = 4f;
         }
 
+        public class Player
+        {
+            public Speed speed = new Speed();
+            public Status status = new Status();
+        }
 
         public NailClipr()
         {
@@ -89,7 +100,16 @@ namespace WindowsFormsApplication1
             Lbl_Status.Text = api.Player.Status + "";
             Lbl_Zone.Text = api.Player.ZoneId + "";
 
-            //Speed
+            /*Speed*/
+            //Not initialized.
+            if (player.speed.expected == 0)
+                player.speed.expected = api.Player.Speed;
+
+            //Prevent overwrite
+            if (api.Player.Speed != player.speed.expected)
+                api.Player.Speed = player.speed.expected;
+
+            //Update labels
             Lbl_SpeedVar.Text = api.Player.Speed / Speed.DEFAULT + "";
             float f = (api.Player.Speed - Speed.DEFAULT) * Speed.DIVISOR;
             int barSpeed = (int)Math.Ceiling(f);
@@ -107,17 +127,17 @@ namespace WindowsFormsApplication1
                 //Save status before switching.
                 if (api.Player.Status == Status.MAINT)
                 {
-                    playerStatus.old = Status.DEFAULT;
+                    player.status.old = Status.DEFAULT;
                 }
                 else {
-                    playerStatus.old = api.Player.Status;
+                    player.status.old = api.Player.Status;
                 }
 
                 //Maint on.
                 api.Player.Status = Status.MAINT;
             }
             else {
-                api.Player.Status = playerStatus.old;
+                api.Player.Status = player.status.old;
             }
         }
 
@@ -133,6 +153,7 @@ namespace WindowsFormsApplication1
         {
             float barVal = Bar_Speed.Value / Speed.DIVISOR;
             float speed = barVal + Speed.DEFAULT;
+            player.speed.expected = speed;
             api.Player.Speed = speed;
             Lbl_SpeedVar.Text = api.Player.Speed / Speed.DEFAULT + "";
         }

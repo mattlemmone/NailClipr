@@ -78,6 +78,7 @@ namespace WindowsFormsApplication1
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
+  
             while (worker.CancellationPending != true)
             {
                 System.Threading.Thread.Sleep(100);
@@ -99,6 +100,7 @@ namespace WindowsFormsApplication1
             Lbl_Y.Text = Math.Round(api.Player.Z, 2) + "";
             Lbl_Z.Text = Math.Round(api.Player.Y, 2) + "";
 
+            //Zone and Status Label
             Lbl_Status.Text = api.Player.Status + "";
             Lbl_Zone.Text = api.Player.ZoneId + "";
 
@@ -112,7 +114,7 @@ namespace WindowsFormsApplication1
                 api.Player.Speed = player.speed.expected;
 
             //Update labels
-            Lbl_SpeedVar.Text = api.Player.Speed / Speed.DEFAULT + "";
+            Lbl_SpeedVar.Text = "x" + api.Player.Speed / Speed.DEFAULT;
             float f = (api.Player.Speed - Speed.DEFAULT) * Speed.DIVISOR;
             int barSpeed = (int)Math.Ceiling(f);
 
@@ -157,7 +159,6 @@ namespace WindowsFormsApplication1
             float speed = barVal + Speed.DEFAULT;
             player.speed.expected = speed;
             api.Player.Speed = speed;
-            Lbl_SpeedVar.Text = api.Player.Speed / Speed.DEFAULT + "";
         }
 
 

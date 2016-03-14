@@ -49,13 +49,15 @@ namespace WindowsFormsApplication1
             this.Btn_Plus_Z = new System.Windows.Forms.Button();
             this.Lbl_Z = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ChkBox_Maint
             // 
             this.ChkBox_Maint.AutoSize = true;
-            this.ChkBox_Maint.Location = new System.Drawing.Point(13, 13);
+            this.ChkBox_Maint.Location = new System.Drawing.Point(154, 18);
             this.ChkBox_Maint.Name = "ChkBox_Maint";
             this.ChkBox_Maint.Size = new System.Drawing.Size(118, 17);
             this.ChkBox_Maint.TabIndex = 0;
@@ -65,7 +67,7 @@ namespace WindowsFormsApplication1
             // 
             // Bar_Speed
             // 
-            this.Bar_Speed.Location = new System.Drawing.Point(13, 117);
+            this.Bar_Speed.Location = new System.Drawing.Point(13, 142);
             this.Bar_Speed.Name = "Bar_Speed";
             this.Bar_Speed.Size = new System.Drawing.Size(259, 45);
             this.Bar_Speed.TabIndex = 3;
@@ -74,7 +76,7 @@ namespace WindowsFormsApplication1
             // Lbl_Speed
             // 
             this.Lbl_Speed.AutoSize = true;
-            this.Lbl_Speed.Location = new System.Drawing.Point(117, 149);
+            this.Lbl_Speed.Location = new System.Drawing.Point(108, 190);
             this.Lbl_Speed.Name = "Lbl_Speed";
             this.Lbl_Speed.Size = new System.Drawing.Size(41, 13);
             this.Lbl_Speed.TabIndex = 4;
@@ -83,7 +85,7 @@ namespace WindowsFormsApplication1
             // Lbl_SpeedVar
             // 
             this.Lbl_SpeedVar.AutoSize = true;
-            this.Lbl_SpeedVar.Location = new System.Drawing.Point(161, 149);
+            this.Lbl_SpeedVar.Location = new System.Drawing.Point(155, 190);
             this.Lbl_SpeedVar.Name = "Lbl_SpeedVar";
             this.Lbl_SpeedVar.Size = new System.Drawing.Size(22, 13);
             this.Lbl_SpeedVar.TabIndex = 5;
@@ -92,7 +94,7 @@ namespace WindowsFormsApplication1
             // ChkBox_StayTop
             // 
             this.ChkBox_StayTop.AutoSize = true;
-            this.ChkBox_StayTop.Location = new System.Drawing.Point(188, 13);
+            this.ChkBox_StayTop.Location = new System.Drawing.Point(154, 41);
             this.ChkBox_StayTop.Name = "ChkBox_StayTop";
             this.ChkBox_StayTop.Size = new System.Drawing.Size(84, 17);
             this.ChkBox_StayTop.TabIndex = 6;
@@ -139,7 +141,7 @@ namespace WindowsFormsApplication1
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(91, 42);
+            this.label1.Location = new System.Drawing.Point(6, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(17, 13);
             this.label1.TabIndex = 20;
@@ -148,7 +150,7 @@ namespace WindowsFormsApplication1
             // Lbl_X
             // 
             this.Lbl_X.AutoSize = true;
-            this.Lbl_X.Location = new System.Drawing.Point(106, 42);
+            this.Lbl_X.Location = new System.Drawing.Point(21, 20);
             this.Lbl_X.Name = "Lbl_X";
             this.Lbl_X.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Lbl_X.Size = new System.Drawing.Size(25, 13);
@@ -157,7 +159,7 @@ namespace WindowsFormsApplication1
             // 
             // Btn_Plus_X
             // 
-            this.Btn_Plus_X.Location = new System.Drawing.Point(145, 37);
+            this.Btn_Plus_X.Location = new System.Drawing.Point(60, 15);
             this.Btn_Plus_X.Name = "Btn_Plus_X";
             this.Btn_Plus_X.Size = new System.Drawing.Size(24, 23);
             this.Btn_Plus_X.TabIndex = 22;
@@ -167,7 +169,7 @@ namespace WindowsFormsApplication1
             // 
             // Btn_Minus_X
             // 
-            this.Btn_Minus_X.Location = new System.Drawing.Point(169, 37);
+            this.Btn_Minus_X.Location = new System.Drawing.Point(90, 15);
             this.Btn_Minus_X.Name = "Btn_Minus_X";
             this.Btn_Minus_X.Size = new System.Drawing.Size(24, 23);
             this.Btn_Minus_X.TabIndex = 23;
@@ -177,7 +179,7 @@ namespace WindowsFormsApplication1
             // 
             // Btn_Minus_Y
             // 
-            this.Btn_Minus_Y.Location = new System.Drawing.Point(169, 63);
+            this.Btn_Minus_Y.Location = new System.Drawing.Point(90, 41);
             this.Btn_Minus_Y.Name = "Btn_Minus_Y";
             this.Btn_Minus_Y.Size = new System.Drawing.Size(24, 23);
             this.Btn_Minus_Y.TabIndex = 27;
@@ -187,7 +189,7 @@ namespace WindowsFormsApplication1
             // 
             // Btn_Plus_Y
             // 
-            this.Btn_Plus_Y.Location = new System.Drawing.Point(145, 63);
+            this.Btn_Plus_Y.Location = new System.Drawing.Point(60, 41);
             this.Btn_Plus_Y.Name = "Btn_Plus_Y";
             this.Btn_Plus_Y.Size = new System.Drawing.Size(24, 23);
             this.Btn_Plus_Y.TabIndex = 26;
@@ -198,7 +200,7 @@ namespace WindowsFormsApplication1
             // Lbl_Y
             // 
             this.Lbl_Y.AutoSize = true;
-            this.Lbl_Y.Location = new System.Drawing.Point(106, 68);
+            this.Lbl_Y.Location = new System.Drawing.Point(21, 46);
             this.Lbl_Y.Name = "Lbl_Y";
             this.Lbl_Y.Size = new System.Drawing.Size(25, 13);
             this.Lbl_Y.TabIndex = 25;
@@ -207,7 +209,7 @@ namespace WindowsFormsApplication1
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(91, 68);
+            this.label6.Location = new System.Drawing.Point(6, 46);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(17, 13);
             this.label6.TabIndex = 24;
@@ -215,7 +217,7 @@ namespace WindowsFormsApplication1
             // 
             // Btn_Minus_Z
             // 
-            this.Btn_Minus_Z.Location = new System.Drawing.Point(169, 89);
+            this.Btn_Minus_Z.Location = new System.Drawing.Point(90, 67);
             this.Btn_Minus_Z.Name = "Btn_Minus_Z";
             this.Btn_Minus_Z.Size = new System.Drawing.Size(24, 23);
             this.Btn_Minus_Z.TabIndex = 31;
@@ -225,7 +227,7 @@ namespace WindowsFormsApplication1
             // 
             // Btn_Plus_Z
             // 
-            this.Btn_Plus_Z.Location = new System.Drawing.Point(145, 89);
+            this.Btn_Plus_Z.Location = new System.Drawing.Point(60, 67);
             this.Btn_Plus_Z.Name = "Btn_Plus_Z";
             this.Btn_Plus_Z.Size = new System.Drawing.Size(24, 23);
             this.Btn_Plus_Z.TabIndex = 30;
@@ -236,7 +238,7 @@ namespace WindowsFormsApplication1
             // Lbl_Z
             // 
             this.Lbl_Z.AutoSize = true;
-            this.Lbl_Z.Location = new System.Drawing.Point(106, 94);
+            this.Lbl_Z.Location = new System.Drawing.Point(21, 72);
             this.Lbl_Z.Name = "Lbl_Z";
             this.Lbl_Z.Size = new System.Drawing.Size(25, 13);
             this.Lbl_Z.TabIndex = 29;
@@ -245,29 +247,39 @@ namespace WindowsFormsApplication1
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(91, 94);
+            this.label8.Location = new System.Drawing.Point(6, 72);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(17, 13);
             this.label8.TabIndex = 28;
             this.label8.Text = "Z:";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.Lbl_X);
+            this.groupBox1.Controls.Add(this.Btn_Minus_Z);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.Btn_Plus_Z);
+            this.groupBox1.Controls.Add(this.Btn_Plus_X);
+            this.groupBox1.Controls.Add(this.Lbl_Z);
+            this.groupBox1.Controls.Add(this.Btn_Minus_X);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.Btn_Minus_Y);
+            this.groupBox1.Controls.Add(this.Lbl_Y);
+            this.groupBox1.Controls.Add(this.Btn_Plus_Y);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(133, 100);
+            this.groupBox1.TabIndex = 32;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Position";
             // 
             // NailClipr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 209);
-            this.Controls.Add(this.Btn_Minus_Z);
-            this.Controls.Add(this.Btn_Plus_Z);
-            this.Controls.Add(this.Lbl_Z);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.Btn_Minus_Y);
-            this.Controls.Add(this.Btn_Plus_Y);
-            this.Controls.Add(this.Lbl_Y);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.Btn_Minus_X);
-            this.Controls.Add(this.Btn_Plus_X);
-            this.Controls.Add(this.Lbl_X);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.Lbl_Zone);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.Lbl_Status);
@@ -280,6 +292,8 @@ namespace WindowsFormsApplication1
             this.Name = "NailClipr";
             this.Text = "NailClipr";
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -308,6 +322,7 @@ namespace WindowsFormsApplication1
         private Button Btn_Plus_Z;
         private Label Lbl_Z;
         private Label label8;
+        private GroupBox groupBox1;
     }
 }
 

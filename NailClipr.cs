@@ -15,7 +15,7 @@ namespace WindowsFormsApplication1
 
         public struct Position
         {
-            public const float INC = 2.0f;
+            public const float INC = 5.0f;
         }
 
         public struct Status
@@ -94,7 +94,9 @@ namespace WindowsFormsApplication1
 
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-
+            //Pos. Z and Y write correctly but read each other. Inherent issue.
+            Lbl_X.Text = Math.Round(api.Player.X, 2) + "";
+            Lbl_Y.Text = Math.Round(api.Player.Z, 2) + "";
             Lbl_Z.Text = Math.Round(api.Player.Y, 2) + "";
 
             Lbl_Status.Text = api.Player.Status + "";
@@ -158,42 +160,40 @@ namespace WindowsFormsApplication1
             Lbl_SpeedVar.Text = api.Player.Speed / Speed.DEFAULT + "";
         }
 
-        private void Btn_ZUp_Click(object sender, EventArgs e)
+
+        private void Btn_Plus_X_Click(object sender, EventArgs e)
         {
-            float Z = api.Player.Z;
-            api.Player.Z = Z - Position.INC;
+            api.Player.X = api.Player.X + Position.INC;
         }
 
-        private void Btn_ZDown_Click(object sender, EventArgs e)
+        private void Btn_Minus_X_Click(object sender, EventArgs e)
         {
-            float Z = api.Player.Z;
-            api.Player.Z = Z + Position.INC;
+
+            api.Player.X = api.Player.X - Position.INC;
         }
 
-        private void Btn_XUp_Click(object sender, EventArgs e)
+        private void Btn_Plus_Y_Click(object sender, EventArgs e)
         {
-            float X = api.Player.X;
-            api.Player.X = X - Position.INC;
+
+            api.Player.Y = api.Player.Z + Position.INC;
         }
 
-        private void Btn_XDown_Click(object sender, EventArgs e)
+        private void Btn_Minus_Y_Click(object sender, EventArgs e)
         {
-            float X = api.Player.X;
-            api.Player.X = X + Position.INC;
 
+            api.Player.Y = api.Player.Z - Position.INC;
         }
 
-        private void Btn_YUp_Click(object sender, EventArgs e)
+        private void Btn_Plus_Z_Click(object sender, EventArgs e)
         {
-            float Y = api.Player.Y;
-            api.Player.Y = Y - Position.INC;
+
+            api.Player.Z = api.Player.Y + Position.INC;
         }
 
-        private void Btn_YDown_Click(object sender, EventArgs e)
+        private void Btn_Minus_Z_Click(object sender, EventArgs e)
         {
-            float Y = api.Player.Y;
-            api.Player.Y = Y + Position.INC;
 
+            api.Player.Z = api.Player.Y - Position.INC;
         }
     }
 

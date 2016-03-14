@@ -29,22 +29,26 @@ namespace WindowsFormsApplication1
         private void InitializeComponent()
         {
             this.ChkBox_Maint = new System.Windows.Forms.CheckBox();
-            this.Btn_ZUp = new System.Windows.Forms.Button();
-            this.Btn_ZDown = new System.Windows.Forms.Button();
             this.Bar_Speed = new System.Windows.Forms.TrackBar();
             this.Lbl_Speed = new System.Windows.Forms.Label();
             this.Lbl_SpeedVar = new System.Windows.Forms.Label();
             this.ChkBox_StayTop = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.Lbl_Z = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.Lbl_Status = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.Lbl_Zone = new System.Windows.Forms.Label();
-            this.Btn_YDown = new System.Windows.Forms.Button();
-            this.Btn_YUp = new System.Windows.Forms.Button();
-            this.Btn_XDown = new System.Windows.Forms.Button();
-            this.Btn_XUp = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.Lbl_X = new System.Windows.Forms.Label();
+            this.Btn_Plus_X = new System.Windows.Forms.Button();
+            this.Btn_Minus_X = new System.Windows.Forms.Button();
+            this.Btn_Minus_Y = new System.Windows.Forms.Button();
+            this.Btn_Plus_Y = new System.Windows.Forms.Button();
+            this.Lbl_Y = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.Btn_Minus_Z = new System.Windows.Forms.Button();
+            this.Btn_Plus_Z = new System.Windows.Forms.Button();
+            this.Lbl_Z = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,26 +62,6 @@ namespace WindowsFormsApplication1
             this.ChkBox_Maint.Text = "Maintenance Mode";
             this.ChkBox_Maint.UseVisualStyleBackColor = true;
             this.ChkBox_Maint.CheckedChanged += new System.EventHandler(this.ChkBox_Maint_CheckedChanged);
-            // 
-            // Btn_ZUp
-            // 
-            this.Btn_ZUp.Location = new System.Drawing.Point(197, 45);
-            this.Btn_ZUp.Name = "Btn_ZUp";
-            this.Btn_ZUp.Size = new System.Drawing.Size(75, 23);
-            this.Btn_ZUp.TabIndex = 1;
-            this.Btn_ZUp.Text = "+ Z";
-            this.Btn_ZUp.UseVisualStyleBackColor = true;
-            this.Btn_ZUp.Click += new System.EventHandler(this.Btn_ZUp_Click);
-            // 
-            // Btn_ZDown
-            // 
-            this.Btn_ZDown.Location = new System.Drawing.Point(197, 74);
-            this.Btn_ZDown.Name = "Btn_ZDown";
-            this.Btn_ZDown.Size = new System.Drawing.Size(75, 23);
-            this.Btn_ZDown.TabIndex = 2;
-            this.Btn_ZDown.Text = "- Z";
-            this.Btn_ZDown.UseVisualStyleBackColor = true;
-            this.Btn_ZDown.Click += new System.EventHandler(this.Btn_ZDown_Click);
             // 
             // Bar_Speed
             // 
@@ -116,24 +100,6 @@ namespace WindowsFormsApplication1
             this.ChkBox_StayTop.UseVisualStyleBackColor = true;
             this.ChkBox_StayTop.CheckedChanged += new System.EventHandler(this.ChkBox_StayTop_CheckedChanged);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(126, 190);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(17, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Z:";
-            // 
-            // Lbl_Z
-            // 
-            this.Lbl_Z.AutoSize = true;
-            this.Lbl_Z.Location = new System.Drawing.Point(145, 190);
-            this.Lbl_Z.Name = "Lbl_Z";
-            this.Lbl_Z.Size = new System.Drawing.Size(13, 13);
-            this.Lbl_Z.TabIndex = 8;
-            this.Lbl_Z.Text = "0";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -170,67 +136,146 @@ namespace WindowsFormsApplication1
             this.Lbl_Zone.TabIndex = 12;
             this.Lbl_Zone.Text = "123";
             // 
-            // Btn_YDown
+            // label1
             // 
-            this.Btn_YDown.Location = new System.Drawing.Point(104, 74);
-            this.Btn_YDown.Name = "Btn_YDown";
-            this.Btn_YDown.Size = new System.Drawing.Size(75, 23);
-            this.Btn_YDown.TabIndex = 14;
-            this.Btn_YDown.Text = "- Y";
-            this.Btn_YDown.UseVisualStyleBackColor = true;
-            this.Btn_YDown.Click += new System.EventHandler(this.Btn_YDown_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(91, 42);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(17, 13);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "X:";
             // 
-            // Btn_YUp
+            // Lbl_X
             // 
-            this.Btn_YUp.Location = new System.Drawing.Point(104, 45);
-            this.Btn_YUp.Name = "Btn_YUp";
-            this.Btn_YUp.Size = new System.Drawing.Size(75, 23);
-            this.Btn_YUp.TabIndex = 13;
-            this.Btn_YUp.Text = "+ Y";
-            this.Btn_YUp.UseVisualStyleBackColor = true;
-            this.Btn_YUp.Click += new System.EventHandler(this.Btn_YUp_Click);
+            this.Lbl_X.AutoSize = true;
+            this.Lbl_X.Location = new System.Drawing.Point(106, 42);
+            this.Lbl_X.Name = "Lbl_X";
+            this.Lbl_X.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Lbl_X.Size = new System.Drawing.Size(25, 13);
+            this.Lbl_X.TabIndex = 21;
+            this.Lbl_X.Text = "123";
             // 
-            // Btn_XDown
+            // Btn_Plus_X
             // 
-            this.Btn_XDown.Location = new System.Drawing.Point(12, 74);
-            this.Btn_XDown.Name = "Btn_XDown";
-            this.Btn_XDown.Size = new System.Drawing.Size(75, 23);
-            this.Btn_XDown.TabIndex = 16;
-            this.Btn_XDown.Text = "- X";
-            this.Btn_XDown.UseVisualStyleBackColor = true;
-            this.Btn_XDown.Click += new System.EventHandler(this.Btn_XDown_Click);
+            this.Btn_Plus_X.Location = new System.Drawing.Point(145, 37);
+            this.Btn_Plus_X.Name = "Btn_Plus_X";
+            this.Btn_Plus_X.Size = new System.Drawing.Size(24, 23);
+            this.Btn_Plus_X.TabIndex = 22;
+            this.Btn_Plus_X.Text = "+";
+            this.Btn_Plus_X.UseVisualStyleBackColor = true;
+            this.Btn_Plus_X.Click += new System.EventHandler(this.Btn_Plus_X_Click);
             // 
-            // Btn_XUp
+            // Btn_Minus_X
             // 
-            this.Btn_XUp.Location = new System.Drawing.Point(12, 45);
-            this.Btn_XUp.Name = "Btn_XUp";
-            this.Btn_XUp.Size = new System.Drawing.Size(75, 23);
-            this.Btn_XUp.TabIndex = 15;
-            this.Btn_XUp.Text = "+ X";
-            this.Btn_XUp.UseVisualStyleBackColor = true;
-            this.Btn_XUp.Click += new System.EventHandler(this.Btn_XUp_Click);
+            this.Btn_Minus_X.Location = new System.Drawing.Point(169, 37);
+            this.Btn_Minus_X.Name = "Btn_Minus_X";
+            this.Btn_Minus_X.Size = new System.Drawing.Size(24, 23);
+            this.Btn_Minus_X.TabIndex = 23;
+            this.Btn_Minus_X.Text = "-";
+            this.Btn_Minus_X.UseVisualStyleBackColor = true;
+            this.Btn_Minus_X.Click += new System.EventHandler(this.Btn_Minus_X_Click);
+            // 
+            // Btn_Minus_Y
+            // 
+            this.Btn_Minus_Y.Location = new System.Drawing.Point(169, 63);
+            this.Btn_Minus_Y.Name = "Btn_Minus_Y";
+            this.Btn_Minus_Y.Size = new System.Drawing.Size(24, 23);
+            this.Btn_Minus_Y.TabIndex = 27;
+            this.Btn_Minus_Y.Text = "-";
+            this.Btn_Minus_Y.UseVisualStyleBackColor = true;
+            this.Btn_Minus_Y.Click += new System.EventHandler(this.Btn_Minus_Y_Click);
+            // 
+            // Btn_Plus_Y
+            // 
+            this.Btn_Plus_Y.Location = new System.Drawing.Point(145, 63);
+            this.Btn_Plus_Y.Name = "Btn_Plus_Y";
+            this.Btn_Plus_Y.Size = new System.Drawing.Size(24, 23);
+            this.Btn_Plus_Y.TabIndex = 26;
+            this.Btn_Plus_Y.Text = "+";
+            this.Btn_Plus_Y.UseVisualStyleBackColor = true;
+            this.Btn_Plus_Y.Click += new System.EventHandler(this.Btn_Plus_Y_Click);
+            // 
+            // Lbl_Y
+            // 
+            this.Lbl_Y.AutoSize = true;
+            this.Lbl_Y.Location = new System.Drawing.Point(106, 68);
+            this.Lbl_Y.Name = "Lbl_Y";
+            this.Lbl_Y.Size = new System.Drawing.Size(25, 13);
+            this.Lbl_Y.TabIndex = 25;
+            this.Lbl_Y.Text = "123";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(91, 68);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(17, 13);
+            this.label6.TabIndex = 24;
+            this.label6.Text = "Y:";
+            // 
+            // Btn_Minus_Z
+            // 
+            this.Btn_Minus_Z.Location = new System.Drawing.Point(169, 89);
+            this.Btn_Minus_Z.Name = "Btn_Minus_Z";
+            this.Btn_Minus_Z.Size = new System.Drawing.Size(24, 23);
+            this.Btn_Minus_Z.TabIndex = 31;
+            this.Btn_Minus_Z.Text = "-";
+            this.Btn_Minus_Z.UseVisualStyleBackColor = true;
+            this.Btn_Minus_Z.Click += new System.EventHandler(this.Btn_Minus_Z_Click);
+            // 
+            // Btn_Plus_Z
+            // 
+            this.Btn_Plus_Z.Location = new System.Drawing.Point(145, 89);
+            this.Btn_Plus_Z.Name = "Btn_Plus_Z";
+            this.Btn_Plus_Z.Size = new System.Drawing.Size(24, 23);
+            this.Btn_Plus_Z.TabIndex = 30;
+            this.Btn_Plus_Z.Text = "+";
+            this.Btn_Plus_Z.UseVisualStyleBackColor = true;
+            this.Btn_Plus_Z.Click += new System.EventHandler(this.Btn_Plus_Z_Click);
+            // 
+            // Lbl_Z
+            // 
+            this.Lbl_Z.AutoSize = true;
+            this.Lbl_Z.Location = new System.Drawing.Point(106, 94);
+            this.Lbl_Z.Name = "Lbl_Z";
+            this.Lbl_Z.Size = new System.Drawing.Size(25, 13);
+            this.Lbl_Z.TabIndex = 29;
+            this.Lbl_Z.Text = "123";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(91, 94);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(17, 13);
+            this.label8.TabIndex = 28;
+            this.label8.Text = "Z:";
             // 
             // NailClipr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 209);
-            this.Controls.Add(this.Btn_XDown);
-            this.Controls.Add(this.Btn_XUp);
-            this.Controls.Add(this.Btn_YDown);
-            this.Controls.Add(this.Btn_YUp);
+            this.Controls.Add(this.Btn_Minus_Z);
+            this.Controls.Add(this.Btn_Plus_Z);
+            this.Controls.Add(this.Lbl_Z);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.Btn_Minus_Y);
+            this.Controls.Add(this.Btn_Plus_Y);
+            this.Controls.Add(this.Lbl_Y);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.Btn_Minus_X);
+            this.Controls.Add(this.Btn_Plus_X);
+            this.Controls.Add(this.Lbl_X);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.Lbl_Zone);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.Lbl_Status);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.Lbl_Z);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.ChkBox_StayTop);
             this.Controls.Add(this.Lbl_SpeedVar);
             this.Controls.Add(this.Lbl_Speed);
             this.Controls.Add(this.Bar_Speed);
-            this.Controls.Add(this.Btn_ZDown);
-            this.Controls.Add(this.Btn_ZUp);
             this.Controls.Add(this.ChkBox_Maint);
             this.Name = "NailClipr";
             this.Text = "NailClipr";
@@ -243,22 +288,26 @@ namespace WindowsFormsApplication1
         #endregion
 
         private System.Windows.Forms.CheckBox ChkBox_Maint;
-        private System.Windows.Forms.Button Btn_ZUp;
-        private System.Windows.Forms.Button Btn_ZDown;
         private System.Windows.Forms.TrackBar Bar_Speed;
         private System.Windows.Forms.Label Lbl_Speed;
         private System.Windows.Forms.Label Lbl_SpeedVar;
         private System.Windows.Forms.CheckBox ChkBox_StayTop;
-        private System.Windows.Forms.Label label1;
-        private Label Lbl_Z;
         private Label Lbl_Status;
         private Label label2;
         private Label label3;
         private Label Lbl_Zone;
-        private Button Btn_YDown;
-        private Button Btn_YUp;
-        private Button Btn_XDown;
-        private Button Btn_XUp;
+        private Label label1;
+        private Label Lbl_X;
+        private Button Btn_Plus_X;
+        private Button Btn_Minus_X;
+        private Button Btn_Minus_Y;
+        private Button Btn_Plus_Y;
+        private Label Lbl_Y;
+        private Label label6;
+        private Button Btn_Minus_Z;
+        private Button Btn_Plus_Z;
+        private Label Lbl_Z;
+        private Label label8;
     }
 }
 

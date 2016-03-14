@@ -1,4 +1,4 @@
 # NailClipr
 Tool written in C# for FFXI.
 
-![](http://puu.sh/nFdVk/e074dce018.png)
+![](http://puu.sh/nFKRi/b3a31b5df5.png)

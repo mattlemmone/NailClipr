@@ -159,7 +159,7 @@ namespace WindowsFormsApplication1
             // 
             // Btn_Plus_X
             // 
-            this.Btn_Plus_X.Location = new System.Drawing.Point(60, 15);
+            this.Btn_Plus_X.Location = new System.Drawing.Point(67, 15);
             this.Btn_Plus_X.Name = "Btn_Plus_X";
             this.Btn_Plus_X.Size = new System.Drawing.Size(24, 23);
             this.Btn_Plus_X.TabIndex = 22;
@@ -169,7 +169,7 @@ namespace WindowsFormsApplication1
             // 
             // Btn_Minus_X
             // 
-            this.Btn_Minus_X.Location = new System.Drawing.Point(90, 15);
+            this.Btn_Minus_X.Location = new System.Drawing.Point(97, 15);
             this.Btn_Minus_X.Name = "Btn_Minus_X";
             this.Btn_Minus_X.Size = new System.Drawing.Size(24, 23);
             this.Btn_Minus_X.TabIndex = 23;
@@ -179,7 +179,7 @@ namespace WindowsFormsApplication1
             // 
             // Btn_Minus_Y
             // 
-            this.Btn_Minus_Y.Location = new System.Drawing.Point(90, 41);
+            this.Btn_Minus_Y.Location = new System.Drawing.Point(97, 41);
             this.Btn_Minus_Y.Name = "Btn_Minus_Y";
             this.Btn_Minus_Y.Size = new System.Drawing.Size(24, 23);
             this.Btn_Minus_Y.TabIndex = 27;
@@ -189,7 +189,7 @@ namespace WindowsFormsApplication1
             // 
             // Btn_Plus_Y
             // 
-            this.Btn_Plus_Y.Location = new System.Drawing.Point(60, 41);
+            this.Btn_Plus_Y.Location = new System.Drawing.Point(67, 41);
             this.Btn_Plus_Y.Name = "Btn_Plus_Y";
             this.Btn_Plus_Y.Size = new System.Drawing.Size(24, 23);
             this.Btn_Plus_Y.TabIndex = 26;
@@ -217,7 +217,7 @@ namespace WindowsFormsApplication1
             // 
             // Btn_Minus_Z
             // 
-            this.Btn_Minus_Z.Location = new System.Drawing.Point(90, 67);
+            this.Btn_Minus_Z.Location = new System.Drawing.Point(97, 67);
             this.Btn_Minus_Z.Name = "Btn_Minus_Z";
             this.Btn_Minus_Z.Size = new System.Drawing.Size(24, 23);
             this.Btn_Minus_Z.TabIndex = 31;
@@ -227,7 +227,7 @@ namespace WindowsFormsApplication1
             // 
             // Btn_Plus_Z
             // 
-            this.Btn_Plus_Z.Location = new System.Drawing.Point(60, 67);
+            this.Btn_Plus_Z.Location = new System.Drawing.Point(67, 67);
             this.Btn_Plus_Z.Name = "Btn_Plus_Z";
             this.Btn_Plus_Z.Size = new System.Drawing.Size(24, 23);
             this.Btn_Plus_Z.TabIndex = 30;

@@ -50,6 +50,9 @@ namespace WindowsFormsApplication1
             this.Lbl_Z = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.CB_Warp = new System.Windows.Forms.ComboBox();
+            this.Btn_Save = new System.Windows.Forms.Button();
+            this.Btn_Warp = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -274,11 +277,42 @@ namespace WindowsFormsApplication1
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Position";
             // 
+            // CB_Warp
+            // 
+            this.CB_Warp.FormattingEnabled = true;
+            this.CB_Warp.Location = new System.Drawing.Point(154, 65);
+            this.CB_Warp.Name = "CB_Warp";
+            this.CB_Warp.Size = new System.Drawing.Size(118, 21);
+            this.CB_Warp.TabIndex = 33;
+            // 
+            // Btn_Save
+            // 
+            this.Btn_Save.Location = new System.Drawing.Point(154, 89);
+            this.Btn_Save.Name = "Btn_Save";
+            this.Btn_Save.Size = new System.Drawing.Size(56, 23);
+            this.Btn_Save.TabIndex = 34;
+            this.Btn_Save.Text = "Save";
+            this.Btn_Save.UseVisualStyleBackColor = true;
+            this.Btn_Save.Click += new System.EventHandler(this.Btn_Save_Click);
+            // 
+            // Btn_Warp
+            // 
+            this.Btn_Warp.Location = new System.Drawing.Point(216, 89);
+            this.Btn_Warp.Name = "Btn_Warp";
+            this.Btn_Warp.Size = new System.Drawing.Size(56, 23);
+            this.Btn_Warp.TabIndex = 35;
+            this.Btn_Warp.Text = "Warp";
+            this.Btn_Warp.UseVisualStyleBackColor = true;
+            this.Btn_Warp.Click += new System.EventHandler(this.Btn_Warp_Click);
+            // 
             // NailClipr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 209);
+            this.Controls.Add(this.Btn_Warp);
+            this.Controls.Add(this.Btn_Save);
+            this.Controls.Add(this.CB_Warp);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.Lbl_Zone);
             this.Controls.Add(this.label3);
@@ -323,6 +357,9 @@ namespace WindowsFormsApplication1
         private Label Lbl_Z;
         private Label label8;
         private GroupBox groupBox1;
+        private ComboBox CB_Warp;
+        private Button Btn_Save;
+        private Button Btn_Warp;
     }
 }
 

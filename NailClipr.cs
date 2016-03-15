@@ -147,6 +147,7 @@ namespace WindowsFormsApplication1
 
         private void ChkBox_StayTop_CheckedChanged(object sender, EventArgs e)
         {
+            
             if (ChkBox_StayTop.Checked)
                 this.TopMost = true;
             else

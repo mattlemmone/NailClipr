@@ -314,6 +314,7 @@ namespace NailClipr
             this.Btn_Delete.TabIndex = 36;
             this.Btn_Delete.Text = "Delete";
             this.Btn_Delete.UseVisualStyleBackColor = true;
+            this.Btn_Delete.Click += new System.EventHandler(this.Btn_Delete_Click);
             // 
             // NailClipr
             // 

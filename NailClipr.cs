@@ -196,6 +196,11 @@ namespace NailClipr
         {
 
         }
+
+        private void Btn_Delete_Click(object sender, EventArgs e)
+        {
+            XML.delete(api);
+        }
     }
 }
 

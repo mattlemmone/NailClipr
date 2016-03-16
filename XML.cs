@@ -77,5 +77,19 @@ namespace NailClipr
             ));
             XML.xdoc.Save(SETTINGS);
         }
+
+        public static void delete(EliteAPI api)
+        {
+            XElement delNode = xdoc.Descendants("Location")
+               .Where(a => a.Element("Title").Value == NailClipr.GUI_WARP.Text && a.Element("Zone").Value == api.Player.ZoneId + "")
+               .FirstOrDefault();
+            delNode.Remove();
+            xdoc.Save(SETTINGS);
+
+            Structs.WarpPoint delWP = Structs.warpPoints.Find(wp => wp.title == NailClipr.GUI_WARP.Text && wp.zone == api.Player.ZoneId);
+            Structs.warpPoints.Remove(delWP);
+
+            NailClipr.GUI_WARP.Items.Remove(NailClipr.GUI_WARP.SelectedItem);
+        }
     }
 }

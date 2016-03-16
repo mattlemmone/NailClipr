@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClipperForm", "ClipperForm.csproj", "{B8A9C22E-C3FC-4DAA-9E2A-2B5B3BE43359}"
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NailClipr", "NailClipr.csproj", "{B8A9C22E-C3FC-4DAA-9E2A-2B5B3BE43359}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

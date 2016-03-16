@@ -17,9 +17,8 @@ namespace WindowsFormsApplication1
         public Player player = new Player();
         public const string SETTINGS = "Settings.xml";
         public const float INC = 5.0f;
-        public XDocument xdoc;
-        public List<WarpPoint> warpPoints = new List<WarpPoint>();
-        public List<WarpPoint> zonePoints = new List<WarpPoint>();
+        public static List<WarpPoint> warpPoints = new List<WarpPoint>();
+        public static List<WarpPoint> zonePoints = new List<WarpPoint>();
 
         public struct Position
         {
@@ -101,46 +100,52 @@ namespace WindowsFormsApplication1
             }
         }
 
-        public void createXML()
+        public class XML
         {
-            var xmlNode = new XElement("Locations");
-            xmlNode.Save(SETTINGS);
-            xdoc = XDocument.Load(SETTINGS);
-        }
-
-        public void loadXML()
-        {
-            xdoc = XDocument.Load(SETTINGS);
-            IEnumerable<XElement> allElements =
-            from xEle in xdoc.Descendants("Locations")
-            select xEle;
-
-            foreach (XElement result in allElements)
+            public static XDocument xdoc;
+            public static void create()
             {
-                result.Descendants("Location").Select(t => new
-                {
-                    title = t.Element("Title").Value,
-                    zone = t.Element("Zone").Value,
-                    x = t.Element("X").Value,
-                    y = t.Element("Y").Value,
-                    z = t.Element("Z").Value,
-                }).ToList().ForEach(t =>
-                {
-                    Position pos = new Position();
-                    pos.X = float.Parse(t.x);
-                    pos.Y = float.Parse(t.y);
-                    pos.Z = float.Parse(t.z);
-
-                    WarpPoint wp = new WarpPoint();
-                    wp.title = t.title;
-                    wp.zone = int.Parse(t.zone);
-                    wp.pos = pos;
-                    warpPoints.Add(wp);
-                });
-
+                var xmlNode = new XElement("Locations");
+                xmlNode.Save(SETTINGS);
+                xdoc = XDocument.Load(SETTINGS);
             }
 
+            public static void load()
+            {
+                xdoc = XDocument.Load(SETTINGS);
+                IEnumerable<XElement> allElements =
+                from xEle in xdoc.Descendants("Locations")
+                select xEle;
+
+                foreach (XElement result in allElements)
+                {
+                    result.Descendants("Location").Select(t => new
+                    {
+                        title = t.Element("Title").Value,
+                        zone = t.Element("Zone").Value,
+                        x = t.Element("X").Value,
+                        y = t.Element("Y").Value,
+                        z = t.Element("Z").Value,
+                    }).ToList().ForEach(t =>
+                    {
+                        Position pos = new Position();
+                        pos.X = float.Parse(t.x);
+                        pos.Y = float.Parse(t.y);
+                        pos.Z = float.Parse(t.z);
+
+                        WarpPoint wp = new WarpPoint();
+                        wp.title = t.title;
+                        wp.zone = int.Parse(t.zone);
+                        wp.pos = pos;
+                        warpPoints.Add(wp);
+                    });
+
+                }
+
+            }
         }
+
+
 
         public void clearZonePoints()
         {
@@ -160,17 +165,8 @@ namespace WindowsFormsApplication1
             });
         }
 
-        public NailClipr()
+        public void selectProcess()
         {
-            InitializeComponent();
-            try
-            {
-                loadXML();
-            }
-            catch (FileNotFoundException)
-            {
-                createXML();
-            }
             #region Final Fantasy XI [POL]
             var data = Process.GetProcessesByName("pol");
 
@@ -186,7 +182,22 @@ namespace WindowsFormsApplication1
                 this.Text = "N/A";
             }
             #endregion
+        }
 
+        public NailClipr()
+        {
+            InitializeComponent();
+            try
+            {
+                XML.load();
+            }
+            catch (FileNotFoundException)
+            {
+                XML.create();
+            }
+
+            selectProcess();
+                        
             // Start the background worker..
             bw.DoWork += new DoWorkEventHandler(bw_DoWork);
             bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
@@ -203,22 +214,28 @@ namespace WindowsFormsApplication1
             {
                 System.Threading.Thread.Sleep(100);
                 bw.ReportProgress(0);
-                //Constantly write maintenance mode in case it gets overwritten.
-                if (ChkBox_Maint.Checked == true)
-                {
-                    if (api.Player.Status != Status.MAINT)
-                        api.Player.Status = Status.MAINT;
-                }
 
-                /*Speed*/
-                //Not initialized.
-                if (player.speed.expected == 0)
-                    player.speed.expected = api.Player.Speed;
-
-                //Prevent overwrite.
-                if (api.Player.Speed != player.speed.expected)
-                    api.Player.Speed = player.speed.expected;
+                workerOverwrites();
             }
+        }
+
+        public void workerOverwrites()
+        {
+            //Constantly write maintenance mode in case it gets overwritten.
+            if (ChkBox_Maint.Checked == true)
+            {
+                if (api.Player.Status != Status.MAINT)
+                    api.Player.Status = Status.MAINT;
+            }
+
+            /*Speed*/
+            //Not initialized.
+            if (player.speed.expected == 0)
+                player.speed.expected = api.Player.Speed;
+
+            //Prevent overwrite.
+            if (api.Player.Speed != player.speed.expected)
+                api.Player.Speed = player.speed.expected;
         }
 
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -226,6 +243,11 @@ namespace WindowsFormsApplication1
             //Update GUI.
             player.location.isZoning = api.Player.X == 0 && api.Player.Y == 0 && api.Player.Z == 0;
 
+            updateLabels();          
+        }
+
+        public void updateLabels()
+        {
             //Pos. Z and Y write correctly but read each other. Inherent issue.
             Lbl_X.Text = Math.Round(api.Player.X, 2) + "";
             Lbl_Y.Text = Math.Round(api.Player.Z, 2) + "";
@@ -242,7 +264,6 @@ namespace WindowsFormsApplication1
             int barSpeed = (int)Math.Ceiling(f);
 
             //If we aren't zoning...
-
             if (!player.location.isZoning)
             {
                 //Load zone points.
@@ -259,7 +280,6 @@ namespace WindowsFormsApplication1
                 if (zonePoints.Count > 0)
                     clearZonePoints();
             }
-
         }
 
         private void ChkBox_Maint_CheckedChanged(object sender, EventArgs e)
@@ -344,7 +364,7 @@ namespace WindowsFormsApplication1
 
             warpPoints.Add(wp);
             CB_Warp.Items.Add(wp.title);
-            xdoc.Element("Locations").Add(
+            XML.xdoc.Element("Locations").Add(
                new XElement("Location",
                new XElement("Zone", wp.zone),
                new XElement("Title", wp.title),
@@ -352,7 +372,7 @@ namespace WindowsFormsApplication1
                new XElement("Y", wp.pos.Y),
                new XElement("Z", wp.pos.Z)
             ));
-            xdoc.Save(SETTINGS);
+            XML.xdoc.Save(SETTINGS);
 
         }
 
@@ -370,6 +390,11 @@ namespace WindowsFormsApplication1
 
             System.Threading.Thread.Sleep(2000);
             player.maintenanceMode(false);
+        }
+
+        private void NailClipr_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

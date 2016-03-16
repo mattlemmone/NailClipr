@@ -183,7 +183,7 @@ namespace WindowsFormsApplication1
             // 
             // Btn_Minus_Y
             // 
-            this.Btn_Minus_Y.Location = new System.Drawing.Point(97, 41);
+            this.Btn_Minus_Y.Location = new System.Drawing.Point(97, 55);
             this.Btn_Minus_Y.Name = "Btn_Minus_Y";
             this.Btn_Minus_Y.Size = new System.Drawing.Size(24, 23);
             this.Btn_Minus_Y.TabIndex = 27;
@@ -193,7 +193,7 @@ namespace WindowsFormsApplication1
             // 
             // Btn_Plus_Y
             // 
-            this.Btn_Plus_Y.Location = new System.Drawing.Point(67, 41);
+            this.Btn_Plus_Y.Location = new System.Drawing.Point(67, 55);
             this.Btn_Plus_Y.Name = "Btn_Plus_Y";
             this.Btn_Plus_Y.Size = new System.Drawing.Size(24, 23);
             this.Btn_Plus_Y.TabIndex = 26;
@@ -204,7 +204,7 @@ namespace WindowsFormsApplication1
             // Lbl_Y
             // 
             this.Lbl_Y.AutoSize = true;
-            this.Lbl_Y.Location = new System.Drawing.Point(21, 46);
+            this.Lbl_Y.Location = new System.Drawing.Point(21, 60);
             this.Lbl_Y.Name = "Lbl_Y";
             this.Lbl_Y.Size = new System.Drawing.Size(25, 13);
             this.Lbl_Y.TabIndex = 25;
@@ -213,7 +213,7 @@ namespace WindowsFormsApplication1
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 46);
+            this.label6.Location = new System.Drawing.Point(6, 60);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(17, 13);
             this.label6.TabIndex = 24;
@@ -221,7 +221,7 @@ namespace WindowsFormsApplication1
             // 
             // Btn_Minus_Z
             // 
-            this.Btn_Minus_Z.Location = new System.Drawing.Point(97, 67);
+            this.Btn_Minus_Z.Location = new System.Drawing.Point(97, 95);
             this.Btn_Minus_Z.Name = "Btn_Minus_Z";
             this.Btn_Minus_Z.Size = new System.Drawing.Size(24, 23);
             this.Btn_Minus_Z.TabIndex = 31;
@@ -231,7 +231,7 @@ namespace WindowsFormsApplication1
             // 
             // Btn_Plus_Z
             // 
-            this.Btn_Plus_Z.Location = new System.Drawing.Point(67, 67);
+            this.Btn_Plus_Z.Location = new System.Drawing.Point(67, 95);
             this.Btn_Plus_Z.Name = "Btn_Plus_Z";
             this.Btn_Plus_Z.Size = new System.Drawing.Size(24, 23);
             this.Btn_Plus_Z.TabIndex = 30;
@@ -242,7 +242,7 @@ namespace WindowsFormsApplication1
             // Lbl_Z
             // 
             this.Lbl_Z.AutoSize = true;
-            this.Lbl_Z.Location = new System.Drawing.Point(21, 72);
+            this.Lbl_Z.Location = new System.Drawing.Point(21, 100);
             this.Lbl_Z.Name = "Lbl_Z";
             this.Lbl_Z.Size = new System.Drawing.Size(25, 13);
             this.Lbl_Z.TabIndex = 29;
@@ -251,7 +251,7 @@ namespace WindowsFormsApplication1
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 72);
+            this.label8.Location = new System.Drawing.Point(6, 100);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(17, 13);
             this.label8.TabIndex = 28;
@@ -273,7 +273,7 @@ namespace WindowsFormsApplication1
             this.groupBox1.Controls.Add(this.Btn_Plus_Y);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(133, 100);
+            this.groupBox1.Size = new System.Drawing.Size(136, 124);
             this.groupBox1.TabIndex = 32;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Position";
@@ -336,6 +336,7 @@ namespace WindowsFormsApplication1
             this.Controls.Add(this.ChkBox_Maint);
             this.Name = "NailClipr";
             this.Text = "NailClipr";
+            this.Load += new System.EventHandler(this.NailClipr_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

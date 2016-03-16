@@ -28,4 +28,11 @@
     <Y>-48.5431137</Y>
     <Z>1</Z>
   </Location>
+  <Location>
+    <Zone>100</Zone>
+    <Title>West Ron. Gate</Title>
+    <X>-125.879</X>
+    <Y>274.1</Y>
+    <Z>-62</Z>
+  </Location>
 </Locations>

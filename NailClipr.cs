@@ -4,165 +4,58 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using EliteMMO.API;
 using System.ComponentModel;
-using System.Xml.Linq;
 using System.IO;
 using System.Collections.Generic;
 
-namespace WindowsFormsApplication1
+namespace NailClipr
 {
     public partial class NailClipr : Form
     {
         private static EliteAPI api;
         private BackgroundWorker bw = new BackgroundWorker();
-        public Player player = new Player();
-        public const string SETTINGS = "Settings.xml";
         public const float INC = 5.0f;
-        public static List<WarpPoint> warpPoints = new List<WarpPoint>();
-        public static List<WarpPoint> zonePoints = new List<WarpPoint>();
+        public static ComboBox GUI_WARP;
+        public static Label GUI_X;
+        public static Label GUI_Y;
+        public static Label GUI_Z;
+        public static Label GUI_STATUS;
+        public static Label GUI_ZONE;
+        public static Label GUI_SPEED;
+        public static TrackBar GUI_SPEED_TRACK;
 
-        public struct Position
+        public NailClipr()
         {
-            public float X;
-            public float Y;
-            public float Z;
-        }
-
-        public struct WarpPoint
-        {
-            public string title;
-            public Position pos;
-            public int zone;
-        }
-
-        public struct Status
-        {
-            private uint oldStatus;
-            public uint old
+            InitializeComponent();
+            AssignControls();
+            try
             {
-                get { return oldStatus; }
-                set { oldStatus = value; }
+                XML.load();
             }
-            public const uint DEFAULT = 0;
-            public const uint MAINT = 31;
-        }
-
-        public struct Speed
-        {
-            private float e;
-            public float expected
+            catch (FileNotFoundException)
             {
-                get { return e; }
-                set { e = value; }
-            }
-            public const float DEFAULT = 5f;
-            public const float DIVISOR = 4f;
-        }
-
-        public struct Location
-        {
-            public int old;
-            public bool isZoning;
-        }
-
-        public class Player
-        {
-            public Speed speed = new Speed();
-            public Status status = new Status();
-            public Location location = new Location();
-
-            //Functions
-            public void maintenanceMode(bool on)
-            {
-                if (!on)
-                {
-                    api.Player.Status = status.old;
-                    return;
-
-                }
-                //Save status before switching.
-                if (api.Player.Status == Status.MAINT)
-                {
-                    status.old = Status.DEFAULT;
-                }
-                else
-                {
-                    status.old = api.Player.Status;
-                }
-
-                //Maint on.
-                api.Player.Status = Status.MAINT;
-            }
-            public void warp(Position p)
-            {
-                api.Player.X = p.X;
-                api.Player.Y = p.Y;
-                api.Player.Z = p.Z;
-            }
-        }
-
-        public class XML
-        {
-            public static XDocument xdoc;
-            public static void create()
-            {
-                var xmlNode = new XElement("Locations");
-                xmlNode.Save(SETTINGS);
-                xdoc = XDocument.Load(SETTINGS);
+                XML.create();
             }
 
-            public static void load()
-            {
-                xdoc = XDocument.Load(SETTINGS);
-                IEnumerable<XElement> allElements =
-                from xEle in xdoc.Descendants("Locations")
-                select xEle;
+            selectProcess();
 
-                foreach (XElement result in allElements)
-                {
-                    result.Descendants("Location").Select(t => new
-                    {
-                        title = t.Element("Title").Value,
-                        zone = t.Element("Zone").Value,
-                        x = t.Element("X").Value,
-                        y = t.Element("Y").Value,
-                        z = t.Element("Z").Value,
-                    }).ToList().ForEach(t =>
-                    {
-                        Position pos = new Position();
-                        pos.X = float.Parse(t.x);
-                        pos.Y = float.Parse(t.y);
-                        pos.Z = float.Parse(t.z);
+            // Start the background worker..
+            bw.DoWork += new DoWorkEventHandler(bw_DoWork);
+            bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
+            bw.WorkerSupportsCancellation = true;
+            bw.WorkerReportsProgress = true;
+            bw.RunWorkerAsync();
+        }       
 
-                        WarpPoint wp = new WarpPoint();
-                        wp.title = t.title;
-                        wp.zone = int.Parse(t.zone);
-                        wp.pos = pos;
-                        warpPoints.Add(wp);
-                    });
-
-                }
-
-            }
-        }
-
-
-
-        public void clearZonePoints()
+        public void AssignControls()
         {
-            CB_Warp.Text = "";
-            CB_Warp.Items.Clear();
-            zonePoints.Clear();
-        }
-        public void loadZonePoints()
-        {
-            warpPoints.ForEach(wp =>
-            {
-                if (wp.zone == api.Player.ZoneId)
-                {
-                    zonePoints.Add(wp);
-                    CB_Warp.Items.Add(wp.title);
-                }
-            });
+            GUI_WARP = CB_Warp;
+            GUI_X = Lbl_X;
+            GUI_Y = Lbl_Y;
+            GUI_Z = Lbl_Z;
+            GUI_STATUS = Lbl_Status;
+            GUI_ZONE = Lbl_Zone;
+            GUI_SPEED = Lbl_SpeedVar;
+            GUI_SPEED_TRACK = Bar_Speed;
         }
 
         public void selectProcess()
@@ -182,29 +75,7 @@ namespace WindowsFormsApplication1
                 this.Text = "N/A";
             }
             #endregion
-        }
-
-        public NailClipr()
-        {
-            InitializeComponent();
-            try
-            {
-                XML.load();
-            }
-            catch (FileNotFoundException)
-            {
-                XML.create();
-            }
-
-            selectProcess();
-                        
-            // Start the background worker..
-            bw.DoWork += new DoWorkEventHandler(bw_DoWork);
-            bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
-            bw.WorkerSupportsCancellation = true;
-            bw.WorkerReportsProgress = true;
-            bw.RunWorkerAsync();
-        }
+        }              
 
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -224,73 +95,37 @@ namespace WindowsFormsApplication1
             //Constantly write maintenance mode in case it gets overwritten.
             if (ChkBox_Maint.Checked == true)
             {
-                if (api.Player.Status != Status.MAINT)
-                    api.Player.Status = Status.MAINT;
+                if (api.Player.Status != Structs.Status.MAINT)
+                    api.Player.Status = Structs.Status.MAINT;
             }
 
             /*Speed*/
             //Not initialized.
-            if (player.speed.expected == 0)
-                player.speed.expected = api.Player.Speed;
+            if (Structs.player.speed.expected == 0)
+                Structs.player.speed.expected = api.Player.Speed;
 
             //Prevent overwrite.
-            if (api.Player.Speed != player.speed.expected)
-                api.Player.Speed = player.speed.expected;
+            if (api.Player.Speed != Structs.player.speed.expected)
+                api.Player.Speed = Structs.player.speed.expected;
         }
 
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             //Update GUI.
-            player.location.isZoning = api.Player.X == 0 && api.Player.Y == 0 && api.Player.Z == 0;
+            Structs.player.location.isZoning = api.Player.X == 0 && api.Player.Y == 0 && api.Player.Z == 0;
 
-            updateLabels();          
-        }
-
-        public void updateLabels()
-        {
-            //Pos. Z and Y write correctly but read each other. Inherent issue.
-            Lbl_X.Text = Math.Round(api.Player.X, 2) + "";
-            Lbl_Y.Text = Math.Round(api.Player.Z, 2) + "";
-            Lbl_Z.Text = Math.Round(api.Player.Y, 2) + "";
-
-            //Zone and Status Label
-            Lbl_Status.Text = api.Player.Status + "";
-            Lbl_Zone.Text = api.Player.ZoneId + "";
-
-            /*Speed*/
-            //Update labels
-            Lbl_SpeedVar.Text = "x" + api.Player.Speed / Speed.DEFAULT;
-            float f = (api.Player.Speed - Speed.DEFAULT) * Speed.DIVISOR;
-            int barSpeed = (int)Math.Ceiling(f);
-
-            //If we aren't zoning...
-            if (!player.location.isZoning)
-            {
-                //Load zone points.
-                if (zonePoints.Count == 0 && api.Player.ZoneId != player.location.old)
-                {
-                    loadZonePoints();
-                }
-
-                Bar_Speed.Value = (int)Math.Ceiling(f);
-                player.location.old = api.Player.ZoneId;
-            }
-            else
-            {
-                if (zonePoints.Count > 0)
-                    clearZonePoints();
-            }
-        }
+            Functions.updateLabels(api);          
+        }        
 
         private void ChkBox_Maint_CheckedChanged(object sender, EventArgs e)
         {
             if (ChkBox_Maint.Checked)
             {
-                player.maintenanceMode(true);
+                Structs.player.maintenanceMode(api, true);
             }
             else
             {
-                player.maintenanceMode(false);
+                Structs.player.maintenanceMode(api, false);
             }
         }
 
@@ -305,9 +140,9 @@ namespace WindowsFormsApplication1
 
         private void Bar_Speed_Scroll(object sender, EventArgs e)
         {
-            float barVal = Bar_Speed.Value / Speed.DIVISOR;
-            float speed = barVal + Speed.DEFAULT;
-            player.speed.expected = speed;
+            float barVal = Bar_Speed.Value / Structs.Speed.DIVISOR;
+            float speed = barVal + Structs.Speed.DEFAULT;
+            Structs.player.speed.expected = speed;
             api.Player.Speed = speed;
         }
 
@@ -349,47 +184,12 @@ namespace WindowsFormsApplication1
 
         private void Btn_Save_Click(object sender, EventArgs e)
         {
-            //http://www.c-sharpcorner.com/UploadFile/de41d6/learning-linq-made-easy-linq-to-xml-tutorial-3/
-
-            Position pos = new Position();
-            pos.X = api.Player.X;
-            pos.Y = api.Player.Z;
-            pos.Z = api.Player.Y;
-
-            WarpPoint wp = new WarpPoint();
-            if (CB_Warp.Text == "") { CB_Warp.Text = "Untitled Location"; wp.title = "Untitled Location"; }
-            else { wp.title = CB_Warp.Text; }
-            wp.zone = api.Player.ZoneId;
-            wp.pos = pos;
-
-            warpPoints.Add(wp);
-            CB_Warp.Items.Add(wp.title);
-            XML.xdoc.Element("Locations").Add(
-               new XElement("Location",
-               new XElement("Zone", wp.zone),
-               new XElement("Title", wp.title),
-               new XElement("X", wp.pos.X),
-               new XElement("Y", wp.pos.Y),
-               new XElement("Z", wp.pos.Z)
-            ));
-            XML.xdoc.Save(SETTINGS);
-
+            XML.save(api);
         }
 
         private void Btn_Warp_Click(object sender, EventArgs e)
         {
-            WarpPoint nextWP = warpPoints.Find(wp => wp.title == CB_Warp.Text && wp.zone == api.Player.ZoneId);
-            if (nextWP.zone == 0)
-                return;
-
-            player.maintenanceMode(true);
-            Lbl_Status.Text = api.Player.Status + ""; //Sleeping will otherwise block it.
-            System.Threading.Thread.Sleep(1000);
-
-            player.warp(nextWP.pos);
-
-            System.Threading.Thread.Sleep(2000);
-            player.maintenanceMode(false);
+            Structs.player.warp(api);
         }
 
         private void NailClipr_Load(object sender, EventArgs e)

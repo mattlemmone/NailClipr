@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using EliteMMO.API;
 
-namespace WindowsFormsApplication1
+namespace NailClipr
 {
     static class Program
     {

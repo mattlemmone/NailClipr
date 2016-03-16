@@ -1,7 +1,7 @@
 ﻿using EliteMMO.API;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1
+namespace NailClipr
 {
     partial class NailClipr
     {

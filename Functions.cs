@@ -27,7 +27,45 @@ namespace NailClipr
                 }
             });
         }
+        public static bool playersRendered(EliteAPI api)
+        {
+            int count = 0;
+            for (var x = 0; x < 4096; x++)
+            {
+                var entity = api.Entity.GetEntity(x);
 
+                // Skip invalid entities..
+                if (entity.WarpPointer == 0)
+                    continue;
+
+                // Skip potentially dead entities..
+                if (entity.HealthPercent <= 0)
+                    continue;
+
+                // Skip out of range entities..
+                if (entity.Distance > 50.0f)
+                    continue;
+
+                // Check if the entity is rendered..
+                if ((entity.Render0000 & 0x200) != 0x200)
+                    continue;
+
+                // Check entity.SpawnFlags here if you wish to check the type of entity it is..
+                //
+                // 0x0001 - PC 
+                // 0x0002 - NPC
+                // 0x0010 - Mob
+                // 0x000D - Self (Current Player)
+
+                // Skips PC players.. etc.
+                if ((entity.SpawnFlags & 0x0001) == 0x0001)
+                    count++;
+
+                if (count > 1) return true;
+
+            }
+            return false;
+        }
         public static void updateLabels(EliteAPI api)
         {
             //Pos. Z and Y write correctly but read each other. Inherent issue.

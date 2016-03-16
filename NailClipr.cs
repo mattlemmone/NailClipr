@@ -44,7 +44,7 @@ namespace NailClipr
             bw.WorkerSupportsCancellation = true;
             bw.WorkerReportsProgress = true;
             bw.RunWorkerAsync();
-        }       
+        }
 
         public void AssignControls()
         {
@@ -75,7 +75,7 @@ namespace NailClipr
                 this.Text = "N/A";
             }
             #endregion
-        }              
+        }
 
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -104,9 +104,16 @@ namespace NailClipr
             if (Structs.player.speed.expected == 0)
                 Structs.player.speed.expected = api.Player.Speed;
 
-            //Prevent overwrite.
-            if (api.Player.Speed != Structs.player.speed.expected)
-                api.Player.Speed = Structs.player.speed.expected;
+            //Turn speed off around other players.
+            bool playersRendered = Functions.playersRendered(api);
+            
+            if (playersRendered)
+                api.Player.Speed = Structs.Speed.DEFAULT;
+            else {
+                //Prevent speed overwrite.
+                if (api.Player.Speed != Structs.player.speed.expected)
+                    api.Player.Speed = Structs.player.speed.expected;
+            }
         }
 
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -114,8 +121,8 @@ namespace NailClipr
             //Update GUI.
             Structs.player.location.isZoning = api.Player.X == 0 && api.Player.Y == 0 && api.Player.Z == 0;
 
-            Functions.updateLabels(api);          
-        }        
+            Functions.updateLabels(api);
+        }
 
         private void ChkBox_Maint_CheckedChanged(object sender, EventArgs e)
         {
@@ -131,7 +138,6 @@ namespace NailClipr
 
         private void ChkBox_StayTop_CheckedChanged(object sender, EventArgs e)
         {
-
             if (ChkBox_StayTop.Checked)
                 this.TopMost = true;
             else

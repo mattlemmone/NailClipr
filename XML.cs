@@ -1,4 +1,5 @@
 ﻿using EliteMMO.API;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -65,6 +66,13 @@ namespace NailClipr
             wp.zone = api.Player.ZoneId;
             wp.pos = pos;
 
+            //Updating - delete old and save new.
+            int index = Structs.zonePoints.FindIndex(p => p.title == wp.title);
+            if (index >= 0)
+            {
+                delete(api);
+            }
+
             Structs.warpPoints.Add(wp);
             Functions.addZonePoint(wp.title);
             XML.xdoc.Element("Locations").Add(
@@ -86,7 +94,9 @@ namespace NailClipr
             delNode.Remove();
             xdoc.Save(SETTINGS);
 
-            Structs.WarpPoint delWP = Structs.warpPoints.Find(wp => wp.title == NailClipr.GUI_WARP.Text && wp.zone == api.Player.ZoneId);
+            Structs.WarpPoint delWP = Structs.zonePoints.Find(wp => wp.title == NailClipr.GUI_WARP.Text);
+
+            Structs.zonePoints.Remove(delWP);
             Structs.warpPoints.Remove(delWP);
 
             NailClipr.GUI_WARP.Items.Remove(NailClipr.GUI_WARP.SelectedItem);

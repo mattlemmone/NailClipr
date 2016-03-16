@@ -53,6 +53,7 @@ namespace WindowsFormsApplication1
             this.CB_Warp = new System.Windows.Forms.ComboBox();
             this.Btn_Save = new System.Windows.Forms.Button();
             this.Btn_Warp = new System.Windows.Forms.Button();
+            this.Btn_Delete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -297,19 +298,29 @@ namespace WindowsFormsApplication1
             // 
             // Btn_Warp
             // 
-            this.Btn_Warp.Location = new System.Drawing.Point(216, 89);
+            this.Btn_Warp.Location = new System.Drawing.Point(154, 113);
             this.Btn_Warp.Name = "Btn_Warp";
-            this.Btn_Warp.Size = new System.Drawing.Size(56, 23);
+            this.Btn_Warp.Size = new System.Drawing.Size(118, 23);
             this.Btn_Warp.TabIndex = 35;
             this.Btn_Warp.Text = "Warp";
             this.Btn_Warp.UseVisualStyleBackColor = true;
             this.Btn_Warp.Click += new System.EventHandler(this.Btn_Warp_Click);
+            // 
+            // Btn_Delete
+            // 
+            this.Btn_Delete.Location = new System.Drawing.Point(216, 89);
+            this.Btn_Delete.Name = "Btn_Delete";
+            this.Btn_Delete.Size = new System.Drawing.Size(56, 23);
+            this.Btn_Delete.TabIndex = 36;
+            this.Btn_Delete.Text = "Delete";
+            this.Btn_Delete.UseVisualStyleBackColor = true;
             // 
             // NailClipr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 209);
+            this.Controls.Add(this.Btn_Delete);
             this.Controls.Add(this.Btn_Warp);
             this.Controls.Add(this.Btn_Save);
             this.Controls.Add(this.CB_Warp);
@@ -360,6 +371,7 @@ namespace WindowsFormsApplication1
         private ComboBox CB_Warp;
         private Button Btn_Save;
         private Button Btn_Warp;
+        private Button Btn_Delete;
     }
 }
 

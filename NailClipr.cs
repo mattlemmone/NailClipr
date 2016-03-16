@@ -20,7 +20,6 @@ namespace WindowsFormsApplication1
         public XDocument xdoc;
         public List<WarpPoint> warpPoints = new List<WarpPoint>();
         public List<WarpPoint> zonePoints = new List<WarpPoint>();
-        public bool isZoning = false;
 
         public struct Position
         {
@@ -60,11 +59,19 @@ namespace WindowsFormsApplication1
             public const float DIVISOR = 4f;
         }
 
+        public struct Location
+        {
+            public int old;
+            public bool isZoning;
+        }
+
         public class Player
         {
             public Speed speed = new Speed();
             public Status status = new Status();
+            public Location location = new Location();
 
+            //Functions
             public void maintenanceMode(bool on)
             {
                 if (!on)
@@ -135,10 +142,14 @@ namespace WindowsFormsApplication1
 
         }
 
-        public void loadZonePoints()
+        public void clearZonePoints()
         {
+            CB_Warp.Text = "";
             CB_Warp.Items.Clear();
             zonePoints.Clear();
+        }
+        public void loadZonePoints()
+        {
             warpPoints.ForEach(wp =>
             {
                 if (wp.zone == api.Player.ZoneId)
@@ -169,7 +180,6 @@ namespace WindowsFormsApplication1
                 api = new EliteAPI(proc);
 
                 this.Text = "NailClipr - " + api.Entity.GetLocalPlayer().Name;
-                
             }
             else
             {
@@ -177,7 +187,6 @@ namespace WindowsFormsApplication1
             }
             #endregion
 
-            loadZonePoints();
             // Start the background worker..
             bw.DoWork += new DoWorkEventHandler(bw_DoWork);
             bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
@@ -215,8 +224,7 @@ namespace WindowsFormsApplication1
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             //Update GUI.
-
-            isZoning = api.Player.ZoneId == 0;            
+            player.location.isZoning = api.Player.X == 0 && api.Player.Y == 0 && api.Player.Z == 0;
 
             //Pos. Z and Y write correctly but read each other. Inherent issue.
             Lbl_X.Text = Math.Round(api.Player.X, 2) + "";
@@ -234,15 +242,22 @@ namespace WindowsFormsApplication1
             int barSpeed = (int)Math.Ceiling(f);
 
             //If we aren't zoning...
-            if (!isZoning)
-                Bar_Speed.Value = (int)Math.Ceiling(f);
-            else {
-                while (isZoning)
+
+            if (!player.location.isZoning)
+            {
+                //Load zone points.
+                if (zonePoints.Count == 0 && api.Player.ZoneId != player.location.old)
                 {
-                    isZoning = api.Player.ZoneId == 0;
-                    System.Threading.Thread.Sleep(100);
+                    loadZonePoints();
                 }
-                loadZonePoints();
+
+                Bar_Speed.Value = (int)Math.Ceiling(f);
+                player.location.old = api.Player.ZoneId;
+            }
+            else
+            {
+                if (zonePoints.Count > 0)
+                    clearZonePoints();
             }
 
         }
@@ -315,7 +330,7 @@ namespace WindowsFormsApplication1
         private void Btn_Save_Click(object sender, EventArgs e)
         {
             //http://www.c-sharpcorner.com/UploadFile/de41d6/learning-linq-made-easy-linq-to-xml-tutorial-3/
-            
+
             Position pos = new Position();
             pos.X = api.Player.X;
             pos.Y = api.Player.Z;
@@ -348,13 +363,13 @@ namespace WindowsFormsApplication1
                 return;
 
             player.maintenanceMode(true);
+            Lbl_Status.Text = api.Player.Status + ""; //Sleeping will otherwise block it.
             System.Threading.Thread.Sleep(1000);
-            
+
             player.warp(nextWP.pos);
 
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(2000);
             player.maintenanceMode(false);
-
         }
     }
 }

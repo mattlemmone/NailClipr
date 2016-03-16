@@ -7,4 +7,25 @@
     <Y>99.829</Y>
     <Z>-14.5586</Z>
   </Location>
+  <Location>
+    <Zone>230</Zone>
+    <Title>AH</Title>
+    <X>9.7049675</X>
+    <Y>-28.76725</Y>
+    <Z>1.7</Z>
+  </Location>
+  <Location>
+    <Zone>230</Zone>
+    <Title>Mog House</Title>
+    <X>164.113037</X>
+    <Y>161.252777</Y>
+    <Z>-2</Z>
+  </Location>
+  <Location>
+    <Zone>230</Zone>
+    <Title>Rolandienne</Title>
+    <X>-85.5906</X>
+    <Y>-48.5431137</Y>
+    <Z>1</Z>
+  </Location>
 </Locations>

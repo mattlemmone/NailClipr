@@ -1,5 +1,6 @@
 ﻿using EliteMMO.API;
 using System;
+using System.Drawing;
 
 namespace NailClipr
 {
@@ -100,16 +101,24 @@ namespace NailClipr
                 int barSpeed = (int)Math.Ceiling(f);
                 NailClipr.GUI_SPEED_TRACK.Value = (int)Math.Ceiling(f);
 
-                //Turn speed off around other players.
+                //Disable track bar, highlight speed. Visual cue.
                 if (Structs.player.isAlone)
                 {
                     if (NailClipr.GUI_SPEED_TRACK.Enabled == false)
+                    {
                         NailClipr.GUI_SPEED_TRACK.Enabled = true;
+                        NailClipr.GUI_SPEED.ForeColor = Color.Black;
+                        NailClipr.GUI_SPEED.Font = new Font(NailClipr.GUI_SPEED.Font, FontStyle.Regular);
+                    }
                 }
                 else
                 {
                     if (NailClipr.GUI_SPEED_TRACK.Enabled)
+                    {
                         NailClipr.GUI_SPEED_TRACK.Enabled = false;
+                        NailClipr.GUI_SPEED.ForeColor = Color.MediumVioletRed;
+                        NailClipr.GUI_SPEED.Font = new Font(NailClipr.GUI_SPEED.Font, FontStyle.Bold);
+                    }
                 }
             }
             else

@@ -98,6 +98,8 @@ namespace NailClipr
             // ChkBox_StayTop
             // 
             this.ChkBox_StayTop.AutoSize = true;
+            this.ChkBox_StayTop.Checked = true;
+            this.ChkBox_StayTop.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ChkBox_StayTop.Location = new System.Drawing.Point(154, 41);
             this.ChkBox_StayTop.Name = "ChkBox_StayTop";
             this.ChkBox_StayTop.Size = new System.Drawing.Size(84, 17);
@@ -337,7 +339,7 @@ namespace NailClipr
             this.Controls.Add(this.ChkBox_Maint);
             this.Name = "NailClipr";
             this.Text = "NailClipr";
-            this.Load += new System.EventHandler(this.NailClipr_Load);
+
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

@@ -29,14 +29,7 @@ namespace NailClipr
         {
             InitializeComponent();
             AssignControls();
-            try
-            {
-                XML.load();
-            }
-            catch (FileNotFoundException)
-            {
-                XML.create();
-            }
+            PostInit();
 
             selectProcess();
 
@@ -58,6 +51,20 @@ namespace NailClipr
             GUI_ZONE = Lbl_Zone;
             GUI_SPEED = Lbl_SpeedVar;
             GUI_SPEED_TRACK = Bar_Speed;
+        }
+
+        public void PostInit()
+        {
+            if (ChkBox_StayTop.Checked)
+                this.TopMost = true;
+            try
+            {
+                XML.load();
+            }
+            catch (FileNotFoundException)
+            {
+                XML.create();
+            }
         }
 
         public void selectProcess()

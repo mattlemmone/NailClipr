@@ -27,7 +27,7 @@ namespace NailClipr
                 }
             });
         }
-        public static bool playersRendered(EliteAPI api)
+        public static void playersRendered(EliteAPI api)
         {
             int count = 0;
             for (var x = 0; x < 4096; x++)
@@ -57,14 +57,21 @@ namespace NailClipr
                 // 0x0010 - Mob
                 // 0x000D - Self (Current Player)
 
-                // Skips PC players.. etc.
+                if (entity.Name == api.Player.Name)
+                    continue;
+
                 if ((entity.SpawnFlags & 0x0001) == 0x0001)
                     count++;
 
-                if (count > 1) return true;
-
+                if (count > 0)
+                {
+                    Structs.player.isAlone = false;
+                    Console.WriteLine(entity.Name + " - " + entity.Distance);
+                    Console.ReadLine();
+                    return;
+                }
             }
-            return false;
+            Structs.player.isAlone = true;
         }
         public static void updateLabels(EliteAPI api)
         {
@@ -77,12 +84,6 @@ namespace NailClipr
             NailClipr.GUI_STATUS.Text = api.Player.Status + "";
             NailClipr.GUI_ZONE.Text = api.Player.ZoneId + "";
 
-            /*Speed*/
-            //Update labels
-            NailClipr.GUI_SPEED.Text = "x" + api.Player.Speed / Structs.Speed.DEFAULT;
-            float f = (api.Player.Speed - Structs.Speed.DEFAULT) * Structs.Speed.DIVISOR;
-            int barSpeed = (int)Math.Ceiling(f);
-
             //If we aren't zoning...
             if (!Structs.player.location.isZoning)
             {
@@ -91,9 +92,25 @@ namespace NailClipr
                 {
                     loadZonePoints(api);
                 }
-
-                NailClipr.GUI_SPEED_TRACK.Value = (int)Math.Ceiling(f);
                 Structs.player.location.old = api.Player.ZoneId;
+
+                //Speed labels
+                NailClipr.GUI_SPEED.Text = "x" + api.Player.Speed / Structs.Speed.DEFAULT;
+                float f = (api.Player.Speed - Structs.Speed.DEFAULT) * Structs.Speed.DIVISOR;
+                int barSpeed = (int)Math.Ceiling(f);
+                NailClipr.GUI_SPEED_TRACK.Value = (int)Math.Ceiling(f);
+
+                //Turn speed off around other players.
+                if (Structs.player.isAlone)
+                {
+                    if (NailClipr.GUI_SPEED_TRACK.Enabled == false)
+                        NailClipr.GUI_SPEED_TRACK.Enabled = true;
+                }
+                else
+                {
+                    if (NailClipr.GUI_SPEED_TRACK.Enabled)
+                        NailClipr.GUI_SPEED_TRACK.Enabled = false;
+                }
             }
             else
             {

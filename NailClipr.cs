@@ -14,6 +14,8 @@ namespace NailClipr
         private static EliteAPI api;
         private BackgroundWorker bw = new BackgroundWorker();
         public const float INC = 5.0f;
+        public bool playersRendered;
+
         public static ComboBox GUI_WARP;
         public static Label GUI_X;
         public static Label GUI_Y;
@@ -105,9 +107,8 @@ namespace NailClipr
                 Structs.player.speed.expected = api.Player.Speed;
 
             //Turn speed off around other players.
-            bool playersRendered = Functions.playersRendered(api);
-            
-            if (playersRendered)
+            Functions.playersRendered(api);
+            if (Structs.player.isAlone == false)
                 api.Player.Speed = Structs.Speed.DEFAULT;
             else {
                 //Prevent speed overwrite.

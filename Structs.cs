@@ -59,7 +59,7 @@ namespace NailClipr
             public Speed speed = new Speed();
             public Status status = new Status();
             public Location location = new Location();
-
+            public bool isAlone;
             //Functions
             public void maintenanceMode(EliteAPI api, bool on)
             {
@@ -67,7 +67,6 @@ namespace NailClipr
                 {
                     api.Player.Status = status.old;
                     return;
-
                 }
                 //Save status before switching.
                 if (api.Player.Status == Status.MAINT)

@@ -86,46 +86,47 @@ namespace NailClipr
             NailClipr.GUI_ZONE.Text = api.Player.ZoneId + "";
 
             //If we aren't zoning...
-            if (!Structs.player.location.isZoning)
+            if (Structs.player.location.isZoning)
             {
-                //Load zone points.
-                if (Structs.zonePoints.Count == 0 && api.Player.ZoneId != Structs.player.location.old)
-                {
-                    loadZonePoints(api);
-                }
-                Structs.player.location.old = api.Player.ZoneId;
+                if (Structs.zonePoints.Count > 0)
+                    clearZonePoints();
+                return;
+            }
 
-                //Speed labels
-                NailClipr.GUI_SPEED.Text = "x" + api.Player.Speed / Structs.Speed.DEFAULT;
-                float f = (api.Player.Speed - Structs.Speed.DEFAULT) * Structs.Speed.DIVISOR;
-                int barSpeed = (int)Math.Ceiling(f);
-                NailClipr.GUI_SPEED_TRACK.Value = (int)Math.Ceiling(f);
+            //Load zone points.
+            if (Structs.zonePoints.Count == 0 && api.Player.ZoneId != Structs.player.location.old)
+            {
+                loadZonePoints(api);
+            }
+            Structs.player.location.old = api.Player.ZoneId;
 
-                //Disable track bar, highlight speed. Visual cue.
-                if (Structs.player.isAlone || !Structs.settings.playerDetection)
+            //Speed labels
+            NailClipr.GUI_SPEED.Text = "x" + api.Player.Speed / Structs.Speed.NATURAL;
+            float f = (api.Player.Speed - Structs.Speed.NATURAL) * Structs.Speed.DIVISOR;
+            int barSpeed = (int)Math.Ceiling(f);
+            NailClipr.GUI_SPEED_TRACK.Value = barSpeed;
+
+            //Disable track bar, highlight speed. Visual cue.
+            if (Structs.player.isAlone || !Structs.settings.playerDetection)
+            {
+                if (NailClipr.GUI_SPEED_TRACK.Enabled == false)
                 {
-                    if (NailClipr.GUI_SPEED_TRACK.Enabled == false)
-                    {
-                        NailClipr.GUI_SPEED_TRACK.Enabled = true;
-                        NailClipr.GUI_SPEED.ForeColor = Color.Black;
-                        NailClipr.GUI_SPEED.Font = new Font(NailClipr.GUI_SPEED.Font, FontStyle.Regular);
-                    }
-                }
-                else
-                {
-                    if (NailClipr.GUI_SPEED_TRACK.Enabled)
-                    {
-                        NailClipr.GUI_SPEED_TRACK.Enabled = false;
-                        NailClipr.GUI_SPEED.ForeColor = Color.MediumVioletRed;
-                        NailClipr.GUI_SPEED.Font = new Font(NailClipr.GUI_SPEED.Font, FontStyle.Bold);
-                    }
+                    NailClipr.GUI_SPEED_TRACK.Enabled = true;
+                    NailClipr.GUI_SPEED.ForeColor = Color.Black;
+                    NailClipr.GUI_SPEED.Font = new Font(NailClipr.GUI_SPEED.Font, FontStyle.Regular);
                 }
             }
             else
             {
-                if (Structs.zonePoints.Count > 0)
-                    clearZonePoints();
+                if (NailClipr.GUI_SPEED_TRACK.Enabled)
+                {
+                    NailClipr.GUI_SPEED_TRACK.Enabled = false;
+                    NailClipr.GUI_SPEED.ForeColor = Color.MediumVioletRed;
+                    NailClipr.GUI_SPEED.Font = new Font(NailClipr.GUI_SPEED.Font, FontStyle.Bold);
+                }
             }
         }
+
     }
 }
+

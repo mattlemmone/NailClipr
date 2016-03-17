@@ -22,7 +22,9 @@ namespace NailClipr
         public static Label GUI_Z;
         public static Label GUI_STATUS;
         public static Label GUI_ZONE;
+        public static Label GUI_DEFAULT_SPEED;
         public static Label GUI_SPEED;
+        //Bar_Speed_Default
         public static TrackBar GUI_SPEED_TRACK;
 
         public NailClipr()
@@ -52,6 +54,7 @@ namespace NailClipr
             GUI_STATUS = Lbl_Status;
             GUI_ZONE = Lbl_Zone;
             GUI_SPEED = Lbl_SpeedVar;
+            GUI_DEFAULT_SPEED = LBL_DefaultSpeed;
             GUI_SPEED_TRACK = Bar_Speed;
         }
 
@@ -101,27 +104,32 @@ namespace NailClipr
 
         public void workerOverwrites()
         {
+            
             //Constantly write maintenance mode in case it gets overwritten.
             if (ChkBox_Maint.Checked == true)
             {
                 if (api.Player.Status != Structs.Status.MAINT)
                     api.Player.Status = Structs.Status.MAINT;
             }
-
+            
             /*Speed*/
             //Not initialized.
             if (Structs.player.speed.expected == 0)
+            {
                 Structs.player.speed.expected = api.Player.Speed;
-
+                Structs.player.speed.normal = Structs.Speed.NATURAL;
+            }
+            
             //Turn speed off around other players.
             if (Structs.settings.playerDetection) Functions.playersRendered(api);
             if (!Structs.player.isAlone && Structs.settings.playerDetection)
-                api.Player.Speed = Structs.Speed.DEFAULT;
+                api.Player.Speed = Structs.player.speed.normal;
             else {
                 //Prevent speed overwrite.
                 if (api.Player.Speed != Structs.player.speed.expected)
                     api.Player.Speed = Structs.player.speed.expected;
             }
+            
         }
 
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -134,14 +142,7 @@ namespace NailClipr
 
         private void ChkBox_Maint_CheckedChanged(object sender, EventArgs e)
         {
-            if (ChkBox_Maint.Checked)
-            {
-                Structs.player.maintenanceMode(api, true);
-            }
-            else
-            {
-                Structs.player.maintenanceMode(api, false);
-            }
+            Structs.player.maintenanceMode(api, ChkBox_Maint.Checked);
         }
 
         private void ChkBox_DetectDisable_CheckedChanged(object sender, EventArgs e)
@@ -154,10 +155,18 @@ namespace NailClipr
             Structs.settings.topMostForm = ChkBox_StayTop.Checked;
         }
 
+        private void Bar_Speed_Default_Scroll(object sender, EventArgs e)
+        {
+            float barVal = Bar_Speed_Default.Value / Structs.Speed.DIVISOR;
+            float speed = barVal + Structs.Speed.NATURAL;
+            Structs.player.speed.normal = speed;
+            GUI_DEFAULT_SPEED.Text = "x" + speed / Structs.Speed.NATURAL;
+        }
+
         private void Bar_Speed_Scroll(object sender, EventArgs e)
         {
             float barVal = Bar_Speed.Value / Structs.Speed.DIVISOR;
-            float speed = barVal + Structs.Speed.DEFAULT;
+            float speed = barVal + Structs.Speed.NATURAL;
             Structs.player.speed.expected = speed;
             api.Player.Speed = speed;
         }
@@ -217,8 +226,6 @@ namespace NailClipr
         {
             XML.delete(api);
         }
-
-
     }
 }
 

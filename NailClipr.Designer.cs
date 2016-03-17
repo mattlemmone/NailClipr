@@ -55,13 +55,13 @@ namespace NailClipr
             this.Btn_Warp = new System.Windows.Forms.Button();
             this.Btn_Delete = new System.Windows.Forms.Button();
             this.ChkBox_StayTop = new System.Windows.Forms.CheckBox();
-            this.Bar_SpeedDefault = new System.Windows.Forms.TrackBar();
             this.label4 = new System.Windows.Forms.Label();
             this.LBL_DefaultSpeed = new System.Windows.Forms.Label();
             this.Btn_SaveSettings = new System.Windows.Forms.Button();
+            this.Bar_Speed_Default = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Bar_SpeedDefault)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed_Default)).BeginInit();
             this.SuspendLayout();
             // 
             // ChkBox_Maint
@@ -77,7 +77,7 @@ namespace NailClipr
             // 
             // Bar_Speed
             // 
-            this.Bar_Speed.Location = new System.Drawing.Point(12, 315);
+            this.Bar_Speed.Location = new System.Drawing.Point(13, 272);
             this.Bar_Speed.Name = "Bar_Speed";
             this.Bar_Speed.Size = new System.Drawing.Size(259, 45);
             this.Bar_Speed.TabIndex = 3;
@@ -86,7 +86,7 @@ namespace NailClipr
             // Lbl_Speed
             // 
             this.Lbl_Speed.AutoSize = true;
-            this.Lbl_Speed.Location = new System.Drawing.Point(107, 363);
+            this.Lbl_Speed.Location = new System.Drawing.Point(108, 320);
             this.Lbl_Speed.Name = "Lbl_Speed";
             this.Lbl_Speed.Size = new System.Drawing.Size(41, 13);
             this.Lbl_Speed.TabIndex = 4;
@@ -95,7 +95,7 @@ namespace NailClipr
             // Lbl_SpeedVar
             // 
             this.Lbl_SpeedVar.AutoSize = true;
-            this.Lbl_SpeedVar.Location = new System.Drawing.Point(151, 363);
+            this.Lbl_SpeedVar.Location = new System.Drawing.Point(152, 320);
             this.Lbl_SpeedVar.Name = "Lbl_SpeedVar";
             this.Lbl_SpeedVar.Size = new System.Drawing.Size(27, 13);
             this.Lbl_SpeedVar.TabIndex = 5;
@@ -115,7 +115,7 @@ namespace NailClipr
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 363);
+            this.label2.Location = new System.Drawing.Point(12, 320);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(40, 13);
             this.label2.TabIndex = 9;
@@ -124,7 +124,7 @@ namespace NailClipr
             // Lbl_Status
             // 
             this.Lbl_Status.AutoSize = true;
-            this.Lbl_Status.Location = new System.Drawing.Point(53, 363);
+            this.Lbl_Status.Location = new System.Drawing.Point(54, 320);
             this.Lbl_Status.Name = "Lbl_Status";
             this.Lbl_Status.Size = new System.Drawing.Size(13, 13);
             this.Lbl_Status.TabIndex = 10;
@@ -133,7 +133,7 @@ namespace NailClipr
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(212, 363);
+            this.label3.Location = new System.Drawing.Point(213, 320);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 11;
@@ -142,7 +142,7 @@ namespace NailClipr
             // Lbl_Zone
             // 
             this.Lbl_Zone.AutoSize = true;
-            this.Lbl_Zone.Location = new System.Drawing.Point(246, 363);
+            this.Lbl_Zone.Location = new System.Drawing.Point(247, 320);
             this.Lbl_Zone.Name = "Lbl_Zone";
             this.Lbl_Zone.Size = new System.Drawing.Size(25, 13);
             this.Lbl_Zone.TabIndex = 12;
@@ -333,18 +333,12 @@ namespace NailClipr
             this.ChkBox_StayTop.UseVisualStyleBackColor = true;
             this.ChkBox_StayTop.CheckedChanged += new System.EventHandler(this.ChkBox_StayTop_CheckedChanged);
             // 
-            // Bar_SpeedDefault
-            // 
-            this.Bar_SpeedDefault.Location = new System.Drawing.Point(12, 232);
-            this.Bar_SpeedDefault.Name = "Bar_SpeedDefault";
-            this.Bar_SpeedDefault.Size = new System.Drawing.Size(259, 45);
-            this.Bar_SpeedDefault.TabIndex = 38;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(92, 280);
+            this.label4.Location = new System.Drawing.Point(91, 241);
             this.label4.Name = "label4";
+            this.label4.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label4.Size = new System.Drawing.Size(78, 13);
             this.label4.TabIndex = 39;
             this.label4.Text = "Default Speed:";
@@ -352,7 +346,7 @@ namespace NailClipr
             // LBL_DefaultSpeed
             // 
             this.LBL_DefaultSpeed.AutoSize = true;
-            this.LBL_DefaultSpeed.Location = new System.Drawing.Point(167, 280);
+            this.LBL_DefaultSpeed.Location = new System.Drawing.Point(166, 241);
             this.LBL_DefaultSpeed.Name = "LBL_DefaultSpeed";
             this.LBL_DefaultSpeed.Size = new System.Drawing.Size(27, 13);
             this.LBL_DefaultSpeed.TabIndex = 40;
@@ -367,15 +361,23 @@ namespace NailClipr
             this.Btn_SaveSettings.Text = "Save Settings";
             this.Btn_SaveSettings.UseVisualStyleBackColor = true;
             // 
+            // Bar_Speed_Default
+            // 
+            this.Bar_Speed_Default.Location = new System.Drawing.Point(12, 204);
+            this.Bar_Speed_Default.Name = "Bar_Speed_Default";
+            this.Bar_Speed_Default.Size = new System.Drawing.Size(259, 45);
+            this.Bar_Speed_Default.TabIndex = 38;
+            this.Bar_Speed_Default.Scroll += new System.EventHandler(this.Bar_Speed_Default_Scroll);
+            // 
             // NailClipr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 385);
+            this.ClientSize = new System.Drawing.Size(284, 342);
             this.Controls.Add(this.Btn_SaveSettings);
             this.Controls.Add(this.LBL_DefaultSpeed);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.Bar_SpeedDefault);
+            this.Controls.Add(this.Bar_Speed_Default);
             this.Controls.Add(this.ChkBox_StayTop);
             this.Controls.Add(this.Btn_Delete);
             this.Controls.Add(this.Btn_Warp);
@@ -396,7 +398,7 @@ namespace NailClipr
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Bar_SpeedDefault)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed_Default)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -431,10 +433,10 @@ namespace NailClipr
         private Button Btn_Warp;
         private Button Btn_Delete;
         private CheckBox ChkBox_StayTop;
-        private TrackBar Bar_SpeedDefault;
         private Label label4;
         private Label LBL_DefaultSpeed;
         private Button Btn_SaveSettings;
+        private TrackBar Bar_Speed_Default;
     }
 }
 

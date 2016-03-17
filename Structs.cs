@@ -13,7 +13,6 @@ namespace NailClipr
 
         public struct Settings
         {
-            public bool playerDetection;
             public bool TMF;
             public bool topMostForm
             {
@@ -23,6 +22,8 @@ namespace NailClipr
                     TMF = value;
                 }
             }
+
+            public bool playerDetection;
             public const float POS_INC = 5f;
         }
 
@@ -48,19 +49,24 @@ namespace NailClipr
                 get { return oldStatus; }
                 set { oldStatus = value; }
             }
-            public const uint DEFAULT = 0;
+            public const uint NATURAL = 0;
             public const uint MAINT = 31;
         }
 
         public struct Speed
         {
-            private float e;
+            private float exp, norm;
             public float expected
             {
-                get { return e; }
-                set { e = value; }
+                get { return exp; }
+                set { exp = value; }
             }
-            public const float DEFAULT = 5f;
+            public float normal
+            {
+                get { return norm; }
+                set { norm = value; }
+            }
+            public const float NATURAL = 5f;
             public const float DIVISOR = 4f;
         }
 
@@ -87,7 +93,7 @@ namespace NailClipr
                 //Save status before switching.
                 if (api.Player.Status == Status.MAINT)
                 {
-                    status.old = Status.DEFAULT;
+                    status.old = Status.NATURAL;
                 }
                 else
                 {

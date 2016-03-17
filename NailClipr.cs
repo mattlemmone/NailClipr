@@ -13,10 +13,10 @@ namespace NailClipr
     {
         private static EliteAPI api;
         private BackgroundWorker bw = new BackgroundWorker();
-        public const float INC = 5.0f;
-        public bool playersRendered;
 
         public static ComboBox GUI_WARP;
+        public static CheckBox GUI_TOPMOST;
+        public static CheckBox GUI_DISABLE_DETECT;
         public static Label GUI_X;
         public static Label GUI_Y;
         public static Label GUI_Z;
@@ -44,6 +44,8 @@ namespace NailClipr
         public void AssignControls()
         {
             GUI_WARP = CB_Warp;
+            GUI_TOPMOST = ChkBox_StayTop;
+            GUI_DISABLE_DETECT = ChkBox_DetectDisable;
             GUI_X = Lbl_X;
             GUI_Y = Lbl_Y;
             GUI_Z = Lbl_Z;
@@ -55,8 +57,6 @@ namespace NailClipr
 
         public void PostInit()
         {
-            if (ChkBox_StayTop.Checked)
-                this.TopMost = true;
             try
             {
                 XML.load();
@@ -114,8 +114,8 @@ namespace NailClipr
                 Structs.player.speed.expected = api.Player.Speed;
 
             //Turn speed off around other players.
-            Functions.playersRendered(api);
-            if (Structs.player.isAlone == false)
+            if (Structs.settings.playerDetection) Functions.playersRendered(api);
+            if (!Structs.player.isAlone && Structs.settings.playerDetection)
                 api.Player.Speed = Structs.Speed.DEFAULT;
             else {
                 //Prevent speed overwrite.
@@ -144,12 +144,14 @@ namespace NailClipr
             }
         }
 
+        private void ChkBox_DetectDisable_CheckedChanged(object sender, EventArgs e)
+        {
+            Structs.settings.playerDetection = ChkBox_DetectDisable.Checked;
+        }
+
         private void ChkBox_StayTop_CheckedChanged(object sender, EventArgs e)
         {
-            if (ChkBox_StayTop.Checked)
-                this.TopMost = true;
-            else
-                this.TopMost = false;
+            Structs.settings.topMostForm = ChkBox_StayTop.Checked;
         }
 
         private void Bar_Speed_Scroll(object sender, EventArgs e)
@@ -163,37 +165,37 @@ namespace NailClipr
 
         private void Btn_Plus_X_Click(object sender, EventArgs e)
         {
-            api.Player.X = api.Player.X + INC;
+            api.Player.X = api.Player.X + Structs.Settings.POS_INC;
         }
 
         private void Btn_Minus_X_Click(object sender, EventArgs e)
         {
 
-            api.Player.X = api.Player.X - INC;
+            api.Player.X = api.Player.X - Structs.Settings.POS_INC;
         }
 
         private void Btn_Plus_Y_Click(object sender, EventArgs e)
         {
 
-            api.Player.Y = api.Player.Z + INC;
+            api.Player.Y = api.Player.Z + Structs.Settings.POS_INC;
         }
 
         private void Btn_Minus_Y_Click(object sender, EventArgs e)
         {
 
-            api.Player.Y = api.Player.Z - INC;
+            api.Player.Y = api.Player.Z - Structs.Settings.POS_INC;
         }
 
         private void Btn_Plus_Z_Click(object sender, EventArgs e)
         {
 
-            api.Player.Z = api.Player.Y + INC;
+            api.Player.Z = api.Player.Y + Structs.Settings.POS_INC;
         }
 
         private void Btn_Minus_Z_Click(object sender, EventArgs e)
         {
 
-            api.Player.Z = api.Player.Y - INC;
+            api.Player.Z = api.Player.Y - Structs.Settings.POS_INC;
         }
 
         private void Btn_Save_Click(object sender, EventArgs e)
@@ -215,6 +217,8 @@ namespace NailClipr
         {
             XML.delete(api);
         }
+
+
     }
 }
 

@@ -102,7 +102,7 @@ namespace NailClipr
                 NailClipr.GUI_SPEED_TRACK.Value = (int)Math.Ceiling(f);
 
                 //Disable track bar, highlight speed. Visual cue.
-                if (Structs.player.isAlone)
+                if (Structs.player.isAlone || !Structs.settings.playerDetection)
                 {
                     if (NailClipr.GUI_SPEED_TRACK.Enabled == false)
                     {

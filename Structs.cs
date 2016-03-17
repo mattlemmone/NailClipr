@@ -7,8 +7,24 @@ namespace NailClipr
     {
 
         public static Player player = new Player();
+        public static Settings settings = new Settings();
         public static List<WarpPoint> warpPoints = new List<WarpPoint>();
         public static List<WarpPoint> zonePoints = new List<WarpPoint>();
+
+        public struct Settings
+        {
+            public bool playerDetection;
+            public bool TMF;
+            public bool topMostForm
+            {
+                get { return TMF; }
+                set {
+                    NailClipr.ActiveForm.TopMost = value;
+                    TMF = value;
+                }
+            }
+            public const float POS_INC = 5f;
+        }
 
         public struct Position
         {

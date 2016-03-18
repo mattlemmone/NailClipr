@@ -28,6 +28,7 @@ namespace NailClipr
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NailClipr));
             this.ChkBox_Maint = new System.Windows.Forms.CheckBox();
             this.Bar_Speed = new System.Windows.Forms.TrackBar();
             this.Lbl_Speed = new System.Windows.Forms.Label();
@@ -395,6 +396,7 @@ namespace NailClipr
             this.Controls.Add(this.Lbl_Speed);
             this.Controls.Add(this.Bar_Speed);
             this.Controls.Add(this.ChkBox_Maint);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "NailClipr";
             this.Text = "NailClipr";
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).EndInit();

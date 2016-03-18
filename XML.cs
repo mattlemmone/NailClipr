@@ -80,10 +80,6 @@ namespace NailClipr
                     Structs.zones.Add(z);
                 });
             }
-            foreach (var n in Structs.zones)
-            {
-                Console.WriteLine(n.name);
-            }
 
         }
         public static void loadWarps()
@@ -147,9 +143,8 @@ namespace NailClipr
 
             Structs.warpPoints.Add(wp);
             Functions.addZonePoint(wp);
-
-            int zIndex = Structs.zones.FindIndex(z => z.id == wp.zone);
-            string zoneName = Structs.zones[zIndex].name;
+            
+            string zoneName = Structs.Zones.nameFromID(wp.zone);
             xdoc.Element("NailClipr").Element("Locations").Add(
                new XElement("Location",
                new XElement("ZoneName", zoneName),

@@ -8,6 +8,7 @@ namespace NailClipr
     {
 
         public static Player player = new Player();
+        public static Zone Zones = new Zone();
         public static Settings settings = new Settings();
         public static List<WarpPoint> warpPoints = new List<WarpPoint>();
         public static List<WarpPoint> zonePoints = new List<WarpPoint>();
@@ -20,10 +21,20 @@ namespace NailClipr
             public const float POS_INC = 5f;
         }
 
-        public struct Zone
+        public class Zone
         {
             public int id;
             public string name;
+            public string nameFromID(int id)
+            {
+                int zIndex = zones.FindIndex(z => z.id == id);
+                return zones[zIndex].name;
+            }
+            public int IDfromName(string name)
+            {
+                int zIndex = zones.FindIndex(z => z.name == name);
+                return zones[zIndex].id;
+            }
         }
 
         public struct Position

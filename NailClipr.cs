@@ -116,7 +116,6 @@ namespace NailClipr
             if (Structs.player.speed.expected == 0)
             {
                 Structs.player.speed.expected = api.Player.Speed;
-                Structs.player.speed.normal = Structs.Speed.NATURAL;
             }
 
             //Turn speed off around other players.
@@ -124,7 +123,11 @@ namespace NailClipr
 
             //Adjust current speed.
             if (!Structs.player.isAlone && Structs.settings.playerDetection)
+            {
                 api.Player.Speed = Structs.player.speed.normal;
+                if (api.Player.Speed != Structs.player.speed.normal)
+                    api.Player.Speed = Structs.player.speed.normal;
+            }
             else {
                 //Prevent speed overwrite.
                 if (api.Player.Speed != Structs.player.speed.expected)

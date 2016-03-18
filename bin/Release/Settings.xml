@@ -67,7 +67,7 @@
   </Locations>
   <Settings>
     <PlayerDetection>True</PlayerDetection>
-    <StayOnTop>False</StayOnTop>
-    <DefaultSpeed>5.5</DefaultSpeed>
+    <StayOnTop>True</StayOnTop>
+    <DefaultSpeed>5.75</DefaultSpeed>
   </Settings>
 </NailClipr>

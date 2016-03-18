@@ -1,4 +1,5 @@
 ﻿using EliteMMO.API;
+using System;
 using System.Collections.Generic;
 
 namespace NailClipr
@@ -13,16 +14,8 @@ namespace NailClipr
 
         public struct Settings
         {
-            public bool TMF;
-            public bool topMostForm
-            {
-                get { return TMF; }
-                set {
-                    NailClipr.ActiveForm.TopMost = value;
-                    TMF = value;
-                }
-            }
-
+            private bool TMF;
+            public bool topMostForm;
             public bool playerDetection;
             public const float POS_INC = 5f;
         }

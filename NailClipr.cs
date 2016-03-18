@@ -16,7 +16,7 @@ namespace NailClipr
 
         public static ComboBox GUI_WARP;
         public static CheckBox GUI_TOPMOST;
-        public static CheckBox GUI_DISABLE_DETECT;
+        public static CheckBox GUI_PLAYER_DETECT;
         public static Label GUI_X;
         public static Label GUI_Y;
         public static Label GUI_Z;
@@ -24,7 +24,7 @@ namespace NailClipr
         public static Label GUI_ZONE;
         public static Label GUI_DEFAULT_SPEED;
         public static Label GUI_SPEED;
-        //Bar_Speed_Default
+        public static TrackBar GUI_SPEED_DEFAULT_TRACK;
         public static TrackBar GUI_SPEED_TRACK;
 
         public NailClipr()
@@ -32,7 +32,6 @@ namespace NailClipr
             InitializeComponent();
             AssignControls();
             PostInit();
-
             selectProcess();
 
             // Start the background worker..
@@ -42,12 +41,24 @@ namespace NailClipr
             bw.WorkerReportsProgress = true;
             bw.RunWorkerAsync();
         }
+        public void PostInit()
+        {
+            try
+            {
+                XML.loadWarps();
+                XML.loadSettings();
+            }
+            catch (FileNotFoundException)
+            {
+                XML.create();
+            }
+        }
 
         public void AssignControls()
         {
             GUI_WARP = CB_Warp;
             GUI_TOPMOST = ChkBox_StayTop;
-            GUI_DISABLE_DETECT = ChkBox_DetectDisable;
+            GUI_PLAYER_DETECT = ChkBox_PlayerDetect;
             GUI_X = Lbl_X;
             GUI_Y = Lbl_Y;
             GUI_Z = Lbl_Z;
@@ -55,19 +66,8 @@ namespace NailClipr
             GUI_ZONE = Lbl_Zone;
             GUI_SPEED = Lbl_SpeedVar;
             GUI_DEFAULT_SPEED = LBL_DefaultSpeed;
+            GUI_SPEED_DEFAULT_TRACK = Bar_Speed_Default;
             GUI_SPEED_TRACK = Bar_Speed;
-        }
-
-        public void PostInit()
-        {
-            try
-            {
-                XML.load();
-            }
-            catch (FileNotFoundException)
-            {
-                XML.create();
-            }
         }
 
         public void selectProcess()
@@ -92,7 +92,6 @@ namespace NailClipr
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-
             while (worker.CancellationPending != true)
             {
                 System.Threading.Thread.Sleep(100);
@@ -104,14 +103,14 @@ namespace NailClipr
 
         public void workerOverwrites()
         {
-            
+
             //Constantly write maintenance mode in case it gets overwritten.
             if (ChkBox_Maint.Checked == true)
             {
                 if (api.Player.Status != Structs.Status.MAINT)
                     api.Player.Status = Structs.Status.MAINT;
             }
-            
+
             /*Speed*/
             //Not initialized.
             if (Structs.player.speed.expected == 0)
@@ -119,9 +118,11 @@ namespace NailClipr
                 Structs.player.speed.expected = api.Player.Speed;
                 Structs.player.speed.normal = Structs.Speed.NATURAL;
             }
-            
+
             //Turn speed off around other players.
             if (Structs.settings.playerDetection) Functions.playersRendered(api);
+
+            //Adjust current speed.
             if (!Structs.player.isAlone && Structs.settings.playerDetection)
                 api.Player.Speed = Structs.player.speed.normal;
             else {
@@ -129,7 +130,7 @@ namespace NailClipr
                 if (api.Player.Speed != Structs.player.speed.expected)
                     api.Player.Speed = Structs.player.speed.expected;
             }
-            
+
         }
 
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -147,7 +148,7 @@ namespace NailClipr
 
         private void ChkBox_DetectDisable_CheckedChanged(object sender, EventArgs e)
         {
-            Structs.settings.playerDetection = ChkBox_DetectDisable.Checked;
+            Structs.settings.playerDetection = ChkBox_PlayerDetect.Checked;
         }
 
         private void ChkBox_StayTop_CheckedChanged(object sender, EventArgs e)
@@ -157,7 +158,7 @@ namespace NailClipr
 
         private void Bar_Speed_Default_Scroll(object sender, EventArgs e)
         {
-            float barVal = Bar_Speed_Default.Value / Structs.Speed.DIVISOR;
+            float barVal = GUI_SPEED_DEFAULT_TRACK.Value / Structs.Speed.DIVISOR;
             float speed = barVal + Structs.Speed.NATURAL;
             Structs.player.speed.normal = speed;
             GUI_DEFAULT_SPEED.Text = "x" + speed / Structs.Speed.NATURAL;
@@ -165,7 +166,7 @@ namespace NailClipr
 
         private void Bar_Speed_Scroll(object sender, EventArgs e)
         {
-            float barVal = Bar_Speed.Value / Structs.Speed.DIVISOR;
+            float barVal = GUI_SPEED_TRACK.Value / Structs.Speed.DIVISOR;
             float speed = barVal + Structs.Speed.NATURAL;
             Structs.player.speed.expected = speed;
             api.Player.Speed = speed;
@@ -209,7 +210,7 @@ namespace NailClipr
 
         private void Btn_Save_Click(object sender, EventArgs e)
         {
-            XML.save(api);
+            XML.saveWarp(api);
         }
 
         private void Btn_Warp_Click(object sender, EventArgs e)
@@ -224,7 +225,12 @@ namespace NailClipr
 
         private void Btn_Delete_Click(object sender, EventArgs e)
         {
-            XML.delete(api);
+            XML.deleteWarp(api);
+        }
+
+        private void Btn_SaveSettings_Click(object sender, EventArgs e)
+        {
+            XML.saveSettings();
         }
     }
 }

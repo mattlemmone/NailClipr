@@ -12,12 +12,49 @@ namespace NailClipr
         public static XDocument xdoc;
         public static void create()
         {
-            var xmlNode = new XElement("Locations");
-            xmlNode.Save(SETTINGS);
+
+            XDocument xmlDocument = new XDocument(
+                new XDeclaration("1.0", "utf-8", "yes"),
+                new XElement("NailClipr",
+                    new XElement("Locations"),
+
+                    new XElement("Settings",                         
+                        new XElement("PlayerDetection", Structs.settings.playerDetection),
+                        new XElement("StayOnTop", Structs.settings.topMostForm),
+                        new XElement("DefaultSpeed", Structs.player.speed.normal)
+                        )));
+
+            xmlDocument.Save(SETTINGS);
             xdoc = XDocument.Load(SETTINGS);
         }
+        public static void saveSettings()
+        {
+            xdoc.Element("NailClipr").Element("Settings").Element("PlayerDetection").Value = Structs.settings.playerDetection + "";
+            xdoc.Element("NailClipr").Element("Settings").Element("StayOnTop").Value = Structs.settings.topMostForm + "";
+            xdoc.Element("NailClipr").Element("Settings").Element("DefaultSpeed").Value = Structs.player.speed.normal + "";
+            xdoc.Save(SETTINGS);
+        }
+        public static void loadSettings()
+        {
+            xdoc = XDocument.Load(SETTINGS);
+            bool PD = Convert.ToBoolean(xdoc.Element("NailClipr").Element("Settings").Element("PlayerDetection").Value);
+            bool SOT = Convert.ToBoolean(xdoc.Element("NailClipr").Element("Settings").Element("StayOnTop").Value);
+            float DS = float.Parse(xdoc.Element("NailClipr").Element("Settings").Element("DefaultSpeed").Value);
 
-        public static void load()
+            NailClipr.GUI_PLAYER_DETECT.Checked = PD;
+            Structs.settings.playerDetection = PD;
+            NailClipr.GUI_TOPMOST.Checked = SOT;
+            Structs.settings.topMostForm = PD;
+
+            //Update Speed
+            float speed = DS;
+            Structs.player.speed.normal = speed;
+
+            //Update Speed Label
+            Functions.updateTrackSpeed(NailClipr.GUI_SPEED_DEFAULT_TRACK, NailClipr.GUI_DEFAULT_SPEED, speed);
+
+        }
+        public static void loadWarps()
         {
             xdoc = XDocument.Load(SETTINGS);
             IEnumerable<XElement> allElements =
@@ -50,7 +87,7 @@ namespace NailClipr
             }
 
         }
-        public static void save(EliteAPI api)
+        public static void saveWarp(EliteAPI api)
         {
             //http://www.c-sharpcorner.com/UploadFile/de41d6/learning-linq-made-easy-linq-to-xml-tutorial-3/
 
@@ -66,16 +103,28 @@ namespace NailClipr
             wp.zone = api.Player.ZoneId;
             wp.pos = pos;
 
+            Console.WriteLine("warp");
+            foreach (var n in Structs.warpPoints)
+            {
+                Console.WriteLine(n.title);
+            }
+            Console.WriteLine("zone");
+            foreach (var n in Structs.zonePoints)
+            {
+                Console.WriteLine(n.title);
+            }
             //Updating - delete old and save new.
             int index = Structs.zonePoints.FindIndex(p => p.title == wp.title);
             if (index >= 0)
             {
-                delete(api);
+                Console.WriteLine("Editing Warp.");Console.ReadLine();
+                deleteWarp(api);
             }
 
             Structs.warpPoints.Add(wp);
-            Functions.addZonePoint(wp.title);
-            XML.xdoc.Element("Locations").Add(
+            Functions.addZonePoint(wp);
+
+            xdoc.Element("NailClipr").Element("Locations").Add(
                new XElement("Location",
                new XElement("Zone", wp.zone),
                new XElement("Title", wp.title),
@@ -83,11 +132,13 @@ namespace NailClipr
                new XElement("Y", wp.pos.Y),
                new XElement("Z", wp.pos.Z)
             ));
-            XML.xdoc.Save(SETTINGS);
-        }
-
-        public static void delete(EliteAPI api)
+            xdoc.Save(SETTINGS);
+        }        
+        public static void deleteWarp(EliteAPI api)
         {
+            if (NailClipr.GUI_WARP.Text == "") return;
+
+            Console.WriteLine("Deleting Warp."); Console.ReadLine();
             XElement delNode = xdoc.Descendants("Location")
                .Where(a => a.Element("Title").Value == NailClipr.GUI_WARP.Text && a.Element("Zone").Value == api.Player.ZoneId + "")
                .FirstOrDefault();
@@ -99,7 +150,7 @@ namespace NailClipr
             Structs.zonePoints.Remove(delWP);
             Structs.warpPoints.Remove(delWP);
 
-            NailClipr.GUI_WARP.Items.Remove(NailClipr.GUI_WARP.SelectedItem);
+            NailClipr.GUI_WARP.Items.Remove(delWP.title);
         }
     }
 }

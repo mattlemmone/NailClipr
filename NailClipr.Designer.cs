@@ -32,7 +32,7 @@ namespace NailClipr
             this.Bar_Speed = new System.Windows.Forms.TrackBar();
             this.Lbl_Speed = new System.Windows.Forms.Label();
             this.Lbl_SpeedVar = new System.Windows.Forms.Label();
-            this.ChkBox_DetectDisable = new System.Windows.Forms.CheckBox();
+            this.ChkBox_PlayerDetect = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.Lbl_Status = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -101,16 +101,16 @@ namespace NailClipr
             this.Lbl_SpeedVar.TabIndex = 5;
             this.Lbl_SpeedVar.Text = "x1.0";
             // 
-            // ChkBox_DetectDisable
+            // ChkBox_PlayerDetect
             // 
-            this.ChkBox_DetectDisable.AutoSize = true;
-            this.ChkBox_DetectDisable.Location = new System.Drawing.Point(154, 44);
-            this.ChkBox_DetectDisable.Name = "ChkBox_DetectDisable";
-            this.ChkBox_DetectDisable.Size = new System.Drawing.Size(104, 17);
-            this.ChkBox_DetectDisable.TabIndex = 6;
-            this.ChkBox_DetectDisable.Text = "Player Detection";
-            this.ChkBox_DetectDisable.UseVisualStyleBackColor = true;
-            this.ChkBox_DetectDisable.CheckedChanged += new System.EventHandler(this.ChkBox_DetectDisable_CheckedChanged);
+            this.ChkBox_PlayerDetect.AutoSize = true;
+            this.ChkBox_PlayerDetect.Location = new System.Drawing.Point(154, 44);
+            this.ChkBox_PlayerDetect.Name = "ChkBox_PlayerDetect";
+            this.ChkBox_PlayerDetect.Size = new System.Drawing.Size(104, 17);
+            this.ChkBox_PlayerDetect.TabIndex = 6;
+            this.ChkBox_PlayerDetect.Text = "Player Detection";
+            this.ChkBox_PlayerDetect.UseVisualStyleBackColor = true;
+            this.ChkBox_PlayerDetect.CheckedChanged += new System.EventHandler(this.ChkBox_DetectDisable_CheckedChanged);
             // 
             // label2
             // 
@@ -248,7 +248,7 @@ namespace NailClipr
             // Lbl_Z
             // 
             this.Lbl_Z.AutoSize = true;
-            this.Lbl_Z.Location = new System.Drawing.Point(21, 78);
+            this.Lbl_Z.Location = new System.Drawing.Point(21, 76);
             this.Lbl_Z.Name = "Lbl_Z";
             this.Lbl_Z.Size = new System.Drawing.Size(25, 13);
             this.Lbl_Z.TabIndex = 29;
@@ -257,7 +257,7 @@ namespace NailClipr
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 78);
+            this.label8.Location = new System.Drawing.Point(6, 76);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(17, 13);
             this.label8.TabIndex = 28;
@@ -360,6 +360,7 @@ namespace NailClipr
             this.Btn_SaveSettings.TabIndex = 41;
             this.Btn_SaveSettings.Text = "Save Settings";
             this.Btn_SaveSettings.UseVisualStyleBackColor = true;
+            this.Btn_SaveSettings.Click += new System.EventHandler(this.Btn_SaveSettings_Click);
             // 
             // Bar_Speed_Default
             // 
@@ -388,7 +389,7 @@ namespace NailClipr
             this.Controls.Add(this.label3);
             this.Controls.Add(this.Lbl_Status);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.ChkBox_DetectDisable);
+            this.Controls.Add(this.ChkBox_PlayerDetect);
             this.Controls.Add(this.Lbl_SpeedVar);
             this.Controls.Add(this.Lbl_Speed);
             this.Controls.Add(this.Bar_Speed);
@@ -410,7 +411,7 @@ namespace NailClipr
         private System.Windows.Forms.TrackBar Bar_Speed;
         private System.Windows.Forms.Label Lbl_Speed;
         private System.Windows.Forms.Label Lbl_SpeedVar;
-        private System.Windows.Forms.CheckBox ChkBox_DetectDisable;
+        private System.Windows.Forms.CheckBox ChkBox_PlayerDetect;
         private Label Lbl_Status;
         private Label label2;
         private Label label3;

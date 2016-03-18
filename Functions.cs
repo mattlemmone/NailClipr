@@ -6,11 +6,11 @@ namespace NailClipr
 {
     class Functions
     {
-        public static void addZonePoint(string title)
+        public static void addZonePoint(Structs.WarpPoint wp)
         {
-            NailClipr.GUI_WARP.Items.Add(title);
+            NailClipr.GUI_WARP.Items.Add(wp.title);
+            Structs.zonePoints.Add(wp);
         }
-
         public static void clearZonePoints()
         {
             NailClipr.GUI_WARP.Text = "";
@@ -88,8 +88,7 @@ namespace NailClipr
             //If we aren't zoning...
             if (Structs.player.location.isZoning)
             {
-                if (Structs.zonePoints.Count > 0)
-                    clearZonePoints();
+                if (Structs.zonePoints.Count > 0) clearZonePoints();
                 return;
             }
 
@@ -101,12 +100,14 @@ namespace NailClipr
             Structs.player.location.old = api.Player.ZoneId;
 
             //Speed labels
-            NailClipr.GUI_SPEED.Text = "x" + api.Player.Speed / Structs.Speed.NATURAL;
-            float f = (api.Player.Speed - Structs.Speed.NATURAL) * Structs.Speed.DIVISOR;
-            int barSpeed = (int)Math.Ceiling(f);
-            NailClipr.GUI_SPEED_TRACK.Value = barSpeed;
+            updateTrackSpeed(NailClipr.GUI_SPEED_TRACK, NailClipr.GUI_SPEED, api.Player.Speed);
 
             //Disable track bar, highlight speed. Visual cue.
+            disableTrackSpeed();
+        }
+
+        public static void disableTrackSpeed()
+        {
             if (Structs.player.isAlone || !Structs.settings.playerDetection)
             {
                 if (NailClipr.GUI_SPEED_TRACK.Enabled == false)
@@ -127,6 +128,13 @@ namespace NailClipr
             }
         }
 
+        public static void updateTrackSpeed(System.Windows.Forms.TrackBar bar, System.Windows.Forms.Label lbl, float speed)
+        {
+            lbl.Text = "x" + speed / Structs.Speed.NATURAL;
+            float f = (speed - Structs.Speed.NATURAL) * Structs.Speed.DIVISOR;
+            int barSpeed = (int)Math.Ceiling(f);
+            bar.Value = barSpeed;
+        }
     }
 }
 

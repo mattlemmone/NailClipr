@@ -1,45 +1,52 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Locations>
-  <Location>
-    <Zone>248</Zone>
-    <Title>Dunes</Title>
-    <X>18.481</X>
-    <Y>99.829</Y>
-    <Z>-14.5586</Z>
-  </Location>
-  <Location>
-    <Zone>230</Zone>
-    <Title>AH</Title>
-    <X>9.7049675</X>
-    <Y>-28.76725</Y>
-    <Z>1.7</Z>
-  </Location>
-  <Location>
-    <Zone>230</Zone>
-    <Title>Mog House</Title>
-    <X>164.113037</X>
-    <Y>161.252777</Y>
-    <Z>-2</Z>
-  </Location>
-  <Location>
-    <Zone>230</Zone>
-    <Title>Rolandienne</Title>
-    <X>-85.5906</X>
-    <Y>-48.5431137</Y>
-    <Z>1</Z>
-  </Location>
-  <Location>
-    <Zone>100</Zone>
-    <Title>West Ron. Gate</Title>
-    <X>-125.879</X>
-    <Y>274.1</Y>
-    <Z>-62</Z>
-  </Location>
-  <Location>
-    <Zone>230</Zone>
-    <Title>ass</Title>
-    <X>158.015152</X>
-    <Y>153.596359</Y>
-    <Z>-2</Z>
-  </Location>
-</Locations>
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<NailClipr>
+  <Locations>
+    <Location>
+      <Zone>248</Zone>
+      <Title>Dunes</Title>
+      <X>18.481</X>
+      <Y>99.829</Y>
+      <Z>14.5586</Z>
+    </Location>
+    <Location>
+      <Zone>230</Zone>
+      <Title>AH</Title>
+      <X>9.7049675</X>
+      <Y>28.76725</Y>
+      <Z>1.7</Z>
+    </Location>
+    <Location>
+      <Zone>230</Zone>
+      <Title>Mog House</Title>
+      <X>164.113037</X>
+      <Y>161.252777</Y>
+      <Z>2</Z>
+    </Location>
+    <Location>
+      <Zone>230</Zone>
+      <Title>Rolandienne</Title>
+      <X>85.5906</X>
+      <Y>48.5431137</Y>
+      <Z>1</Z>
+    </Location>
+    <Location>
+      <Zone>100</Zone>
+      <Title>West Ron. Gate</Title>
+      <X>125.879</X>
+      <Y>274.1</Y>
+      <Z>62</Z>
+    </Location>
+    <Location>
+      <Zone>244</Zone>
+      <Title>Mog House</Title>
+      <X>45.93488</X>
+      <Y>78.4389648</Y>
+      <Z>4.998174</Z>
+    </Location>
+  </Locations>
+  <Settings>
+    <PlayerDetection>False</PlayerDetection>
+    <StayOnTop>True</StayOnTop>
+    <DefaultSpeed>5.25</DefaultSpeed>
+  </Settings>
+</NailClipr>

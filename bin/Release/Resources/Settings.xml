@@ -64,6 +64,28 @@
       <Y>657.873352</Y>
       <Z>0.04729572</Z>
     </Location>
+    <Location>
+      <Zone>231</Zone>
+      <Title>Survival Guide</Title>
+      <X>-175.552017</X>
+      <Y>81.4851761</Y>
+      <Z>4</Z>
+    </Location>
+    <Location>
+      <Zone>115</Zone>
+      <Title>Outer Hortoto</Title>
+      <X>-265.7106</X>
+      <Y>660.318359</Y>
+      <Z>-15.25</Z>
+    </Location>
+    <Location>
+      <ZoneName>Outer Horutoto Ruins</ZoneName>
+      <Zone>194</Zone>
+      <Title>test</Title>
+      <X>-240.681442</X>
+      <Y>699.311157</Y>
+      <Z>0</Z>
+    </Location>
   </Locations>
   <Settings>
     <PlayerDetection>True</PlayerDetection>

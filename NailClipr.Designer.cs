@@ -286,6 +286,7 @@ namespace NailClipr
             // 
             // CB_Warp
             // 
+            this.CB_Warp.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.CB_Warp.FormattingEnabled = true;
             this.CB_Warp.Location = new System.Drawing.Point(15, 119);
             this.CB_Warp.Name = "CB_Warp";

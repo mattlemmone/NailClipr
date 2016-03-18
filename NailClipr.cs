@@ -47,6 +47,7 @@ namespace NailClipr
             {
                 XML.loadWarps();
                 XML.loadSettings();
+                XML.loadAreas();
             }
             catch (FileNotFoundException)
             {

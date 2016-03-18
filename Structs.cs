@@ -11,13 +11,19 @@ namespace NailClipr
         public static Settings settings = new Settings();
         public static List<WarpPoint> warpPoints = new List<WarpPoint>();
         public static List<WarpPoint> zonePoints = new List<WarpPoint>();
+        public static List<Zone> zones = new List<Zone>();
 
         public struct Settings
         {
-            private bool TMF;
             public bool topMostForm;
             public bool playerDetection;
             public const float POS_INC = 5f;
+        }
+
+        public struct Zone
+        {
+            public int id;
+            public string name;
         }
 
         public struct Position

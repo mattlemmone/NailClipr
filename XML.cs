@@ -8,8 +8,11 @@ namespace NailClipr
 {
     class XML
     {
-        public const string SETTINGS = "Settings.xml";
+        public const string SETTINGS = "Resources/Settings.xml";
+        public const string AREAS = "Resources/areas.xml";
+
         public static XDocument xdoc;
+
         public static void create()
         {
 
@@ -41,8 +44,10 @@ namespace NailClipr
             bool SOT = Convert.ToBoolean(xdoc.Element("NailClipr").Element("Settings").Element("StayOnTop").Value);
             float DS = float.Parse(xdoc.Element("NailClipr").Element("Settings").Element("DefaultSpeed").Value);
 
+            //Update checkboxes
             NailClipr.GUI_PLAYER_DETECT.Checked = PD;
             Structs.settings.playerDetection = PD;
+
             NailClipr.GUI_TOPMOST.Checked = SOT;
             Structs.settings.topMostForm = PD;
 
@@ -52,6 +57,33 @@ namespace NailClipr
 
             //Update Speed Label
             Functions.updateTrackSpeed(NailClipr.GUI_SPEED_DEFAULT_TRACK, NailClipr.GUI_DEFAULT_SPEED, speed);
+
+        }
+        public static void loadAreas()
+        {
+            XDocument adoc = XDocument.Load(AREAS);
+
+            IEnumerable<XElement> allElements =
+            from xEle in adoc.Descendants("areas")
+            select xEle;
+            foreach (XElement result in allElements)
+            {
+                result.Elements().Select(t => new
+                {
+                    id = t.Attribute("id").Value,
+                    name = t.Value,
+                }).ToList().ForEach(t =>
+                {
+                    Structs.Zone z = new Structs.Zone();
+                    z.id = int.Parse(t.id);
+                    z.name = t.name;
+                    Structs.zones.Add(z);
+                });
+            }
+            foreach (var n in Structs.zones)
+            {
+                Console.WriteLine(n.name);
+            }
 
         }
         public static void loadWarps()
@@ -103,16 +135,8 @@ namespace NailClipr
             wp.zone = api.Player.ZoneId;
             wp.pos = pos;
 
-            Console.WriteLine("warp");
-            foreach (var n in Structs.warpPoints)
-            {
-                Console.WriteLine(n.title);
-            }
-            Console.WriteLine("zone");
-            foreach (var n in Structs.zonePoints)
-            {
-                Console.WriteLine(n.title);
-            }
+            Console.WriteLine("Saving warp.");
+
             //Updating - delete old and save new.
             int index = Structs.zonePoints.FindIndex(p => p.title == wp.title);
             if (index >= 0)
@@ -124,8 +148,11 @@ namespace NailClipr
             Structs.warpPoints.Add(wp);
             Functions.addZonePoint(wp);
 
+            int zIndex = Structs.zones.FindIndex(z => z.id == wp.zone);
+            string zoneName = Structs.zones[zIndex].name;
             xdoc.Element("NailClipr").Element("Locations").Add(
                new XElement("Location",
+               new XElement("ZoneName", zoneName),
                new XElement("Zone", wp.zone),
                new XElement("Title", wp.title),
                new XElement("X", wp.pos.X),

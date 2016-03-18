@@ -154,6 +154,7 @@ namespace NailClipr
         private void ChkBox_StayTop_CheckedChanged(object sender, EventArgs e)
         {
             Structs.settings.topMostForm = ChkBox_StayTop.Checked;
+            this.TopMost = ChkBox_StayTop.Checked;
         }
 
         private void Bar_Speed_Default_Scroll(object sender, EventArgs e)

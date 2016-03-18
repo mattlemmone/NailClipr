@@ -43,10 +43,24 @@
       <Y>78.4389648</Y>
       <Z>4.998174</Z>
     </Location>
+    <Location>
+      <Zone>191</Zone>
+      <Title>EXP 80-90</Title>
+      <X>-136.54454</X>
+      <Y>498.781219</Y>
+      <Z>3.9920845</Z>
+    </Location>
+    <Location>
+      <Zone>194</Zone>
+      <Title>Tome</Title>
+      <X>-343.4878</X>
+      <Y>853.585</Y>
+      <Z>-8</Z>
+    </Location>
   </Locations>
   <Settings>
-    <PlayerDetection>False</PlayerDetection>
-    <StayOnTop>True</StayOnTop>
-    <DefaultSpeed>5.25</DefaultSpeed>
+    <PlayerDetection>True</PlayerDetection>
+    <StayOnTop>False</StayOnTop>
+    <DefaultSpeed>5.5</DefaultSpeed>
   </Settings>
 </NailClipr>

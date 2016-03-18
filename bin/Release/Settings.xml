@@ -57,6 +57,13 @@
       <Y>853.585</Y>
       <Z>-8</Z>
     </Location>
+    <Location>
+      <Zone>194</Zone>
+      <Title>Fuligo</Title>
+      <X>-379.123779</X>
+      <Y>657.873352</Y>
+      <Z>0.04729572</Z>
+    </Location>
   </Locations>
   <Settings>
     <PlayerDetection>True</PlayerDetection>

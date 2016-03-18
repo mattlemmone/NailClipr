@@ -279,7 +279,7 @@ namespace NailClipr
             this.groupBox1.Controls.Add(this.Btn_Plus_Y);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(136, 111);
+            this.groupBox1.Size = new System.Drawing.Size(136, 101);
             this.groupBox1.TabIndex = 32;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Position";
@@ -354,7 +354,7 @@ namespace NailClipr
             // 
             // Btn_SaveSettings
             // 
-            this.Btn_SaveSettings.Location = new System.Drawing.Point(154, 83);
+            this.Btn_SaveSettings.Location = new System.Drawing.Point(154, 90);
             this.Btn_SaveSettings.Name = "Btn_SaveSettings";
             this.Btn_SaveSettings.Size = new System.Drawing.Size(117, 23);
             this.Btn_SaveSettings.TabIndex = 41;

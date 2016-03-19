@@ -178,15 +178,28 @@ namespace NailClipr
                 Functions.addZonePoint(wp);
 
                 string zoneName = Structs.Zones.nameFromID(wp.zone);
-                xdoc.Element("NailClipr").Element("Locations").Add(
-                   new XElement("Location",
-                   new XElement("ZoneName", zoneName),
-                   new XElement("Zone", wp.zone),
-                   new XElement("Title", wp.title),
-                   new XElement("X", wp.pos.X),
-                   new XElement("Y", wp.pos.Y),
-                   new XElement("Z", wp.pos.Z)
-                ));
+
+                try
+                {
+                    string s = xdoc.Element("NailClipr").Element("Locations").Elements("Zone").Single(z => z.Attribute("id").Value == wp.zone + "").Value;
+                }
+                catch (System.InvalidOperationException)
+                {
+                    xdoc.Element("NailClipr").Element("Locations").Add(new XElement("Zone"));
+                    xdoc.Element("NailClipr").Element("Locations").Element("Zone").Add(new XAttribute("id", wp.zone));
+                    xdoc.Element("NailClipr").Element("Locations").Element("Zone").Add(new XAttribute("title", zoneName));
+                    xdoc.Save(SETTINGS);
+                }
+
+
+                xdoc.Element("NailClipr").Elements("Locations").Elements("Zone").Single(z => z.Attribute("id").Value == wp.zone + "")
+                    .Add(
+                       new XElement("WarpPoint",
+                       new XAttribute("title", wp.title),
+                       new XElement("X", wp.pos.X),
+                       new XElement("Y", wp.pos.Y),
+                       new XElement("Z", wp.pos.Z)
+                    ));
                 xdoc.Save(SETTINGS);
             }
             catch (FileNotFoundException)
@@ -199,7 +212,7 @@ namespace NailClipr
         {
             if (NailClipr.GUI_WARP.Text == "") return;
 
-            Console.WriteLine("Deleting Warp."); 
+            Console.WriteLine("Deleting Warp.");
 
             Structs.WarpPoint delWP = Structs.zonePoints.Find(wp => wp.title == NailClipr.GUI_WARP.Text);
 

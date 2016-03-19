@@ -120,7 +120,7 @@ namespace NailClipr
                     result.Descendants("WarpPoint").Select(t => new
                     {
                         zone = t.Parent.Attribute("id").Value,
-                        title = t.Element("Title").Value,
+                        title = t.Attribute("title").Value,
                         x = t.Element("X").Value,
                         y = t.Element("Y").Value,
                         z = t.Element("Z").Value,
@@ -222,9 +222,10 @@ namespace NailClipr
                 return;
             }
 
-            XElement delNode = xdoc.Descendants("Location")
-               .Where(a => a.Element("Title").Value == NailClipr.GUI_WARP.Text && a.Element("Zone").Value == api.Player.ZoneId + "")
+            XElement delNode = xdoc.Descendants("WarpPoint")
+               .Where(a => a.Parent.Attribute("id").Value == api.Player.ZoneId + "" && a.Attribute("title").Value == NailClipr.GUI_WARP.Text)
                .FirstOrDefault();
+
             delNode.Remove();
             xdoc.Save(SETTINGS);
             Structs.zonePoints.Remove(delWP);

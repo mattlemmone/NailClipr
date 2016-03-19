@@ -20,6 +20,8 @@ namespace NailClipr
         public static Label GUI_X;
         public static Label GUI_Y;
         public static Label GUI_Z;
+        public static Label GUI_TARGET;
+        public static Label GUI_NEAREST_PLAYER;
         public static Label GUI_STATUS;
         public static Label GUI_ZONE;
         public static Label GUI_DEFAULT_SPEED;
@@ -63,6 +65,8 @@ namespace NailClipr
             GUI_X = Lbl_X;
             GUI_Y = Lbl_Y;
             GUI_Z = Lbl_Z;
+            GUI_TARGET = Lbl_TargetInfo;
+            GUI_NEAREST_PLAYER = Lbl_NearestPlayer;
             GUI_STATUS = Lbl_Status;
             GUI_ZONE = Lbl_Zone;
             GUI_SPEED = Lbl_SpeedVar;

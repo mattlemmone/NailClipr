@@ -6,6 +6,7 @@ namespace NailClipr
 {
     class Functions
     {
+        private static Structs.PC nearestPC = new Structs.PC();
         public static void addZonePoint(Structs.WarpPoint wp)
         {
             NailClipr.GUI_WARP.Items.Add(wp.title);
@@ -67,8 +68,8 @@ namespace NailClipr
                 if (count > 0)
                 {
                     Structs.player.isAlone = false;
-                    Console.WriteLine(entity.Name + " - " + entity.Distance);
-                    Console.ReadLine();
+                    nearestPC.name = entity.Name;
+                    nearestPC.distance = entity.Distance;
                     return;
                 }
             }
@@ -83,7 +84,21 @@ namespace NailClipr
 
             //Zone and Status Label
             NailClipr.GUI_STATUS.Text = api.Player.Status + "";
-            NailClipr.GUI_ZONE.Text = api.Player.ZoneId + "";
+            NailClipr.GUI_ZONE.Text = Structs.Zones.nameFromID(api.Player.ZoneId);
+
+            //Target Info
+            EliteAPI.TargetInfo target = api.Target.GetTargetInfo(); 
+            NailClipr.GUI_TARGET.Text = target.TargetName + " (" + target.TargetHealthPercent + "%)";
+
+            //Nearest Player
+            if (Structs.settings.playerDetection)
+            {
+                string s = nearestPC.name == null ? "None" : nearestPC.name + " @ " + nearestPC.distance;
+                NailClipr.GUI_NEAREST_PLAYER.Text = s;
+            } else
+            {
+                NailClipr.GUI_NEAREST_PLAYER.Text = "Disabled";
+            }
 
             //If we aren't zoning...
             if (Structs.player.location.isZoning)
@@ -100,7 +115,7 @@ namespace NailClipr
             Structs.player.location.old = api.Player.ZoneId;
 
             //Speed labels
-            updateTrackSpeed(NailClipr.GUI_SPEED_TRACK, NailClipr.GUI_SPEED, api.Player.Speed);
+            updateTrackSpeed(NailClipr.GUI_SPEED_TRACK, NailClipr.GUI_SPEED, api.Player.Speed, api);
 
             //Disable track bar, highlight speed. Visual cue.
             disableTrackSpeed();
@@ -128,12 +143,17 @@ namespace NailClipr
             }
         }
 
-        public static void updateTrackSpeed(System.Windows.Forms.TrackBar bar, System.Windows.Forms.Label lbl, float speed)
+        public static void updateTrackSpeed(System.Windows.Forms.TrackBar bar, System.Windows.Forms.Label lbl, float speed, EliteAPI api = null)
         {
-            lbl.Text = "x" + speed / Structs.Speed.NATURAL;
-            float f = (speed - Structs.Speed.NATURAL) * Structs.Speed.DIVISOR;
-            int barSpeed = (int)Math.Ceiling(f);
-            bar.Value = barSpeed;
+            //Only update GUI speed if not in combat or CS.
+            if (api == null || (api.Player.Status != 1 && api.Player.Status != 4))
+            {
+                lbl.Text = "x" + speed / Structs.Speed.NATURAL;
+
+                float f = (speed - Structs.Speed.NATURAL) * Structs.Speed.DIVISOR;
+                int barSpeed = (int)Math.Ceiling(f);
+                bar.Value = barSpeed;
+            }
         }
     }
 }

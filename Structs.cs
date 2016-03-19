@@ -14,6 +14,12 @@ namespace NailClipr
         public static List<WarpPoint> zonePoints = new List<WarpPoint>();
         public static List<Zone> zones = new List<Zone>();
 
+        public struct PC
+        {
+            public string name;
+            public float distance;
+        }
+
         public struct Settings
         {
             public bool topMostForm;

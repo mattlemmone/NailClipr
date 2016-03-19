@@ -84,6 +84,8 @@ namespace NailClipr
             }
             public const float NATURAL = 5f;
             public const float DIVISOR = 4f;
+            public const float MAX_MULT = 1.5f;
+            public const float MAX = 10f;
         }
 
         public struct Location

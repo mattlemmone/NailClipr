@@ -9,27 +9,6 @@
       <Z>14.5586</Z>
     </Location>
     <Location>
-      <Zone>230</Zone>
-      <Title>AH</Title>
-      <X>9.7049675</X>
-      <Y>28.76725</Y>
-      <Z>1.7</Z>
-    </Location>
-    <Location>
-      <Zone>230</Zone>
-      <Title>Mog House</Title>
-      <X>164.113037</X>
-      <Y>161.252777</Y>
-      <Z>2</Z>
-    </Location>
-    <Location>
-      <Zone>230</Zone>
-      <Title>Rolandienne</Title>
-      <X>85.5906</X>
-      <Y>48.5431137</Y>
-      <Z>1</Z>
-    </Location>
-    <Location>
       <Zone>100</Zone>
       <Title>West Ron. Gate</Title>
       <X>125.879</X>
@@ -86,6 +65,38 @@
       <X>-7.94282246</X>
       <Y>137.237</Y>
       <Z>-9.194143</Z>
+    </Location>
+    <Location>
+      <ZoneName>Southern San d'Oria</ZoneName>
+      <Zone>230</Zone>
+      <Title>AH</Title>
+      <X>9.959199</X>
+      <Y>-28.6423283</Y>
+      <Z>1.7</Z>
+    </Location>
+    <Location>
+      <ZoneName>Southern San d'Oria</ZoneName>
+      <Zone>230</Zone>
+      <Title>Mog House</Title>
+      <X>161.132233</X>
+      <Y>160.841415</Y>
+      <Z>-2</Z>
+    </Location>
+    <Location>
+      <ZoneName>Ru'Lude Gardens</ZoneName>
+      <Zone>243</Zone>
+      <Title>Magian Moogles</Title>
+      <X>-5.837468</X>
+      <Y>117.268517</Y>
+      <Z>3.1</Z>
+    </Location>
+    <Location>
+      <ZoneName>Ru'Lude Gardens</ZoneName>
+      <Zone>243</Zone>
+      <Title>Home Point</Title>
+      <X>-4.683485</X>
+      <Y>-1.29854655</Y>
+      <Z>3</Z>
     </Location>
   </Locations>
   <Settings>

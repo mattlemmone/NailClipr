@@ -45,16 +45,9 @@ namespace NailClipr
         }
         public void PostInit()
         {
-            try
-            {
-                XML.loadWarps();
-                XML.loadSettings();
-                XML.loadAreas();
-            }
-            catch (FileNotFoundException)
-            {
-                XML.create();
-            }
+            XML.loadAreas();
+            XML.loadWarps();
+            XML.loadSettings();
         }
 
         public void AssignControls()
@@ -118,7 +111,7 @@ namespace NailClipr
 
             /*Speed*/
             //Not initialized.
-            if (Structs.player.speed.expected == 0)
+            if (Structs.player.speed.expected == 0 && api.Player.Speed <= Structs.Speed.MAX)
             {
                 Structs.player.speed.expected = api.Player.Speed;
             }
@@ -177,9 +170,14 @@ namespace NailClipr
         {
             float barVal = GUI_SPEED_TRACK.Value / Structs.Speed.DIVISOR;
             float speed = barVal + Structs.Speed.NATURAL;
-            Structs.player.speed.expected = speed;
-            api.Player.Speed = speed;
-            GUI_SPEED.Text = "x" + speed / Structs.Speed.NATURAL;
+
+            //Fallback. Never can be too safe with speed mods.
+            if (speed <= Structs.Speed.MAX)
+            {
+                Structs.player.speed.expected = speed;
+                api.Player.Speed = speed;
+                GUI_SPEED.Text = "x" + speed / Structs.Speed.NATURAL;
+            }
         }
 
 

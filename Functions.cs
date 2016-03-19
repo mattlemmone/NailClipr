@@ -49,7 +49,7 @@ namespace NailClipr
                     continue;
 
                 // Check if the entity is rendered..
-                if ((entity.Render0000 & 0x200) != 0x200)
+                if ((entity.Render0000 & 0x200) != 0x200 || (entity.SpawnFlags & 0x0001) != 0x0001)
                     continue;
 
                 // Check entity.SpawnFlags here if you wish to check the type of entity it is..
@@ -62,19 +62,14 @@ namespace NailClipr
                 if (entity.Name == api.Player.Name)
                     continue;
 
-                if ((entity.SpawnFlags & 0x0001) == 0x0001)
-                    count++;
 
-                if (count > 0)
+                Structs.player.isAlone = false;
+                if (nearestPC.distance == 0 || entity.Distance < nearestPC.distance || entity.Name == nearestPC.name)
                 {
-                    Structs.player.isAlone = false;
-                    if (nearestPC.distance == 0 || entity.Distance < nearestPC.distance || entity.Name == nearestPC.name)
-                    {
-                        nearestPC.name = entity.Name;
-                        nearestPC.distance = entity.Distance;
-                    }
-                    //return;
+                    nearestPC.name = entity.Name;
+                    nearestPC.distance = entity.Distance;
                 }
+
             }
             if (count > 0) return;
             nearestPC.name = "";

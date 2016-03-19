@@ -247,3 +247,6 @@ paket-files/
 .idea/
 *.sln.iml
 bin/Release/NailClipr.vshost.exe
+bin/Release/NailClipr.exe.config
+bin/Release/NailClipr.vshost.exe.config
+bin/Release/NailClipr.vshost.exe.manifest

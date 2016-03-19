@@ -117,10 +117,10 @@ namespace NailClipr
 
                 foreach (XElement result in allElements)
                 {
-                    result.Descendants("Location").Select(t => new
+                    result.Descendants("WarpPoint").Select(t => new
                     {
+                        zone = t.Parent.Attribute("id").Value,
                         title = t.Element("Title").Value,
-                        zone = t.Element("Zone").Value,
                         x = t.Element("X").Value,
                         y = t.Element("Y").Value,
                         z = t.Element("Z").Value,

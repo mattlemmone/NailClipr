@@ -73,6 +73,8 @@ namespace NailClipr
                     return;
                 }
             }
+            nearestPC.name = "";
+            nearestPC.distance = 0;
             Structs.player.isAlone = true;
         }
         public static void updateLabels(EliteAPI api)
@@ -87,13 +89,16 @@ namespace NailClipr
             NailClipr.GUI_ZONE.Text = Structs.Zones.nameFromID(api.Player.ZoneId);
 
             //Target Info
-            EliteAPI.TargetInfo target = api.Target.GetTargetInfo(); 
-            NailClipr.GUI_TARGET.Text = target.TargetName + " (" + target.TargetHealthPercent + "%)";
+            EliteAPI.TargetInfo target = api.Target.GetTargetInfo();
+            uint targetIdx = target.TargetIndex;
+            var entity = api.Entity.GetEntity(Convert.ToInt32(targetIdx));
+            string s = target.TargetName == "" ? "None" : entity.Name + " (" + entity.HealthPercent + "%) @ " + Math.Round(entity.Distance, 2) + " yalms.";
+            NailClipr.GUI_TARGET.Text = s;
 
             //Nearest Player
             if (Structs.settings.playerDetection)
             {
-                string s = nearestPC.name == null ? "None" : nearestPC.name + " @ " + nearestPC.distance;
+                s = nearestPC.name == "" ? "None" : nearestPC.name + " @ " + Math.Round(nearestPC.distance, 2) + " yalms.";
                 NailClipr.GUI_NEAREST_PLAYER.Text = s;
             } else
             {
@@ -146,7 +151,7 @@ namespace NailClipr
         public static void updateTrackSpeed(System.Windows.Forms.TrackBar bar, System.Windows.Forms.Label lbl, float speed, EliteAPI api = null)
         {
             //Only update GUI speed if not in combat or CS.
-            if (api == null || (api.Player.Status != 1 && api.Player.Status != 4))
+            if (api == null || ((api.Player.Status != 1 && api.Player.Status != 4) ))
             {
                 lbl.Text = "x" + speed / Structs.Speed.NATURAL;
 

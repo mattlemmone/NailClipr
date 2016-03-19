@@ -179,6 +179,7 @@ namespace NailClipr
             float speed = barVal + Structs.Speed.NATURAL;
             Structs.player.speed.expected = speed;
             api.Player.Speed = speed;
+            GUI_SPEED.Text = "x" + speed / Structs.Speed.NATURAL;
         }
 
 

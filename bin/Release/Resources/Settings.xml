@@ -79,6 +79,14 @@
       <Y>722.0942</Y>
       <Z>1.28410554</Z>
     </Location>
+    <Location>
+      <ZoneName>Gustav Tunnel</ZoneName>
+      <Zone>212</Zone>
+      <Title>Gov 8</Title>
+      <X>-7.94282246</X>
+      <Y>137.237</Y>
+      <Z>-9.194143</Z>
+    </Location>
   </Locations>
   <Settings>
     <PlayerDetection>True</PlayerDetection>

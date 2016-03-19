@@ -21,14 +21,14 @@ namespace NailClipr
             XDocument xmlDocument = new XDocument(
                 new XDeclaration("1.0", "utf-8", "yes"),
                 new XElement("NailClipr",
-                    new XElement("Locations"),
+                    new XElement("Zones"),
 
                     new XElement("Settings",
                         new XElement("PlayerDetection", Structs.settings.playerDetection),
                         new XElement("StayOnTop", Structs.settings.topMostForm),
                         new XElement("DefaultSpeed", Structs.player.speed.normal)
                         )));
-
+             
             xmlDocument.Save(SETTINGS);
             xdoc = XDocument.Load(SETTINGS);
         }
@@ -112,7 +112,7 @@ namespace NailClipr
             {
                 xdoc = XDocument.Load(SETTINGS);
                 IEnumerable<XElement> allElements =
-                from xEle in xdoc.Descendants("Locations")
+                from xEle in xdoc.Descendants("Zones")
                 select xEle;
 
                 foreach (XElement result in allElements)
@@ -181,18 +181,18 @@ namespace NailClipr
 
                 try
                 {
-                    string s = xdoc.Element("NailClipr").Element("Locations").Elements("Zone").Single(z => z.Attribute("id").Value == wp.zone + "").Value;
+                    string s = xdoc.Element("NailClipr").Element("Zones").Elements("Zone").Single(z => z.Attribute("id").Value == wp.zone + "").Value;
                 }
-                catch (System.InvalidOperationException)
+                catch (InvalidOperationException)
                 {
-                    xdoc.Element("NailClipr").Element("Locations").Add(new XElement("Zone"));
-                    xdoc.Element("NailClipr").Element("Locations").Element("Zone").Add(new XAttribute("id", wp.zone));
-                    xdoc.Element("NailClipr").Element("Locations").Element("Zone").Add(new XAttribute("title", zoneName));
+                    xdoc.Element("NailClipr").Element("Zones").Add(new XElement("Zone",
+                        new XAttribute("id", wp.zone),
+                        new XAttribute("title", zoneName)));
                     xdoc.Save(SETTINGS);
                 }
+                
 
-
-                xdoc.Element("NailClipr").Elements("Locations").Elements("Zone").Single(z => z.Attribute("id").Value == wp.zone + "")
+                xdoc.Element("NailClipr").Elements("Zones").Elements("Zone").Single(z => z.Attribute("id").Value == wp.zone + "")
                     .Add(
                        new XElement("WarpPoint",
                        new XAttribute("title", wp.title),

@@ -14,6 +14,8 @@ namespace NailClipr
         private static EliteAPI api;
         private BackgroundWorker bw = new BackgroundWorker();
 
+        public static Player Player = new Player();
+
         public static ComboBox GUI_WARP;
         public static CheckBox GUI_TOPMOST;
         public static CheckBox GUI_PLAYER_DETECT;
@@ -45,9 +47,9 @@ namespace NailClipr
         }
         public void PostInit()
         {
-            XML.loadAreas();
-            XML.loadWarps();
-            XML.loadSettings();
+            XML.LoadAreas();
+            XML.LoadWarps();
+            XML.LoadSettings();
         }
 
         public void AssignControls()
@@ -111,25 +113,25 @@ namespace NailClipr
 
             /*Speed*/
             //Not initialized.
-            if (Structs.player.speed.expected == 0 && api.Player.Speed <= Structs.Speed.MAX)
+            if (Player.Speed.expected == 0 && api.Player.Speed <= Structs.Speed.MAX)
             {
-                Structs.player.speed.expected = api.Player.Speed;
+                Player.Speed.expected = api.Player.Speed;
             }
 
             //Turn speed off around other players.
-            if (Structs.settings.playerDetection) Functions.playersRendered(api);
+            if (Structs.settings.playerDetection) Functions.PlayersRendered(api);
 
             //Adjust current speed.
-            if (!Structs.player.isAlone && Structs.settings.playerDetection)
+            if (!Player.isAlone && Structs.settings.playerDetection)
             {
-                api.Player.Speed = Structs.player.speed.normal;
-                if (api.Player.Speed != Structs.player.speed.normal)
-                    api.Player.Speed = Structs.player.speed.normal;
+                api.Player.Speed = Player.Speed.normal;
+                if (api.Player.Speed != Player.Speed.normal)
+                    api.Player.Speed = Player.Speed.normal;
             }
             else {
                 //Prevent speed overwrite.
-                if (api.Player.Speed != Structs.player.speed.expected)
-                    api.Player.Speed = Structs.player.speed.expected;
+                if (api.Player.Speed != Player.Speed.expected)
+                    api.Player.Speed = Player.Speed.expected;
             }
 
         }
@@ -137,18 +139,19 @@ namespace NailClipr
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             //Update GUI.
-            Structs.player.location.isZoning = api.Player.X == 0 && api.Player.Y == 0 && api.Player.Z == 0;
+            Player.Location.isZoning = api.Player.X == 0 && api.Player.Y == 0 && api.Player.Z == 0;
 
-            Functions.updateLabels(api);
+            Functions.UpdateLabels(api);
         }
 
         private void ChkBox_Maint_CheckedChanged(object sender, EventArgs e)
         {
-            Structs.player.maintenanceMode(api, ChkBox_Maint.Checked);
+            Player.MaintenanceMode(api, ChkBox_Maint.Checked);
         }
 
         private void ChkBox_DetectDisable_CheckedChanged(object sender, EventArgs e)
         {
+
             Structs.settings.playerDetection = ChkBox_PlayerDetect.Checked;
         }
 
@@ -162,7 +165,7 @@ namespace NailClipr
         {
             float barVal = GUI_SPEED_DEFAULT_TRACK.Value / Structs.Speed.DIVISOR;
             float speed = barVal + Structs.Speed.NATURAL;
-            Structs.player.speed.normal = speed;
+            Player.Speed.normal = speed;
             GUI_DEFAULT_SPEED.Text = "x" + speed / Structs.Speed.NATURAL;
         }
 
@@ -174,7 +177,7 @@ namespace NailClipr
             //Fallback. Never can be too safe with speed mods.
             if (speed <= Structs.Speed.MAX)
             {
-                Structs.player.speed.expected = speed;
+                Player.Speed.expected = speed;
                 api.Player.Speed = speed;
                 GUI_SPEED.Text = "x" + speed / Structs.Speed.NATURAL;
             }
@@ -218,27 +221,27 @@ namespace NailClipr
 
         private void Btn_Save_Click(object sender, EventArgs e)
         {
-            XML.saveWarp(api);
+            XML.SaveWarp(api);
         }
 
         private void Btn_Warp_Click(object sender, EventArgs e)
         {
-            Structs.player.warp(api);
+            Player.Warp(api);
         }
 
         private void Form_Close(object sender, EventArgs e)
         {
-            api.Player.Speed = Structs.player.speed.normal;
+            api.Player.Speed = Player.Speed.normal;
         }
 
         private void Btn_Delete_Click(object sender, EventArgs e)
         {
-            XML.deleteWarp(api);
+            XML.DeleteWarp(api);
         }
 
         private void Btn_SaveSettings_Click(object sender, EventArgs e)
         {
-            XML.saveSettings();
+            XML.SaveSettings();
         }
     }
 }

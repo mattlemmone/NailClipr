@@ -7,7 +7,7 @@ namespace NailClipr
     class Functions
     {
         private static Structs.PC nearestPC = new Structs.PC();
-        public static void addZonePoint(Structs.WarpPoint wp)
+        public static void AddZonePoint(Structs.WarpPoint wp)
         {
             NailClipr.GUI_WARP.Items.Add(wp.title);
             Structs.zonePoints.Add(wp);
@@ -18,7 +18,7 @@ namespace NailClipr
             NailClipr.GUI_WARP.Items.Clear();
             Structs.zonePoints.Clear();
         }
-        public static void loadZonePoints(EliteAPI api)
+        public static void LoadZonePoints(EliteAPI api)
         {
             Structs.warpPoints.ForEach(wp =>
             {
@@ -29,7 +29,7 @@ namespace NailClipr
                 }
             });
         }
-        public static void playersRendered(EliteAPI api)
+        public static void PlayersRendered(EliteAPI api)
         {
             int count = 0;
             for (var x = 0; x < 4096; x++)
@@ -63,7 +63,7 @@ namespace NailClipr
                     continue;
 
                 count++;
-                Structs.player.isAlone = false;
+                Player.isAlone = false;
                 if (nearestPC.distance == 0 || entity.Distance < nearestPC.distance || entity.Name == nearestPC.name)
                 {
                     if (!float.IsNaN(entity.Distance) )
@@ -78,9 +78,9 @@ namespace NailClipr
             
             nearestPC.name = "";
             nearestPC.distance = 0;
-            Structs.player.isAlone = true;
+            Player.isAlone = true;
         }
-        public static void updateLabels(EliteAPI api)
+        public static void UpdateLabels(EliteAPI api)
         {
             //Pos. Z and Y write correctly but read each other. Inherent issue.
             NailClipr.GUI_X.Text = Math.Round(api.Player.X, 2) + "";
@@ -89,7 +89,7 @@ namespace NailClipr
 
             //Zone and Status Label
             NailClipr.GUI_STATUS.Text = api.Player.Status + "";
-            NailClipr.GUI_ZONE.Text = Structs.Zones.nameFromID(api.Player.ZoneId);
+            NailClipr.GUI_ZONE.Text = Structs.Zones.NameFromID(api.Player.ZoneId);
 
             //Target Info
             EliteAPI.TargetInfo target = api.Target.GetTargetInfo();
@@ -110,29 +110,29 @@ namespace NailClipr
             }
 
             //If we aren't zoning...
-            if (Structs.player.location.isZoning)
+            if (Player.Location.isZoning)
             {
                 if (Structs.zonePoints.Count > 0) clearZonePoints();
                 return;
             }
 
             //Load zone points.
-            if (Structs.zonePoints.Count == 0 && api.Player.ZoneId != Structs.player.location.old)
+            if (Structs.zonePoints.Count == 0 && api.Player.ZoneId != Player.Location.old)
             {
-                loadZonePoints(api);
+                LoadZonePoints(api);
             }
-            Structs.player.location.old = api.Player.ZoneId;
+            Player.Location.old = api.Player.ZoneId;
 
             //Speed labels
-            updateTrackSpeed(NailClipr.GUI_SPEED_TRACK, NailClipr.GUI_SPEED, api.Player.Speed, api);
+            UpdateTrackSpeed(NailClipr.GUI_SPEED_TRACK, NailClipr.GUI_SPEED, api.Player.Speed, api);
 
             //Disable track bar, highlight speed. Visual cue.
-            disableTrackSpeed();
+            DisableTrackSpeed();
         }
 
-        public static void disableTrackSpeed()
+        public static void DisableTrackSpeed()
         {
-            if (Structs.player.isAlone || !Structs.settings.playerDetection)
+            if (Player.isAlone || !Structs.settings.playerDetection)
             {
                 if (NailClipr.GUI_SPEED_TRACK.Enabled == false)
                 {
@@ -152,10 +152,10 @@ namespace NailClipr
             }
         }
 
-        public static void updateTrackSpeed(System.Windows.Forms.TrackBar bar, System.Windows.Forms.Label lbl, float speed, EliteAPI api = null)
+        public static void UpdateTrackSpeed(System.Windows.Forms.TrackBar bar, System.Windows.Forms.Label lbl, float speed, EliteAPI api = null)
         {
             //Only update GUI speed if not in combat or CS.
-            if (api == null || (api.Player.Status != 1 && api.Player.Status != 4  && api.Player.Speed >= Structs.player.speed.normal))
+            if (api == null || (api.Player.Status != 1 && api.Player.Status != 4  && api.Player.Speed >= Player.Speed.normal))
             {
 
                 lbl.Text = "x" + speed / Structs.Speed.NATURAL;

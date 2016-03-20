@@ -15,7 +15,7 @@ namespace NailClipr
 
         public static XDocument xdoc;
 
-        public static void create()
+        public static void Create()
         {
 
             XDocument xmlDocument = new XDocument(
@@ -26,28 +26,28 @@ namespace NailClipr
                     new XElement("Settings",
                         new XElement("PlayerDetection", Structs.settings.playerDetection),
                         new XElement("StayOnTop", Structs.settings.topMostForm),
-                        new XElement("DefaultSpeed", Structs.player.speed.normal)
+                        new XElement("DefaultSpeed", Player.Speed.normal)
                         )));
              
             xmlDocument.Save(SETTINGS);
             xdoc = XDocument.Load(SETTINGS);
         }
-        public static void saveSettings()
+        public static void SaveSettings()
         {
             try
             {
                 xdoc.Element("NailClipr").Element("Settings").Element("PlayerDetection").Value = Structs.settings.playerDetection + "";
                 xdoc.Element("NailClipr").Element("Settings").Element("StayOnTop").Value = Structs.settings.topMostForm + "";
-                xdoc.Element("NailClipr").Element("Settings").Element("DefaultSpeed").Value = Structs.player.speed.normal + "";
+                xdoc.Element("NailClipr").Element("Settings").Element("DefaultSpeed").Value = Player.Speed.normal + "";
                 xdoc.Save(SETTINGS);
             }
             catch (FileNotFoundException)
             {
-                XML.create();
-                XML.saveSettings();
+                XML.Create();
+                XML.SaveSettings();
             }
         }
-        public static void loadSettings()
+        public static void LoadSettings()
         {
             try
             {
@@ -65,17 +65,17 @@ namespace NailClipr
 
                 //Update Speed
                 float speed = DS == 0 ? Structs.Speed.NATURAL : DS;
-                Structs.player.speed.normal = speed;
+                Player.Speed.normal = speed;
 
                 //Update Speed Label
-                Functions.updateTrackSpeed(NailClipr.GUI_SPEED_DEFAULT_TRACK, NailClipr.GUI_DEFAULT_SPEED, speed);
+                Functions.UpdateTrackSpeed(NailClipr.GUI_SPEED_DEFAULT_TRACK, NailClipr.GUI_DEFAULT_SPEED, speed);
             }
             catch (FileNotFoundException)
             {
-                XML.create();
+                XML.Create();
             }
         }
-        public static void loadAreas()
+        public static void LoadAreas()
         {
             try
             {
@@ -95,7 +95,7 @@ namespace NailClipr
                         Structs.Zone z = new Structs.Zone();
                         z.id = int.Parse(t.id);
                         z.name = t.name;
-                        Structs.zones.Add(z);
+                        Structs.zoneList.Add(z);
                     });
                 }
             }
@@ -106,7 +106,7 @@ namespace NailClipr
                 FNFerror("areas.xml");
             }
         }
-        public static void loadWarps()
+        public static void LoadWarps()
         {
             try
             {
@@ -142,11 +142,11 @@ namespace NailClipr
             }
             catch (FileNotFoundException)
             {
-                XML.create();
+                XML.Create();
             }
 
         }
-        public static void saveWarp(EliteAPI api)
+        public static void SaveWarp(EliteAPI api)
         {
             try
             {
@@ -171,13 +171,13 @@ namespace NailClipr
                 if (index >= 0)
                 {
                     Console.WriteLine("Editing Warp."); Console.ReadLine();
-                    deleteWarp(api);
+                    DeleteWarp(api);
                 }
 
                 Structs.warpPoints.Add(wp);
-                Functions.addZonePoint(wp);
+                Functions.AddZonePoint(wp);
 
-                string zoneName = Structs.Zones.nameFromID(wp.zone);
+                string zoneName = Structs.Zones.NameFromID(wp.zone);
 
                 try
                 {
@@ -204,11 +204,11 @@ namespace NailClipr
             }
             catch (FileNotFoundException)
             {
-                XML.create();
-                XML.saveWarp(api);
+                XML.Create();
+                XML.SaveWarp(api);
             }
         }
-        public static void deleteWarp(EliteAPI api)
+        public static void DeleteWarp(EliteAPI api)
         {
             if (NailClipr.GUI_WARP.Text == "") return;
 

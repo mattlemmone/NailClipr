@@ -53,6 +53,7 @@
         <Z>-0.149999976</Z>
       </WarpPoint>
     </Zone>
+    <Zone id="246" title="Port Jeuno" />
   </Zones>
   <Settings>
     <PlayerDetection>True</PlayerDetection>

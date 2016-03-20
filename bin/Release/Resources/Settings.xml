@@ -54,6 +54,13 @@
       </WarpPoint>
     </Zone>
     <Zone id="246" title="Port Jeuno" />
+    <Zone id="126" title="Qufim Island">
+      <WarpPoint title="Jeuno">
+        <X>141.121</X>
+        <Y>-476.954</Y>
+        <Z>10.53281</Z>
+      </WarpPoint>
+    </Zone>
   </Zones>
   <Settings>
     <PlayerDetection>True</PlayerDetection>

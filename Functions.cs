@@ -66,8 +66,11 @@ namespace NailClipr
                 Structs.player.isAlone = false;
                 if (nearestPC.distance == 0 || entity.Distance < nearestPC.distance || entity.Name == nearestPC.name)
                 {
-                    nearestPC.name = entity.Name;
-                    nearestPC.distance = entity.Distance;
+                    if (!float.IsNaN(entity.Distance) )
+                    {
+                        nearestPC.name = entity.Name;
+                        nearestPC.distance = entity.Distance;
+                    }
                 }
 
             }

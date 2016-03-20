@@ -1,160 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <NailClipr>
-  <Locations>
-    <Location>
-      <Zone>248</Zone>
-      <Title>Dunes</Title>
-      <X>18.481</X>
-      <Y>99.829</Y>
-      <Z>14.5586</Z>
-    </Location>
-    <Location>
-      <Zone>100</Zone>
-      <Title>West Ron. Gate</Title>
-      <X>125.879</X>
-      <Y>274.1</Y>
-      <Z>62</Z>
-    </Location>
-    <Location>
-      <Zone>244</Zone>
-      <Title>Mog House</Title>
-      <X>45.93488</X>
-      <Y>78.4389648</Y>
-      <Z>4.998174</Z>
-    </Location>
-    <Location>
-      <Zone>191</Zone>
-      <Title>EXP 80-90</Title>
-      <X>-136.54454</X>
-      <Y>498.781219</Y>
-      <Z>3.9920845</Z>
-    </Location>
-    <Location>
-      <Zone>194</Zone>
-      <Title>Tome</Title>
-      <X>-343.4878</X>
-      <Y>853.585</Y>
-      <Z>-8</Z>
-    </Location>
-    <Location>
-      <Zone>231</Zone>
-      <Title>Survival Guide</Title>
-      <X>-175.552017</X>
-      <Y>81.4851761</Y>
-      <Z>4</Z>
-    </Location>
-    <Location>
-      <Zone>115</Zone>
-      <Title>Outer Hortoto</Title>
-      <X>-265.7106</X>
-      <Y>660.318359</Y>
-      <Z>-15.25</Z>
-    </Location>
-    <Location>
-      <ZoneName>Outer Horutoto Ruins</ZoneName>
-      <Zone>194</Zone>
-      <Title>GoV 7</Title>
-      <X>-222.820953</X>
-      <Y>722.0942</Y>
-      <Z>1.28410554</Z>
-    </Location>
-    <Location>
-      <ZoneName>Gustav Tunnel</ZoneName>
-      <Zone>212</Zone>
-      <Title>Gov 8</Title>
-      <X>-7.94282246</X>
-      <Y>137.237</Y>
-      <Z>-9.194143</Z>
-    </Location>
-    <Location>
-      <ZoneName>Southern San d'Oria</ZoneName>
-      <Zone>230</Zone>
-      <Title>AH</Title>
-      <X>9.959199</X>
-      <Y>-28.6423283</Y>
-      <Z>1.7</Z>
-    </Location>
-    <Location>
-      <ZoneName>Southern San d'Oria</ZoneName>
-      <Zone>230</Zone>
-      <Title>Mog House</Title>
-      <X>161.132233</X>
-      <Y>160.841415</Y>
-      <Z>-2</Z>
-    </Location>
-    <Location>
-      <ZoneName>Ru'Lude Gardens</ZoneName>
-      <Zone>243</Zone>
-      <Title>Magian Moogles</Title>
-      <X>-5.837468</X>
-      <Y>117.268517</Y>
-      <Z>3.1</Z>
-    </Location>
-    <Location>
-      <ZoneName>Ru'Lude Gardens</ZoneName>
-      <Zone>243</Zone>
-      <Title>Home Point</Title>
-      <X>-4.683485</X>
-      <Y>-1.29854655</Y>
-      <Z>3</Z>
-    </Location>
-    <Location>
-      <ZoneName>Western Adoulin</ZoneName>
-      <Zone>256</Zone>
-      <Title>Courier's Coalition</Title>
-      <X>-28.3898525</X>
-      <Y>35.70134</Y>
-      <Z>-0.6822312</Z>
-    </Location>
-    <Location>
-      <ZoneName>Western Adoulin</ZoneName>
-      <Zone>256</Zone>
-      <Title>Courier's Waypoint</Title>
-      <X>5.0691123</X>
-      <Y>-4.98005438</Y>
-      <Z>0</Z>
-    </Location>
-    <Location>
-      <ZoneName>Foret de Hennetiel</ZoneName>
-      <Zone>262</Zone>
-      <Title>Main Camp Waypoint</Title>
-      <X>397.631775</X>
-      <Y>277.853271</Y>
-      <Z>-2</Z>
-    </Location>
-    <Location>
-      <ZoneName>Foret de Hennetiel</ZoneName>
-      <Zone>262</Zone>
-      <Title>Waypoint 3</Title>
-      <X>103.923874</X>
-      <Y>-93.39916</Y>
-      <Z>-2.25</Z>
-    </Location>
-    <Location>
-      <ZoneName>Western Adoulin</ZoneName>
-      <Zone>256</Zone>
-      <Title>Pioneers' Coalition</Title>
-      <X>-88.75699</X>
-      <Y>16.3345413</Y>
-      <Z>3.3245492</Z>
-    </Location>
-    <Location>
-      <ZoneName>Lower Jeuno</ZoneName>
-      <Zone>245</Zone>
-      <Title>Mog House</Title>
-      <X>42.933</X>
-      <Y>85.823</Y>
-      <Z>-4.99802256</Z>
-    </Location>
-    <Location>
-      <ZoneName>Rolanberry Fields</ZoneName>
-      <Zone>110</Zone>
-      <Title>Jeuno</Title>
-      <X>344.491</X>
-      <Y>608.165</Y>
-      <Z>24.14011</Z>
-    </Location>
-  </Locations>
+  <Zones>
+    <Zone id="231" title="Northern San d'Oria">
+      <WarpPoint title="Tomes">
+        <X>-178.171</X>
+        <Y>75.85261</Y>
+        <Z>4</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="197" title="Crawlers' Nest">
+      <WarpPoint title="Tome">
+        <X>351.815674</X>
+        <Y>-23.3933887</Y>
+        <Z>-32.5105629</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="256" title="Western Adoulin">
+      <WarpPoint title="Couriers' Coalition">
+        <X>4.78996038</X>
+        <Y>-4.295786</Y>
+        <Z>0</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="260" title="Yahse Hunting Grounds">
+      <WarpPoint title="Frontier Station Waypoint">
+        <X>324.4978</X>
+        <Y>-199.987473</Y>
+        <Z>0.03489667</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="265" title="Morimar Basalt Fields">
+      <WarpPoint title="Frontier Station Waypoint">
+        <X>444.470337</X>
+        <Y>-325.34848</Y>
+        <Z>-15.9111519</Z>
+      </WarpPoint>
+      <WarpPoint title="Waypoint #3">
+        <X>175.44548</X>
+        <Y>-317.80542</Y>
+        <Z>-15.4659023</Z>
+      </WarpPoint>
+    </Zone>
+  </Zones>
   <Settings>
     <PlayerDetection>True</PlayerDetection>
     <StayOnTop>True</StayOnTop>

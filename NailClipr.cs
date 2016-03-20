@@ -226,9 +226,9 @@ namespace NailClipr
             Structs.player.warp(api);
         }
 
-        private void NailClipr_Load(object sender, EventArgs e)
+        private void Form_Close(object sender, EventArgs e)
         {
-
+            api.Player.Speed = Structs.player.speed.normal;
         }
 
         private void Btn_Delete_Click(object sender, EventArgs e)

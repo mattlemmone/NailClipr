@@ -21,6 +21,11 @@
         <Y>-4.295786</Y>
         <Z>0</Z>
       </WarpPoint>
+      <WarpPoint title="Pioneers' Coalition">
+        <X>-89.10254</X>
+        <Y>18.7244549</Y>
+        <Z>3.3315804</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="260" title="Yahse Hunting Grounds">
       <WarpPoint title="Frontier Station Waypoint">

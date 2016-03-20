@@ -441,6 +441,7 @@ namespace NailClipr
             this.Controls.Add(this.Lbl_Speed);
             this.Controls.Add(this.Bar_Speed);
             this.Controls.Add(this.ChkBox_Maint);
+            this.FormClosing += this.Form_Close;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "NailClipr";
             this.Text = "NailClipr";

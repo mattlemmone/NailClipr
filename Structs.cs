@@ -128,7 +128,7 @@ namespace NailClipr
                     return;
 
                 Structs.player.maintenanceMode(api, true);
-                NailClipr.GUI_STATUS.Text = api.Player.Status + ""; //Sleeping will otherwise block it.
+                NailClipr.GUI_STATUS.Text = Structs.Status.MAINT + ""; //Sleeping will otherwise block it.
                 System.Threading.Thread.Sleep(1000);
 
                 api.Player.X = nextWP.pos.X;

@@ -62,7 +62,7 @@ namespace NailClipr
                 if (entity.Name == api.Player.Name)
                     continue;
 
-
+                count++;
                 Structs.player.isAlone = false;
                 if (nearestPC.distance == 0 || entity.Distance < nearestPC.distance || entity.Name == nearestPC.name)
                 {

@@ -46,6 +46,13 @@
         <Z>-15.4659023</Z>
       </WarpPoint>
     </Zone>
+    <Zone id="257" title="Eastern Adoulin">
+      <WarpPoint title="Fame Checker">
+        <X>-61.0205078</X>
+        <Y>-7.18051624</Y>
+        <Z>-0.149999976</Z>
+      </WarpPoint>
+    </Zone>
   </Zones>
   <Settings>
     <PlayerDetection>True</PlayerDetection>

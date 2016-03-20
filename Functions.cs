@@ -75,6 +75,7 @@ namespace NailClipr
 
             }
             if (count > 0) return;
+            
             nearestPC.name = "";
             nearestPC.distance = 0;
             Structs.player.isAlone = true;
@@ -154,7 +155,7 @@ namespace NailClipr
         public static void updateTrackSpeed(System.Windows.Forms.TrackBar bar, System.Windows.Forms.Label lbl, float speed, EliteAPI api = null)
         {
             //Only update GUI speed if not in combat or CS.
-            if (api == null || ((api.Player.Status != 1 && api.Player.Status != 4)))
+            if (api == null || (api.Player.Status != 1 && api.Player.Status != 4  && api.Player.Speed >= Structs.Speed.NATURAL))
             {
                 lbl.Text = "x" + speed / Structs.Speed.NATURAL;
 

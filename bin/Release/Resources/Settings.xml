@@ -7,6 +7,11 @@
         <Y>75.85261</Y>
         <Z>4</Z>
       </WarpPoint>
+      <WarpPoint title="South Sandy">
+        <X>0.999130964</X>
+        <Y>-18.2658672</Y>
+        <Z>0</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="197" title="Crawlers' Nest">
       <WarpPoint title="Tome">
@@ -59,6 +64,28 @@
         <X>141.121</X>
         <Y>-476.954</Y>
         <Z>10.53281</Z>
+      </WarpPoint>
+      <WarpPoint title="Home Point">
+        <X>-211.209381</X>
+        <Y>91.549614</Y>
+        <Z>-20.8176479</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="230" title="Southern San d'Oria">
+      <WarpPoint title="AH">
+        <X>8.356652</X>
+        <Y>-28.9106064</Y>
+        <Z>1.7</Z>
+      </WarpPoint>
+      <WarpPoint title="Mog House">
+        <X>163.116074</X>
+        <Y>160.860489</Y>
+        <Z>-2</Z>
+      </WarpPoint>
+      <WarpPoint title="Rolandienne">
+        <X>-84.134346</X>
+        <Y>-48.15038</Y>
+        <Z>1</Z>
       </WarpPoint>
     </Zone>
   </Zones>

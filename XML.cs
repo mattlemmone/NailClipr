@@ -236,16 +236,7 @@ namespace NailClipr
         public static void FNFerror(string file)
         {
             MessageBox.Show("Please add " + file + " to the Resources directory.", "File Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            if (System.Windows.Forms.Application.MessageLoop)
-            {
-                // WinForms app
-                System.Windows.Forms.Application.Exit();
-            }
-            else
-            {
-                // Console app
-                System.Environment.Exit(1);
-            }
+            NailClipr.ExitApp();
         }
     }
 }

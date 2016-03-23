@@ -95,7 +95,8 @@ namespace NailClipr
             }
             else
             {
-                this.Text = "N/A";
+                MessageBox.Show("Launch FFXI before prior to launching this program.", "pol.exe not detected", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ExitApp();
             }
             #endregion
         }
@@ -125,10 +126,6 @@ namespace NailClipr
 
         public void workerOverwrites()
         {
-
-
-
-
             //Constantly write maintenance mode in case it gets overwritten.
             Structs.Status.PreventOverwrite(api);
 
@@ -268,6 +265,20 @@ namespace NailClipr
             string s = api.Player.X + " " + api.Player.Z + " " + api.Player.Y + " " + api.Player.ZoneId;
             api.ThirdParty.SendString("/p " + s);
             Player.hasDialogue = false;
+        }
+
+        public static void ExitApp()
+        {
+            if (System.Windows.Forms.Application.MessageLoop)
+            {
+                // WinForms app
+                System.Windows.Forms.Application.Exit();
+            }
+            else
+            {
+                // Console app
+                System.Environment.Exit(1);
+            }
         }
     }
 }

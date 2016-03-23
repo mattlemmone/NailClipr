@@ -1,12 +1,16 @@
 ﻿using EliteMMO.API;
 using System;
 using System.Drawing;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Timers;
 
 namespace NailClipr
 {
     class Functions
     {
         private static Structs.PC nearestPC = new Structs.PC();
+
         public static void AddZonePoint(Structs.WarpPoint wp)
         {
             NailClipr.GUI_WARP.Items.Add(wp.title);
@@ -66,7 +70,7 @@ namespace NailClipr
                 Player.isAlone = false;
                 if (nearestPC.distance == 0 || entity.Distance < nearestPC.distance || entity.Name == nearestPC.name)
                 {
-                    if (!float.IsNaN(entity.Distance) )
+                    if (!float.IsNaN(entity.Distance))
                     {
                         nearestPC.name = entity.Name;
                         nearestPC.distance = entity.Distance;
@@ -75,7 +79,7 @@ namespace NailClipr
 
             }
             if (count > 0) return;
-            
+
             nearestPC.name = "";
             nearestPC.distance = 0;
             Player.isAlone = true;
@@ -129,7 +133,6 @@ namespace NailClipr
             //Disable track bar, highlight speed. Visual cue.
             DisableTrackSpeed();
         }
-
         public static void DisableTrackSpeed()
         {
             if (Player.isAlone || !Structs.settings.playerDetection)
@@ -151,11 +154,10 @@ namespace NailClipr
                 }
             }
         }
-
         public static void UpdateTrackSpeed(System.Windows.Forms.TrackBar bar, System.Windows.Forms.Label lbl, float speed, EliteAPI api = null)
         {
             //Only update GUI speed if not in combat or CS.
-            if (api == null || (api.Player.Status != 1 && api.Player.Status != 4  && api.Player.Speed >= Player.Speed.normal))
+            if (api == null || (api.Player.Status != 1 && api.Player.Status != 4 && api.Player.Speed >= Player.Speed.normal))
             {
 
                 lbl.Text = "x" + speed / Structs.Speed.NATURAL;
@@ -165,6 +167,52 @@ namespace NailClipr
                 bar.Value = barSpeed;
             }
         }
+        public static async void ParseChat(EliteAPI api)
+        {
+            EliteAPI.ChatEntry c = api.Chat.GetChatLine(0);
+            int partyType = 5;
+            int chatType = c.ChatType;
+            if (partyType == chatType)
+            {
+                const int acceptSec = 5;
+                string controller = "Sound";
+                controller = "(" + controller + ")";
+
+                string text = c.Text;
+                string senderEx = @"\(([A-Za-z]+)\)";
+                string coordEx = @"(\-*\d*\.*\d+)+";
+                //Console.WriteLine(chatType);
+                //Console.WriteLine(text);
+                MatchCollection senderMatch = Regex.Matches(text, senderEx);
+                MatchCollection coordMatch = Regex.Matches(text, coordEx);
+
+                if (senderMatch.Count == 1 && coordMatch.Count == 4)
+                {
+                    string sender = senderMatch[0] + "";
+                    Structs.Position p = new Structs.Position();
+
+                    p.X = float.Parse(coordMatch[0] + "");
+                    p.Y = float.Parse(coordMatch[1] + "");
+                    p.Z = float.Parse(coordMatch[2] + "");
+                    p.Zone = int.Parse(coordMatch[3] + "");
+
+                    if (sender == controller && p.Zone == api.Player.ZoneId)
+                    {
+                        api.ThirdParty.SendString("/echo You have been requested by " + controller + " in " + Structs.Zones.NameFromID(p.Zone) + ". You have " + acceptSec + " seconds to Accept.");
+                        Player.reqPos = p;
+
+                        Player.hasDialogue = true;
+                        await Task.Delay(acceptSec * 1000);
+                        Player.hasDialogue = false;
+                        if (!Player.warpAccepted)
+                        {
+                            api.ThirdParty.SendString("/echo Request declined.");
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
 

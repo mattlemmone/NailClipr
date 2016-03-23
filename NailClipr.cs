@@ -13,12 +13,15 @@ namespace NailClipr
     {
         private static EliteAPI api;
         private BackgroundWorker bw = new BackgroundWorker();
+        private BackgroundWorker cw = new BackgroundWorker();
 
         public static Player Player = new Player();
 
         public static ComboBox GUI_WARP;
+        public static CheckBox GUI_MAINT;
         public static CheckBox GUI_TOPMOST;
         public static CheckBox GUI_PLAYER_DETECT;
+        public static Button GUI_ACCEPT;
         public static Label GUI_X;
         public static Label GUI_Y;
         public static Label GUI_Z;
@@ -44,6 +47,12 @@ namespace NailClipr
             bw.WorkerSupportsCancellation = true;
             bw.WorkerReportsProgress = true;
             bw.RunWorkerAsync();
+
+
+            // Start the background worker..
+            cw.DoWork += new DoWorkEventHandler(cw_DoWork);
+            cw.WorkerSupportsCancellation = true;
+            cw.RunWorkerAsync();
         }
         public void PostInit()
         {
@@ -55,8 +64,10 @@ namespace NailClipr
         public void AssignControls()
         {
             GUI_WARP = CB_Warp;
+            GUI_MAINT = ChkBox_Maint;
             GUI_TOPMOST = ChkBox_StayTop;
             GUI_PLAYER_DETECT = ChkBox_PlayerDetect;
+            GUI_ACCEPT = Btn_Accept;
             GUI_X = Lbl_X;
             GUI_Y = Lbl_Y;
             GUI_Z = Lbl_Z;
@@ -101,15 +112,25 @@ namespace NailClipr
             }
         }
 
+        private void cw_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+            while (worker.CancellationPending != true)
+            {
+                System.Threading.Thread.Sleep(50);
+
+                Functions.ParseChat(api);
+            }
+        }
+
         public void workerOverwrites()
         {
 
+
+
+
             //Constantly write maintenance mode in case it gets overwritten.
-            if (ChkBox_Maint.Checked == true)
-            {
-                if (api.Player.Status != Structs.Status.MAINT)
-                    api.Player.Status = Structs.Status.MAINT;
-            }
+            Structs.Status.PreventOverwrite(api);
 
             /*Speed*/
             //Not initialized.
@@ -121,18 +142,7 @@ namespace NailClipr
             //Turn speed off around other players.
             if (Structs.settings.playerDetection) Functions.PlayersRendered(api);
 
-            //Adjust current speed.
-            if (!Player.isAlone && Structs.settings.playerDetection)
-            {
-                api.Player.Speed = Player.Speed.normal;
-                if (api.Player.Speed != Player.Speed.normal)
-                    api.Player.Speed = Player.Speed.normal;
-            }
-            else {
-                //Prevent speed overwrite.
-                if (api.Player.Speed != Player.Speed.expected)
-                    api.Player.Speed = Player.Speed.expected;
-            }
+            Structs.Speed.PreventOverWrite(api);
 
         }
 
@@ -142,6 +152,8 @@ namespace NailClipr
             Player.Location.isZoning = api.Player.X == 0 && api.Player.Y == 0 && api.Player.Z == 0;
 
             Functions.UpdateLabels(api);
+
+            GUI_ACCEPT.Enabled = Player.hasDialogue;
         }
 
         private void ChkBox_Maint_CheckedChanged(object sender, EventArgs e)
@@ -242,6 +254,19 @@ namespace NailClipr
         private void Btn_SaveSettings_Click(object sender, EventArgs e)
         {
             XML.SaveSettings();
+        }
+
+        private void Btn_Accept_Click(object sender, EventArgs e)
+        {
+            api.ThirdParty.SendString("/echo Accepted.");
+            api.ThirdParty.SendString("/p i accept <:'^)");
+            Player.Warp(api, true);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string s = api.Player.X + " " + api.Player.Z + " " + api.Player.Y + " " + api.Player.ZoneId;
+            api.ThirdParty.SendString("/p " + s);
         }
     }
 }

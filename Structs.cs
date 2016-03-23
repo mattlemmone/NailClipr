@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace NailClipr
 {
-    class Structs
+    public class Structs
     {
         public static Zone Zones = new Zone();
         public static Settings settings = new Settings();
@@ -43,6 +43,7 @@ namespace NailClipr
             public float X;
             public float Y;
             public float Z;
+            public int Zone;
         }
         public struct WarpPoint
         {
@@ -50,18 +51,41 @@ namespace NailClipr
             public Position pos;
             public int zone;
         }
-        public struct Status
-        {           
+        public class Status
+        {
             public const uint NATURAL = 0;
             public const uint MAINT = 31;
+            public static void PreventOverwrite(EliteAPI api)
+            {
+                if (NailClipr.GUI_MAINT.Checked == true)
+                {
+                    if (api.Player.Status != Structs.Status.MAINT)
+                        api.Player.Status = Structs.Status.MAINT;
+                }
+            }
         }
-        public struct Speed
+        public class Speed
         {
             public const float NATURAL = 5f;
             public const float DIVISOR = 4f;
             public const float MAX_MULT = 1.5f;
             public const float MAX = 10f;
+            public static void PreventOverWrite(EliteAPI api)
+            {
+                //Adjust current speed.
+                if (!Player.isAlone && settings.playerDetection)
+                {
+                    api.Player.Speed = Player.Speed.normal;
+                    if (api.Player.Speed != Player.Speed.normal)
+                        api.Player.Speed = Player.Speed.normal;
+                }
+                else {
+                    //Prevent speed overwrite.
+                    if (api.Player.Speed != Player.Speed.expected)
+                        api.Player.Speed = Player.Speed.expected;
+                }
+            }
         }
     }
-    
+
 }

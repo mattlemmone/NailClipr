@@ -64,6 +64,8 @@ namespace NailClipr
             this.Lbl_TargetInfo = new System.Windows.Forms.Label();
             this.Lbl_NearestPlayer = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.Btn_Accept = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed_Default)).BeginInit();
@@ -302,7 +304,7 @@ namespace NailClipr
             // 
             this.Btn_Save.Location = new System.Drawing.Point(12, 175);
             this.Btn_Save.Name = "Btn_Save";
-            this.Btn_Save.Size = new System.Drawing.Size(121, 23);
+            this.Btn_Save.Size = new System.Drawing.Size(57, 23);
             this.Btn_Save.TabIndex = 34;
             this.Btn_Save.Text = "Save";
             this.Btn_Save.UseVisualStyleBackColor = true;
@@ -320,9 +322,9 @@ namespace NailClipr
             // 
             // Btn_Delete
             // 
-            this.Btn_Delete.Location = new System.Drawing.Point(154, 175);
+            this.Btn_Delete.Location = new System.Drawing.Point(79, 175);
             this.Btn_Delete.Name = "Btn_Delete";
-            this.Btn_Delete.Size = new System.Drawing.Size(118, 23);
+            this.Btn_Delete.Size = new System.Drawing.Size(57, 23);
             this.Btn_Delete.TabIndex = 36;
             this.Btn_Delete.Text = "Delete";
             this.Btn_Delete.UseVisualStyleBackColor = true;
@@ -413,11 +415,34 @@ namespace NailClipr
             this.label5.TabIndex = 48;
             this.label5.Text = "Target:";
             // 
+            // Btn_Accept
+            // 
+            this.Btn_Accept.Enabled = false;
+            this.Btn_Accept.Location = new System.Drawing.Point(213, 175);
+            this.Btn_Accept.Name = "Btn_Accept";
+            this.Btn_Accept.Size = new System.Drawing.Size(57, 23);
+            this.Btn_Accept.TabIndex = 54;
+            this.Btn_Accept.Text = "Accept";
+            this.Btn_Accept.UseVisualStyleBackColor = true;
+            this.Btn_Accept.Click += new System.EventHandler(this.Btn_Accept_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(146, 175);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(57, 23);
+            this.button1.TabIndex = 55;
+            this.button1.Text = "Request";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // NailClipr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 391);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Btn_Accept);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.Lbl_NearestPlayer);
             this.Controls.Add(this.Btn_SaveSettings);
@@ -441,7 +466,6 @@ namespace NailClipr
             this.Controls.Add(this.Lbl_Speed);
             this.Controls.Add(this.Bar_Speed);
             this.Controls.Add(this.ChkBox_Maint);
-            this.FormClosing += this.Form_Close;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "NailClipr";
             this.Text = "NailClipr";
@@ -491,6 +515,8 @@ namespace NailClipr
         private Label Lbl_TargetInfo;
         private Label Lbl_NearestPlayer;
         private Label label5;
+        private Button Btn_Accept;
+        private Button button1;
     }
 }
 

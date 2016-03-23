@@ -170,19 +170,16 @@ namespace NailClipr
         public static async void ParseChat(EliteAPI api)
         {
             EliteAPI.ChatEntry c = api.Chat.GetChatLine(0);
-            int partyType = 5;
+            const int partyType = 5;
             int chatType = c.ChatType;
             if (partyType == chatType)
             {
                 const int acceptSec = 5;
-                string controller = "Sound";
-                controller = "(" + controller + ")";
 
                 string text = c.Text;
                 string senderEx = @"\(([A-Za-z]+)\)";
                 string coordEx = @"(\-*\d*\.*\d+)+";
-                //Console.WriteLine(chatType);
-                //Console.WriteLine(text);
+
                 MatchCollection senderMatch = Regex.Matches(text, senderEx);
                 MatchCollection coordMatch = Regex.Matches(text, coordEx);
 
@@ -196,19 +193,35 @@ namespace NailClipr
                     p.Z = float.Parse(coordMatch[2] + "");
                     p.Zone = int.Parse(coordMatch[3] + "");
 
-                    if (sender == controller && p.Zone == api.Player.ZoneId)
-                    {
-                        api.ThirdParty.SendString("/echo You have been requested by " + controller + " in " + Structs.Zones.NameFromID(p.Zone) + ". You have " + acceptSec + " seconds to Accept.");
-                        Player.reqPos = p;
+                    int endZoneID = p.Zone;
+                    string endZone = Structs.Zones.NameFromID(endZoneID);
 
+                    int startZoneID = api.Player.ZoneId;
+                    string startZone = Structs.Zones.NameFromID(startZoneID);
+
+                    if (endZoneID == startZoneID)
+                    {
+                        string s = "You have been requested by " + sender + " in " + endZone + ". You have " + acceptSec + " seconds to Accept.";
+                        api.ThirdParty.SendString("/echo " + s);
+                        Player.reqPos = p;
                         Player.hasDialogue = true;
+
                         await Task.Delay(acceptSec * 1000);
                         Player.hasDialogue = false;
+
                         if (!Player.warpAccepted)
                         {
                             api.ThirdParty.SendString("/echo Request declined.");
                         }
                     }
+                    else
+                    {
+                        api.ThirdParty.SendString("/echo Cannot warp to " + endZone + " from " + startZone + ".");
+                    }
+                }
+                else
+                {
+                    api.ThirdParty.SendString("/echo Error parsing request.");
                 }
             }
         }

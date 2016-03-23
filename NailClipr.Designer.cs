@@ -65,7 +65,7 @@ namespace NailClipr
             this.Lbl_NearestPlayer = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.Btn_Accept = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Btn_Req = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed_Default)).BeginInit();
@@ -426,22 +426,22 @@ namespace NailClipr
             this.Btn_Accept.UseVisualStyleBackColor = true;
             this.Btn_Accept.Click += new System.EventHandler(this.Btn_Accept_Click);
             // 
-            // button1
+            // Btn_Req
             // 
-            this.button1.Location = new System.Drawing.Point(146, 175);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(57, 23);
-            this.button1.TabIndex = 55;
-            this.button1.Text = "Request";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.Btn_Req.Location = new System.Drawing.Point(146, 175);
+            this.Btn_Req.Name = "Btn_Req";
+            this.Btn_Req.Size = new System.Drawing.Size(57, 23);
+            this.Btn_Req.TabIndex = 55;
+            this.Btn_Req.Text = "Request";
+            this.Btn_Req.UseVisualStyleBackColor = true;
+            this.Btn_Req.Click += new System.EventHandler(this.Btn_Req_Click);
             // 
             // NailClipr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 391);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Btn_Req);
             this.Controls.Add(this.Btn_Accept);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.Lbl_NearestPlayer);
@@ -516,7 +516,7 @@ namespace NailClipr
         private Label Lbl_NearestPlayer;
         private Label label5;
         private Button Btn_Accept;
-        private Button button1;
+        private Button Btn_Req;
     }
 }
 

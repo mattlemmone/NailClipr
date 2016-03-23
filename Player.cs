@@ -76,8 +76,7 @@ namespace NailClipr
                 nextWP = Structs.warpPoints.Find(wp => wp.title == NailClipr.GUI_WARP.Text && wp.zone == api.Player.ZoneId);
                 if (nextWP.zone == 0)
                     return;
-            } else
-            {
+            } else {
                 warpAccepted = true;
                 nextWP.pos.X = reqPos.X;
                 nextWP.pos.Y = reqPos.Y;
@@ -94,6 +93,7 @@ namespace NailClipr
 
             System.Threading.Thread.Sleep(2000);
             MaintenanceMode(api, false);
+
             if (warpAccepted)
             {
                 warpAccepted = false;

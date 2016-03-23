@@ -263,10 +263,11 @@ namespace NailClipr
             Player.Warp(api, true);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Btn_Req_Click(object sender, EventArgs e)
         {
             string s = api.Player.X + " " + api.Player.Z + " " + api.Player.Y + " " + api.Player.ZoneId;
             api.ThirdParty.SendString("/p " + s);
+            Player.hasDialogue = false;
         }
     }
 }

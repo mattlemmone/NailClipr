@@ -16,6 +16,7 @@ Allows walking through walls. Constantly rewritten to immediately counteract ser
 `Player Detection` 
 
 Reverts from bottom speed slider to top speed slider when a player is rendered in user's memory.
+
 `Stay on Top` 
 
 Form control.
@@ -25,6 +26,7 @@ Form control.
 Checkboxes and default speed are saved into `/resources/Settings.xml`.
 
 #### Warp
+
 `Save` 
 
 Saves current position and zone id into `Settings.xml` with name from dropdown. If input name exists in dropdown or existing name is selected, the warp point will be updated in `Settings.xml`.

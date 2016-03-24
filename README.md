@@ -48,3 +48,4 @@ Enabled upon request receipt. Disabled upon zone. This prevents players from tel
 1. Echo saves/deletes into chat.
 2. Control bot via windower commands (functionality yet not supported).
 3. Integrate a whitelist for Player Detection feature.
+4. Add screenshots.

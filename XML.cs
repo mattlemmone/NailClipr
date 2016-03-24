@@ -28,7 +28,7 @@ namespace NailClipr
                         new XElement("StayOnTop", Structs.settings.topMostForm),
                         new XElement("DefaultSpeed", Player.Speed.normal)
                         )));
-             
+
             xmlDocument.Save(SETTINGS);
             xdoc = XDocument.Load(SETTINGS);
         }
@@ -164,14 +164,17 @@ namespace NailClipr
                 wp.zone = api.Player.ZoneId;
                 wp.pos = pos;
 
-                Console.WriteLine("Saving warp.");
 
                 //Updating - delete old and save new.
                 int index = Structs.zonePoints.FindIndex(p => p.title == wp.title);
                 if (index >= 0)
                 {
-                    Console.WriteLine("Editing Warp."); Console.ReadLine();
-                    DeleteWarp(api);
+                    api.ThirdParty.SendString("/echo Updating warp point: " + NailClipr.GUI_WARP.Text + ".");
+                    DeleteWarp(api, true);
+                }
+                else
+                {
+                    api.ThirdParty.SendString("/echo Saving new warp point: " + NailClipr.GUI_WARP.Text + ".");
                 }
 
                 Structs.warpPoints.Add(wp);
@@ -190,7 +193,7 @@ namespace NailClipr
                         new XAttribute("title", zoneName)));
                     xdoc.Save(SETTINGS);
                 }
-                
+
 
                 xdoc.Element("NailClipr").Elements("Zones").Elements("Zone").Single(z => z.Attribute("id").Value == wp.zone + "")
                     .Add(
@@ -204,21 +207,22 @@ namespace NailClipr
             }
             catch (FileNotFoundException)
             {
-                XML.Create();
-                XML.SaveWarp(api);
+                Create();
+                SaveWarp(api);
             }
         }
-        public static void DeleteWarp(EliteAPI api)
+        public static void DeleteWarp(EliteAPI api, bool updating = false)
         {
             if (NailClipr.GUI_WARP.Text == "") return;
 
-            Console.WriteLine("Deleting Warp.");
+            if (!updating)
+                api.ThirdParty.SendString("/echo Deleting warp point: " + NailClipr.GUI_WARP.Text + ".");
 
             Structs.WarpPoint delWP = Structs.zonePoints.Find(wp => wp.title == NailClipr.GUI_WARP.Text);
 
             if (delWP.Equals(default(Structs.WarpPoint)))
             {
-                Console.WriteLine("No warp point with that name found.");
+                api.ThirdParty.SendString("/echo No warp point with that name found.");
                 return;
             }
 

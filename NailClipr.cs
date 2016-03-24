@@ -259,8 +259,8 @@ namespace NailClipr
 
         private void Btn_Accept_Click(object sender, EventArgs e)
         {
-            api.ThirdParty.SendString("/echo " + Structs.Chat.acceptSelfNotify);
-            api.ThirdParty.SendString("/p " + Structs.Chat.acceptNotify);
+            api.ThirdParty.SendString("/echo " + Structs.Chat.Warp.acceptSelfNotify);
+            api.ThirdParty.SendString("/p " + Structs.Chat.Warp.acceptNotify);
             Player.Warp(api, true);
         }
 

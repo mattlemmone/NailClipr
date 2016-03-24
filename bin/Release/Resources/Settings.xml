@@ -12,6 +12,11 @@
         <Y>-18.2658672</Y>
         <Z>0</Z>
       </WarpPoint>
+      <WarpPoint title="test">
+        <X>46.432</X>
+        <Y>28.548</Y>
+        <Z>-0.199</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="197" title="Crawlers' Nest">
       <WarpPoint title="Tome">

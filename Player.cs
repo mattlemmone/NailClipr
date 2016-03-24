@@ -97,7 +97,7 @@ namespace NailClipr
             if (warpAccepted)
             {
                 warpAccepted = false;
-                api.ThirdParty.SendString("/echo Arrived.");
+                api.ThirdParty.SendString("/echo " + Structs.Chat.Warp.arrived);
             }
         }
     }

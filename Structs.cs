@@ -20,8 +20,12 @@ namespace NailClipr
         }
         public struct Chat
         {
-            public static string acceptNotify = "i accept <:'^)";
-            public static string acceptSelfNotify = "Accepted.";
+            public struct Warp
+            {
+                public static string acceptNotify = "i accept <:'^)";
+                public static string acceptSelfNotify = "Accepted.";
+                public static string arrived = "Arrived.";
+            }
         }
         public struct Error
         {

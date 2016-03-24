@@ -58,7 +58,18 @@
         <Z>-0.149999976</Z>
       </WarpPoint>
     </Zone>
-    <Zone id="246" title="Port Jeuno" />
+    <Zone id="246" title="Port Jeuno">
+      <WarpPoint title="Joachim">
+        <X>-51.58804</X>
+        <Y>-8.426912</Y>
+        <Z>0</Z>
+      </WarpPoint>
+      <WarpPoint title="Seals NPC">
+        <X>-57.12658</X>
+        <Y>9.214854</Y>
+        <Z>0</Z>
+      </WarpPoint>
+    </Zone>
     <Zone id="126" title="Qufim Island">
       <WarpPoint title="Jeuno">
         <X>141.121</X>
@@ -86,6 +97,25 @@
         <X>-84.134346</X>
         <Y>-48.15038</Y>
         <Z>1</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="100" title="West Ronfaure">
+      <WarpPoint title="North Sandy">
+        <X>-172.185</X>
+        <Y>383.497</Y>
+        <Z>-62.00001</Z>
+      </WarpPoint>
+      <WarpPoint title="Ghelsba">
+        <X>-724.844055</X>
+        <Y>603.269653</Y>
+        <Z>-60.3753853</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="245" title="Lower Jeuno">
+      <WarpPoint title="Mystery Box">
+        <X>12.2113562</X>
+        <Y>6.24645424</Y>
+        <Z>3.94284725E-05</Z>
       </WarpPoint>
     </Zone>
   </Zones>

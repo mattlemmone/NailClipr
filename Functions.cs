@@ -167,15 +167,16 @@ namespace NailClipr
                 bar.Value = barSpeed;
             }
         }
-        public static async void ParseChat(EliteAPI api)
+        public static void ParseChat(EliteAPI api)
         {
-            EliteAPI.ChatEntry c = api.Chat.GetChatLine(0);
-            const int partyType = 5;
+            EliteAPI.ChatEntry c = api.Chat.GetNextChatLine();
+            if (string.IsNullOrEmpty(c?.Text)) return;
+            const int partyType = 13; //Incoming party
             int chatType = c.ChatType;
+            string t = c.Text;
+            Console.WriteLine(t);
             if (partyType == chatType)
-            {
-                const int acceptSec = 5;
-
+            {                
                 string text = c.Text;
                 string senderEx = @"\(([A-Za-z]+)\)";
                 string coordEx = @"(\-*\d*\.*\d+)+";
@@ -201,26 +202,29 @@ namespace NailClipr
 
                     if (endZoneID == startZoneID)
                     {
-                        string s = "You have been requested by " + sender + " in " + endZone + ". You have " + acceptSec + " seconds to Accept.";
+                        string s = "You have been requested by " + sender + " in " + endZone + ". You have until you zone to accept.";
                         api.ThirdParty.SendString("/echo " + s);
+
                         Player.reqPos = p;
                         Player.hasDialogue = true;
 
-                        await Task.Delay(acceptSec * 1000);
+                       /* await Task.Delay(acceptSec * 1000);
                         Player.hasDialogue = false;
 
                         if (!Player.warpAccepted)
                         {
                             api.ThirdParty.SendString("/echo Request declined.");
-                        }
+                        }*/
                     }
                     else
                     {
+                        //endZoneID != startZoneID
                         api.ThirdParty.SendString("/echo Cannot warp to " + endZone + " from " + startZone + ".");
                     }
                 }
                 else
                 {
+                    //!(senderMatch.Count == 1 && coordMatch.Count == 4)
                     api.ThirdParty.SendString("/echo Error parsing request.");
                 }
             }

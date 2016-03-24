@@ -6,6 +6,7 @@ using EliteMMO.API;
 using System.ComponentModel;
 using System.IO;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace NailClipr
 {
@@ -76,9 +77,11 @@ namespace NailClipr
             GUI_STATUS = Lbl_Status;
             GUI_ZONE = Lbl_Zone;
             GUI_SPEED = Lbl_SpeedVar;
-            GUI_DEFAULT_SPEED = LBL_DefaultSpeed;
+            GUI_DEFAULT_SPEED = Lbl_DefaultSpeed;
             GUI_SPEED_DEFAULT_TRACK = Bar_Speed_Default;
             GUI_SPEED_TRACK = Bar_Speed;
+
+            Lbl_Ver.Text = "v." + Structs.App.ver;
         }
 
         public void selectProcess()
@@ -91,11 +94,11 @@ namespace NailClipr
                 var proc = Process.GetProcessesByName("pol").First().Id;
                 api = new EliteAPI(proc);
 
-                this.Text = "NailClipr - " + api.Entity.GetLocalPlayer().Name;
+                this.Text = Structs.App.name + " - " + api.Entity.GetLocalPlayer().Name;
             }
             else
             {
-                MessageBox.Show("Launch FFXI before prior to launching this program.", "pol.exe not detected", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Structs.Error.Exit.text, Structs.Error.Exit.title, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 ExitApp();
             }
             #endregion
@@ -116,10 +119,9 @@ namespace NailClipr
         private void cw_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-            while (worker.CancellationPending != true)
+            while (!worker.CancellationPending)
             {
-                System.Threading.Thread.Sleep(50);
-
+                Thread.Sleep(TimeSpan.FromSeconds(0.1));
                 Functions.ParseChat(api);
             }
         }
@@ -147,6 +149,8 @@ namespace NailClipr
         {
             //Update GUI.
             Player.Location.isZoning = api.Player.X == 0 && api.Player.Y == 0 && api.Player.Z == 0;
+            if (Player.Location.isZoning && Player.hasDialogue)
+                Player.hasDialogue = false;
 
             Functions.UpdateLabels(api);
 
@@ -255,8 +259,8 @@ namespace NailClipr
 
         private void Btn_Accept_Click(object sender, EventArgs e)
         {
-            api.ThirdParty.SendString("/echo Accepted.");
-            api.ThirdParty.SendString("/p i accept <:'^)");
+            api.ThirdParty.SendString("/echo " + Structs.Chat.acceptSelfNotify);
+            api.ThirdParty.SendString("/p " + Structs.Chat.acceptNotify);
             Player.Warp(api, true);
         }
 
@@ -264,7 +268,6 @@ namespace NailClipr
         {
             string s = api.Player.X + " " + api.Player.Z + " " + api.Player.Y + " " + api.Player.ZoneId;
             api.ThirdParty.SendString("/p " + s);
-            Player.hasDialogue = false;
         }
 
         public static void ExitApp()

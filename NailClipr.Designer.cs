@@ -57,7 +57,7 @@ namespace NailClipr
             this.Btn_Delete = new System.Windows.Forms.Button();
             this.ChkBox_StayTop = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.LBL_DefaultSpeed = new System.Windows.Forms.Label();
+            this.Lbl_DefaultSpeed = new System.Windows.Forms.Label();
             this.Btn_SaveSettings = new System.Windows.Forms.Button();
             this.Bar_Speed_Default = new System.Windows.Forms.TrackBar();
             this.label11 = new System.Windows.Forms.Label();
@@ -66,6 +66,7 @@ namespace NailClipr
             this.label5 = new System.Windows.Forms.Label();
             this.Btn_Accept = new System.Windows.Forms.Button();
             this.Btn_Req = new System.Windows.Forms.Button();
+            this.Lbl_Ver = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed_Default)).BeginInit();
@@ -351,14 +352,14 @@ namespace NailClipr
             this.label4.TabIndex = 39;
             this.label4.Text = "Default Speed:";
             // 
-            // LBL_DefaultSpeed
+            // Lbl_DefaultSpeed
             // 
-            this.LBL_DefaultSpeed.AutoSize = true;
-            this.LBL_DefaultSpeed.Location = new System.Drawing.Point(166, 241);
-            this.LBL_DefaultSpeed.Name = "LBL_DefaultSpeed";
-            this.LBL_DefaultSpeed.Size = new System.Drawing.Size(27, 13);
-            this.LBL_DefaultSpeed.TabIndex = 40;
-            this.LBL_DefaultSpeed.Text = "x1.0";
+            this.Lbl_DefaultSpeed.AutoSize = true;
+            this.Lbl_DefaultSpeed.Location = new System.Drawing.Point(166, 241);
+            this.Lbl_DefaultSpeed.Name = "Lbl_DefaultSpeed";
+            this.Lbl_DefaultSpeed.Size = new System.Drawing.Size(27, 13);
+            this.Lbl_DefaultSpeed.TabIndex = 40;
+            this.Lbl_DefaultSpeed.Text = "x1.0";
             // 
             // Btn_SaveSettings
             // 
@@ -436,18 +437,28 @@ namespace NailClipr
             this.Btn_Req.UseVisualStyleBackColor = true;
             this.Btn_Req.Click += new System.EventHandler(this.Btn_Req_Click);
             // 
+            // Lbl_Ver
+            // 
+            this.Lbl_Ver.AutoSize = true;
+            this.Lbl_Ver.Location = new System.Drawing.Point(235, 343);
+            this.Lbl_Ver.Name = "Lbl_Ver";
+            this.Lbl_Ver.Size = new System.Drawing.Size(37, 13);
+            this.Lbl_Ver.TabIndex = 56;
+            this.Lbl_Ver.Text = "v1.2.3";
+            // 
             // NailClipr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 391);
+            this.Controls.Add(this.Lbl_Ver);
             this.Controls.Add(this.Btn_Req);
             this.Controls.Add(this.Btn_Accept);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.Lbl_NearestPlayer);
             this.Controls.Add(this.Btn_SaveSettings);
             this.Controls.Add(this.Lbl_TargetInfo);
-            this.Controls.Add(this.LBL_DefaultSpeed);
+            this.Controls.Add(this.Lbl_DefaultSpeed);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.Bar_Speed_Default);
@@ -508,7 +519,7 @@ namespace NailClipr
         private Button Btn_Delete;
         private CheckBox ChkBox_StayTop;
         private Label label4;
-        private Label LBL_DefaultSpeed;
+        private Label Lbl_DefaultSpeed;
         private Button Btn_SaveSettings;
         private TrackBar Bar_Speed_Default;
         private Label label11;
@@ -517,6 +528,7 @@ namespace NailClipr
         private Label label5;
         private Button Btn_Accept;
         private Button Btn_Req;
+        private Label Lbl_Ver;
     }
 }
 

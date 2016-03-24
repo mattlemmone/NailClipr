@@ -29,9 +29,14 @@ Checkboxes and default speed are saved into `/resources/Settings.xml`.
 
 Saves current position and zone id into `Settings.xml` with name from dropdown. If input name exists in dropdown or existing name is selected, the warp point will be updated in `Settings.xml`.
 
+![](http://puu.sh/nROsb/10cfa69025.jpg)
+![](http://puu.sh/nROti/66302d91ff.jpg)
+
 `Delete` 
 
 ...
+
+![](http://puu.sh/nROuh/7ba21f1c8c.jpg)
 
 `Request` 
 
@@ -48,4 +53,4 @@ Enabled upon request receipt. Disabled upon zone. This prevents players from tel
 1. Echo saves/deletes into chat.
 2. Control bot via windower commands (functionality yet not supported).
 3. Integrate a whitelist for Player Detection feature.
-4. Add screenshots.
+4. Consolidate strings into Structs.

@@ -15,7 +15,7 @@ namespace NailClipr
         public struct App
         {
             public static string name = "NailClipr";
-            private static int[] v = { 1, 0, 0 };
+            private static int[] v = { 1, 0, 4 };
             public static string ver = string.Join(".", v);
         }
         public struct Chat
@@ -33,6 +33,10 @@ namespace NailClipr
             {
                 public static string title = "pol.exe not detected";
                 public static string text = "Launch FFXI before prior to launching this program.";
+            }
+            public struct Warp
+            {
+                public static string parse = "Error parsing request.";
             }
         }
         public struct PC

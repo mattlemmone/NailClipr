@@ -176,15 +176,15 @@ namespace NailClipr
             string t = c.Text;
             Console.WriteLine(t);
             if (partyType == chatType)
-            {                
+            {
                 string text = c.Text;
                 string senderEx = @"\(([A-Za-z]+)\)";
-                string coordEx = @"(\-*\d*\.*\d+)+";
+                string coordEx = @"(\-?[0-9]+.[0-9]+)";
 
                 MatchCollection senderMatch = Regex.Matches(text, senderEx);
                 MatchCollection coordMatch = Regex.Matches(text, coordEx);
 
-                if (senderMatch.Count == 1 && coordMatch.Count == 4)
+                if (coordMatch.Count == 4)
                 {
                     string sender = senderMatch[0] + "";
                     Structs.Position p = new Structs.Position();
@@ -208,13 +208,13 @@ namespace NailClipr
                         Player.reqPos = p;
                         Player.hasDialogue = true;
 
-                       /* await Task.Delay(acceptSec * 1000);
-                        Player.hasDialogue = false;
+                        /* await Task.Delay(acceptSec * 1000);
+                         Player.hasDialogue = false;
 
-                        if (!Player.warpAccepted)
-                        {
-                            api.ThirdParty.SendString("/echo Request declined.");
-                        }*/
+                         if (!Player.warpAccepted)
+                         {
+                             api.ThirdParty.SendString("/echo Request declined.");
+                         }*/
                     }
                     else
                     {
@@ -225,7 +225,8 @@ namespace NailClipr
                 else
                 {
                     //!(senderMatch.Count == 1 && coordMatch.Count == 4)
-                    api.ThirdParty.SendString("/echo Error parsing request.");
+                    if (coordMatch.Count > 0)
+                        api.ThirdParty.SendString("/echo " + Structs.Error.Warp.parse);
                 }
             }
         }

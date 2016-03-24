@@ -266,7 +266,7 @@ namespace NailClipr
 
         private void Btn_Req_Click(object sender, EventArgs e)
         {
-            string s = api.Player.X + " " + api.Player.Z + " " + api.Player.Y + " " + api.Player.ZoneId;
+            string s = Math.Round(api.Player.X, 5) + " " + Math.Round(api.Player.Z, 5) + " " + Math.Round(api.Player.Y, 5) + " " + api.Player.ZoneId;
             api.ThirdParty.SendString("/p " + s);
         }
 

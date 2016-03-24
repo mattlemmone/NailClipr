@@ -12,11 +12,6 @@
         <Y>-18.2658672</Y>
         <Z>0</Z>
       </WarpPoint>
-      <WarpPoint title="test">
-        <X>46.432</X>
-        <Y>28.548</Y>
-        <Z>-0.199</Z>
-      </WarpPoint>
     </Zone>
     <Zone id="197" title="Crawlers' Nest">
       <WarpPoint title="Tome">
@@ -121,6 +116,87 @@
         <X>12.2113562</X>
         <Y>6.24645424</Y>
         <Z>3.94284725E-05</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="108" title="Konschtat Highlands">
+      <WarpPoint title="Crag">
+        <X>220.284134</X>
+        <Y>303.566742</Y>
+        <Z>19.1040173</Z>
+      </WarpPoint>
+      <WarpPoint title="North Gusta">
+        <X>94.75417</X>
+        <Y>-587.931</Y>
+        <Z>-69.7538</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="106" title="North Gustaberg">
+      <WarpPoint title="Konschtat">
+        <X>-513.357849</X>
+        <Y>580.7328</Y>
+        <Z>38.85311</Z>
+      </WarpPoint>
+      <WarpPoint title="Palborough">
+        <X>479.079</X>
+        <Y>1159.95166</Y>
+        <Z>-30.0545044</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="143" title="Palborough Mines">
+      <WarpPoint title="Key Mobs 1">
+        <X>220.444672</X>
+        <Y>-34.96898</Y>
+        <Z>-31.8376923</Z>
+      </WarpPoint>
+      <WarpPoint title="Key Mobs 2">
+        <X>98.07267</X>
+        <Y>-25.9166527</Y>
+        <Z>-31.8376923</Z>
+      </WarpPoint>
+      <WarpPoint title="Scorpion (key mobs 3)">
+        <X>266.750946</X>
+        <Y>182.0475</Y>
+        <Z>-31.5738373</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="235" title="Bastok Markets">
+      <WarpPoint title="Mines">
+        <X>-201.102341</X>
+        <Y>-174.00647</Y>
+        <Z>4</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="234" title="Bastok Mines">
+      <WarpPoint title="Zeruhn">
+        <X>-170.302826</X>
+        <Y>-14.7679062</Y>
+        <Z>-8.025051</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="123" title="Yuhtunga Jungle">
+      <WarpPoint title="Sea Serpeant Grotto">
+        <X>-613.371948</X>
+        <Y>-418.431732</Y>
+        <Z>17.27737</Z>
+      </WarpPoint>
+      <WarpPoint title="Yhoator Jungle">
+        <X>117.77684</X>
+        <Y>21.48882</Y>
+        <Z>8.3</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="124" title="Yhoator Jungle">
+      <WarpPoint title="Yuhtunga Jungle">
+        <X>-476.853</X>
+        <Y>59.066</Y>
+        <Z>8.35710049</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="110" title="Rolanberry Fields">
+      <WarpPoint title="Crawlers Nest">
+        <X>-369.0865</X>
+        <Y>-766.816345</Y>
+        <Z>-27.152956</Z>
       </WarpPoint>
     </Zone>
   </Zones>

@@ -29,6 +29,11 @@ namespace NailClipr
         }
         public struct Error
         {
+            public struct Auth
+            {
+                public static string title = "Unauthorized.";
+                public static string text = "You do not have permission to use this program.";
+            }
             public struct Exit
             {
                 public static string title = "pol.exe not detected";

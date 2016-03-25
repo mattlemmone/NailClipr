@@ -95,8 +95,14 @@ namespace NailClipr
                 Stream stream = client.OpenRead("https://github.com/mattlemmone/NailClipr/raw/master/auth.txt");
                 StreamReader reader = new StreamReader(stream);
                 String content = reader.ReadToEnd();
-                Console.WriteLine(content);
+
+                if (content.Length == 0 || p.Length == 0 || !content.Contains(p))
+                {
+                    MessageBox.Show(Structs.Error.Auth.text, Structs.Error.Auth.title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ExitApp();
+                }
                 this.Text = Structs.App.name + " - " + p;
+
             }
             else
             {

@@ -86,10 +86,6 @@ namespace NailClipr
         }
         public static void UpdateLabels(EliteAPI api)
         {
-            //Pos. Z and Y write correctly but read each other. Inherent issue.
-            NailClipr.GUI_X.Text = Math.Round(api.Player.X, 2) + "";
-            NailClipr.GUI_Y.Text = Math.Round(api.Player.Z, 2) + "";
-            NailClipr.GUI_Z.Text = Math.Round(api.Player.Y, 2) + "";
 
             //Zone and Status Label
             NailClipr.GUI_STATUS.Text = api.Player.Status + "";

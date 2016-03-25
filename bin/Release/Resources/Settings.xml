@@ -12,6 +12,11 @@
         <Y>-18.2658672</Y>
         <Z>0</Z>
       </WarpPoint>
+      <WarpPoint title="Chateau">
+        <X>1.33493876</X>
+        <Y>110.554611</Y>
+        <Z>-2</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="197" title="Crawlers' Nest">
       <WarpPoint title="Tome">
@@ -98,6 +103,11 @@
         <Y>-48.15038</Y>
         <Z>1</Z>
       </WarpPoint>
+      <WarpPoint title="Mystrix (Gobbie)">
+        <X>103.464973</X>
+        <Y>56.83638</Y>
+        <Z>4</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="100" title="West Ronfaure">
       <WarpPoint title="North Sandy">
@@ -109,6 +119,11 @@
         <X>-724.844055</X>
         <Y>603.269653</Y>
         <Z>-60.3753853</Z>
+      </WarpPoint>
+      <WarpPoint title="South Sandy">
+        <X>-125.879</X>
+        <Y>274.1</Y>
+        <Z>-62</Z>
       </WarpPoint>
     </Zone>
     <Zone id="245" title="Lower Jeuno">
@@ -197,6 +212,30 @@
         <X>-369.0865</X>
         <Y>-766.816345</Y>
         <Z>-27.152956</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="233" title="Chateau d'Oraguille">
+      <WarpPoint title="North Sandy">
+        <X>0.001</X>
+        <Y>-14</Y>
+        <Z>0</Z>
+      </WarpPoint>
+      <WarpPoint title="Bost">
+        <X>18.4782925</X>
+        <Y>24.5702457</Y>
+        <Z>10.5</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="167" title="Bostaunieux Oubliette">
+      <WarpPoint title="Chateau">
+        <X>99.228</X>
+        <Y>72.866</Y>
+        <Z>-24</Z>
+      </WarpPoint>
+      <WarpPoint title="Tome">
+        <X>-28.3384323</X>
+        <Y>23.7363243</Y>
+        <Z>-0.0231230259</Z>
       </WarpPoint>
     </Zone>
   </Zones>

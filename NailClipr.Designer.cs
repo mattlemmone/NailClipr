@@ -38,19 +38,17 @@ namespace NailClipr
             this.Lbl_Status = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.Lbl_Zone = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.Lbl_X = new System.Windows.Forms.Label();
             this.Btn_Plus_X = new System.Windows.Forms.Button();
             this.Btn_Minus_X = new System.Windows.Forms.Button();
             this.Btn_Minus_Y = new System.Windows.Forms.Button();
             this.Btn_Plus_Y = new System.Windows.Forms.Button();
-            this.Lbl_Y = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.Btn_Minus_Z = new System.Windows.Forms.Button();
             this.Btn_Plus_Z = new System.Windows.Forms.Button();
-            this.Lbl_Z = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Btn_SE = new System.Windows.Forms.Button();
+            this.Btn_NE = new System.Windows.Forms.Button();
+            this.Btn_SW = new System.Windows.Forms.Button();
+            this.Btn_NW = new System.Windows.Forms.Button();
             this.CB_Warp = new System.Windows.Forms.ComboBox();
             this.Btn_Save = new System.Windows.Forms.Button();
             this.Btn_Warp = new System.Windows.Forms.Button();
@@ -123,7 +121,7 @@ namespace NailClipr
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(222, 369);
+            this.label2.Location = new System.Drawing.Point(218, 369);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(40, 13);
             this.label2.TabIndex = 9;
@@ -132,7 +130,7 @@ namespace NailClipr
             // Lbl_Status
             // 
             this.Lbl_Status.AutoSize = true;
-            this.Lbl_Status.Location = new System.Drawing.Point(259, 369);
+            this.Lbl_Status.Location = new System.Drawing.Point(255, 369);
             this.Lbl_Status.Name = "Lbl_Status";
             this.Lbl_Status.Size = new System.Drawing.Size(13, 13);
             this.Lbl_Status.TabIndex = 10;
@@ -156,134 +154,84 @@ namespace NailClipr
             this.Lbl_Zone.TabIndex = 12;
             this.Lbl_Zone.Text = "Zone Name";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(17, 13);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "X:";
-            // 
-            // Lbl_X
-            // 
-            this.Lbl_X.AutoSize = true;
-            this.Lbl_X.Location = new System.Drawing.Point(21, 20);
-            this.Lbl_X.Name = "Lbl_X";
-            this.Lbl_X.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Lbl_X.Size = new System.Drawing.Size(25, 13);
-            this.Lbl_X.TabIndex = 21;
-            this.Lbl_X.Text = "123";
-            // 
             // Btn_Plus_X
             // 
-            this.Btn_Plus_X.Location = new System.Drawing.Point(67, 15);
+            this.Btn_Plus_X.Font = new System.Drawing.Font("Meiryo", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Plus_X.Location = new System.Drawing.Point(94, 48);
             this.Btn_Plus_X.Name = "Btn_Plus_X";
-            this.Btn_Plus_X.Size = new System.Drawing.Size(24, 23);
+            this.Btn_Plus_X.Size = new System.Drawing.Size(35, 23);
             this.Btn_Plus_X.TabIndex = 22;
-            this.Btn_Plus_X.Text = "+";
+            this.Btn_Plus_X.Text = "E";
             this.Btn_Plus_X.UseVisualStyleBackColor = true;
             this.Btn_Plus_X.Click += new System.EventHandler(this.Btn_Plus_X_Click);
             // 
             // Btn_Minus_X
             // 
-            this.Btn_Minus_X.Location = new System.Drawing.Point(97, 15);
+            this.Btn_Minus_X.Font = new System.Drawing.Font("Meiryo", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Minus_X.Location = new System.Drawing.Point(8, 48);
             this.Btn_Minus_X.Name = "Btn_Minus_X";
-            this.Btn_Minus_X.Size = new System.Drawing.Size(24, 23);
+            this.Btn_Minus_X.Size = new System.Drawing.Size(35, 23);
             this.Btn_Minus_X.TabIndex = 23;
-            this.Btn_Minus_X.Text = "-";
+            this.Btn_Minus_X.Text = "W";
             this.Btn_Minus_X.UseVisualStyleBackColor = true;
             this.Btn_Minus_X.Click += new System.EventHandler(this.Btn_Minus_X_Click);
             // 
             // Btn_Minus_Y
             // 
-            this.Btn_Minus_Y.Location = new System.Drawing.Point(97, 43);
+            this.Btn_Minus_Y.Font = new System.Drawing.Font("Meiryo", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Minus_Y.Location = new System.Drawing.Point(51, 77);
             this.Btn_Minus_Y.Name = "Btn_Minus_Y";
-            this.Btn_Minus_Y.Size = new System.Drawing.Size(24, 23);
+            this.Btn_Minus_Y.Size = new System.Drawing.Size(35, 23);
             this.Btn_Minus_Y.TabIndex = 27;
-            this.Btn_Minus_Y.Text = "-";
+            this.Btn_Minus_Y.Text = "S";
             this.Btn_Minus_Y.UseVisualStyleBackColor = true;
             this.Btn_Minus_Y.Click += new System.EventHandler(this.Btn_Minus_Y_Click);
             // 
             // Btn_Plus_Y
             // 
-            this.Btn_Plus_Y.Location = new System.Drawing.Point(67, 43);
+            this.Btn_Plus_Y.Font = new System.Drawing.Font("Meiryo", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Plus_Y.Location = new System.Drawing.Point(51, 19);
             this.Btn_Plus_Y.Name = "Btn_Plus_Y";
-            this.Btn_Plus_Y.Size = new System.Drawing.Size(24, 23);
+            this.Btn_Plus_Y.Size = new System.Drawing.Size(35, 23);
             this.Btn_Plus_Y.TabIndex = 26;
-            this.Btn_Plus_Y.Text = "+";
+            this.Btn_Plus_Y.Text = "N";
             this.Btn_Plus_Y.UseVisualStyleBackColor = true;
             this.Btn_Plus_Y.Click += new System.EventHandler(this.Btn_Plus_Y_Click);
             // 
-            // Lbl_Y
-            // 
-            this.Lbl_Y.AutoSize = true;
-            this.Lbl_Y.Location = new System.Drawing.Point(21, 48);
-            this.Lbl_Y.Name = "Lbl_Y";
-            this.Lbl_Y.Size = new System.Drawing.Size(25, 13);
-            this.Lbl_Y.TabIndex = 25;
-            this.Lbl_Y.Text = "123";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 48);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(17, 13);
-            this.label6.TabIndex = 24;
-            this.label6.Text = "Y:";
-            // 
             // Btn_Minus_Z
             // 
-            this.Btn_Minus_Z.Location = new System.Drawing.Point(97, 71);
+            this.Btn_Minus_Z.Font = new System.Drawing.Font("Meiryo", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Minus_Z.Location = new System.Drawing.Point(51, 48);
+            this.Btn_Minus_Z.Margin = new System.Windows.Forms.Padding(1);
             this.Btn_Minus_Z.Name = "Btn_Minus_Z";
-            this.Btn_Minus_Z.Size = new System.Drawing.Size(24, 23);
+            this.Btn_Minus_Z.Size = new System.Drawing.Size(35, 11);
             this.Btn_Minus_Z.TabIndex = 31;
-            this.Btn_Minus_Z.Text = "-";
+            this.Btn_Minus_Z.Text = "+";
             this.Btn_Minus_Z.UseVisualStyleBackColor = true;
             this.Btn_Minus_Z.Click += new System.EventHandler(this.Btn_Minus_Z_Click);
             // 
             // Btn_Plus_Z
             // 
-            this.Btn_Plus_Z.Location = new System.Drawing.Point(67, 71);
+            this.Btn_Plus_Z.Font = new System.Drawing.Font("Meiryo", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Plus_Z.Location = new System.Drawing.Point(51, 60);
             this.Btn_Plus_Z.Name = "Btn_Plus_Z";
-            this.Btn_Plus_Z.Size = new System.Drawing.Size(24, 23);
+            this.Btn_Plus_Z.Size = new System.Drawing.Size(35, 11);
             this.Btn_Plus_Z.TabIndex = 30;
-            this.Btn_Plus_Z.Text = "+";
+            this.Btn_Plus_Z.Text = "-";
             this.Btn_Plus_Z.UseVisualStyleBackColor = true;
             this.Btn_Plus_Z.Click += new System.EventHandler(this.Btn_Plus_Z_Click);
             // 
-            // Lbl_Z
-            // 
-            this.Lbl_Z.AutoSize = true;
-            this.Lbl_Z.Location = new System.Drawing.Point(21, 76);
-            this.Lbl_Z.Name = "Lbl_Z";
-            this.Lbl_Z.Size = new System.Drawing.Size(25, 13);
-            this.Lbl_Z.TabIndex = 29;
-            this.Lbl_Z.Text = "123";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 76);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(17, 13);
-            this.label8.TabIndex = 28;
-            this.label8.Text = "Z:";
-            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.Lbl_X);
+            this.groupBox1.Controls.Add(this.Btn_SE);
+            this.groupBox1.Controls.Add(this.Btn_NE);
+            this.groupBox1.Controls.Add(this.Btn_SW);
+            this.groupBox1.Controls.Add(this.Btn_NW);
             this.groupBox1.Controls.Add(this.Btn_Minus_Z);
-            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.Btn_Plus_Z);
             this.groupBox1.Controls.Add(this.Btn_Plus_X);
-            this.groupBox1.Controls.Add(this.Lbl_Z);
             this.groupBox1.Controls.Add(this.Btn_Minus_X);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.Btn_Minus_Y);
-            this.groupBox1.Controls.Add(this.Lbl_Y);
             this.groupBox1.Controls.Add(this.Btn_Plus_Y);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
@@ -291,6 +239,50 @@ namespace NailClipr
             this.groupBox1.TabIndex = 32;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Position";
+            // 
+            // Btn_SE
+            // 
+            this.Btn_SE.Font = new System.Drawing.Font("Meiryo", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_SE.Location = new System.Drawing.Point(94, 77);
+            this.Btn_SE.Name = "Btn_SE";
+            this.Btn_SE.Size = new System.Drawing.Size(35, 23);
+            this.Btn_SE.TabIndex = 35;
+            this.Btn_SE.Text = "SE";
+            this.Btn_SE.UseVisualStyleBackColor = true;
+            this.Btn_SE.Click += new System.EventHandler(this.Btn_SE_Click);
+            // 
+            // Btn_NE
+            // 
+            this.Btn_NE.Font = new System.Drawing.Font("Meiryo", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_NE.Location = new System.Drawing.Point(94, 19);
+            this.Btn_NE.Name = "Btn_NE";
+            this.Btn_NE.Size = new System.Drawing.Size(35, 23);
+            this.Btn_NE.TabIndex = 34;
+            this.Btn_NE.Text = "NE";
+            this.Btn_NE.UseVisualStyleBackColor = true;
+            this.Btn_NE.Click += new System.EventHandler(this.Btn_NE_Click);
+            // 
+            // Btn_SW
+            // 
+            this.Btn_SW.Font = new System.Drawing.Font("Meiryo", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_SW.Location = new System.Drawing.Point(8, 77);
+            this.Btn_SW.Name = "Btn_SW";
+            this.Btn_SW.Size = new System.Drawing.Size(35, 23);
+            this.Btn_SW.TabIndex = 33;
+            this.Btn_SW.Text = "SW";
+            this.Btn_SW.UseVisualStyleBackColor = true;
+            this.Btn_SW.Click += new System.EventHandler(this.Btn_SW_Click);
+            // 
+            // Btn_NW
+            // 
+            this.Btn_NW.Font = new System.Drawing.Font("Meiryo", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_NW.Location = new System.Drawing.Point(8, 19);
+            this.Btn_NW.Name = "Btn_NW";
+            this.Btn_NW.Size = new System.Drawing.Size(35, 23);
+            this.Btn_NW.TabIndex = 32;
+            this.Btn_NW.Text = "NW";
+            this.Btn_NW.UseVisualStyleBackColor = true;
+            this.Btn_NW.Click += new System.EventHandler(this.Btn_NW_Click);
             // 
             // CB_Warp
             // 
@@ -482,7 +474,6 @@ namespace NailClipr
             this.Text = "NailClipr";
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed_Default)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -500,18 +491,12 @@ namespace NailClipr
         private Label label2;
         private Label label3;
         private Label Lbl_Zone;
-        private Label label1;
-        private Label Lbl_X;
         private Button Btn_Plus_X;
         private Button Btn_Minus_X;
         private Button Btn_Minus_Y;
         private Button Btn_Plus_Y;
-        private Label Lbl_Y;
-        private Label label6;
         private Button Btn_Minus_Z;
         private Button Btn_Plus_Z;
-        private Label Lbl_Z;
-        private Label label8;
         private GroupBox groupBox1;
         private ComboBox CB_Warp;
         private Button Btn_Save;
@@ -529,6 +514,10 @@ namespace NailClipr
         private Button Btn_Accept;
         private Button Btn_Req;
         private Label Lbl_Ver;
+        private Button Btn_SE;
+        private Button Btn_NE;
+        private Button Btn_SW;
+        private Button Btn_NW;
     }
 }
 

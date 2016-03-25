@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Collections.Generic;
 using System.Threading;
+using System.Net;
 
 namespace NailClipr
 {
@@ -15,7 +16,7 @@ namespace NailClipr
         private static EliteAPI api;
         private BackgroundWorker bw = new BackgroundWorker();
         private BackgroundWorker cw = new BackgroundWorker();
-
+        private bool hasAuth;
         public static Player Player = new Player();
 
         public static ComboBox GUI_WARP;
@@ -23,9 +24,7 @@ namespace NailClipr
         public static CheckBox GUI_TOPMOST;
         public static CheckBox GUI_PLAYER_DETECT;
         public static Button GUI_ACCEPT;
-        public static Label GUI_X;
-        public static Label GUI_Y;
-        public static Label GUI_Z;
+
         public static Label GUI_TARGET;
         public static Label GUI_NEAREST_PLAYER;
         public static Label GUI_STATUS;
@@ -69,9 +68,7 @@ namespace NailClipr
             GUI_TOPMOST = ChkBox_StayTop;
             GUI_PLAYER_DETECT = ChkBox_PlayerDetect;
             GUI_ACCEPT = Btn_Accept;
-            GUI_X = Lbl_X;
-            GUI_Y = Lbl_Y;
-            GUI_Z = Lbl_Z;
+
             GUI_TARGET = Lbl_TargetInfo;
             GUI_NEAREST_PLAYER = Lbl_NearestPlayer;
             GUI_STATUS = Lbl_Status;
@@ -93,8 +90,13 @@ namespace NailClipr
             {
                 var proc = Process.GetProcessesByName("pol").First().Id;
                 api = new EliteAPI(proc);
-
-                this.Text = Structs.App.name + " - " + api.Entity.GetLocalPlayer().Name;
+                string p = api.Entity.GetLocalPlayer().Name;
+                WebClient client = new WebClient();
+                Stream stream = client.OpenRead("https://github.com/mattlemmone/NailClipr/raw/master/auth.txt");
+                StreamReader reader = new StreamReader(stream);
+                String content = reader.ReadToEnd();
+                Console.WriteLine(content);
+                this.Text = Structs.App.name + " - " + p;
             }
             else
             {
@@ -282,6 +284,56 @@ namespace NailClipr
                 // Console app
                 System.Environment.Exit(1);
             }
+        }
+
+        private void Btn_NW_Click(object sender, EventArgs e)
+        {
+            float PtX = api.Player.X;
+            float PtX1 = PtX - Structs.Settings.POS_INC;
+            float PtY = api.Player.Z;
+            float PtY1 = PtY + Structs.Settings.POS_INC;
+            float[] pts = MidPoint(PtX, PtX1, PtY, PtY1);
+            api.Player.X = pts[0];
+            api.Player.Y = pts[1];
+        }
+
+        private float[] MidPoint(float A, float A1, float B, float B1)
+        {
+            float[] ret = { (A + A1) / 2, (B + B1) / 2 };
+            return ret;
+        }
+
+        private void Btn_SW_Click(object sender, EventArgs e)
+        {
+            float PtX = api.Player.X;
+            float PtX1 = PtX - Structs.Settings.POS_INC;
+            float PtY = api.Player.Z;
+            float PtY1 = PtY - Structs.Settings.POS_INC;
+            float[] pts = MidPoint(PtX, PtX1, PtY, PtY1);
+            api.Player.X = pts[0];
+            api.Player.Y = pts[1];
+        }
+
+        private void Btn_NE_Click(object sender, EventArgs e)
+        {
+            float PtX = api.Player.X;
+            float PtX1 = PtX + Structs.Settings.POS_INC;
+            float PtY = api.Player.Z;
+            float PtY1 = PtY + Structs.Settings.POS_INC;
+            float[] pts = MidPoint(PtX, PtX1, PtY, PtY1);
+            api.Player.X = pts[0];
+            api.Player.Y = pts[1];
+        }
+
+        private void Btn_SE_Click(object sender, EventArgs e)
+        {
+            float PtX = api.Player.X;
+            float PtX1 = PtX + Structs.Settings.POS_INC;
+            float PtY = api.Player.Z;
+            float PtY1 = PtY - Structs.Settings.POS_INC;
+            float[] pts = MidPoint(PtX, PtX1, PtY, PtY1);
+            api.Player.X = pts[0];
+            api.Player.Y = pts[1];
         }
     }
 }

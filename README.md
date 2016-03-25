@@ -1,10 +1,10 @@
 # NailClipr
 Tool written in C# for FFXI.
 
-![](http://puu.sh/nRNpP/5a25a77464.png)
+![](http://puu.sh/nU0wl/c999bffa7b.png)
 
 #### Position
-`+ | -` 
+`NW, N, NE, ...` 
 
 Nudge player forward/backward on X/Y/Z axis.
 

@@ -5,9 +5,9 @@ using System.Windows.Forms;
 using EliteMMO.API;
 using System.ComponentModel;
 using System.IO;
-using System.Collections.Generic;
 using System.Threading;
 using System.Net;
+using System.Text.RegularExpressions;
 
 namespace NailClipr
 {
@@ -16,7 +16,7 @@ namespace NailClipr
         private static EliteAPI api;
         private BackgroundWorker bw = new BackgroundWorker();
         private BackgroundWorker cw = new BackgroundWorker();
-        private bool hasAuth;
+
         public static Player Player = new Player();
 
         public static ComboBox GUI_WARP;
@@ -39,7 +39,7 @@ namespace NailClipr
             InitializeComponent();
             AssignControls();
             PostInit();
-            selectProcess();
+            SelectProcess();
 
             // Start the background worker..
             bw.DoWork += new DoWorkEventHandler(bw_DoWork);
@@ -81,7 +81,7 @@ namespace NailClipr
             Lbl_Ver.Text = "v." + Structs.App.ver;
         }
 
-        public void selectProcess()
+        public void SelectProcess()
         {
             #region Final Fantasy XI [POL]
             var data = Process.GetProcessesByName("pol");
@@ -110,6 +110,22 @@ namespace NailClipr
                 ExitApp();
             }
             #endregion
+        }
+
+        private void CheckUpdate()
+        {
+            Process.Start(Application.StartupPath + @"\Updater.exe");
+            ExitApp();
+        }
+
+        private string GetStringFromUrl(string location)
+        {
+            WebRequest request = WebRequest.Create(location);
+            WebResponse response = request.GetResponse();
+            Stream dataStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(dataStream);
+            string responseFromServer = reader.ReadToEnd();
+            return responseFromServer;
         }
 
         private void bw_DoWork(object sender, DoWorkEventArgs e)

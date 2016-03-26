@@ -1,6 +1,7 @@
 ﻿using EliteMMO.API;
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Timers;
@@ -179,57 +180,19 @@ namespace NailClipr
             if (partyType == chatType)
             {
                 string text = c.Text;
-                string senderEx = @"\(([A-Za-z]+)\)";
-                string coordEx = @"(\-*\d*\.*\d+)+";
 
-                MatchCollection senderMatch = Regex.Matches(text, senderEx);
-                MatchCollection coordMatch = Regex.Matches(text, coordEx);
+                MatchCollection senderMatch = Regex.Matches(text, Structs.Chat.Warp.senderRegEx);
+                MatchCollection coordMatch = Regex.Matches(text, Structs.Chat.Warp.coordRegEx);
 
-                if (coordMatch.Count == 4)
+                if (coordMatch.Count == Structs.Chat.Warp.expectedNumCoords)
                 {
-                    string sender = senderMatch[0] + "";
-                    Structs.Position p = new Structs.Position();
-
-                    p.X = float.Parse(coordMatch[0] + "");
-                    p.Y = float.Parse(coordMatch[1] + "");
-                    p.Z = float.Parse(coordMatch[2] + "");
-                    p.Zone = int.Parse(coordMatch[3] + "");
-
-                    int endZoneID = p.Zone;
-                    string endZone = Structs.Zones.NameFromID(endZoneID);
-
-                    int startZoneID = api.Player.ZoneId;
-                    string startZone = Structs.Zones.NameFromID(startZoneID);
-
-                    if (endZoneID == startZoneID)
-                    {
-                        string s = "You have been requested by " + sender + " in " + endZone + ". You have until you zone to accept.";
-                        api.ThirdParty.SendString("/echo " + s);
-
-                        Player.reqPos = p;
-                        Player.hasDialogue = true;
-
-                        /* await Task.Delay(acceptSec * 1000);
-                         Player.hasDialogue = false;
-
-                         if (!Player.warpAccepted)
-                         {
-                             api.ThirdParty.SendString("/echo Request declined.");
-                         }*/
-                    }
-                    else
-                    {
-                        //endZoneID != startZoneID
-                        api.ThirdParty.SendString("/echo Cannot warp to " + endZone + " from " + startZone + ".");
-                    }
+                    Player.PartyWarp(api, senderMatch, coordMatch);
                 }
                 else
                 {
                     //!(senderMatch.Count == 1 && coordMatch.Count == 4)
                     foreach (var k in coordMatch)
                         Console.WriteLine(k);
-                    if (coordMatch.Count > 0)
-                        api.ThirdParty.SendString("/echo " + Structs.Error.Warp.parse);
                 }
             }
         }

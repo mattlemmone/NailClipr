@@ -163,24 +163,24 @@ namespace NailClipr
                 else { wp.title = warpText; }
                 wp.zone = api.Player.ZoneId;
                 wp.pos = pos;
-
+                string zoneName = Structs.Zones.NameFromID(wp.zone);
 
                 //Updating - delete old and save new.
                 int index = Structs.zonePoints.FindIndex(p => p.title == wp.title);
                 if (index >= 0)
                 {
-                    api.ThirdParty.SendString("/echo Updating warp point: " + NailClipr.GUI_WARP.Text + ".");
+                    api.ThirdParty.SendString("/echo Updating warp point: " + zoneName + " - " + NailClipr.GUI_WARP.Text + ".");
                     DeleteWarp(api, true);
                 }
                 else
                 {
-                    api.ThirdParty.SendString("/echo Saving new warp point: " + NailClipr.GUI_WARP.Text + ".");
+                    api.ThirdParty.SendString("/echo Saving new warp point: " + zoneName + " - " + NailClipr.GUI_WARP.Text + ".");
                 }
 
                 Structs.warpPoints.Add(wp);
                 Functions.AddZonePoint(wp);
 
-                string zoneName = Structs.Zones.NameFromID(wp.zone);
+                
 
                 try
                 {
@@ -214,9 +214,11 @@ namespace NailClipr
         public static void DeleteWarp(EliteAPI api, bool updating = false)
         {
             if (NailClipr.GUI_WARP.Text == "") return;
+            int zone = api.Player.ZoneId;
+            string zoneName = Structs.Zones.NameFromID(zone);
 
             if (!updating)
-                api.ThirdParty.SendString("/echo Deleting warp point: " + NailClipr.GUI_WARP.Text + ".");
+                api.ThirdParty.SendString("/echo Deleting warp point: " + zoneName + " - " + NailClipr.GUI_WARP.Text + ".");
 
             Structs.WarpPoint delWP = Structs.zonePoints.Find(wp => wp.title == NailClipr.GUI_WARP.Text);
 
@@ -227,7 +229,7 @@ namespace NailClipr
             }
 
             XElement delNode = xdoc.Descendants("WarpPoint")
-               .Where(a => a.Parent.Attribute("id").Value == api.Player.ZoneId + "" && a.Attribute("title").Value == NailClipr.GUI_WARP.Text)
+               .Where(a => a.Parent.Attribute("id").Value == zone + "" && a.Attribute("title").Value == NailClipr.GUI_WARP.Text)
                .FirstOrDefault();
 
             delNode.Remove();

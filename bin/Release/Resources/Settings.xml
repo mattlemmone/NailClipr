@@ -238,6 +238,30 @@
         <Z>-0.0231230259</Z>
       </WarpPoint>
     </Zone>
+    <Zone id="77" title="Nyzul Isle">
+      <WarpPoint title="1">
+        <X>12.3570795</X>
+        <Y>-261.537231</Y>
+        <Z>0.0498999953</Z>
+      </WarpPoint>
+      <WarpPoint title="trans">
+        <X>-463.008331</X>
+        <Y>-340.6182</Y>
+        <Z>-7.724762E-05</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="50" title="Aht Urhgan Whitegate">
+      <WarpPoint title="Assault Tag">
+        <X>111.902435</X>
+        <Y>-42.1200256</Y>
+        <Z>-0.340000033</Z>
+      </WarpPoint>
+      <WarpPoint title="??? Appraiser">
+        <X>-85.99673</X>
+        <Y>86.1685257</Y>
+        <Z>0</Z>
+      </WarpPoint>
+    </Zone>
   </Zones>
   <Settings>
     <PlayerDetection>True</PlayerDetection>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace NailClipr
@@ -76,7 +77,8 @@ namespace NailClipr
                 nextWP = Structs.warpPoints.Find(wp => wp.title == NailClipr.GUI_WARP.Text && wp.zone == api.Player.ZoneId);
                 if (nextWP.zone == 0)
                     return;
-            } else {
+            }
+            else {
                 warpAccepted = true;
                 nextWP.pos.X = reqPos.X;
                 nextWP.pos.Y = reqPos.Y;
@@ -98,6 +100,36 @@ namespace NailClipr
             {
                 warpAccepted = false;
                 api.ThirdParty.SendString("/echo " + Structs.Chat.Warp.arrived);
+            }
+        }
+        public static void PartyWarp(EliteAPI api, MatchCollection senderMatch, MatchCollection coordMatch)
+        {
+            string sender = senderMatch[0] + "";
+            Structs.Position p = new Structs.Position();
+
+            p.X = float.Parse(coordMatch[0] + "");
+            p.Y = float.Parse(coordMatch[1] + "");
+            p.Z = float.Parse(coordMatch[2] + "");
+            p.Zone = int.Parse(coordMatch[3] + "");
+
+            int endZoneID = p.Zone;
+            string endZone = Structs.Zones.NameFromID(endZoneID);
+
+            int startZoneID = api.Player.ZoneId;
+            string startZone = Structs.Zones.NameFromID(startZoneID);
+
+            if (endZoneID == startZoneID)
+            {
+                string s = "You have been requested by " + sender + " in " + endZone + ". You have until you zone to accept.";
+                api.ThirdParty.SendString("/echo " + s);
+
+                Player.reqPos = p;
+                Player.hasDialogue = true;
+            }
+            else
+            {
+                //endZoneID != startZoneID
+                api.ThirdParty.SendString("/echo Cannot warp to " + endZone + " from " + startZone + ".");
             }
         }
     }

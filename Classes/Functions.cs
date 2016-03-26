@@ -180,7 +180,7 @@ namespace NailClipr
             {
                 string text = c.Text;
                 string senderEx = @"\(([A-Za-z]+)\)";
-                string coordEx = @"(\-?[0-9]+.[0-9]+)";
+                string coordEx = @"(\-*\d*\.*\d+)+";
 
                 MatchCollection senderMatch = Regex.Matches(text, senderEx);
                 MatchCollection coordMatch = Regex.Matches(text, coordEx);
@@ -226,6 +226,8 @@ namespace NailClipr
                 else
                 {
                     //!(senderMatch.Count == 1 && coordMatch.Count == 4)
+                    foreach (var k in coordMatch)
+                        Console.WriteLine(k);
                     if (coordMatch.Count > 0)
                         api.ThirdParty.SendString("/echo " + Structs.Error.Warp.parse);
                 }

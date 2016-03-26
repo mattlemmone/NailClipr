@@ -36,6 +36,7 @@ namespace NailClipr
 
         public NailClipr()
         {
+            CheckUpdate();
             InitializeComponent();
             AssignControls();
             PostInit();
@@ -101,6 +102,7 @@ namespace NailClipr
                     MessageBox.Show(Structs.Error.Auth.text, Structs.Error.Auth.title, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     ExitApp();
                 }
+                Structs.Speed.whitelist = content.Split(',').ToList();
                 this.Text = Structs.App.name + " - " + p;
 
             }
@@ -114,8 +116,25 @@ namespace NailClipr
 
         private void CheckUpdate()
         {
-            Process.Start(Application.StartupPath + @"\Updater.exe");
-            ExitApp();
+            string apidll = "";
+            string mmodll = "";
+            string appexe = "";
+            if (File.Exists(Application.StartupPath + @"\EliteAPI.dll"))
+                apidll = FileVersionInfo.GetVersionInfo(Application.StartupPath + @"\EliteAPI.dll").FileVersion;
+            if (File.Exists(Application.StartupPath + @"\EliteMMO.API.dll"))
+                mmodll = FileVersionInfo.GetVersionInfo(Application.StartupPath + @"\EliteMMO.API.dll").FileVersion;
+            appexe = Structs.App.ver;
+
+            string api, mmo, exe;
+            api = GetStringFromUrl("http://ext.elitemmonetwork.com/downloads/eliteapi/index.php?v");
+            mmo = GetStringFromUrl("http://ext.elitemmonetwork.com/downloads/elitemmo_api/index.php?v");
+            exe = Regex.Replace(GetStringFromUrl("https://raw.githubusercontent.com/mattlemmone/NailClipr/master/ver.txt"), @"\t|\n|\r", "");
+
+            if (apidll == "" || api != apidll || appexe == "" || exe != appexe || mmodll == "" || mmo != mmodll)
+            {
+                Process.Start(Application.StartupPath + @"\Updater.exe");
+                ExitApp();
+            }
         }
 
         private string GetStringFromUrl(string location)
@@ -127,7 +146,6 @@ namespace NailClipr
             string responseFromServer = reader.ReadToEnd();
             return responseFromServer;
         }
-
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;

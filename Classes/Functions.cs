@@ -63,7 +63,12 @@ namespace NailClipr
                 // 0x0010 - Mob
                 // 0x000D - Self (Current Player)
 
+                //Self
                 if (entity.Name == api.Player.Name)
+                    continue;
+
+                //Is in whitelist
+                if (Structs.Speed.whitelist.IndexOf(entity.Name) != -1)
                     continue;
 
                 count++;

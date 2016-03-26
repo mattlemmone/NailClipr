@@ -1,10 +1,10 @@
 # NailClipr
 Tool written in C# for FFXI.
 
-![](http://puu.sh/nRNpP/5a25a77464.png)
+![](http://puu.sh/nU0wl/c999bffa7b.png)
 
 #### Position
-`+ | -` 
+`NW, N, NE, ...` 
 
 Nudge player forward/backward on X/Y/Z axis.
 
@@ -52,7 +52,9 @@ Enabled upon request receipt. Disabled upon zone. This prevents players from tel
 
 
 #### To Do
-1. Echo saves/deletes into chat.
+1. ~~Echo saves/deletes into chat.~~
 2. Control bot via windower commands (functionality yet not supported).
 3. Integrate a whitelist for Player Detection feature.
 4. Consolidate strings into Structs.
+5. ~~Cardinal direction nudges.~~
+6. Auto update.

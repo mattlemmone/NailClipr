@@ -191,8 +191,9 @@ namespace NailClipr
                 else
                 {
                     //!(senderMatch.Count == 1 && coordMatch.Count == 4)
+                    /*api.ThirdParty.SendString("/echo " + text);
                     foreach (var k in coordMatch)
-                        Console.WriteLine(k);
+                        api.ThirdParty.SendString("/echo " + k);*/
                 }
             }
         }

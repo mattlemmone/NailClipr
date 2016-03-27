@@ -206,6 +206,16 @@
         <Y>59.066</Y>
         <Z>8.35710049</Z>
       </WarpPoint>
+      <WarpPoint title="Temple of Uggalepih">
+        <X>300.324</X>
+        <Y>-607.901</Y>
+        <Z>-4</Z>
+      </WarpPoint>
+      <WarpPoint title="OP">
+        <X>198.784927</X>
+        <Y>-80.01703</Y>
+        <Z>0</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="110" title="Rolanberry Fields">
       <WarpPoint title="Crawlers Nest">

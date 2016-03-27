@@ -105,6 +105,7 @@ namespace NailClipr
         public static void PartyWarp(EliteAPI api, MatchCollection senderMatch, MatchCollection coordMatch)
         {
             string sender = senderMatch[0] + "";
+
             Structs.Position p = new Structs.Position();
 
             p.X = float.Parse(coordMatch[0] + "");

@@ -15,7 +15,7 @@ namespace NailClipr
         public struct App
         {
             public static string name = "NailClipr";
-            private static int[] v = { 1, 0, 10 };
+            private static int[] v = { 1, 0, 11 };
             public static string ver = string.Join(".", v);
         }
         public struct Chat
@@ -26,7 +26,7 @@ namespace NailClipr
                 public static string acceptSelfNotify = "Accepted.";
                 public static string arrived = "Arrived.";
                 public const string senderRegEx = @"\(([A-Za-z]+)\)";
-                public const string coordRegEx = @"(\-*\d*\.*\d+)+";
+                public const string coordRegEx = @"[^\[\d:d\]](\-*\d*\.*\d+)+";
                 public const int expectedNumCoords = 4;
             }
         }

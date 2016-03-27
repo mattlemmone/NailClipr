@@ -247,6 +247,11 @@
         <Y>23.7363243</Y>
         <Z>-0.0231230259</Z>
       </WarpPoint>
+      <WarpPoint title="Leeches (Sneak)">
+        <X>-21.25566</X>
+        <Y>-218.6055</Y>
+        <Z>17.0730362</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="77" title="Nyzul Isle">
       <WarpPoint title="1">

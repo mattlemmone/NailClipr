@@ -13,9 +13,14 @@
         <Z>0</Z>
       </WarpPoint>
       <WarpPoint title="Chateau">
-        <X>1.33493876</X>
-        <Y>110.554611</Y>
-        <Z>-2</Z>
+        <X>9.390009</X>
+        <Y>96.59663</Y>
+        <Z>-0.199</Z>
+      </WarpPoint>
+      <WarpPoint title="Mog House">
+        <X>128.892914</X>
+        <Y>-4.82691574</Y>
+        <Z>-0.199</Z>
       </WarpPoint>
     </Zone>
     <Zone id="197" title="Crawlers' Nest">
@@ -136,6 +141,11 @@
         <X>12.2113562</X>
         <Y>6.24645424</Y>
         <Z>3.94284725E-05</Z>
+      </WarpPoint>
+      <WarpPoint title="Rolanberry">
+        <X>-99.588</X>
+        <Y>-183.416</Y>
+        <Z>-4.285574E-05</Z>
       </WarpPoint>
     </Zone>
     <Zone id="108" title="Konschtat Highlands">
@@ -316,6 +326,54 @@
         <X>-8.208524</X>
         <Y>-138.680939</Y>
         <Z>9.426249</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="115" title="West Sarutabaruta">
+      <WarpPoint title="Outpost">
+        <X>-14.322</X>
+        <Y>315.696</Y>
+        <Z>-12.791832</Z>
+      </WarpPoint>
+      <WarpPoint title="Outer Hor. Ruins">
+        <X>-263.520142</X>
+        <Y>659.8749</Y>
+        <Z>-16.4499989</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="194" title="Outer Horutoto Ruins">
+      <WarpPoint title="Tome">
+        <X>-343.889832</X>
+        <Y>853.4266</Y>
+        <Z>-8</Z>
+      </WarpPoint>
+      <WarpPoint title="Page 8 Mobs">
+        <X>-230.3067</X>
+        <Y>733.919067</Y>
+        <Z>-0.264488637</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="114" title="Eastern Altepa Desert">
+      <WarpPoint title="Telepoint">
+        <X>-61.942</X>
+        <Y>224.9</Y>
+        <Z>3.94922</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="125" title="Western Altepa Desert">
+      <WarpPoint title="Eastern Altepa SW">
+        <X>-118.837</X>
+        <Y>-500.499</Y>
+        <Z>-0.04500234</Z>
+      </WarpPoint>
+      <WarpPoint title="Eastern Altepa NE">
+        <X>419.162842</X>
+        <Y>13.7080107</Y>
+        <Z>-3.21243119</Z>
+      </WarpPoint>
+      <WarpPoint title="Rabao">
+        <X>445.911865</X>
+        <Y>349.660767</Y>
+        <Z>-1.43680155</Z>
       </WarpPoint>
     </Zone>
   </Zones>

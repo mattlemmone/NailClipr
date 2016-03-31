@@ -108,6 +108,11 @@
         <Y>56.83638</Y>
         <Z>4</Z>
       </WarpPoint>
+      <WarpPoint title="Home Point #2">
+        <X>45.17834</X>
+        <Y>-34.729248</Y>
+        <Z>2</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="100" title="West Ronfaure">
       <WarpPoint title="North Sandy">
@@ -186,6 +191,11 @@
         <X>-170.302826</X>
         <Y>-14.7679062</Y>
         <Z>-8.025051</Z>
+      </WarpPoint>
+      <WarpPoint title="South Gustaberg">
+        <X>-17.289</X>
+        <Y>-132.805</Y>
+        <Z>-1.50083017</Z>
       </WarpPoint>
     </Zone>
     <Zone id="123" title="Yuhtunga Jungle">
@@ -275,6 +285,37 @@
         <X>-85.99673</X>
         <Y>86.1685257</Y>
         <Z>0</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="249" title="Mhaura">
+      <WarpPoint title="Home Point #1">
+        <X>-11.9579144</X>
+        <Y>85.67905</Y>
+        <Z>-15.7869263</Z>
+      </WarpPoint>
+      <WarpPoint title="Scrolls">
+        <X>-50.6611633</X>
+        <Y>31.13167</Y>
+        <Z>-4.089674</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="191" title="Dangruf Wadi">
+      <WarpPoint title="Tomes">
+        <X>-18.3470383</X>
+        <Y>2.88250113</Y>
+        <Z>-0.0978062153</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="172" title="Zeruhn Mines">
+      <WarpPoint title="Tomes">
+        <X>-15.6881437</X>
+        <Y>4.985016</Y>
+        <Z>0</Z>
+      </WarpPoint>
+      <WarpPoint title="Page 4 Mobs">
+        <X>-8.208524</X>
+        <Y>-138.680939</Y>
+        <Z>9.426249</Z>
       </WarpPoint>
     </Zone>
   </Zones>

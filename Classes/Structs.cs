@@ -15,7 +15,7 @@ namespace NailClipr
         public struct App
         {
             public static string name = "NailClipr";
-            private static int[] v = { 1, 0, 11 };
+            private static int[] v = { 1, 1, 0 };
             public static string ver = string.Join(".", v);
         }
         public struct Chat
@@ -45,6 +45,13 @@ namespace NailClipr
             public struct Warp
             {
                 public static string parse = "Error parsing request.";
+            }
+        }
+        public struct FFXI
+        {
+            public class Name{
+                public const int MAXLENGTH = 15;
+                public const int MINLENGTH = 3;
             }
         }
         public struct PC

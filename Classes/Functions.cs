@@ -72,6 +72,10 @@ namespace NailClipr
                 if (Structs.Speed.whitelist.IndexOf(entity.Name) != -1)
                     continue;
 
+                //Has a valid name
+                if (entity.Name.Length <= Structs.FFXI.Name.MINLENGTH || entity.Name.Length >= Structs.FFXI.Name.MAXLENGTH)
+                    continue;
+
                 count++;
                 Player.isAlone = false;
                 if (nearestPC.distance == 0 || entity.Distance < nearestPC.distance || entity.Name == nearestPC.name)

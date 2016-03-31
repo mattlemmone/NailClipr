@@ -432,7 +432,7 @@ namespace NailClipr
             // Lbl_Ver
             // 
             this.Lbl_Ver.AutoSize = true;
-            this.Lbl_Ver.Location = new System.Drawing.Point(235, 343);
+            this.Lbl_Ver.Location = new System.Drawing.Point(218, 343);
             this.Lbl_Ver.Name = "Lbl_Ver";
             this.Lbl_Ver.Size = new System.Drawing.Size(37, 13);
             this.Lbl_Ver.TabIndex = 56;

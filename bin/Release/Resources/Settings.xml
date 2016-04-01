@@ -75,6 +75,21 @@
         <Y>-317.80542</Y>
         <Z>-15.4659023</Z>
       </WarpPoint>
+      <WarpPoint title="Hot Spring 1">
+        <X>-51.8444557</X>
+        <Y>151.527054</Y>
+        <Z>0.573160648</Z>
+      </WarpPoint>
+      <WarpPoint title="Hot Spring 2">
+        <X>-127.765121</X>
+        <Y>-27.89957</Y>
+        <Z>0.4033477</Z>
+      </WarpPoint>
+      <WarpPoint title="Hot Spring 3">
+        <X>7.754589</X>
+        <Y>-12.2337856</Y>
+        <Z>0.39651984</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="257" title="Eastern Adoulin">
       <WarpPoint title="Fame Checker">
@@ -311,6 +326,11 @@
         <Y>86.1685257</Y>
         <Z>0</Z>
       </WarpPoint>
+      <WarpPoint title="Al Zahbi">
+        <X>-146.742218</X>
+        <Y>0.152643576</Y>
+        <Z>1.8</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="249" title="Mhaura">
       <WarpPoint title="Home Point #1">
@@ -358,6 +378,11 @@
         <X>-263.520142</X>
         <Y>659.8749</Y>
         <Z>-16.4499989</Z>
+      </WarpPoint>
+      <WarpPoint title="Giddeus">
+        <X>-320.2865</X>
+        <Y>135.74411</Y>
+        <Z>-20.98568</Z>
       </WarpPoint>
     </Zone>
     <Zone id="194" title="Outer Horutoto Ruins">
@@ -418,6 +443,32 @@
         <X>-441.253448</X>
         <Y>-244.322052</Y>
         <Z>-2.026558E-06</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="145" title="Giddeus">
+      <WarpPoint title="Saruta">
+        <X>-100.05</X>
+        <Y>406.817</Y>
+        <Z>-0.337092161</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="48" title="Al Zahbi">
+      <WarpPoint title="Bhaflau Thickets">
+        <X>-61.17091</X>
+        <Y>104.746559</Y>
+        <Z>2</Z>
+      </WarpPoint>
+      <WarpPoint title="Whitegate">
+        <X>111.838211</X>
+        <Y>40.22342</Y>
+        <Z>-2.2</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="88" title="North Gustaberg [S]">
+      <WarpPoint title="Bastok Markets (S)">
+        <X>378.92926</X>
+        <Y>153.840408</Y>
+        <Z>1.437917</Z>
       </WarpPoint>
     </Zone>
   </Zones>

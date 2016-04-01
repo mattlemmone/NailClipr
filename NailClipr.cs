@@ -379,22 +379,6 @@ namespace NailClipr
             api.Player.Y = pts[1];
         }
 
-        private void StatusEasterEgg(object sender, EventArgs e)
-        {
-            if (api.Player.Status == 0)
-            {
-                api.Player.Status = 4;
-            }
-            else if (api.Player.Status == 4)
-            {
-                api.Player.Status = 0;
-            }
-            else
-            {
-                api.ThirdParty.SendString("/echo " + Structs.Error.Other.StatusEasterEgg);
-            }
-        }
-
     }
 }
 

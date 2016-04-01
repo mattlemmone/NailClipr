@@ -73,7 +73,7 @@ namespace NailClipr
                     continue;
 
                 //Has a valid name
-                if (entity.Name.Length <= Structs.FFXI.Name.MINLENGTH || entity.Name.Length >= Structs.FFXI.Name.MAXLENGTH || !Regex.IsMatch(entity.Name, @"^[a-zA-Z]+$"))
+                if (entity.Name.Length < Structs.FFXI.Name.MINLENGTH || entity.Name.Length > Structs.FFXI.Name.MAXLENGTH || !Regex.IsMatch(entity.Name, @"^[a-zA-Z]+$"))
                     continue;
 
                 //Filter out more garbage.

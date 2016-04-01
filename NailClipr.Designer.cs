@@ -126,7 +126,6 @@ namespace NailClipr
             this.label2.Size = new System.Drawing.Size(40, 13);
             this.label2.TabIndex = 9;
             this.label2.Text = "Status:";
-            this.label2.Click += new System.EventHandler(this.StatusEasterEgg);
             // 
             // Lbl_Status
             // 
@@ -136,7 +135,6 @@ namespace NailClipr
             this.Lbl_Status.Size = new System.Drawing.Size(13, 13);
             this.Lbl_Status.TabIndex = 10;
             this.Lbl_Status.Text = "0";
-            this.Lbl_Status.Click += new System.EventHandler(this.StatusEasterEgg);
             // 
             // label3
             // 

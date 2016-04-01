@@ -46,6 +46,16 @@
         <Y>18.7244549</Y>
         <Z>3.3315804</Z>
       </WarpPoint>
+      <WarpPoint title="Home Point #1">
+        <X>-85.86111</X>
+        <Y>-31.560688</Y>
+        <Z>4</Z>
+      </WarpPoint>
+      <WarpPoint title="Mog House">
+        <X>2.10374618</X>
+        <Y>-142.606674</Y>
+        <Z>-0.75</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="260" title="Yahse Hunting Grounds">
       <WarpPoint title="Frontier Station Waypoint">
@@ -391,6 +401,23 @@
         <X>260.163452</X>
         <Y>-435.953125</Y>
         <Z>9.946222</Z>
+      </WarpPoint>
+      <WarpPoint title="Survival Guide">
+        <X>-58.41237</X>
+        <Y>262.740845</Y>
+        <Z>-30.2329388</Z>
+      </WarpPoint>
+      <WarpPoint title="Home Point #1">
+        <X>-64.61816</X>
+        <Y>562.9177</Y>
+        <Z>-17.602726</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="261" title="Ceizak Battlegrounds">
+      <WarpPoint title="Frontier Bivouac #3">
+        <X>-441.253448</X>
+        <Y>-244.322052</Y>
+        <Z>-2.026558E-06</Z>
       </WarpPoint>
     </Zone>
   </Zones>

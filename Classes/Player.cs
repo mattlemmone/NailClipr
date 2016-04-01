@@ -54,12 +54,14 @@ namespace NailClipr
         {
             if (!on)
             {
+                if (isWarping && NailClipr.GUI_MAINT.Checked)
+                    api.Player.Status = Structs.Status.MAINT;
                 api.Player.Status = Status.old;
                 return;
             }
 
             //Save status before switching.
-            if (api.Player.Status == Structs.Status.MAINT && !NailClipr.GUI_MAINT.Checked)
+            if (api.Player.Status == Structs.Status.MAINT)
             {
                 Status.old = Structs.Status.NATURAL;
             }

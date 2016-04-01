@@ -14,6 +14,7 @@ namespace NailClipr
         public static bool hasDialogue;
         public static bool warpAccepted;
         public static bool isAlone;
+        public static bool isWarping;
 
         //Structs
         public class Speed
@@ -56,8 +57,9 @@ namespace NailClipr
                 api.Player.Status = Status.old;
                 return;
             }
+
             //Save status before switching.
-            if (api.Player.Status == Structs.Status.MAINT)
+            if (api.Player.Status == Structs.Status.MAINT && !NailClipr.GUI_MAINT.Checked)
             {
                 Status.old = Structs.Status.NATURAL;
             }
@@ -72,6 +74,8 @@ namespace NailClipr
         public void Warp(EliteAPI api, bool toPlayer = false)
         {
             Structs.WarpPoint nextWP;
+
+            //If we're warping to a saved location... not a player.
             if (!toPlayer)
             {
                 nextWP = Structs.warpPoints.Find(wp => wp.title == NailClipr.GUI_WARP.Text && wp.zone == api.Player.ZoneId);
@@ -79,28 +83,35 @@ namespace NailClipr
                     return;
             }
             else {
+                //Warping to a player.
                 warpAccepted = true;
                 nextWP.pos.X = reqPos.X;
                 nextWP.pos.Y = reqPos.Y;
                 nextWP.pos.Z = reqPos.Z;
             }
 
+            //Mark flag for status gui text update.
+            isWarping = true;
+            api.ThirdParty.SendString("/echo " + Structs.Chat.Warp.warmupNotify);
+
+            //Start warp.
             MaintenanceMode(api, true);
-            NailClipr.GUI_STATUS.Text = Structs.Status.MAINT + ""; //Sleeping will otherwise block it.
+
             System.Threading.Thread.Sleep(1000);
 
             api.Player.X = nextWP.pos.X;
             api.Player.Y = nextWP.pos.Y;
             api.Player.Z = nextWP.pos.Z;
 
+            //Finish warp.
             System.Threading.Thread.Sleep(2000);
             MaintenanceMode(api, false);
 
             if (warpAccepted)
-            {
                 warpAccepted = false;
-                api.ThirdParty.SendString("/echo " + Structs.Chat.Warp.arrived);
-            }
+
+            api.ThirdParty.SendString("/echo " + Structs.Chat.Warp.arrivedNotify);
+            isWarping = false;
         }
         public static void PartyWarp(EliteAPI api, MatchCollection senderMatch, MatchCollection coordMatch)
         {

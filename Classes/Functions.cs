@@ -73,13 +73,12 @@ namespace NailClipr
                     continue;
 
                 //Has a valid name
-                if (entity.Name.Length <= Structs.FFXI.Name.MINLENGTH || entity.Name.Length >= Structs.FFXI.Name.MAXLENGTH)
+                if (entity.Name.Length <= Structs.FFXI.Name.MINLENGTH || entity.Name.Length >= Structs.FFXI.Name.MAXLENGTH || !Regex.IsMatch(entity.Name, @"^[a-zA-Z]+$"))
                     continue;
 
                 //Filter out more garbage.
-                if (float.IsNaN(entity.Distance))
+                if (float.IsNaN(entity.Distance) || entity.Distance <= 0)
                     continue;
-
                 count++;
                 Player.isAlone = false;
                 if (nearestPC.distance == 0 || entity.Distance < nearestPC.distance || entity.Name == nearestPC.name)
@@ -109,14 +108,14 @@ namespace NailClipr
             EliteAPI.TargetInfo target = api.Target.GetTargetInfo();
             uint targetIdx = target.TargetIndex;
             var entity = api.Entity.GetEntity(Convert.ToInt32(targetIdx));
-            string s = target.TargetName == "" ? "None" : entity.Name + " (" + entity.HealthPercent + "%) @ " + Math.Round(entity.Distance, 2) + " yalms.";
-            NailClipr.GUI_TARGET.Text = s;
+            string targetText = target.TargetName == "" ? "None" : entity.Name + " (" + entity.HealthPercent + "%) @ " + Math.Round(entity.Distance, 2) + " yalms.";
+            NailClipr.GUI_TARGET.Text = targetText;
 
             //Nearest Player
             if (Structs.settings.playerDetection)
             {
-                s = nearestPC.name == "" ? "None" : nearestPC.name + " @ " + Math.Round(nearestPC.distance, 2) + " yalms.";
-                NailClipr.GUI_NEAREST_PLAYER.Text = s;
+                string nearestPlayerText = nearestPC.name == "" ? "None" : nearestPC.name + " @ " + Math.Round(nearestPC.distance, 2) + " yalms.";
+                NailClipr.GUI_NEAREST_PLAYER.Text = nearestPlayerText;
             }
             else
             {

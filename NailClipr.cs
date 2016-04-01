@@ -36,7 +36,10 @@ namespace NailClipr
 
         public NailClipr()
         {
-            CheckUpdate();
+            if (!Debugger.IsAttached)
+            {
+                CheckUpdate();
+            }
             InitializeComponent();
             AssignControls();
             PostInit();

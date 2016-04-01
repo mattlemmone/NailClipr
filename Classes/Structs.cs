@@ -15,7 +15,7 @@ namespace NailClipr
         public struct App
         {
             public static string name = "NailClipr";
-            private static int[] v = { 1, 1, 1 };
+            private static int[] v = { 1, 1, 2};
             public static string ver = string.Join(".", v);
         }
         public struct Chat
@@ -24,7 +24,9 @@ namespace NailClipr
             {
                 public static string acceptNotify = "i accept <:'^)";
                 public static string acceptSelfNotify = "Accepted.";
-                public static string arrived = "Arrived.";
+                public static string arrivedNotify = "Arrived.";
+                public static string warmupNotify = "Warming up...";
+
                 public const string senderRegEx = @"\(([A-Za-z]+)\)";
                 public const string coordRegEx = @"[^\[\d:d\]](\-*\d*\.*\d+)+";
                 public const int expectedNumCoords = 4;
@@ -101,7 +103,7 @@ namespace NailClipr
             public const uint MAINT = 31;
             public static void PreventOverwrite(EliteAPI api)
             {
-                if (NailClipr.GUI_MAINT.Checked == true)
+                if (NailClipr.GUI_MAINT.Checked == true || Player.isWarping)
                 {
                     if (api.Player.Status != Structs.Status.MAINT)
                         api.Player.Status = Structs.Status.MAINT;

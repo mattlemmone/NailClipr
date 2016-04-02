@@ -1,0 +1,9 @@
+alias sea input /echo sea
+alias sp input /echo s
+alias warp input /echo w
+alias getwarp input /echo cur
+alias accept input /echo acc
+alias req input /echo req
+alias save input /echo sve
+alias abort input /echo abrt
+alias maint input /echo m

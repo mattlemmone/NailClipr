@@ -66,6 +66,11 @@
         <Y>8.641103</Y>
         <Z>-0.5500277</Z>
       </WarpPoint>
+      <WarpPoint title="one two lol lol">
+        <X>0.341026723</X>
+        <Y>-2.87046623</Y>
+        <Z>0</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="260" title="Yahse Hunting Grounds">
       <WarpPoint title="Frontier Station Waypoint">
@@ -224,6 +229,11 @@
         <Y>-587.931</Y>
         <Z>-69.7538</Z>
       </WarpPoint>
+      <WarpPoint title="Dimensional Portal">
+        <X>219.952652</X>
+        <Y>137.93132</Y>
+        <Z>19.104002</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="106" title="North Gustaberg">
       <WarpPoint title="Konschtat">
@@ -308,6 +318,11 @@
         <Y>-766.816345</Y>
         <Z>-27.152956</Z>
       </WarpPoint>
+      <WarpPoint title="Sauromugue">
+        <X>368.774628</X>
+        <Y>482.503021</Y>
+        <Z>24.2376881</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="233" title="Chateau d'Oraguille">
       <WarpPoint title="North Sandy">
@@ -349,6 +364,11 @@
         <Y>-340.6182</Y>
         <Z>-7.724762E-05</Z>
       </WarpPoint>
+      <WarpPoint title="R">
+        <X>620.246</X>
+        <Y>-11.079</Y>
+        <Z>0</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="50" title="Aht Urhgan Whitegate">
       <WarpPoint title="Assault Tag">
@@ -365,6 +385,11 @@
         <X>-146.742218</X>
         <Y>0.152643576</Y>
         <Z>1.8</Z>
+      </WarpPoint>
+      <WarpPoint title="Staging Point">
+        <X>125.015724</X>
+        <Y>63.1155472</Y>
+        <Z>-4.215</Z>
       </WarpPoint>
     </Zone>
     <Zone id="249" title="Mhaura">
@@ -548,6 +573,37 @@
         <X>498.049927</X>
         <Y>-300.560028</Y>
         <Z>-2.63816524</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="33" title="Al'Taieu">
+      <WarpPoint title="Home Point #2">
+        <X>-532.3899</X>
+        <Y>447.900757</Y>
+        <Z>0</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="72" title="Alzadaal Undersea Ruins">
+      <WarpPoint title="Gate">
+        <X>128.504089</X>
+        <Y>19.7352886</Y>
+        <Z>-5.82933426E-05</Z>
+      </WarpPoint>
+      <WarpPoint title="Runic Portal">
+        <X>202.235352</X>
+        <Y>6.377506</Y>
+        <Z>0</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="120" title="Sauromugue Champaign">
+      <WarpPoint title="Rolanberry">
+        <X>-471.217072</X>
+        <Y>198.573029</Y>
+        <Z>0.238077551</Z>
+      </WarpPoint>
+      <WarpPoint title="Garlaige">
+        <X>264.369629</X>
+        <Y>-383.608643</Y>
+        <Z>-0.700000048</Z>
       </WarpPoint>
     </Zone>
   </Zones>

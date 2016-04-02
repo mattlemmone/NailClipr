@@ -1,8 +1,5 @@
 ﻿using EliteMMO.API;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -30,8 +27,9 @@ namespace NailClipr
                 get { return norm; }
                 set { norm = value; }
             }
-            public void SetSpeed(EliteAPI api, float speed)
+            public static void SetSpeed(EliteAPI api, float speed)
             {
+                expected = speed;
                 api.Player.Speed = speed;
             }
         }
@@ -56,12 +54,13 @@ namespace NailClipr
         }
 
         //Functions
-        public void MaintenanceMode(EliteAPI api, bool on)
+        public static void MaintenanceMode(EliteAPI api, bool on)
         {
             if (!on)
             {
                 if (isWarping && NailClipr.GUI_MAINT.Checked)
                     api.Player.Status = Structs.Status.MAINT;
+
                 api.Player.Status = Status.old;
                 return;
             }
@@ -79,7 +78,7 @@ namespace NailClipr
             //Maint on.
             api.Player.Status = Structs.Status.MAINT;
         }
-        public async void Warp(EliteAPI api, bool toPlayer = false)
+        public static async void Warp(EliteAPI api, bool toPlayer = false)
         {
             Structs.WarpPoint nextWP;
 

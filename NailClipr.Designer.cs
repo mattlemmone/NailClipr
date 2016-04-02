@@ -70,6 +70,7 @@ namespace NailClipr
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.Lbl_Search = new System.Windows.Forms.Label();
+            this.Btn_Abort = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed_Default)).BeginInit();
@@ -457,6 +458,7 @@ namespace NailClipr
             this.Txt_Search.Name = "Txt_Search";
             this.Txt_Search.Size = new System.Drawing.Size(180, 21);
             this.Txt_Search.TabIndex = 57;
+            this.Txt_Search.KeyDown += new KeyEventHandler(this.Txt_Search_KeyDown);
             // 
             // Btn_Find
             // 
@@ -480,7 +482,7 @@ namespace NailClipr
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(100, 391);
+            this.label6.Location = new System.Drawing.Point(12, 387);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(86, 14);
             this.label6.TabIndex = 60;
@@ -489,17 +491,29 @@ namespace NailClipr
             // Lbl_Search
             // 
             this.Lbl_Search.AutoSize = true;
-            this.Lbl_Search.Location = new System.Drawing.Point(188, 391);
+            this.Lbl_Search.Location = new System.Drawing.Point(100, 387);
             this.Lbl_Search.Name = "Lbl_Search";
             this.Lbl_Search.Size = new System.Drawing.Size(26, 14);
             this.Lbl_Search.TabIndex = 61;
             this.Lbl_Search.Text = "idle";
+            // 
+            // Btn_Abort
+            // 
+            this.Btn_Abort.Enabled = false;
+            this.Btn_Abort.Location = new System.Drawing.Point(259, 384);
+            this.Btn_Abort.Name = "Btn_Abort";
+            this.Btn_Abort.Size = new System.Drawing.Size(55, 21);
+            this.Btn_Abort.TabIndex = 62;
+            this.Btn_Abort.Text = "Abort";
+            this.Btn_Abort.UseVisualStyleBackColor = true;
+            this.Btn_Abort.Click += new System.EventHandler(this.Btn_Abort_Click);
             // 
             // NailClipr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(331, 472);
+            this.Controls.Add(this.Btn_Abort);
             this.Controls.Add(this.Lbl_Search);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label1);
@@ -586,6 +600,7 @@ namespace NailClipr
         private Label label1;
         private Label label6;
         private Label Lbl_Search;
+        private Button Btn_Abort;
     }
 }
 

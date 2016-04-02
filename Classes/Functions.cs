@@ -1,4 +1,5 @@
 ﻿using EliteMMO.API;
+using NailClipr.Classes;
 using System;
 using System.Drawing;
 using System.Linq;
@@ -37,7 +38,6 @@ namespace NailClipr
         public static void PlayersRendered(EliteAPI api)
         {
             bool findPlayer = Structs.settings.playerDetection;
-            bool found = false;
             int count = 0;
 
             const Int32 PC = 0x0001;
@@ -48,37 +48,23 @@ namespace NailClipr
             for (var x = 0; x < 4096; x++)
             {
                 var entity = api.Entity.GetEntity(x);
+                bool invalid = entity.WarpPointer == 0,
+                    dead = entity.HealthPercent <= 0,
+                    outsideRange = entity.Distance > 50.0f || float.IsNaN(entity.Distance) || entity.Distance <= 0,
+                    isRendered = (entity.Render0000 & 0x200) == 0x200,
+                    isSelf = (entity.SpawnFlags & Self) == Self || entity.Name == api.Player.Name;
 
-                // Skip invalid entities..
-                if (entity.WarpPointer == 0)
+                if (invalid || dead || outsideRange || !isRendered || isSelf)
                     continue;
 
-                // Skip potentially dead entities..
-                if (entity.HealthPercent <= 0)
-                    continue;
-
-                // Skip out of range entities..
-                if (entity.Distance > 50.0f || float.IsNaN(entity.Distance) || entity.Distance <= 0)
-                    continue;
-
-                bool isRendered = (entity.Render0000 & 0x200) == 0x200;
-                bool isSelf = (entity.SpawnFlags & Self) == Self || entity.Name == api.Player.Name;
-
-                //Skip unloaded entities and self.
-                if (!isRendered || isSelf)
-                    continue;
-
-                bool isMob = (entity.SpawnFlags & Mob) == Mob;
-                bool isNPC = (entity.SpawnFlags & NPC) == NPC;
-                bool isPC = (entity.SpawnFlags & PC) == PC;
-
-                bool invalidPlayerName = entity.Name.Length < Structs.FFXI.Name.MINLENGTH || entity.Name.Length > Structs.FFXI.Name.MAXLENGTH || !Regex.IsMatch(entity.Name, @"^[a-zA-Z]+$");
+                bool isMob = (entity.SpawnFlags & Mob) == Mob,
+                isNPC = (entity.SpawnFlags & NPC) == NPC,
+                isPC = (entity.SpawnFlags & PC) == PC,
+                invalidPlayerName = isPC && (entity.Name.Length < Structs.FFXI.Name.MINLENGTH || entity.Name.Length > Structs.FFXI.Name.MAXLENGTH || !Regex.IsMatch(entity.Name, @"^[a-zA-Z]+$")),
+                inWhitelist = isPC && Structs.Speed.whitelist.IndexOf(entity.Name) != -1;
 
                 //Is in whitelist
-                if (isPC && Structs.Speed.whitelist.IndexOf(entity.Name) != -1)
-                    continue;
-
-                if (isPC && invalidPlayerName)
+                if (inWhitelist || invalidPlayerName)
                     continue;
 
                 if (isPC && findPlayer)
@@ -96,10 +82,10 @@ namespace NailClipr
                 if (Player.Search.isSearching)
                 {
                     string target = Player.Search.target.ToLower();
+                    Console.WriteLine(entity.Name);
                     //Found target
                     if (entity.Name.ToLower().Contains(target))
                     {
-                        Console.WriteLine(entity.Name);
                         Player.Search.isSearching = false;
                         Player.Search.status = Structs.Search.success;
 
@@ -114,6 +100,7 @@ namespace NailClipr
                 }
 
             }
+            //Outside of loop
             if (findPlayer)
             {
                 if (count > 0) return;
@@ -150,6 +137,7 @@ namespace NailClipr
 
             //Search label
             NailClipr.GUI_SEARCH.Text = Player.Search.status;
+            NailClipr.GUI_ABORT.Enabled = Player.Search.isSearching;
 
             //If we are zoning...
             if (Player.Location.isZoning)
@@ -157,7 +145,7 @@ namespace NailClipr
                 if (Structs.zonePoints.Count > 0) clearZonePoints();
 
                 Player.Search.isSearching = false;
-                NailClipr.GUI_SEARCH.Text = "idle";
+                Player.Search.status = "idle";
                 return;
             }
 
@@ -217,12 +205,16 @@ namespace NailClipr
         public static void ParseChat(EliteAPI api)
         {
             EliteAPI.ChatEntry c = api.Chat.GetNextChatLine();
-            if (string.IsNullOrEmpty(c?.Text)) return;
-            const int partyType = 13; //Incoming party
+            if (string.IsNullOrEmpty(c?.Text))
+            {
+                if (!Structs.Chat.loaded) { Structs.Chat.loaded = true; api.ThirdParty.SendString("/echo Chat Loaded!"); }
+                return;
+            }
+            if (!Structs.Chat.loaded) return;
+            const int party = 13,
+                echo = 206;
             int chatType = c.ChatType;
-            string t = c.Text;
-            Console.WriteLine(t);
-            if (partyType == chatType)
+            if (party == chatType)
             {
                 string text = c.Text;
 
@@ -230,12 +222,62 @@ namespace NailClipr
                 MatchCollection coordMatch = Regex.Matches(text, Structs.Chat.Warp.coordRegEx);
 
                 if (coordMatch.Count == Structs.Chat.Warp.expectedNumCoords)
-                {
                     Player.PartyWarp(api, senderMatch, coordMatch);
+
+            }
+            else if (echo == chatType)
+            {
+
+                string text = c.Text;
+
+                MatchCollection echoMatch = Regex.Matches(text, Structs.Chat.Controller.echoRegex);
+                if (echoMatch.Count == 1)
+                {
+                    if (Structs.Chat.Controller.dictOneParam.ContainsKey(text))
+                        Structs.Chat.Controller.dictOneParam[text](api);
+                    else return;
                 }
+                else if (echoMatch[0].ToString() == Structs.Chat.Controller.saveWarp)
+                {
+                    string[] s = echoMatch.Cast<Match>()
+                        .Select(m => m.Value)
+                       .ToArray();
+
+                    string saveName = string.Join(" ", s.Skip(1));
+                    SharedFunctions.SaveWarp(api, saveName);
+                }
+                else if (echoMatch[0].ToString() == Structs.Chat.Controller.search)
+                {
+                    string[] s = echoMatch.Cast<Match>()
+                        .Select(m => m.Value)
+                       .ToArray();
+
+                    string target = string.Join(" ", s.Skip(1));
+                    SharedFunctions.Search(target);
+                }
+                else if (echoMatch[0].ToString() == Structs.Chat.Controller.speed)
+                {
+                    SharedFunctions.Speed(api, echoMatch[1].Value);
+                }
+                /*
+                acpt -> Accept
+                req -> Request
+                m -> Maintenance toggle
+                save -> Save Warp
+                dlt -> Delete Warp
+                abrt -> Abort
+                
+                Variables
+                srch ... -> Search ...
+                s ... -> Set Speed
+                    + -> + 0.5
+                    - -> - 0.5
+                ds ... -> Set Default Speed
+                    + -> + 0.5
+                    - -> - 0.5
+                */
             }
         }
-
     }
 }
 

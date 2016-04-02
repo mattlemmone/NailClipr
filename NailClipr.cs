@@ -8,6 +8,7 @@ using System.IO;
 using System.Threading;
 using System.Net;
 using System.Text.RegularExpressions;
+using NailClipr.Classes;
 
 namespace NailClipr
 {
@@ -37,6 +38,8 @@ namespace NailClipr
 
 
         public static Label GUI_SEARCH;
+        public static Button GUI_FIND;
+        public static Button GUI_ABORT;
         public static TextBox GUI_SEARCH_TARGET;
 
         public NailClipr()
@@ -88,6 +91,8 @@ namespace NailClipr
 
             GUI_SEARCH = Lbl_Search;
             GUI_SEARCH_TARGET = Txt_Search;
+            GUI_FIND = Btn_Find;
+            GUI_ABORT = Btn_Abort;
 
             Lbl_Ver.Text = "v." + Structs.App.ver;
         }
@@ -205,11 +210,10 @@ namespace NailClipr
         #region CheckBoxes
         private void ChkBox_Maint_CheckedChanged(object sender, EventArgs e)
         {
-            Player.MaintenanceMode(api, ChkBox_Maint.Checked);
+            Player.MaintenanceMode(api, NailClipr.GUI_MAINT.Checked);
         }
         private void ChkBox_DetectDisable_CheckedChanged(object sender, EventArgs e)
         {
-
             Structs.settings.playerDetection = ChkBox_PlayerDetect.Checked;
         }
         private void ChkBox_StayTop_CheckedChanged(object sender, EventArgs e)
@@ -234,8 +238,7 @@ namespace NailClipr
             //Fallback. Never can be too safe with speed mods.
             if (speed <= Structs.Speed.MAX)
             {
-                Player.Speed.expected = speed;
-                api.Player.Speed = speed;
+                Player.Speed.SetSpeed(api, speed);
                 GUI_SPEED.Text = "x" + speed / Structs.Speed.NATURAL;
             }
         }
@@ -314,15 +317,15 @@ namespace NailClipr
         #region WarpBtns
         private void Btn_Save_Click(object sender, EventArgs e)
         {
-            XML.SaveWarp(api);
+            SharedFunctions.SaveWarp(api);
         }
         private void Btn_Warp_Click(object sender, EventArgs e)
         {
-            Player.Warp(api);
+            SharedFunctions.Warp(api);
         }
         private void Btn_Delete_Click(object sender, EventArgs e)
         {
-            XML.DeleteWarp(api);
+            SharedFunctions.DelWarp(api);
         }
         #endregion
         #region Settings
@@ -332,14 +335,11 @@ namespace NailClipr
         }
         private void Btn_Accept_Click(object sender, EventArgs e)
         {
-            api.ThirdParty.SendString("/echo " + Structs.Chat.Warp.acceptSelfNotify);
-            api.ThirdParty.SendString("/p " + Structs.Chat.Warp.acceptNotify);
-            Player.Warp(api, true);
+            SharedFunctions.Accept(api);
         }
         private void Btn_Req_Click(object sender, EventArgs e)
         {
-            string s = Math.Round(api.Player.X, 5) + " " + Math.Round(api.Player.Z, 5) + " " + Math.Round(api.Player.Y, 5) + " " + api.Player.ZoneId;
-            api.ThirdParty.SendString("/p " + s);
+            SharedFunctions.Request(api);
         }
         #endregion
 
@@ -347,9 +347,20 @@ namespace NailClipr
 
         private void Btn_Find_Click(object sender, EventArgs e)
         {
-            Player.Search.isSearching = true;
-            Player.Search.target = GUI_SEARCH_TARGET.Text;
-            Player.Search.status = Structs.Search.searching;
+            SharedFunctions.Search();
+        }
+
+        private void Btn_Abort_Click(object sender, EventArgs e)
+        {
+            SharedFunctions.Abort(api);
+        }
+
+        private void Txt_Search_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+            {
+                Btn_Find_Click(this, new EventArgs());
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using EliteMMO.API;
 using System;
 using System.Collections.Generic;
+using NailClipr.Classes;
 
 namespace NailClipr
 {
@@ -15,11 +16,12 @@ namespace NailClipr
         public struct App
         {
             public static string name = "NailClipr";
-            private static int[] v = { 1, 2, 0 };
+            private static int[] v = { 1, 3, 0 };
             public static string ver = string.Join(".", v);
         }
         public struct Chat
         {
+            public static bool loaded;
             public struct Warp
             {
                 public static string acceptNotify = "i accept <:'^)";
@@ -30,6 +32,53 @@ namespace NailClipr
                 public const string senderRegEx = @"\(([A-Za-z]+)\)";
                 public const string coordRegEx = @"[^\[\d:d\]](\-*\d*\.*\d+)+";
                 public const int expectedNumCoords = 4;
+            }
+            public class Controller
+            {
+                public const string echoRegex = @"([^\s])+";
+                public const string
+                    //Single param calls
+                    accept = "acc",
+                    request = "req",
+                    maintenance = "m",
+                    delWarp = "del",
+                    warp = "w",
+                    curWarp = "cur",
+                    abort = "abrt",
+
+                    //Two param calls
+                    saveWarp = "sve",
+                    search = "sea",
+                    speed = "s";
+
+                public static Dictionary<string, Action<EliteAPI>> dictOneParam =
+                new Dictionary<string, Action<EliteAPI>>
+                {
+                    {accept, SharedFunctions.Accept },
+                    {request, SharedFunctions.Request },
+                    {abort, SharedFunctions.Abort },
+                    {maintenance, SharedFunctions.MaintenanceToggle },
+                    {delWarp, SharedFunctions.DelWarp },
+                    {warp, SharedFunctions.Warp },
+                    {curWarp, SharedFunctions.GetWarp }
+                };
+
+                /*
+               acc -> Accept
+               req -> Request
+               abrt -> Abort
+               m -> Maintenance toggle
+               save -> Save Warp
+               del -> Delete Warp
+               w -> Warp to Current Selection
+               cur -> Get Current Selection
+
+               Variables
+               sea ... -> Search ...
+               s ... -> Set Speed
+                   + -> + 0.5
+                   - -> - 0.5
+               */
             }
         }
         public struct Error
@@ -90,7 +139,7 @@ namespace NailClipr
             public const float NATURAL = 5f;
             public const float DIVISOR = 4f;
             public const float MAX_MULT = 1.5f;
-            public const float MAX = 10f;
+            public const float MAX = 7.5f;
             public static List<String> whitelist;
             public static void PreventOverWrite(EliteAPI api)
             {

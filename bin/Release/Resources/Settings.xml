@@ -88,6 +88,11 @@
         <Y>-139.2005</Y>
         <Z>6.98731041</Z>
       </WarpPoint>
+      <WarpPoint title="Frontier Bivouac #1">
+        <X>86.5</X>
+        <Y>1.5</Y>
+        <Z>0</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="265" title="Morimar Basalt Fields">
       <WarpPoint title="Frontier Station Waypoint">
@@ -562,6 +567,11 @@
         <Y>140.436569</Y>
         <Z>19.9978619</Z>
       </WarpPoint>
+      <WarpPoint title="Cirdas Caverns">
+        <X>-100.405334</X>
+        <Y>-364.332245</Y>
+        <Z>31.0452538</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="262" title="Foret de Hennetiel">
       <WarpPoint title="Frontier Station">
@@ -604,6 +614,25 @@
         <X>264.369629</X>
         <Y>-383.608643</Y>
         <Z>-0.700000048</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="270" title="Cirdas Caverns">
+      <WarpPoint title="Moh gates">
+        <X>497.6375</X>
+        <Y>386.148224</Y>
+        <Z>30.0588112</Z>
+      </WarpPoint>
+      <WarpPoint title="Yorcia">
+        <X>194</X>
+        <Y>222</Y>
+        <Z>10.4348507</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="263" title="Yorcia Weald">
+      <WarpPoint title="Cirdas Caverns">
+        <X>240</X>
+        <Y>60.25</Y>
+        <Z>8.3</Z>
       </WarpPoint>
     </Zone>
   </Zones>

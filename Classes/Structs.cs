@@ -16,7 +16,7 @@ namespace NailClipr
         public struct App
         {
             public static string name = "NailClipr";
-            private static int[] v = { 1, 3, 0 };
+            private static int[] v = { 1, 3, 1};
             public static string ver = string.Join(".", v);
         }
         public struct Chat
@@ -81,6 +81,10 @@ namespace NailClipr
                */
             }
         }
+        public class Commit
+        {
+            string url = "https://api.github.com/repos/mattlemmone/NailClipr/commits";
+        }
         public struct Error
         {
             public struct Auth
@@ -100,6 +104,17 @@ namespace NailClipr
             public struct Other
             {
                 public static string StatusEasterEgg = "Unsupported status type.";
+            }
+        }
+        public class File
+        {
+            public string title;
+            public string url;
+
+            public File(string t, string u)
+            {
+                title = t;
+                url = u;
             }
         }
         public struct FFXI
@@ -169,6 +184,13 @@ namespace NailClipr
                         api.Player.Status = Structs.Status.MAINT;
                 }
             }
+        }
+        public class Update
+        {
+            public static File Updater = new File("Updater.exe", "https://github.com/mattlemmone/NailClipr/raw/master/bin/Release/Updater.exe");
+            public const string ver = "https://raw.githubusercontent.com/mattlemmone/NailClipr/master/ver.txt";
+            public static File API_DLL = new File("EliteAPI.dll", "http://ext.elitemmonetwork.com/downloads/eliteapi/index.php?v");
+            public static File MMO_DLL = new File("EliteMMO.API.dll", "http://ext.elitemmonetwork.com/downloads/elitemmo_api/index.php?v");
         }
         public struct WarpPoint
         {

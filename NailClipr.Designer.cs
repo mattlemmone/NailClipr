@@ -458,7 +458,7 @@ namespace NailClipr
             this.Txt_Search.Name = "Txt_Search";
             this.Txt_Search.Size = new System.Drawing.Size(180, 21);
             this.Txt_Search.TabIndex = 57;
-            this.Txt_Search.KeyDown += new KeyEventHandler(this.Txt_Search_KeyDown);
+            this.Txt_Search.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_Search_KeyDown);
             // 
             // Btn_Find
             // 

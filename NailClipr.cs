@@ -132,21 +132,26 @@ namespace NailClipr
             string apidll = "";
             string mmodll = "";
             string appexe = "";
-            if (File.Exists(Application.StartupPath + @"\EliteAPI.dll"))
-                apidll = FileVersionInfo.GetVersionInfo(Application.StartupPath + @"\EliteAPI.dll").FileVersion;
-            if (File.Exists(Application.StartupPath + @"\EliteMMO.API.dll"))
-                mmodll = FileVersionInfo.GetVersionInfo(Application.StartupPath + @"\EliteMMO.API.dll").FileVersion;
+            if (!File.Exists(Application.StartupPath + @"\"+ Structs.Update.Updater.title))
+            {
+                WebClient Client = new WebClient();
+                Client.DownloadFile(Structs.Update.Updater.url, Application.StartupPath + @"\" + Structs.Update.Updater.title);
+            }
+            if (File.Exists(Application.StartupPath + @"\"+ Structs.Update.API_DLL.title))
+                apidll = FileVersionInfo.GetVersionInfo(Application.StartupPath + @"\"+ Structs.Update.API_DLL.title).FileVersion;
+            if (File.Exists(Application.StartupPath + @"\"+ Structs.Update.MMO_DLL.title))
+                mmodll = FileVersionInfo.GetVersionInfo(Application.StartupPath + @"\"+ Structs.Update.MMO_DLL.title).FileVersion;
             appexe = Structs.App.ver;
 
             string api, mmo, exe;
-            api = GetStringFromUrl("http://ext.elitemmonetwork.com/downloads/eliteapi/index.php?v");
-            mmo = GetStringFromUrl("http://ext.elitemmonetwork.com/downloads/elitemmo_api/index.php?v");
-            exe = Regex.Replace(GetStringFromUrl("https://raw.githubusercontent.com/mattlemmone/NailClipr/master/ver.txt"), @"\t|\n|\r", "");
+            api = GetStringFromUrl(Structs.Update.API_DLL.url);
+            mmo = GetStringFromUrl(Structs.Update.MMO_DLL.url);
+            exe = Regex.Replace(GetStringFromUrl(Structs.Update.ver), @"\t|\n|\r", "");
 
             if (apidll == "" || api != apidll || appexe == "" || exe != appexe || mmodll == "" || mmo != mmodll)
             {
-                Process.Start(Application.StartupPath + @"\Updater.exe");
-                ExitApp();
+                Process.Start(Application.StartupPath + @"\"+ Structs.Update.Updater.title);
+                Process.GetCurrentProcess().Kill();
             }
         }
         #region Helpers

@@ -83,7 +83,7 @@ namespace NailClipr
         }
         public class Commit
         {
-            string url = "https://api.github.com/repos/mattlemmone/NailClipr/commits";
+            public static string url = "https://api.github.com/repos/mattlemmone/NailClipr/commits";
         }
         public struct Error
         {
@@ -192,6 +192,7 @@ namespace NailClipr
             public static File API_DLL = new File("EliteAPI.dll", "http://ext.elitemmonetwork.com/downloads/eliteapi/index.php?v");
             public static File MMO_DLL = new File("EliteMMO.API.dll", "http://ext.elitemmonetwork.com/downloads/elitemmo_api/index.php?v");
         }
+
         public struct WarpPoint
         {
             public string title;

@@ -8,6 +8,7 @@ using System.IO;
 using System.Threading;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Runtime.Serialization.Json;
 using NailClipr.Classes;
 
 namespace NailClipr
@@ -36,7 +37,6 @@ namespace NailClipr
         public static TrackBar GUI_SPEED_DEFAULT_TRACK;
         public static TrackBar GUI_SPEED_TRACK;
 
-
         public static Label GUI_SEARCH;
         public static Button GUI_FIND;
         public static Button GUI_ABORT;
@@ -48,6 +48,7 @@ namespace NailClipr
             {
                 CheckUpdate();
             }
+            UpdateComments();
             InitializeComponent();
             AssignControls();
             PostInit();
@@ -65,8 +66,14 @@ namespace NailClipr
             cw.WorkerSupportsCancellation = true;
             cw.RunWorkerAsync();
         }
-        public void PostInit()
+        private void UpdateComments()
         {
+            string requestUrl = Structs.Commit.url;
+        }
+        private void PostInit()
+        {
+
+
             XML.LoadAreas();
             XML.LoadWarps();
             XML.LoadSettings();
@@ -132,15 +139,25 @@ namespace NailClipr
             string apidll = "";
             string mmodll = "";
             string appexe = "";
-            if (!File.Exists(Application.StartupPath + @"\"+ Structs.Update.Updater.title))
+            if (!File.Exists(Application.StartupPath + @"\" + Structs.Update.Updater.title))
             {
+
                 WebClient Client = new WebClient();
-                Client.DownloadFile(Structs.Update.Updater.url, Application.StartupPath + @"\" + Structs.Update.Updater.title);
+                try
+                {
+                    Client.DownloadFile(Structs.Update.Updater.url, Application.StartupPath + @"\" + Structs.Update.Updater.title);
+                }
+                catch (WebException)
+                {
+                    MessageBox.Show("Error downloading " + Structs.Update.Updater.title + ".", "Update Error");
+                    Process.GetCurrentProcess().Kill();
+                }
+                Client.Dispose();
             }
-            if (File.Exists(Application.StartupPath + @"\"+ Structs.Update.API_DLL.title))
-                apidll = FileVersionInfo.GetVersionInfo(Application.StartupPath + @"\"+ Structs.Update.API_DLL.title).FileVersion;
-            if (File.Exists(Application.StartupPath + @"\"+ Structs.Update.MMO_DLL.title))
-                mmodll = FileVersionInfo.GetVersionInfo(Application.StartupPath + @"\"+ Structs.Update.MMO_DLL.title).FileVersion;
+            if (File.Exists(Application.StartupPath + @"\" + Structs.Update.API_DLL.title))
+                apidll = FileVersionInfo.GetVersionInfo(Application.StartupPath + @"\" + Structs.Update.API_DLL.title).FileVersion;
+            if (File.Exists(Application.StartupPath + @"\" + Structs.Update.MMO_DLL.title))
+                mmodll = FileVersionInfo.GetVersionInfo(Application.StartupPath + @"\" + Structs.Update.MMO_DLL.title).FileVersion;
             appexe = Structs.App.ver;
 
             string api, mmo, exe;
@@ -150,7 +167,7 @@ namespace NailClipr
 
             if (apidll == "" || api != apidll || appexe == "" || exe != appexe || mmodll == "" || mmo != mmodll)
             {
-                Process.Start(Application.StartupPath + @"\"+ Structs.Update.Updater.title);
+                Process.Start(Application.StartupPath + @"\" + Structs.Update.Updater.title);
                 Process.GetCurrentProcess().Kill();
             }
         }

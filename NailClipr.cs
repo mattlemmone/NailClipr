@@ -20,6 +20,7 @@ namespace NailClipr
         public static Player Player = new Player();
 
         public static ComboBox GUI_WARP;
+        public static Button GUI_WARP_BTN;
         public static CheckBox GUI_MAINT;
         public static CheckBox GUI_TOPMOST;
         public static CheckBox GUI_PLAYER_DETECT;
@@ -33,6 +34,10 @@ namespace NailClipr
         public static Label GUI_SPEED;
         public static TrackBar GUI_SPEED_DEFAULT_TRACK;
         public static TrackBar GUI_SPEED_TRACK;
+
+
+        public static Label GUI_SEARCH;
+        public static TextBox GUI_SEARCH_TARGET;
 
         public NailClipr()
         {
@@ -52,7 +57,6 @@ namespace NailClipr
             bw.WorkerReportsProgress = true;
             bw.RunWorkerAsync();
 
-
             // Start the background worker..
             cw.DoWork += new DoWorkEventHandler(cw_DoWork);
             cw.WorkerSupportsCancellation = true;
@@ -64,10 +68,10 @@ namespace NailClipr
             XML.LoadWarps();
             XML.LoadSettings();
         }
-
         public void AssignControls()
         {
             GUI_WARP = CB_Warp;
+            GUI_WARP_BTN = Btn_Warp;
             GUI_MAINT = ChkBox_Maint;
             GUI_TOPMOST = ChkBox_StayTop;
             GUI_PLAYER_DETECT = ChkBox_PlayerDetect;
@@ -82,9 +86,11 @@ namespace NailClipr
             GUI_SPEED_DEFAULT_TRACK = Bar_Speed_Default;
             GUI_SPEED_TRACK = Bar_Speed;
 
+            GUI_SEARCH = Lbl_Search;
+            GUI_SEARCH_TARGET = Txt_Search;
+
             Lbl_Ver.Text = "v." + Structs.App.ver;
         }
-
         public void SelectProcess()
         {
             #region Final Fantasy XI [POL]
@@ -116,7 +122,6 @@ namespace NailClipr
             }
             #endregion
         }
-
         private void CheckUpdate()
         {
             string apidll = "";
@@ -139,7 +144,7 @@ namespace NailClipr
                 ExitApp();
             }
         }
-
+        #region Helpers
         private string GetStringFromUrl(string location)
         {
             WebRequest request = WebRequest.Create(location);
@@ -149,6 +154,27 @@ namespace NailClipr
             string responseFromServer = reader.ReadToEnd();
             return responseFromServer;
         }
+        public static void ExitApp()
+        {
+            api.Player.Speed = Player.Speed.normal;
+            if (System.Windows.Forms.Application.MessageLoop)
+            {
+                // WinForms app
+                System.Windows.Forms.Application.Exit();
+            }
+            else
+            {
+                // Console app
+                System.Environment.Exit(1);
+            }
+        }
+        private float[] MidPoint(float A, float A1, float B, float B1)
+        {
+            float[] ret = { (A + A1) / 2, (B + B1) / 2 };
+            return ret;
+        }
+        #endregion
+        #region Threads
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
@@ -157,10 +183,9 @@ namespace NailClipr
                 System.Threading.Thread.Sleep(100);
                 bw.ReportProgress(0);
 
-                workerOverwrites();
+                Threads.Overwrites(api);
             }
         }
-
         private void cw_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
@@ -171,54 +196,29 @@ namespace NailClipr
             }
         }
 
-        public void workerOverwrites()
-        {
-            //Constantly write maintenance mode in case it gets overwritten.
-            Structs.Status.PreventOverwrite(api);
-
-            /*Speed*/
-            //Not initialized.
-            if (Player.Speed.expected == 0 && api.Player.Speed <= Structs.Speed.MAX)
-            {
-                Player.Speed.expected = api.Player.Speed;
-            }
-
-            //Turn speed off around other players.
-            if (Structs.settings.playerDetection) Functions.PlayersRendered(api);
-
-            Structs.Speed.PreventOverWrite(api);
-
-        }
-
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            //Update GUI.
-            Player.Location.isZoning = api.Player.X == 0 && api.Player.Y == 0 && api.Player.Z == 0;
-            if (Player.Location.isZoning && Player.hasDialogue)
-                Player.hasDialogue = false;
-
-            Functions.UpdateLabels(api);
-
-            GUI_ACCEPT.Enabled = Player.hasDialogue;
+            Threads.Update(api);
         }
-
+        #endregion
+        #region GUI
+        #region CheckBoxes
         private void ChkBox_Maint_CheckedChanged(object sender, EventArgs e)
         {
             Player.MaintenanceMode(api, ChkBox_Maint.Checked);
         }
-
         private void ChkBox_DetectDisable_CheckedChanged(object sender, EventArgs e)
         {
 
             Structs.settings.playerDetection = ChkBox_PlayerDetect.Checked;
         }
-
         private void ChkBox_StayTop_CheckedChanged(object sender, EventArgs e)
         {
             Structs.settings.topMostForm = ChkBox_StayTop.Checked;
             this.TopMost = ChkBox_StayTop.Checked;
         }
-
+        #endregion
+        #region Scrollbars
         private void Bar_Speed_Default_Scroll(object sender, EventArgs e)
         {
             float barVal = GUI_SPEED_DEFAULT_TRACK.Value / Structs.Speed.DIVISOR;
@@ -226,7 +226,6 @@ namespace NailClipr
             Player.Speed.normal = speed;
             GUI_DEFAULT_SPEED.Text = "x" + speed / Structs.Speed.NATURAL;
         }
-
         private void Bar_Speed_Scroll(object sender, EventArgs e)
         {
             float barVal = GUI_SPEED_TRACK.Value / Structs.Speed.DIVISOR;
@@ -240,95 +239,37 @@ namespace NailClipr
                 GUI_SPEED.Text = "x" + speed / Structs.Speed.NATURAL;
             }
         }
-
-
+        #endregion
+        #region PosBtns
         private void Btn_Plus_X_Click(object sender, EventArgs e)
         {
             api.Player.X = api.Player.X + Structs.Settings.POS_INC;
         }
-
         private void Btn_Minus_X_Click(object sender, EventArgs e)
         {
 
             api.Player.X = api.Player.X - Structs.Settings.POS_INC;
         }
-
         private void Btn_Plus_Y_Click(object sender, EventArgs e)
         {
 
             api.Player.Y = api.Player.Z + Structs.Settings.POS_INC;
         }
-
         private void Btn_Minus_Y_Click(object sender, EventArgs e)
         {
 
             api.Player.Y = api.Player.Z - Structs.Settings.POS_INC;
         }
-
         private void Btn_Plus_Z_Click(object sender, EventArgs e)
         {
 
             api.Player.Z = api.Player.Y + Structs.Settings.POS_INC;
         }
-
         private void Btn_Minus_Z_Click(object sender, EventArgs e)
         {
 
             api.Player.Z = api.Player.Y - Structs.Settings.POS_INC;
         }
-
-        private void Btn_Save_Click(object sender, EventArgs e)
-        {
-            XML.SaveWarp(api);
-        }
-
-        private void Btn_Warp_Click(object sender, EventArgs e)
-        {
-            Player.Warp(api);
-        }
-
-        private void Form_Close(object sender, EventArgs e)
-        {
-            api.Player.Speed = Player.Speed.normal;
-        }
-
-        private void Btn_Delete_Click(object sender, EventArgs e)
-        {
-            XML.DeleteWarp(api);
-        }
-
-        private void Btn_SaveSettings_Click(object sender, EventArgs e)
-        {
-            XML.SaveSettings();
-        }
-
-        private void Btn_Accept_Click(object sender, EventArgs e)
-        {
-            api.ThirdParty.SendString("/echo " + Structs.Chat.Warp.acceptSelfNotify);
-            api.ThirdParty.SendString("/p " + Structs.Chat.Warp.acceptNotify);
-            Player.Warp(api, true);
-        }
-
-        private void Btn_Req_Click(object sender, EventArgs e)
-        {
-            string s = Math.Round(api.Player.X, 5) + " " + Math.Round(api.Player.Z, 5) + " " + Math.Round(api.Player.Y, 5) + " " + api.Player.ZoneId;
-            api.ThirdParty.SendString("/p " + s);
-        }
-
-        public static void ExitApp()
-        {
-            if (System.Windows.Forms.Application.MessageLoop)
-            {
-                // WinForms app
-                System.Windows.Forms.Application.Exit();
-            }
-            else
-            {
-                // Console app
-                System.Environment.Exit(1);
-            }
-        }
-
         private void Btn_NW_Click(object sender, EventArgs e)
         {
             float PtX = api.Player.X;
@@ -339,13 +280,6 @@ namespace NailClipr
             api.Player.X = pts[0];
             api.Player.Y = pts[1];
         }
-
-        private float[] MidPoint(float A, float A1, float B, float B1)
-        {
-            float[] ret = { (A + A1) / 2, (B + B1) / 2 };
-            return ret;
-        }
-
         private void Btn_SW_Click(object sender, EventArgs e)
         {
             float PtX = api.Player.X;
@@ -356,7 +290,6 @@ namespace NailClipr
             api.Player.X = pts[0];
             api.Player.Y = pts[1];
         }
-
         private void Btn_NE_Click(object sender, EventArgs e)
         {
             float PtX = api.Player.X;
@@ -367,7 +300,6 @@ namespace NailClipr
             api.Player.X = pts[0];
             api.Player.Y = pts[1];
         }
-
         private void Btn_SE_Click(object sender, EventArgs e)
         {
             float PtX = api.Player.X;
@@ -378,7 +310,47 @@ namespace NailClipr
             api.Player.X = pts[0];
             api.Player.Y = pts[1];
         }
+        #endregion
+        #region WarpBtns
+        private void Btn_Save_Click(object sender, EventArgs e)
+        {
+            XML.SaveWarp(api);
+        }
+        private void Btn_Warp_Click(object sender, EventArgs e)
+        {
+            Player.Warp(api);
+        }
+        private void Btn_Delete_Click(object sender, EventArgs e)
+        {
+            XML.DeleteWarp(api);
+        }
+        #endregion
+        #region Settings
+        private void Btn_SaveSettings_Click(object sender, EventArgs e)
+        {
+            XML.SaveSettings();
+        }
+        private void Btn_Accept_Click(object sender, EventArgs e)
+        {
+            api.ThirdParty.SendString("/echo " + Structs.Chat.Warp.acceptSelfNotify);
+            api.ThirdParty.SendString("/p " + Structs.Chat.Warp.acceptNotify);
+            Player.Warp(api, true);
+        }
+        private void Btn_Req_Click(object sender, EventArgs e)
+        {
+            string s = Math.Round(api.Player.X, 5) + " " + Math.Round(api.Player.Z, 5) + " " + Math.Round(api.Player.Y, 5) + " " + api.Player.ZoneId;
+            api.ThirdParty.SendString("/p " + s);
+        }
+        #endregion
 
+        #endregion
+
+        private void Btn_Find_Click(object sender, EventArgs e)
+        {
+            Player.Search.isSearching = true;
+            Player.Search.target = GUI_SEARCH_TARGET.Text;
+            Player.Search.status = Structs.Search.searching;
+        }
     }
 }
 

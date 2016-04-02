@@ -83,6 +83,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Classes\Threads.cs" />
     <EmbeddedResource Include="NailClipr.resx">
       <DependentUpon>NailClipr.cs</DependentUpon>
     </EmbeddedResource>

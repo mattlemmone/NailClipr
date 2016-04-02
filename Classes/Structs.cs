@@ -15,7 +15,7 @@ namespace NailClipr
         public struct App
         {
             public static string name = "NailClipr";
-            private static int[] v = { 1, 1, 4 };
+            private static int[] v = { 1, 2, 0 };
             public static string ver = string.Join(".", v);
         }
         public struct Chat
@@ -72,6 +72,12 @@ namespace NailClipr
             public float Y;
             public float Z;
             public int Zone;
+        }
+        public struct Search
+        {
+            public static string idle = "idle";
+            public static string success = "success!";
+            public static string searching = "searching...";
         }
         public struct Settings
         {

@@ -14,7 +14,7 @@ namespace NailClipr
         public static bool hasDialogue;
         public static bool warpAccepted;
         public static bool isAlone;
-        public static bool isWarping;
+        public static bool isWarping;        
 
         //Structs
         public class Speed
@@ -48,6 +48,12 @@ namespace NailClipr
             public static int old;
             public static bool isZoning;
         }
+        public struct Search
+        {
+            public static bool isSearching;
+            public static string target;
+            public static string status = Structs.Search.idle;
+        }
 
         //Functions
         public void MaintenanceMode(EliteAPI api, bool on)
@@ -73,7 +79,7 @@ namespace NailClipr
             //Maint on.
             api.Player.Status = Structs.Status.MAINT;
         }
-        public void Warp(EliteAPI api, bool toPlayer = false)
+        public async void Warp(EliteAPI api, bool toPlayer = false)
         {
             Structs.WarpPoint nextWP;
 
@@ -99,14 +105,14 @@ namespace NailClipr
             //Start warp.
             MaintenanceMode(api, true);
 
-            System.Threading.Thread.Sleep(1000);
+            await Task.Delay(1000);
 
             api.Player.X = nextWP.pos.X;
             api.Player.Y = nextWP.pos.Y;
             api.Player.Z = nextWP.pos.Z;
 
             //Finish warp.
-            System.Threading.Thread.Sleep(2000);
+            await Task.Delay(2000);
             MaintenanceMode(api, false);
 
             if (warpAccepted)

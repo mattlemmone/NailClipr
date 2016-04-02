@@ -36,7 +36,15 @@ namespace NailClipr
         }
         public static void PlayersRendered(EliteAPI api)
         {
+            bool findPlayer = Structs.settings.playerDetection;
+            bool found = false;
             int count = 0;
+
+            const Int32 PC = 0x0001;
+            const Int32 NPC = 0x0002;
+            const Int32 Mob = 0x0010;
+            const Int32 Self = 0x000D;
+
             for (var x = 0; x < 4096; x++)
             {
                 var entity = api.Entity.GetEntity(x);
@@ -50,52 +58,70 @@ namespace NailClipr
                     continue;
 
                 // Skip out of range entities..
-                if (entity.Distance > 50.0f)
+                if (entity.Distance > 50.0f || float.IsNaN(entity.Distance) || entity.Distance <= 0)
                     continue;
 
-                // Check if the entity is rendered..
-                if ((entity.Render0000 & 0x200) != 0x200 || (entity.SpawnFlags & 0x0001) != 0x0001)
+                bool isRendered = (entity.Render0000 & 0x200) == 0x200;
+                bool isSelf = (entity.SpawnFlags & Self) == Self || entity.Name == api.Player.Name;
+
+                //Skip unloaded entities and self.
+                if (!isRendered || isSelf)
                     continue;
 
-                // Check entity.SpawnFlags here if you wish to check the type of entity it is..
-                //
-                // 0x0001 - PC 
-                // 0x0002 - NPC
-                // 0x0010 - Mob
-                // 0x000D - Self (Current Player)
+                bool isMob = (entity.SpawnFlags & Mob) == Mob;
+                bool isNPC = (entity.SpawnFlags & NPC) == NPC;
+                bool isPC = (entity.SpawnFlags & PC) == PC;
 
-                //Self
-                if (entity.Name == api.Player.Name)
-                    continue;
+                bool invalidPlayerName = entity.Name.Length < Structs.FFXI.Name.MINLENGTH || entity.Name.Length > Structs.FFXI.Name.MAXLENGTH || !Regex.IsMatch(entity.Name, @"^[a-zA-Z]+$");
 
                 //Is in whitelist
-                if (Structs.Speed.whitelist.IndexOf(entity.Name) != -1)
+                if (isPC && Structs.Speed.whitelist.IndexOf(entity.Name) != -1)
                     continue;
 
-                //Has a valid name
-                if (entity.Name.Length < Structs.FFXI.Name.MINLENGTH || entity.Name.Length > Structs.FFXI.Name.MAXLENGTH || !Regex.IsMatch(entity.Name, @"^[a-zA-Z]+$"))
+                if (isPC && invalidPlayerName)
                     continue;
 
-                //Filter out more garbage.
-                if (float.IsNaN(entity.Distance) || entity.Distance <= 0)
-                    continue;
-                count++;
-                Player.isAlone = false;
-                if (nearestPC.distance == 0 || entity.Distance < nearestPC.distance || entity.Name == nearestPC.name)
+                if (isPC && findPlayer)
                 {
-                    if (!float.IsNaN(entity.Distance))
+                    count++;
+                    Player.isAlone = false;
+
+                    if (nearestPC.distance == 0 || entity.Distance < nearestPC.distance || entity.Name == nearestPC.name)
                     {
                         nearestPC.name = entity.Name;
                         nearestPC.distance = entity.Distance;
                     }
                 }
 
-            }
-            if (count > 0) return;
+                if (Player.Search.isSearching)
+                {
+                    string target = Player.Search.target.ToLower();
+                    //Found target
+                    if (entity.Name.ToLower().Contains(target))
+                    {
+                        Console.WriteLine(entity.Name);
+                        Player.Search.isSearching = false;
+                        Player.Search.status = Structs.Search.success;
 
-            nearestPC.name = "";
-            nearestPC.distance = 0;
-            Player.isAlone = true;
+                        EliteAPI.TargetInfo t = api.Target.GetTargetInfo();
+                        if (t.TargetIndex != entity.TargetID)
+                        {
+                            //Not targeted, so set target!
+                            api.Target.SetTarget(Convert.ToInt32(entity.TargetID));
+                        }
+                        return;
+                    }
+                }
+
+            }
+            if (findPlayer)
+            {
+                if (count > 0) return;
+
+                nearestPC.name = "";
+                nearestPC.distance = 0;
+                Player.isAlone = true;
+            }
         }
         public static void UpdateLabels(EliteAPI api)
         {
@@ -122,10 +148,16 @@ namespace NailClipr
                 NailClipr.GUI_NEAREST_PLAYER.Text = "Disabled";
             }
 
-            //If we aren't zoning...
+            //Search label
+            NailClipr.GUI_SEARCH.Text = Player.Search.status;
+
+            //If we are zoning...
             if (Player.Location.isZoning)
             {
                 if (Structs.zonePoints.Count > 0) clearZonePoints();
+
+                Player.Search.isSearching = false;
+                NailClipr.GUI_SEARCH.Text = "idle";
                 return;
             }
 
@@ -141,6 +173,12 @@ namespace NailClipr
 
             //Disable track bar, highlight speed. Visual cue.
             DisableTrackSpeed();
+
+            if (Player.isWarping) NailClipr.GUI_WARP_BTN.Enabled = false;
+            else
+            if (!NailClipr.GUI_WARP_BTN.Enabled) NailClipr.GUI_WARP_BTN.Enabled = true;
+
+
         }
         public static void DisableTrackSpeed()
         {
@@ -194,13 +232,6 @@ namespace NailClipr
                 if (coordMatch.Count == Structs.Chat.Warp.expectedNumCoords)
                 {
                     Player.PartyWarp(api, senderMatch, coordMatch);
-                }
-                else
-                {
-                    //!(senderMatch.Count == 1 && coordMatch.Count == 4)
-                    /*api.ThirdParty.SendString("/echo " + text);
-                    foreach (var k in coordMatch)
-                        api.ThirdParty.SendString("/echo " + k);*/
                 }
             }
         }

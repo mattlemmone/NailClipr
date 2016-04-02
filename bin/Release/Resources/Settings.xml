@@ -56,12 +56,32 @@
         <Y>-142.606674</Y>
         <Z>-0.75</Z>
       </WarpPoint>
+      <WarpPoint title="Gob. Mystery Box">
+        <X>22.4503441</X>
+        <Y>-95.64319</Y>
+        <Z>3.993511E-06</Z>
+      </WarpPoint>
+      <WarpPoint title="Svenja's Manor">
+        <X>50.4384</X>
+        <Y>8.641103</Y>
+        <Z>-0.5500277</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="260" title="Yahse Hunting Grounds">
       <WarpPoint title="Frontier Station Waypoint">
         <X>324.4978</X>
         <Y>-199.987473</Y>
         <Z>0.03489667</Z>
+      </WarpPoint>
+      <WarpPoint title="Frontier Bivouac #2">
+        <X>-282.133026</X>
+        <Y>41.90831</Y>
+        <Z>0</Z>
+      </WarpPoint>
+      <WarpPoint title="Moh Gates West">
+        <X>-508.542084</X>
+        <Y>-139.2005</Y>
+        <Z>6.98731041</Z>
       </WarpPoint>
     </Zone>
     <Zone id="265" title="Morimar Basalt Fields">
@@ -89,6 +109,16 @@
         <X>7.754589</X>
         <Y>-12.2337856</Y>
         <Z>0.39651984</Z>
+      </WarpPoint>
+      <WarpPoint title="Moh Gates">
+        <X>579.396</X>
+        <Y>-477.706</Y>
+        <Z>-7.7</Z>
+      </WarpPoint>
+      <WarpPoint title="Icy Weather Tree ???">
+        <X>494.345642</X>
+        <Y>74.08546</Y>
+        <Z>-16.2454014</Z>
       </WarpPoint>
     </Zone>
     <Zone id="257" title="Eastern Adoulin">
@@ -147,6 +177,11 @@
         <X>45.17834</X>
         <Y>-34.729248</Y>
         <Z>2</Z>
+      </WarpPoint>
+      <WarpPoint title="Trust Cipher NPC">
+        <X>123.064651</X>
+        <Y>92.7715759</Y>
+        <Z>0</Z>
       </WarpPoint>
     </Zone>
     <Zone id="100" title="West Ronfaure">
@@ -444,6 +479,21 @@
         <Y>-244.322052</Y>
         <Z>-2.026558E-06</Z>
       </WarpPoint>
+      <WarpPoint title="Frontier Station">
+        <X>368.701965</X>
+        <Y>188.4442</Y>
+        <Z>0.6</Z>
+      </WarpPoint>
+      <WarpPoint title="Frontier Bivouac #2">
+        <X>-41.51747</X>
+        <Y>157.158432</Y>
+        <Z>-2.98023224E-06</Z>
+      </WarpPoint>
+      <WarpPoint title="Frontier Bivouac #1">
+        <X>-6.879</X>
+        <Y>-117.511</Y>
+        <Z>-2.026558E-06</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="145" title="Giddeus">
       <WarpPoint title="Saruta">
@@ -469,6 +519,35 @@
         <X>378.92926</X>
         <Y>153.840408</Y>
         <Z>1.437917</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="269" title="Moh Gates">
+      <WarpPoint title="Magma Vein">
+        <X>378.268982</X>
+        <Y>58.5156</Y>
+        <Z>30.1222363</Z>
+      </WarpPoint>
+      <WarpPoint title="Yahse East">
+        <X>293.803619</X>
+        <Y>-347.3754</Y>
+        <Z>55.334198</Z>
+      </WarpPoint>
+      <WarpPoint title="Morimar">
+        <X>121.829453</X>
+        <Y>140.436569</Y>
+        <Z>19.9978619</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="262" title="Foret de Hennetiel">
+      <WarpPoint title="Frontier Station">
+        <X>396.7398</X>
+        <Y>275.88858</Y>
+        <Z>-2</Z>
+      </WarpPoint>
+      <WarpPoint title="Frontier Bivouac #2">
+        <X>498.049927</X>
+        <Y>-300.560028</Y>
+        <Z>-2.63816524</Z>
       </WarpPoint>
     </Zone>
   </Zones>

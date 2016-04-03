@@ -17,7 +17,7 @@ namespace NailClipr
         public struct App
         {
             public static string name = "NailClipr";
-            private static int[] v = { 1, 4, 2};
+            private static int[] v = { 1, 4, 3};
             public static string ver = string.Join(".", v);
         }
         public struct Chat

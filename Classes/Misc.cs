@@ -51,8 +51,9 @@ namespace NailClipr.Classes
                 Download(Structs.Downloads.UPDATER.title, Structs.Downloads.UPDATER.url);
             }
 
+            /* Temp bypass
             Process.Start(Application.StartupPath + @"\" + Structs.Downloads.UPDATER.title);
-            Process.GetCurrentProcess().Kill();
+            Process.GetCurrentProcess().Kill();*/
         }
         public static void UpdateComments()
         {

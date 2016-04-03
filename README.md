@@ -1,7 +1,7 @@
 # NailClipr
 Tool written in C# for FFXI.
 
-![](http://puu.sh/nU0wl/c999bffa7b.png)
+![](http://puu.sh/o4bPg/1c71f29bdb.png)
 
 #### Position
 `NW, N, NE, ...` 
@@ -31,14 +31,13 @@ Checkboxes and default speed are saved into `/resources/Settings.xml`.
 
 Saves current position and zone id into `Settings.xml` with name from dropdown. If input name exists in dropdown or existing name is selected, the warp point will be updated in `Settings.xml`.
 
-![](http://puu.sh/nROsb/10cfa69025.jpg)
-![](http://puu.sh/nROti/66302d91ff.jpg)
+![](http://puu.sh/o4bTZ/0d603fab12.jpg)
 
 `Delete` 
 
 ...
 
-![](http://puu.sh/nROuh/7ba21f1c8c.jpg)
+![](http://puu.sh/o4bUC/69f0630431.jpg)
 
 `Request` 
 
@@ -50,11 +49,15 @@ Sends coordinates and zone id to chat to request party teleportation.
 
 Enabled upon request receipt. Disabled upon zone. This prevents players from teleporting to areas outside of map range.
 
+`Find`
 
-#### To Do
-1. ~~Echo saves/deletes into chat.~~
-2. Control bot via windower commands (functionality yet not supported).
-3. ~~Integrate a whitelist for Player Detection feature.~~
-4. Consolidate strings into Structs.
-5. ~~Cardinal direction nudges.~~
-6. ~~Auto update.~~
+Continuously searches loaded entities until a partial name match is found. Targets upon success.
+
+`Abort`
+
+Cancels search. Zoning also cancels search.
+
+--
+
+All controls other than default speed, cardinals, and player detection are controllable from chat.
+![](http://puu.sh/o4c3A/f004098278.jpg)

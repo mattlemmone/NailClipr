@@ -252,10 +252,18 @@ namespace NailClipr
                         SharedFunctions.Speed(api, echoMatch[1].Value);
                         break;
                     case Structs.Chat.Controller.searchBG:
-                        openURL(Structs.URL.blueGartr + echoMatch[1].Value);
+                        string[] s = echoMatch.Cast<Match>()
+                            .Select(m => m.Value)
+                            .ToArray();
+                        string term = string.Join(" ", s.Skip(1));
+                        openURL(Structs.URL.blueGartr + term);
                         break;
                     case Structs.Chat.Controller.searchWiki:
-                        openURL(Structs.URL.wiki + echoMatch[1].Value);
+                        string[] s1 = echoMatch.Cast<Match>()
+                            .Select(m => m.Value)
+                            .ToArray();
+                        string term1 = string.Join(" ", s1.Skip(1));
+                        openURL(Structs.URL.wiki + term1);
                         break;
                 }
 

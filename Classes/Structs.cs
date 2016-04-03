@@ -17,7 +17,7 @@ namespace NailClipr
         public struct App
         {
             public static string name = "NailClipr";
-            private static int[] v = { 1, 4, 1};
+            private static int[] v = { 1, 4, 2};
             public static string ver = string.Join(".", v);
         }
         public struct Chat
@@ -211,13 +211,14 @@ namespace NailClipr
                 }
             }
         }
-        public class Update
+        public class Downloads
         {
             public static File UPDATER = new File("Updater.exe", "https://github.com/mattlemmone/NailClipr/raw/master/bin/Release/Updater.exe");
             public const string ver = "https://raw.githubusercontent.com/mattlemmone/NailClipr/master/ver.txt";
             public static File API_DLL = new File("EliteAPI.dll", "http://ext.elitemmonetwork.com/downloads/eliteapi/index.php?v");
             public static File MMO_DLL = new File("EliteMMO.API.dll", "http://ext.elitemmonetwork.com/downloads/elitemmo_api/index.php?v");
             public static File CHANGES = new File("changes.json", "http://api.github.com/repos/mattlemmone/NailClipr/commits");
+            public static File AREAS = new File("areas.xml", "https://github.com/mattlemmone/NailClipr/raw/master/bin/Release/Resources/areas.xml");
         }
         public class URL
         {

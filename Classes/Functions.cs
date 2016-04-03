@@ -4,21 +4,19 @@ using System;
 using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Timers;
 
 namespace NailClipr
 {
     class Functions
     {
-        private static Structs.PC nearestPC = new Structs.PC();
+        
 
         public static void AddZonePoint(Structs.WarpPoint wp)
         {
             NailClipr.GUI_WARP.Items.Add(wp.title);
             Structs.zonePoints.Add(wp);
         }
-        public static void clearZonePoints()
+        public static void ClearZonePoints()
         {
             NailClipr.GUI_WARP.Text = "";
             NailClipr.GUI_WARP.Items.Clear();
@@ -52,19 +50,14 @@ namespace NailClipr
                     dead = entity.HealthPercent <= 0,
                     outsideRange = entity.Distance > 50.0f || float.IsNaN(entity.Distance) || entity.Distance <= 0,
                     isRendered = (entity.Render0000 & 0x200) == 0x200,
-                    isSelf = (entity.SpawnFlags & Self) == Self || entity.Name == api.Player.Name;
+                    isSelf = (entity.SpawnFlags & Self) == Self || entity.Name == api.Player.Name,
+                    isMob = (entity.SpawnFlags & Mob) == Mob,
+                    isNPC = (entity.SpawnFlags & NPC) == NPC,
+                    isPC = (entity.SpawnFlags & PC) == PC,
+                    invalidPlayerName = isPC && (entity.Name.Length < Structs.FFXI.Name.MINLENGTH || entity.Name.Length > Structs.FFXI.Name.MAXLENGTH || !Regex.IsMatch(entity.Name, @"^[a-zA-Z]+$")),
+                    inWhitelist = isPC && Structs.Speed.whitelist.IndexOf(entity.Name) != -1;
 
-                if (invalid || dead || outsideRange || !isRendered || isSelf)
-                    continue;
-
-                bool isMob = (entity.SpawnFlags & Mob) == Mob,
-                isNPC = (entity.SpawnFlags & NPC) == NPC,
-                isPC = (entity.SpawnFlags & PC) == PC,
-                invalidPlayerName = isPC && (entity.Name.Length < Structs.FFXI.Name.MINLENGTH || entity.Name.Length > Structs.FFXI.Name.MAXLENGTH || !Regex.IsMatch(entity.Name, @"^[a-zA-Z]+$")),
-                inWhitelist = isPC && Structs.Speed.whitelist.IndexOf(entity.Name) != -1;
-
-                //Is in whitelist
-                if (inWhitelist || invalidPlayerName)
+                if (invalid || dead || outsideRange || !isRendered || isSelf || inWhitelist || invalidPlayerName)
                     continue;
 
                 if (isPC && findPlayer)
@@ -72,138 +65,24 @@ namespace NailClipr
                     count++;
                     Player.isAlone = false;
 
-                    if (nearestPC.distance == 0 || entity.Distance < nearestPC.distance || entity.Name == nearestPC.name)
+                    bool closerPC = Updates.nearestPC.distance == 0 || entity.Distance < Updates.nearestPC.distance || entity.Name == Updates.nearestPC.name;
+                    if (closerPC)
                     {
-                        nearestPC.name = entity.Name;
-                        nearestPC.distance = entity.Distance;
+                        Updates.nearestPC.name = entity.Name;
+                        Updates.nearestPC.distance = entity.Distance;
                     }
                 }
 
                 if (Player.Search.isSearching)
                 {
-                    string target = Player.Search.target.ToLower();
-                    Console.WriteLine(entity.Name);
-                    //Found target
-                    if (entity.Name.ToLower().Contains(target))
-                    {
-                        Player.Search.isSearching = false;
-                        Player.Search.status = Structs.Search.success;
-                        Structs.Chat.SendEcho(api, Structs.Chat.Search.success);
-
-                        EliteAPI.TargetInfo t = api.Target.GetTargetInfo();
-                        if (t.TargetIndex != entity.TargetID)
-                        {
-                            //Not targeted, so set target!
-                            api.Target.SetTarget(Convert.ToInt32(entity.TargetID));
-                        }
-                        return;
-                    }
+                    Search(api, entity);
                 }
 
             }
             //Outside of loop
             if (findPlayer)
-            {
-                if (count > 0) return;
-
-                nearestPC.name = "";
-                nearestPC.distance = 0;
-                Player.isAlone = true;
-            }
-        }
-        public static void UpdateLabels(EliteAPI api)
-        {
-
-            //Zone and Status Label
-            NailClipr.GUI_STATUS.Text = api.Player.Status + "";
-            NailClipr.GUI_ZONE.Text = Structs.Zones.NameFromID(api.Player.ZoneId);
-
-            //Target Info
-            EliteAPI.TargetInfo target = api.Target.GetTargetInfo();
-            uint targetIdx = target.TargetIndex;
-            var entity = api.Entity.GetEntity(Convert.ToInt32(targetIdx));
-            string targetText = target.TargetName == "" ? "None" : entity.Name + " (" + entity.HealthPercent + "%) @ " + Math.Round(entity.Distance, 2) + " yalms.";
-            NailClipr.GUI_TARGET.Text = targetText;
-
-            //Nearest Player
-            if (Structs.settings.playerDetection)
-            {
-                string nearestPlayerText = nearestPC.name == "" ? "None" : nearestPC.name + " @ " + Math.Round(nearestPC.distance, 2) + " yalms.";
-                NailClipr.GUI_NEAREST_PLAYER.Text = nearestPlayerText;
-            }
-            else
-            {
-                NailClipr.GUI_NEAREST_PLAYER.Text = "Disabled";
-            }
-
-            //Search label
-            NailClipr.GUI_SEARCH.Text = Player.Search.status;
-            NailClipr.GUI_ABORT.Enabled = Player.Search.isSearching;
-
-            //If we are zoning...
-            if (Player.Location.isZoning)
-            {
-                if (Structs.zonePoints.Count > 0) clearZonePoints();
-
-                Player.Search.isSearching = false;
-                Player.Search.status = Structs.Search.idle;
-                //NailClipr.GUI_ABORT.Enabled = false;
-                return;
-            }
-
-            //Load zone points.
-            if (Structs.zonePoints.Count == 0 && api.Player.ZoneId != Player.Location.old)
-            {
-                LoadZonePoints(api);
-            }
-            Player.Location.old = api.Player.ZoneId;
-
-            //Speed labels
-            UpdateTrackSpeed(NailClipr.GUI_SPEED_TRACK, NailClipr.GUI_SPEED, api.Player.Speed, api);
-
-            //Disable track bar, highlight speed. Visual cue.
-            DisableTrackSpeed();
-
-            if (Player.isWarping) NailClipr.GUI_WARP_BTN.Enabled = false;
-            else
-            if (!NailClipr.GUI_WARP_BTN.Enabled) NailClipr.GUI_WARP_BTN.Enabled = true;
-
-
-        }
-        public static void DisableTrackSpeed()
-        {
-            if (Player.isAlone || !Structs.settings.playerDetection)
-            {
-                if (NailClipr.GUI_SPEED_TRACK.Enabled == false)
-                {
-                    NailClipr.GUI_SPEED_TRACK.Enabled = true;
-                    NailClipr.GUI_SPEED.ForeColor = Color.Black;
-                    NailClipr.GUI_SPEED.Font = new Font(NailClipr.GUI_SPEED.Font, FontStyle.Regular);
-                }
-            }
-            else
-            {
-                if (NailClipr.GUI_SPEED_TRACK.Enabled)
-                {
-                    NailClipr.GUI_SPEED_TRACK.Enabled = false;
-                    NailClipr.GUI_SPEED.ForeColor = Color.MediumVioletRed;
-                    NailClipr.GUI_SPEED.Font = new Font(NailClipr.GUI_SPEED.Font, FontStyle.Bold);
-                }
-            }
-        }
-        public static void UpdateTrackSpeed(System.Windows.Forms.TrackBar bar, System.Windows.Forms.Label lbl, float speed, EliteAPI api = null)
-        {
-            //Only update GUI speed if not in combat or CS.
-            if (api == null || (api.Player.Status != 1 && api.Player.Status != 4 && api.Player.Speed >= Player.Speed.normal))
-            {
-
-                lbl.Text = "x" + speed / Structs.Speed.NATURAL;
-
-                float f = (speed - Structs.Speed.NATURAL) * Structs.Speed.DIVISOR;
-                int barSpeed = (int)Math.Ceiling(f);
-                bar.Value = barSpeed;
-            }
-        }
+                PlayerFound(count);
+        }        
         public static void ParseChat(EliteAPI api)
         {
             EliteAPI.ChatEntry c = api.Chat.GetNextChatLine();
@@ -251,40 +130,16 @@ namespace NailClipr
                     case Structs.Chat.Controller.speed:
                         SharedFunctions.Speed(api, echoMatch[1].Value);
                         break;
+                    case Structs.Chat.Controller.select:
+                        SharedFunctions.Select(api, echoMatch[1].Value);
+                        break;
                     case Structs.Chat.Controller.searchBG:
-                        string[] s = echoMatch.Cast<Match>()
-                            .Select(m => m.Value)
-                            .ToArray();
-                        string term = string.Join(" ", s.Skip(1));
-                        openURL(Structs.URL.blueGartr + term);
+                        Search(echoMatch, Structs.URL.blueGartr);
                         break;
                     case Structs.Chat.Controller.searchWiki:
-                        string[] s1 = echoMatch.Cast<Match>()
-                            .Select(m => m.Value)
-                            .ToArray();
-                        string term1 = string.Join(" ", s1.Skip(1));
-                        openURL(Structs.URL.wiki + term1);
+                        Search(echoMatch, Structs.URL.wiki);
                         break;
                 }
-
-
-                /*
-                acpt -> Accept
-                req -> Request
-                m -> Maintenance toggle
-                save -> Save Warp
-                dlt -> Delete Warp
-                abrt -> Abort
-                
-                Variables
-                srch ... -> Search ...
-                s ... -> Set Speed
-                    + -> + 0.5
-                    - -> - 0.5
-                ds ... -> Set Default Speed
-                    + -> + 0.5
-                    - -> - 0.5
-                */
             }
         }
         private static void SaveWarp(EliteAPI api, MatchCollection echoMatch)
@@ -296,6 +151,14 @@ namespace NailClipr
             string saveName = string.Join(" ", s.Skip(1));
             SharedFunctions.SaveWarp(api, saveName);
         }
+        private static void Search(MatchCollection echoMatch, string url)
+        {
+            string[] s = echoMatch.Cast<Match>()
+                            .Select(m => m.Value)
+                            .ToArray();
+            string term = string.Join(" ", s.Skip(1));
+            OpenURL(url + term);
+        }
         private static void Search(EliteAPI api, MatchCollection echoMatch)
         {
             string[] s = echoMatch.Cast<Match>()
@@ -305,10 +168,37 @@ namespace NailClipr
             string target = string.Join(" ", s.Skip(1));
             SharedFunctions.Search(api, target);
         }
+        private static void Search(EliteAPI api, EliteAPI.XiEntity entity)
+        {
+            string target = Player.Search.target.ToLower();
+            Console.WriteLine(entity.Name);
+            //Found target
+            if (entity.Name.ToLower().Contains(target))
+            {
+                Player.Search.isSearching = false;
+                Player.Search.status = Structs.Search.success;
+                Structs.Chat.SendEcho(api, Structs.Chat.Search.success);
 
-        private static void openURL(string url)
+                EliteAPI.TargetInfo t = api.Target.GetTargetInfo();
+                if (t.TargetIndex != entity.TargetID)
+                {
+                    //Not targeted, so set target!
+                    api.Target.SetTarget(Convert.ToInt32(entity.TargetID));
+                }
+                return;
+            }
+        }
+        private static void OpenURL(string url)
         {
             System.Diagnostics.Process.Start(url);
+        }
+        private static void PlayerFound(int numPlayers)
+        {
+            if (numPlayers > 0) return;
+
+            Updates.nearestPC.name = "";
+            Updates.nearestPC.distance = 0;
+            Player.isAlone = true;
         }
     }
 }

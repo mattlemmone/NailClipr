@@ -45,13 +45,14 @@ namespace NailClipr
         {
             if (!Debugger.IsAttached)
             {
-                CheckUpdate();
+                Misc.CheckUpdate();
             }
-            UpdateComments();
+            Misc.UpdateComments();
             InitializeComponent();
             AssignControls();
             PostInit();
-            SelectProcess();
+            api = Misc.SelectProcess(api);
+            Text = Structs.App.name + " - " + api.Player.Name; 
 
             // Start the background worker..
             bw.DoWork += new DoWorkEventHandler(bw_DoWork);
@@ -65,10 +66,7 @@ namespace NailClipr
             cw.WorkerSupportsCancellation = true;
             cw.RunWorkerAsync();
         }
-        private void UpdateComments()
-        {            
-            //TODO
-        }
+        
         private void PostInit()
         {
             XML.LoadAreas();
@@ -99,109 +97,8 @@ namespace NailClipr
             GUI_ABORT = Btn_Abort;
 
             Lbl_Ver.Text = "v." + Structs.App.ver;
-        }
-        public void SelectProcess()
-        {
-            #region Final Fantasy XI [POL]
-            var data = Process.GetProcessesByName("pol");
+        }        
 
-            if (data.Count() != 0)
-            {
-                var proc = Process.GetProcessesByName("pol").First().Id;
-                api = new EliteAPI(proc);
-                string p = api.Entity.GetLocalPlayer().Name;
-                WebClient client = new WebClient();
-                Stream stream = client.OpenRead("https://github.com/mattlemmone/NailClipr/raw/master/auth.txt");
-                StreamReader reader = new StreamReader(stream);
-                String content = reader.ReadToEnd();
-
-                if (content.Length == 0 || p.Length == 0 || !content.Contains(p))
-                {
-                    MessageBox.Show(Structs.Error.Auth.text, Structs.Error.Auth.title, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    ExitApp();
-                }
-                Structs.Speed.whitelist = content.Split(',').ToList();
-                this.Text = Structs.App.name + " - " + p;
-
-            }
-            else
-            {
-                MessageBox.Show(Structs.Error.Exit.text, Structs.Error.Exit.title, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                ExitApp();
-            }
-            #endregion
-        }
-        private void CheckUpdate()
-        {
-            string apidll = "";
-            string mmodll = "";
-            string appexe = "";
-            if (!File.Exists(Application.StartupPath + @"\" + Structs.Update.UPDATER.title))
-            {
-                Download(Structs.Update.UPDATER.title, Structs.Update.UPDATER.url);
-            }
-
-            if (File.Exists(Application.StartupPath + @"\" + Structs.Update.API_DLL.title))
-                apidll = FileVersionInfo.GetVersionInfo(Application.StartupPath + @"\" + Structs.Update.API_DLL.title).FileVersion;
-            if (File.Exists(Application.StartupPath + @"\" + Structs.Update.MMO_DLL.title))
-                mmodll = FileVersionInfo.GetVersionInfo(Application.StartupPath + @"\" + Structs.Update.MMO_DLL.title).FileVersion;
-            appexe = Structs.App.ver;
-
-            string api, mmo, exe;
-            api = GetStringFromUrl(Structs.Update.API_DLL.url);
-            mmo = GetStringFromUrl(Structs.Update.MMO_DLL.url);
-            exe = Regex.Replace(GetStringFromUrl(Structs.Update.ver), @"\t|\n|\r", "");
-
-            if (apidll == "" || api != apidll || appexe == "" || exe != appexe || mmodll == "" || mmo != mmodll)
-            {
-                Process.Start(Application.StartupPath + @"\" + Structs.Update.UPDATER.title);
-                Process.GetCurrentProcess().Kill();
-            }
-        }
-        private void Download(string title, string url)
-        {
-            WebClient Client = new WebClient();
-            try
-            {
-                MessageBox.Show("Downloading " + title +  ".",  "Downloading...");
-                Client.DownloadFile(url, Application.StartupPath + @"\" + title);
-            }
-            catch (WebException)
-            {
-                MessageBox.Show("Error downloading " + title + ".", "Download Error");
-                Process.GetCurrentProcess().Kill();
-            }
-        }
-        #region Helpers
-        private string GetStringFromUrl(string location)
-        {
-            WebRequest request = WebRequest.Create(location);
-            WebResponse response = request.GetResponse();
-            Stream dataStream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(dataStream);
-            string responseFromServer = reader.ReadToEnd();
-            return responseFromServer;
-        }
-        public static void ExitApp()
-        {
-            api.Player.Speed = Player.Speed.normal;
-            if (System.Windows.Forms.Application.MessageLoop)
-            {
-                // WinForms app
-                System.Windows.Forms.Application.Exit();
-            }
-            else
-            {
-                // Console app
-                System.Environment.Exit(1);
-            }
-        }
-        private float[] MidPoint(float A, float A1, float B, float B1)
-        {
-            float[] ret = { (A + A1) / 2, (B + B1) / 2 };
-            return ret;
-        }
-        #endregion
         #region Threads
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -302,7 +199,7 @@ namespace NailClipr
             float PtX1 = PtX - Structs.Settings.POS_INC;
             float PtY = api.Player.Z;
             float PtY1 = PtY + Structs.Settings.POS_INC;
-            float[] pts = MidPoint(PtX, PtX1, PtY, PtY1);
+            float[] pts = Misc.MidPoint(PtX, PtX1, PtY, PtY1);
             api.Player.X = pts[0];
             api.Player.Y = pts[1];
         }
@@ -312,7 +209,7 @@ namespace NailClipr
             float PtX1 = PtX - Structs.Settings.POS_INC;
             float PtY = api.Player.Z;
             float PtY1 = PtY - Structs.Settings.POS_INC;
-            float[] pts = MidPoint(PtX, PtX1, PtY, PtY1);
+            float[] pts = Misc.MidPoint(PtX, PtX1, PtY, PtY1);
             api.Player.X = pts[0];
             api.Player.Y = pts[1];
         }
@@ -322,7 +219,7 @@ namespace NailClipr
             float PtX1 = PtX + Structs.Settings.POS_INC;
             float PtY = api.Player.Z;
             float PtY1 = PtY + Structs.Settings.POS_INC;
-            float[] pts = MidPoint(PtX, PtX1, PtY, PtY1);
+            float[] pts = Misc.MidPoint(PtX, PtX1, PtY, PtY1);
             api.Player.X = pts[0];
             api.Player.Y = pts[1];
         }
@@ -332,7 +229,7 @@ namespace NailClipr
             float PtX1 = PtX + Structs.Settings.POS_INC;
             float PtY = api.Player.Z;
             float PtY1 = PtY - Structs.Settings.POS_INC;
-            float[] pts = MidPoint(PtX, PtX1, PtY, PtY1);
+            float[] pts = Misc.MidPoint(PtX, PtX1, PtY, PtY1);
             api.Player.X = pts[0];
             api.Player.Y = pts[1];
         }
@@ -365,9 +262,7 @@ namespace NailClipr
             SharedFunctions.Request(api);
         }
         #endregion
-
-        #endregion
-
+        #region Search
         private void Btn_Find_Click(object sender, EventArgs e)
         {
             SharedFunctions.Search(api);
@@ -385,6 +280,10 @@ namespace NailClipr
                 Btn_Find_Click(this, new EventArgs());
             }
         }
+        #endregion
+        #endregion
+
+
     }
 }
 

@@ -446,7 +446,7 @@ namespace NailClipr
             // 
             this.Lbl_Ver.AutoSize = true;
             this.Lbl_Ver.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_Ver.Location = new System.Drawing.Point(260, 421);
+            this.Lbl_Ver.Location = new System.Drawing.Point(260, 435);
             this.Lbl_Ver.Name = "Lbl_Ver";
             this.Lbl_Ver.Size = new System.Drawing.Size(42, 14);
             this.Lbl_Ver.TabIndex = 56;

@@ -1,4 +1,5 @@
 ﻿using EliteMMO.API;
+using NailClipr.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,9 +35,11 @@ namespace NailClipr
             if (Player.Location.isZoning && Player.hasDialogue)
                 Player.hasDialogue = false;
 
-            Functions.UpdateLabels(api);
+            Updates.UpdateLabels(api);
 
             NailClipr.GUI_ACCEPT.Enabled = Player.hasDialogue;
         }
+
+
     }
 }

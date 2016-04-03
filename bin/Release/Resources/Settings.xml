@@ -81,6 +81,11 @@
         <Y>-2.440815</Y>
         <Z>-0.199992</Z>
       </WarpPoint>
+      <WarpPoint title="Sparks NPC">
+        <X>13.9120283</X>
+        <Y>-121.015778</Y>
+        <Z>-0.1500001</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="260" title="Yahse Hunting Grounds">
       <WarpPoint title="Frontier Station Waypoint">
@@ -642,6 +647,11 @@
         <Y>496.64798</Y>
         <Z>19.5051556</Z>
       </WarpPoint>
+      <WarpPoint title="Ergon Locus">
+        <X>-140.348038</X>
+        <Y>55.56684</Y>
+        <Z>10.05689</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="263" title="Yorcia Weald">
       <WarpPoint title="Cirdas Caverns">
@@ -663,6 +673,16 @@
         <X>-379.413361</X>
         <Y>220.126587</Y>
         <Z>4.100603</Z>
+      </WarpPoint>
+      <WarpPoint title="Augural Conveyor - Skirmish">
+        <X>170.429474</X>
+        <Y>-256.6431</Y>
+        <Z>4.3839674</Z>
+      </WarpPoint>
+      <WarpPoint title="Near Skirmish">
+        <X>211.49939</X>
+        <Y>-264.567261</Y>
+        <Z>0.2687996</Z>
       </WarpPoint>
     </Zone>
     <Zone id="273" title="Woh Gates">

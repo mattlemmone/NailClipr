@@ -1,10 +1,12 @@
 ﻿using EliteMMO.API;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using NailClipr.Classes;
 
 namespace NailClipr
 {
@@ -68,7 +70,7 @@ namespace NailClipr
                 Player.Speed.normal = speed;
 
                 //Update Speed Label
-                Functions.UpdateTrackSpeed(NailClipr.GUI_SPEED_DEFAULT_TRACK, NailClipr.GUI_DEFAULT_SPEED, speed);
+                Updates.UpdateTrackSpeed(NailClipr.GUI_SPEED_DEFAULT_TRACK, NailClipr.GUI_DEFAULT_SPEED, speed);
             }
             catch (FileNotFoundException)
             {
@@ -101,9 +103,20 @@ namespace NailClipr
             }
             catch (Exception ex)
             {
+                string path = @"Resources\" + Structs.Downloads.AREAS.title;
+                bool getAreas = false;
                 if (ex is DirectoryNotFoundException || ex is FileNotFoundException)
+                {
                     Directory.CreateDirectory("Resources");
-                FNFerror("areas.xml");
+                    getAreas = true;
+                }
+                else if (!File.Exists(Application.StartupPath + path))
+                {
+                    getAreas = true;
+                }
+                if (getAreas)
+                    Misc.Download(path, Structs.Downloads.AREAS.url);
+                LoadAreas();
             }
         }
         public static void LoadWarps()
@@ -180,7 +193,7 @@ namespace NailClipr
                 Structs.warpPoints.Add(wp);
                 Functions.AddZonePoint(wp);
 
-                
+
 
                 try
                 {
@@ -239,10 +252,6 @@ namespace NailClipr
 
             NailClipr.GUI_WARP.Items.Remove(delWP.title);
         }
-        public static void FNFerror(string file)
-        {
-            MessageBox.Show("Please add " + file + " to the Resources directory.", "File Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            NailClipr.ExitApp();
-        }
+
     }
 }

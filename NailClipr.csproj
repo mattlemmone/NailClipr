@@ -72,9 +72,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Functions.cs" />
+    <Compile Include="Classes\Misc.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\SharedFunctions.cs" />
     <Compile Include="Classes\Structs.cs" />
+    <Compile Include="Classes\Updates.cs" />
     <Compile Include="Classes\XML.cs" />
     <Compile Include="NailClipr.cs">
       <SubType>Form</SubType>

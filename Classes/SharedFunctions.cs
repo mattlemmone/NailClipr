@@ -20,7 +20,6 @@ namespace NailClipr.Classes
                 Structs.Chat.SendEcho(api, "Maintenance: " + NailClipr.GUI_MAINT.Checked);
             }
         }
-
         public static void Warp(EliteAPI api)
         {
             if (NailClipr.GUI_WARP.InvokeRequired)

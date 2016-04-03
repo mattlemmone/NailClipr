@@ -6,7 +6,7 @@ alias abort input /echo abort
 alias warp input /echo warp
 alias save input /echo save
 alias sel input /echo select
-alias del input /echo delelte
+alias del input /echo delete
 alias getwarp input /echo getwarp
 alias getwarps input /echo getwarps
 

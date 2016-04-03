@@ -1,9 +1,21 @@
-alias sea input /echo sea
-alias sp input /echo s
-alias warp input /echo w
-alias getwarp input /echo cur
-alias accept input /echo acc
-alias req input /echo req
-alias save input /echo sve
-alias abort input /echo abrt
-alias maint input /echo m
+//Search
+alias sea input /echo search
+alias abort input /echo abort
+
+//Warps
+alias warp input /echo warp
+alias save input /echo save
+alias sel input /echo select
+alias del input /echo delelte
+alias getwarp input /echo getwarp
+alias getwarps input /echo getwarps
+
+//Info
+alias bg input /echo bg
+alias wiki input /echo wiki
+
+//Etc
+alias accept input /echo accept
+alias req input /echo request
+alias maint input /echo maint
+alias speed input /echo speed

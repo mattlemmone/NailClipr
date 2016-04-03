@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using NailClipr.Classes;
+using System.Runtime.Serialization;
 
 namespace NailClipr
 {
@@ -16,12 +17,13 @@ namespace NailClipr
         public struct App
         {
             public static string name = "NailClipr";
-            private static int[] v = { 1, 3, 1};
+            private static int[] v = { 1, 4, 0};
             public static string ver = string.Join(".", v);
         }
         public struct Chat
         {
             public static bool loaded;
+            public static string loadStr = "Chat Loaded!";
             public struct Warp
             {
                 public static string acceptNotify = "i accept <:'^)";
@@ -37,19 +39,25 @@ namespace NailClipr
             {
                 public const string echoRegex = @"([^\s])+";
                 public const string
-                    //Single param calls
-                    accept = "acc",
-                    request = "req",
-                    maintenance = "m",
-                    delWarp = "del",
-                    warp = "w",
-                    curWarp = "cur",
-                    abort = "abrt",
+                    //Dict Calls
+                    accept = "accept",
+                    request = "request",
+                    maintenance = "maint",
+                    delWarp = "delete",
+                    warp = "warp",
+                    curWarp = "getwarp",
+                    abort = "abort",
+                    listWarps = "getwarps",
+
+                    //Search Calls
+                    searchBG = "bg",
+                    searchWiki = "wiki",
 
                     //Two param calls
-                    saveWarp = "sve",
-                    search = "sea",
-                    speed = "s";
+                    saveWarp = "save",
+                    search = "search",
+                    select = "select",
+                    speed = "speed";
 
                 public static Dictionary<string, Action<EliteAPI>> dictOneParam =
                 new Dictionary<string, Action<EliteAPI>>
@@ -60,6 +68,7 @@ namespace NailClipr
                     {maintenance, SharedFunctions.MaintenanceToggle },
                     {delWarp, SharedFunctions.DelWarp },
                     {warp, SharedFunctions.Warp },
+                    {listWarps, SharedFunctions.ListWarps },
                     {curWarp, SharedFunctions.GetWarp }
                 };
 
@@ -80,10 +89,27 @@ namespace NailClipr
                    - -> - 0.5
                */
             }
-        }
-        public class Commit
-        {
-            public static string url = "https://api.github.com/repos/mattlemmone/NailClipr/commits";
+            public struct Search
+            {
+                public static string begin = "Searching...";
+                public static string success = "Search success!";
+                public static string abort = "Search aborted.";
+            }
+            public struct Commands
+            {
+                public const string echo = "/echo ";
+                public const string party = "/p ";
+            }
+            public struct Types
+            {
+                public const int partyOut = 13;
+                public const int echo = 206;
+            }
+
+            public static void SendEcho(EliteAPI api, string msg)
+            {
+                api.ThirdParty.SendString(Chat.Commands.echo + App.name + " - " + msg);
+            }
         }
         public struct Error
         {
@@ -187,12 +213,17 @@ namespace NailClipr
         }
         public class Update
         {
-            public static File Updater = new File("Updater.exe", "https://github.com/mattlemmone/NailClipr/raw/master/bin/Release/Updater.exe");
+            public static File UPDATER = new File("Updater.exe", "https://github.com/mattlemmone/NailClipr/raw/master/bin/Release/Updater.exe");
             public const string ver = "https://raw.githubusercontent.com/mattlemmone/NailClipr/master/ver.txt";
             public static File API_DLL = new File("EliteAPI.dll", "http://ext.elitemmonetwork.com/downloads/eliteapi/index.php?v");
             public static File MMO_DLL = new File("EliteMMO.API.dll", "http://ext.elitemmonetwork.com/downloads/elitemmo_api/index.php?v");
+            public static File CHANGES = new File("changes.json", "http://api.github.com/repos/mattlemmone/NailClipr/commits");
         }
-
+        public class URL
+        {
+            public static string blueGartr = "https://www.bg-wiki.com/index.php?search=";
+            public static string wiki = "http://ffxiclopedia.wikia.com/wiki/Special:Search?search=";
+        }
         public struct WarpPoint
         {
             public string title;
@@ -214,6 +245,5 @@ namespace NailClipr
                 return zoneList[zIndex].id;
             }
         }
-
     }
 }

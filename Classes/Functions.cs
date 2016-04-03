@@ -88,6 +88,7 @@ namespace NailClipr
                     {
                         Player.Search.isSearching = false;
                         Player.Search.status = Structs.Search.success;
+                        Structs.Chat.SendEcho(api, Structs.Chat.Search.success);
 
                         EliteAPI.TargetInfo t = api.Target.GetTargetInfo();
                         if (t.TargetIndex != entity.TargetID)
@@ -145,7 +146,8 @@ namespace NailClipr
                 if (Structs.zonePoints.Count > 0) clearZonePoints();
 
                 Player.Search.isSearching = false;
-                Player.Search.status = "idle";
+                Player.Search.status = Structs.Search.idle;
+                //NailClipr.GUI_ABORT.Enabled = false;
                 return;
             }
 
@@ -207,12 +209,12 @@ namespace NailClipr
             EliteAPI.ChatEntry c = api.Chat.GetNextChatLine();
             if (string.IsNullOrEmpty(c?.Text))
             {
-                if (!Structs.Chat.loaded) { Structs.Chat.loaded = true; api.ThirdParty.SendString("/echo Chat Loaded!"); }
+                if (!Structs.Chat.loaded) { Structs.Chat.loaded = true; Structs.Chat.SendEcho(api, Structs.Chat.loadStr); }
                 return;
             }
             if (!Structs.Chat.loaded) return;
-            const int party = 13,
-                echo = 206;
+            const int party = Structs.Chat.Types.partyOut,
+                echo = Structs.Chat.Types.echo;
             int chatType = c.ChatType;
             if (party == chatType)
             {
@@ -237,28 +239,27 @@ namespace NailClipr
                         Structs.Chat.Controller.dictOneParam[text](api);
                     else return;
                 }
-                else if (echoMatch[0].ToString() == Structs.Chat.Controller.saveWarp)
+                string firstMatch = echoMatch[0].ToString();
+                switch (firstMatch)
                 {
-                    string[] s = echoMatch.Cast<Match>()
-                        .Select(m => m.Value)
-                       .ToArray();
+                    case Structs.Chat.Controller.saveWarp:
+                        SaveWarp(api, echoMatch);
+                        break;
+                    case Structs.Chat.Controller.search:
+                        Search(api, echoMatch);
+                        break;
+                    case Structs.Chat.Controller.speed:
+                        SharedFunctions.Speed(api, echoMatch[1].Value);
+                        break;
+                    case Structs.Chat.Controller.searchBG:
+                        openURL(Structs.URL.blueGartr + echoMatch[1].Value);
+                        break;
+                    case Structs.Chat.Controller.searchWiki:
+                        openURL(Structs.URL.wiki + echoMatch[1].Value);
+                        break;
+                }
 
-                    string saveName = string.Join(" ", s.Skip(1));
-                    SharedFunctions.SaveWarp(api, saveName);
-                }
-                else if (echoMatch[0].ToString() == Structs.Chat.Controller.search)
-                {
-                    string[] s = echoMatch.Cast<Match>()
-                        .Select(m => m.Value)
-                       .ToArray();
 
-                    string target = string.Join(" ", s.Skip(1));
-                    SharedFunctions.Search(target);
-                }
-                else if (echoMatch[0].ToString() == Structs.Chat.Controller.speed)
-                {
-                    SharedFunctions.Speed(api, echoMatch[1].Value);
-                }
                 /*
                 acpt -> Accept
                 req -> Request
@@ -277,6 +278,29 @@ namespace NailClipr
                     - -> - 0.5
                 */
             }
+        }
+        private static void SaveWarp(EliteAPI api, MatchCollection echoMatch)
+        {
+            string[] s = echoMatch.Cast<Match>()
+                        .Select(m => m.Value)
+                       .ToArray();
+
+            string saveName = string.Join(" ", s.Skip(1));
+            SharedFunctions.SaveWarp(api, saveName);
+        }
+        private static void Search(EliteAPI api, MatchCollection echoMatch)
+        {
+            string[] s = echoMatch.Cast<Match>()
+                        .Select(m => m.Value)
+                       .ToArray();
+
+            string target = string.Join(" ", s.Skip(1));
+            SharedFunctions.Search(api, target);
+        }
+
+        private static void openURL(string url)
+        {
+            System.Diagnostics.Process.Start(url);
         }
     }
 }

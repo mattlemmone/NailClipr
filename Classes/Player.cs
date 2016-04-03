@@ -99,7 +99,7 @@ namespace NailClipr
 
             //Mark flag for status gui text update.
             isWarping = true;
-            api.ThirdParty.SendString("/echo " + Structs.Chat.Warp.warmupNotify);
+           Structs.Chat.SendEcho(api,  Structs.Chat.Warp.warmupNotify);
 
             //Start warp.
             MaintenanceMode(api, true);
@@ -117,7 +117,7 @@ namespace NailClipr
             if (warpAccepted)
                 warpAccepted = false;
 
-            api.ThirdParty.SendString("/echo " + Structs.Chat.Warp.arrivedNotify);
+           Structs.Chat.SendEcho(api,  Structs.Chat.Warp.arrivedNotify);
             isWarping = false;
         }
         public static void PartyWarp(EliteAPI api, MatchCollection senderMatch, MatchCollection coordMatch)
@@ -140,7 +140,7 @@ namespace NailClipr
             if (endZoneID == startZoneID)
             {
                 string s = "You have been requested by " + sender + " in " + endZone + ". You have until you zone to accept.";
-                api.ThirdParty.SendString("/echo " + s);
+               Structs.Chat.SendEcho(api,  s);
 
                 Player.reqPos = p;
                 Player.hasDialogue = true;

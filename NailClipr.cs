@@ -8,7 +8,6 @@ using System.IO;
 using System.Threading;
 using System.Net;
 using System.Text.RegularExpressions;
-using System.Runtime.Serialization.Json;
 using NailClipr.Classes;
 
 namespace NailClipr
@@ -67,13 +66,11 @@ namespace NailClipr
             cw.RunWorkerAsync();
         }
         private void UpdateComments()
-        {
-            string requestUrl = Structs.Commit.url;
+        {            
+            //TODO
         }
         private void PostInit()
         {
-
-
             XML.LoadAreas();
             XML.LoadWarps();
             XML.LoadSettings();
@@ -139,21 +136,11 @@ namespace NailClipr
             string apidll = "";
             string mmodll = "";
             string appexe = "";
-            if (!File.Exists(Application.StartupPath + @"\" + Structs.Update.Updater.title))
+            if (!File.Exists(Application.StartupPath + @"\" + Structs.Update.UPDATER.title))
             {
-
-                WebClient Client = new WebClient();
-                try
-                {
-                    Client.DownloadFile(Structs.Update.Updater.url, Application.StartupPath + @"\" + Structs.Update.Updater.title);
-                }
-                catch (WebException)
-                {
-                    MessageBox.Show("Error downloading " + Structs.Update.Updater.title + ".", "Update Error");
-                    Process.GetCurrentProcess().Kill();
-                }
-                Client.Dispose();
+                Download(Structs.Update.UPDATER.title, Structs.Update.UPDATER.url);
             }
+
             if (File.Exists(Application.StartupPath + @"\" + Structs.Update.API_DLL.title))
                 apidll = FileVersionInfo.GetVersionInfo(Application.StartupPath + @"\" + Structs.Update.API_DLL.title).FileVersion;
             if (File.Exists(Application.StartupPath + @"\" + Structs.Update.MMO_DLL.title))
@@ -167,7 +154,20 @@ namespace NailClipr
 
             if (apidll == "" || api != apidll || appexe == "" || exe != appexe || mmodll == "" || mmo != mmodll)
             {
-                Process.Start(Application.StartupPath + @"\" + Structs.Update.Updater.title);
+                Process.Start(Application.StartupPath + @"\" + Structs.Update.UPDATER.title);
+                Process.GetCurrentProcess().Kill();
+            }
+        }
+        private void Download(string title, string url)
+        {
+            WebClient Client = new WebClient();
+            try
+            {
+                Client.DownloadFile(url, Application.StartupPath + @"\" + title);
+            }
+            catch (WebException)
+            {
+                MessageBox.Show("Error downloading " + title + ".", "Download Error");
                 Process.GetCurrentProcess().Kill();
             }
         }
@@ -207,7 +207,7 @@ namespace NailClipr
             BackgroundWorker worker = sender as BackgroundWorker;
             while (worker.CancellationPending != true)
             {
-                System.Threading.Thread.Sleep(100);
+                Thread.Sleep(100);
                 bw.ReportProgress(0);
 
                 Threads.Overwrites(api);
@@ -218,7 +218,7 @@ namespace NailClipr
             BackgroundWorker worker = sender as BackgroundWorker;
             while (!worker.CancellationPending)
             {
-                Thread.Sleep(TimeSpan.FromSeconds(0.1));
+                Thread.Sleep(100);
                 Functions.ParseChat(api);
             }
         }
@@ -369,7 +369,7 @@ namespace NailClipr
 
         private void Btn_Find_Click(object sender, EventArgs e)
         {
-            SharedFunctions.Search();
+            SharedFunctions.Search(api);
         }
 
         private void Btn_Abort_Click(object sender, EventArgs e)

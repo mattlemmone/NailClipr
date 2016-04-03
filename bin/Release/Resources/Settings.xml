@@ -66,10 +66,20 @@
         <Y>8.641103</Y>
         <Z>-0.5500277</Z>
       </WarpPoint>
-      <WarpPoint title="one two lol lol">
-        <X>0.341026723</X>
-        <Y>-2.87046623</Y>
-        <Z>0</Z>
+      <WarpPoint title="Rala Waterways">
+        <X>77</X>
+        <Y>-147.625</Y>
+        <Z>12</Z>
+      </WarpPoint>
+      <WarpPoint title="Inventor's Coalition">
+        <X>91.451</X>
+        <Y>-49.013</Y>
+        <Z>-0.1500001</Z>
+      </WarpPoint>
+      <WarpPoint title="GitHub Demo #2">
+        <X>-2.72072</X>
+        <Y>-2.440815</Y>
+        <Z>-0.199992</Z>
       </WarpPoint>
     </Zone>
     <Zone id="260" title="Yahse Hunting Grounds">
@@ -627,12 +637,144 @@
         <Y>222</Y>
         <Z>10.4348507</Z>
       </WarpPoint>
+      <WarpPoint title="Woh Gates">
+        <X>-190.603577</X>
+        <Y>496.64798</Y>
+        <Z>19.5051556</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="263" title="Yorcia Weald">
       <WarpPoint title="Cirdas Caverns">
         <X>240</X>
         <Y>60.25</Y>
         <Z>8.3</Z>
+      </WarpPoint>
+      <WarpPoint title="Frontier Bivouac #2">
+        <X>121.670738</X>
+        <Y>-283.704651</Y>
+        <Z>0.00594</Z>
+      </WarpPoint>
+      <WarpPoint title="Frontier Bivouac">
+        <X>355.544525</X>
+        <Y>153.397522</Y>
+        <Z>0.15080598</Z>
+      </WarpPoint>
+      <WarpPoint title="Woh Gates">
+        <X>-379.413361</X>
+        <Y>220.126587</Y>
+        <Z>4.100603</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="273" title="Woh Gates">
+      <WarpPoint title="Cirdas Caverns">
+        <X>382.36618</X>
+        <Y>119.586182</Y>
+        <Z>19.8942337</Z>
+      </WarpPoint>
+      <WarpPoint title="Kamihr Drifts">
+        <X>338.0343</X>
+        <Y>520.9188</Y>
+        <Z>-30.0448837</Z>
+      </WarpPoint>
+      <WarpPoint title="Yorcia">
+        <X>475.49054</X>
+        <Y>141.261658</Y>
+        <Z>1.53968823</Z>
+      </WarpPoint>
+      <WarpPoint title="Marjami Ravine">
+        <X>184.2538</X>
+        <Y>49.1316681</Y>
+        <Z>34.65354</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="267" title="Kamihr Drifts">
+      <WarpPoint title="Woh Gates">
+        <X>496.66864</X>
+        <Y>-466.974976</Y>
+        <Z>70.15364</Z>
+      </WarpPoint>
+      <WarpPoint title="Frontier Station">
+        <X>438.470459</X>
+        <Y>-275.632019</Y>
+        <Z>63.8817177</Z>
+      </WarpPoint>
+      <WarpPoint title="Home Point #1">
+        <X>208.167908</X>
+        <Y>314.1246</Y>
+        <Z>20.4822254</Z>
+      </WarpPoint>
+      <WarpPoint title="Frontier Bivouac #3">
+        <X>7.73609257</X>
+        <Y>162.9327</Y>
+        <Z>23</Z>
+      </WarpPoint>
+      <WarpPoint title="Outer Ra Kaz'nar">
+        <X>-258.878021</X>
+        <Y>61.4812164</Y>
+        <Z>18.9638748</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="274" title="Outer Ra'Kaznar">
+      <WarpPoint title="Kamihr Drifts">
+        <X>-38.4731</X>
+        <Y>-22.1483517</Y>
+        <Z>-179.3335</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="258" title="Rala Waterways">
+      <WarpPoint title="Chalvava">
+        <X>-320.236481</X>
+        <Y>-320.960419</Y>
+        <Z>-1.05113</Z>
+      </WarpPoint>
+      <WarpPoint title="Saldinor">
+        <X>-338.540771</X>
+        <Y>-311.15744</Y>
+        <Z>-1</Z>
+      </WarpPoint>
+      <WarpPoint title="Western Adoulin">
+        <X>-270.485657</X>
+        <Y>-380.014526</Y>
+        <Z>-5.76754</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="266" title="Marjami Ravine">
+      <WarpPoint title="Woh Gates">
+        <X>-499.625</X>
+        <Y>320</Y>
+        <Z>-40</Z>
+      </WarpPoint>
+      <WarpPoint title="Frontier Bivouac #4">
+        <X>-325.570129</X>
+        <Y>199.1181</Y>
+        <Z>-40</Z>
+      </WarpPoint>
+      <WarpPoint title="Frontier Bivouac #1">
+        <X>319.908783</X>
+        <Y>-78.8620148</Y>
+        <Z>-20</Z>
+      </WarpPoint>
+      <WarpPoint title="Frontier Station">
+        <X>359.2128</X>
+        <Y>163.401886</Y>
+        <Z>-60</Z>
+      </WarpPoint>
+      <WarpPoint title="Home Point #1">
+        <X>-22.99281</X>
+        <Y>175.304688</Y>
+        <Z>-0.05742526</Z>
+      </WarpPoint>
+      <WarpPoint title="Dho Gates">
+        <X>415.257141</X>
+        <Y>265.282135</Y>
+        <Z>-60</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="272" title="Dho Gates">
+      <WarpPoint title="Marjami Ravine">
+        <X>-320.5</X>
+        <Y>339.625</Y>
+        <Z>-40</Z>
       </WarpPoint>
     </Zone>
   </Zones>

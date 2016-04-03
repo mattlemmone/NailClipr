@@ -73,10 +73,7 @@ namespace NailClipr
                     }
                 }
 
-                if (Player.Search.isSearching)
-                {
-                    Search(api, entity);
-                }
+                if (Player.Search.isSearching) Search(api, entity);
 
             }
             //Outside of loop
@@ -88,58 +85,58 @@ namespace NailClipr
             EliteAPI.ChatEntry c = api.Chat.GetNextChatLine();
             if (string.IsNullOrEmpty(c?.Text))
             {
+                //Trigged our ChatLoaded bool if no new text is processed.
                 if (!Structs.Chat.loaded) { Structs.Chat.loaded = true; Structs.Chat.SendEcho(api, Structs.Chat.loadStr); }
                 return;
             }
             if (!Structs.Chat.loaded) return;
+
             const int party = Structs.Chat.Types.partyOut,
                 echo = Structs.Chat.Types.echo;
             int chatType = c.ChatType;
-            if (party == chatType)
+
+            if (party == chatType)  ProcessParty(api, c.Text);
+            else if (echo == chatType) ProcessEcho(api, c.Text);   
+            
+        }
+        private static void ProcessParty(EliteAPI api, string text)
+        {
+            MatchCollection senderMatch = Regex.Matches(text, Structs.Chat.Warp.senderRegEx);
+            MatchCollection coordMatch = Regex.Matches(text, Structs.Chat.Warp.coordRegEx);
+
+            if (coordMatch.Count == Structs.Chat.Warp.expectedNumCoords)
+                Player.PartyWarp(api, senderMatch, coordMatch);
+        }
+        private static void ProcessEcho(EliteAPI api, string text)
+        { 
+            MatchCollection echoMatch = Regex.Matches(text, Structs.Chat.Controller.echoRegex);
+            if (echoMatch.Count == 1)
             {
-                string text = c.Text;
-
-                MatchCollection senderMatch = Regex.Matches(text, Structs.Chat.Warp.senderRegEx);
-                MatchCollection coordMatch = Regex.Matches(text, Structs.Chat.Warp.coordRegEx);
-
-                if (coordMatch.Count == Structs.Chat.Warp.expectedNumCoords)
-                    Player.PartyWarp(api, senderMatch, coordMatch);
-
+                if (Structs.Chat.Controller.dictOneParam.ContainsKey(text))
+                    Structs.Chat.Controller.dictOneParam[text](api);
+                else return;
             }
-            else if (echo == chatType)
+            string firstMatch = echoMatch[0].ToString();
+            switch (firstMatch)
             {
-
-                string text = c.Text;
-
-                MatchCollection echoMatch = Regex.Matches(text, Structs.Chat.Controller.echoRegex);
-                if (echoMatch.Count == 1)
-                {
-                    if (Structs.Chat.Controller.dictOneParam.ContainsKey(text))
-                        Structs.Chat.Controller.dictOneParam[text](api);
-                    else return;
-                }
-                string firstMatch = echoMatch[0].ToString();
-                switch (firstMatch)
-                {
-                    case Structs.Chat.Controller.saveWarp:
-                        SaveWarp(api, echoMatch);
-                        break;
-                    case Structs.Chat.Controller.search:
-                        Search(api, echoMatch);
-                        break;
-                    case Structs.Chat.Controller.speed:
-                        SharedFunctions.Speed(api, echoMatch[1].Value);
-                        break;
-                    case Structs.Chat.Controller.select:
-                        SharedFunctions.Select(api, echoMatch[1].Value);
-                        break;
-                    case Structs.Chat.Controller.searchBG:
-                        Search(echoMatch, Structs.URL.blueGartr);
-                        break;
-                    case Structs.Chat.Controller.searchWiki:
-                        Search(echoMatch, Structs.URL.wiki);
-                        break;
-                }
+                case Structs.Chat.Controller.saveWarp:
+                    SaveWarp(api, echoMatch);
+                    break;
+                case Structs.Chat.Controller.search:
+                    Search(api, echoMatch);
+                    break;
+                case Structs.Chat.Controller.speed:
+                    SharedFunctions.Speed(api, echoMatch[1].Value);
+                    break;
+                case Structs.Chat.Controller.select:
+                    SharedFunctions.Select(api, echoMatch[1].Value);
+                    break;
+                case Structs.Chat.Controller.searchBG:
+                    Search(echoMatch, Structs.URL.blueGartr);
+                    break;
+                case Structs.Chat.Controller.searchWiki:
+                    Search(echoMatch, Structs.URL.wiki);
+                    break;
             }
         }
         private static void SaveWarp(EliteAPI api, MatchCollection echoMatch)

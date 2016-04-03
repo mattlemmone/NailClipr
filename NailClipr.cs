@@ -163,6 +163,7 @@ namespace NailClipr
             WebClient Client = new WebClient();
             try
             {
+                MessageBox.Show("Downloading " +  ".",  "Downloading...");
                 Client.DownloadFile(url, Application.StartupPath + @"\" + title);
             }
             catch (WebException)

@@ -28,10 +28,6 @@ namespace Updater
         public static void CheckUpdate()
         {
             //Get Main files if they don't exist.
-            Download(Structs.Downloads.API_DLL, true);
-            Download(Structs.Downloads.MMO_DLL, true);
-            Download(Structs.Downloads.APP, true);
-
             Directory.CreateDirectory("Resources");
             Download(Structs.Downloads.AREAS, true);
 
@@ -47,10 +43,11 @@ namespace Updater
 
         private static void CheckVersion(Structs.File file)
         {
+            const string vZero = "0.0.0";
 
             //Assign version
-            file.ver = FileVersionInfo.GetVersionInfo(file.fullPath).FileVersion;
-            if (file != Structs.Downloads.APP)
+            file.ver = File.Exists(file.fullPath) ? FileVersionInfo.GetVersionInfo(file.fullPath).FileVersion : vZero;
+            if (file.title != Structs.Downloads.APP.title)
                 file.expectedVer = GetStringFromUrl(file.verUrl);
             else
                 file.expectedVer = Regex.Replace(GetStringFromUrl(file.verUrl), @"\t|\n|\r", "");
@@ -69,12 +66,12 @@ namespace Updater
 
         public static void Download(Structs.File file, bool checkExists = false)
         {
-
             if (checkExists && File.Exists(file.fullPath)) return;
             WebClient Client = new WebClient();
             try
             {
-                string msg = (!string.IsNullOrEmpty(file.expectedVer)) ? "Downloading " + file.title + " v." + file.expectedVer + "." : "Downloading " + file.title + ".";
+                bool hasVer = (!string.IsNullOrEmpty(file.expectedVer));
+                string msg = hasVer ? "Downloading " + file.title + "\n v." + file.ver + " -> v." + file.expectedVer : "Downloading " + file.title + ".";
                 DialogResult result = MessageBox.Show(new NativeWindow(), msg, "Downloading...", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                 if (result == DialogResult.OK)
                     Client.DownloadFile(file.downloadUrl, file.fullPath);

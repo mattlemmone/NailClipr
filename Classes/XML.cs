@@ -79,46 +79,28 @@ namespace NailClipr
         }
         public static void LoadAreas()
         {
-            try
-            {
-                XDocument adoc = XDocument.Load(AREAS);
 
-                IEnumerable<XElement> allElements =
-                from xEle in adoc.Descendants("areas")
-                select xEle;
-                foreach (XElement result in allElements)
-                {
-                    result.Elements().Select(t => new
-                    {
-                        id = t.Attribute("id").Value,
-                        name = t.Value,
-                    }).ToList().ForEach(t =>
-                    {
-                        Structs.Zone z = new Structs.Zone();
-                        z.id = int.Parse(t.id);
-                        z.name = t.name;
-                        Structs.zoneList.Add(z);
-                    });
-                }
-            }
-            catch (Exception ex)
+            XDocument adoc = XDocument.Load(AREAS);
+
+            IEnumerable<XElement> allElements =
+            from xEle in adoc.Descendants("areas")
+            select xEle;
+            foreach (XElement result in allElements)
             {
-                string path = @"Resources\" + Structs.Downloads.AREAS.title;
-                bool getAreas = false;
-                if (ex is DirectoryNotFoundException || ex is FileNotFoundException)
+                result.Elements().Select(t => new
                 {
-                    Directory.CreateDirectory("Resources");
-                    getAreas = true;
-                }
-                else if (!File.Exists(Application.StartupPath + path))
+                    id = t.Attribute("id").Value,
+                    name = t.Value,
+                }).ToList().ForEach(t =>
                 {
-                    getAreas = true;
-                }
-                if (getAreas)
-                    Misc.Download(path, Structs.Downloads.AREAS.url);
-                LoadAreas();
+                    Structs.Zone z = new Structs.Zone();
+                    z.id = int.Parse(t.id);
+                    z.name = t.name;
+                    Structs.zoneList.Add(z);
+                });
             }
         }
+
         public static void LoadWarps()
         {
             try
@@ -192,8 +174,6 @@ namespace NailClipr
 
                 Structs.warpPoints.Add(wp);
                 Functions.AddZonePoint(wp);
-
-
 
                 try
                 {

@@ -45,28 +45,39 @@ namespace NailClipr.Classes
         }
         public static void CheckUpdate()
         {
+            string[] s = Environment.GetCommandLineArgs();
+            Download(Structs.Downloads.UPDATER, true);
 
-            if (!File.Exists(Application.StartupPath + @"\" + Structs.Downloads.UPDATER.title))
+            //Not Launched by updater.
+            if (s.Length != 2 || s[1] != Structs.App.updated)
             {
-                Download(Structs.Downloads.UPDATER.title, Structs.Downloads.UPDATER.url);
+                Process.Start(Structs.Downloads.UPDATER.title);
+                Process.GetCurrentProcess().Kill();
             }
+        }
+        public static void Download(Structs.File file, bool checkExists = false)
+        {
 
-            /* Temp bypass
-            Process.Start(Application.StartupPath + @"\" + Structs.Downloads.UPDATER.title);
-            Process.GetCurrentProcess().Kill();*/
+            if (checkExists && File.Exists(file.fullPath)) return;
+            WebClient Client = new WebClient();
+            try
+            {
+                string msg = "Downloading " + file.title + ".";
+                DialogResult result = MessageBox.Show(new NativeWindow(), msg, "Downloading...", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (result == DialogResult.OK)
+                    Client.DownloadFile(file.downloadUrl, file.fullPath);
+                else
+                    Process.GetCurrentProcess().Kill();
+            }
+            catch (WebException)
+            {
+                MessageBox.Show("Error downloading " + file.title + ".", "Download Error");
+                Process.GetCurrentProcess().Kill();
+            }
         }
         public static void UpdateComments()
         {
             //TODO
-        }
-        public static string GetStringFromUrl(string location)
-        {
-            WebRequest request = WebRequest.Create(location);
-            WebResponse response = request.GetResponse();
-            Stream dataStream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(dataStream);
-            string responseFromServer = reader.ReadToEnd();
-            return responseFromServer;
         }
         public static void ExitApp(EliteAPI api)
         {
@@ -82,28 +93,17 @@ namespace NailClipr.Classes
                 System.Environment.Exit(1);
             }
         }
-        public static void Download(string title, string url)
-        {
-            WebClient Client = new WebClient();
-            try
-            {
-                DialogResult result = MessageBox.Show("Downloading " + title + ".", "Downloading...", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                if (result == DialogResult.OK)
-                    Client.DownloadFile(url, Application.StartupPath + @"\" + title);
-                else
-                    Process.GetCurrentProcess().Kill();
-            }
-            catch (WebException)
-            {
-                MessageBox.Show("Error downloading " + title + ".", "Download Error");
-                Process.GetCurrentProcess().Kill();
-            }
-        }
         public static float[] MidPoint(float A, float A1, float B, float B1)
         {
             float[] ret = { (A + A1) / 2, (B + B1) / 2 };
             return ret;
         }
+        public static void SetVer()
+        {
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            Structs.App.ver = fvi.FileVersion;
+    }
         #endregion
     }
 }

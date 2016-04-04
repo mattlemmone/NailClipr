@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using NailClipr.Classes;
 using System.Runtime.Serialization;
+using System.Windows.Forms;
 
 namespace NailClipr
 {
@@ -17,8 +18,8 @@ namespace NailClipr
         public struct App
         {
             public static string name = "NailClipr";
-            private static int[] v = { 1, 4, 3};
-            public static string ver = string.Join(".", v);
+            public static string ver;
+            public static string updated = "updated";
         }
         public struct Chat
         {
@@ -134,13 +135,17 @@ namespace NailClipr
         }
         public class File
         {
-            public string title;
-            public string url;
+            public string
+            title,
+            downloadUrl,
+            fullPath,
+            ver;
 
-            public File(string t, string u)
+            public File(string t, string down)
             {
                 title = t;
-                url = u;
+                downloadUrl = down;
+                fullPath = Structs.Downloads.BASE_PATH + t;
             }
         }
         public struct FFXI
@@ -213,12 +218,12 @@ namespace NailClipr
         }
         public class Downloads
         {
-            public static File UPDATER = new File("Updater.exe", "https://github.com/mattlemmone/NailClipr/raw/master/bin/Release/Updater.exe");
-            public const string ver = "https://raw.githubusercontent.com/mattlemmone/NailClipr/master/ver.txt";
-            public static File API_DLL = new File("EliteAPI.dll", "http://ext.elitemmonetwork.com/downloads/eliteapi/index.php?v");
-            public static File MMO_DLL = new File("EliteMMO.API.dll", "http://ext.elitemmonetwork.com/downloads/elitemmo_api/index.php?v");
-            public static File CHANGES = new File("changes.json", "http://api.github.com/repos/mattlemmone/NailClipr/commits");
-            public static File AREAS = new File("areas.xml", "https://github.com/mattlemmone/NailClipr/raw/master/bin/Release/Resources/areas.xml");
+            public static File UPDATER = new File(
+                "Updater.exe",
+                "https://github.com/mattlemmone/NailClipr/raw/master/bin/Release/Updater.exe"
+            );
+
+            public static string BASE_PATH = Application.StartupPath + @"\";
         }
         public class URL
         {

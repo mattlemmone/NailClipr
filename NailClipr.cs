@@ -43,16 +43,15 @@ namespace NailClipr
 
         public NailClipr()
         {
-            if (!Debugger.IsAttached)
-            {
-                Misc.CheckUpdate();
-            }
+            Misc.SetVer();
+            Misc.CheckUpdate();
             Misc.UpdateComments();
+
             InitializeComponent();
             AssignControls();
             PostInit();
             api = Misc.SelectProcess(api);
-            Text = Structs.App.name + " - " + api.Player.Name; 
+            Text = Structs.App.name + " - " + api.Player.Name;
 
             // Start the background worker..
             bw.DoWork += new DoWorkEventHandler(bw_DoWork);
@@ -66,7 +65,7 @@ namespace NailClipr
             cw.WorkerSupportsCancellation = true;
             cw.RunWorkerAsync();
         }
-        
+
         private void PostInit()
         {
             XML.LoadAreas();
@@ -97,7 +96,7 @@ namespace NailClipr
             GUI_ABORT = Btn_Abort;
 
             Lbl_Ver.Text = "v." + Structs.App.ver;
-        }        
+        }
 
         #region Threads
         private void bw_DoWork(object sender, DoWorkEventArgs e)

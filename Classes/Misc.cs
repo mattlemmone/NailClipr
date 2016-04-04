@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace NailClipr.Classes
@@ -48,11 +49,16 @@ namespace NailClipr.Classes
             string[] s = Environment.GetCommandLineArgs();
             Download(Structs.Downloads.UPDATER, true);
 
-            //Not Launched by updater.
-            if (s.Length != 2 || s[1] != Structs.App.updated)
+            //Not Launched by updater, so launch the updater and kill the app.
+            if (s.Length < 2 || bool.Parse(s[1]) != true)
             {
                 Process.Start(Structs.Downloads.UPDATER.title);
                 Process.GetCurrentProcess().Kill();
+            } else
+            {
+                bool wasUpdated = bool.Parse(s[2]);
+                if (wasUpdated)
+                    UpdateComments();
             }
         }
         public static void Download(Structs.File file, bool checkExists = false)
@@ -77,8 +83,38 @@ namespace NailClipr.Classes
         }
         public static void UpdateComments()
         {
-            //TODO
+
+            string text = ReturnGitResponse(Structs.Commit.URL);
+
+            Regex dateRegex = new Regex(Structs.Commit.DATE_REGEX);
+            MatchCollection dateMatch = dateRegex.Matches(text);
+            string date = dateMatch[0].Groups["date"].Value;
+
+            Regex msgRegex = new Regex(Structs.Commit.DATE_REGEX);
+            MatchCollection msgMatch = msgRegex.Matches(text);
+            string msg = msgMatch[0].Groups["message"].Value;
+
+            MessageBox.Show("Changes from last version\n" + msg, "Change Log", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+        private static string ReturnGitResponse(string url)
+        {
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+            httpWebRequest.Method = WebRequestMethods.Http.Get;
+            httpWebRequest.Accept = "application/json";
+            httpWebRequest.UserAgent = "pls";
+
+            int numChars = 500;
+            char[] block = new char[numChars];
+            var response = (HttpWebResponse)httpWebRequest.GetResponse();
+
+            using (var sr = new StreamReader(response.GetResponseStream()))
+            {                
+                sr.ReadBlock(block, 0, numChars);
+            }
+            string text = String.Join("", block);
+            return text;
+        }
+
         public static void ExitApp(EliteAPI api)
         {
             api.Player.Speed = Player.Speed.normal;

@@ -19,7 +19,7 @@ namespace NailClipr
         {
             public static string name = "NailClipr";
             public static string ver;
-            public static string updated = "updated";
+            public static bool updated;
         }
         public struct Chat
         {
@@ -216,6 +216,13 @@ namespace NailClipr
                 }
             }
         }
+        public struct Commit
+        {
+            public const string
+            URL = "https://api.github.com/repos/mattlemmone/NailClipr/commits",
+            DATE_REGEX = "\"date\":\"(?<date>[A-z0-9\\-\\:]+)",
+            MESSAGE_REGEX = "\"message\":\"(<message>.+)\",\"tree\"";
+        }
         public class Downloads
         {
             public static File UPDATER = new File(
@@ -224,6 +231,7 @@ namespace NailClipr
             );
 
             public static string BASE_PATH = Application.StartupPath + @"\";
+
         }
         public class URL
         {

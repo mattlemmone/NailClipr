@@ -44,8 +44,7 @@ namespace NailClipr
         public NailClipr()
         {
             Misc.SetVer();
-            Misc.CheckUpdate();
-            Misc.UpdateComments();
+            if (!Debugger.IsAttached) Misc.CheckUpdate();
 
             InitializeComponent();
             AssignControls();

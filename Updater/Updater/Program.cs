@@ -14,6 +14,7 @@ namespace Updater
             url = "https://github.com/mattlemmone/NailClipr/raw/master/bin/Release/NailClipr.exe";
 
         public string fullPath = AppDomain.CurrentDomain.BaseDirectory + appName;
+        public static bool wasChecked, isUpdated;
 
         private static string GetStringFromUrl(string location)
         {
@@ -60,7 +61,11 @@ namespace Updater
             num_fileVer = int.Parse(fileVer),
             num_expVer = int.Parse(expVer);
 
-            if (num_fileVer < num_expVer) Download(file);
+            if (num_fileVer < num_expVer)
+            {
+                if (file.title == appName) isUpdated = true;
+                Download(file);
+            }
 
         }
 
@@ -88,13 +93,14 @@ namespace Updater
         private static void Launch()
         {
             Console.WriteLine("Launching " + appName + ".exe...");
-            Process.Start(appName + ".exe", "updated");
+            Process.Start(appName + ".exe", wasChecked + " " + isUpdated);
             Process.GetCurrentProcess().Kill();
         }
 
         static void Main(string[] args)
         {
             CheckUpdate();
+            wasChecked = true;
             Launch();
         }
 

@@ -38,10 +38,11 @@ namespace NailClipr
             bool findPlayer = Structs.settings.playerDetection;
             int count = 0;
 
-            const Int32 PC = 0x0001;
-            const Int32 NPC = 0x0002;
-            const Int32 Mob = 0x0010;
-            const Int32 Self = 0x000D;
+            const Int32 
+            PC = 0x0001,
+            NPC = 0x0002,
+            Mob = 0x0010,
+            Self = 0x000D;
 
             for (var x = 0; x < 4096; x++)
             {

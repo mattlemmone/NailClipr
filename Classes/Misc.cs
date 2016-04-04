@@ -57,6 +57,7 @@ namespace NailClipr.Classes
             } else
             {
                 bool wasUpdated = bool.Parse(s[2]);
+                MessageBox.Show(s[2]);
                 if (wasUpdated)
                     UpdateComments();
             }
@@ -83,7 +84,7 @@ namespace NailClipr.Classes
         }
         public static void UpdateComments()
         {
-
+            MessageBox.Show("s");
             string text = ReturnGitResponse(Structs.Commit.URL);
 
             Regex dateRegex = new Regex(Structs.Commit.DATE_REGEX);

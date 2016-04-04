@@ -221,7 +221,7 @@ namespace NailClipr
             public const string
             URL = "https://api.github.com/repos/mattlemmone/NailClipr/commits",
             DATE_REGEX = "\"date\":\"(?<date>[A-z0-9\\-\\:]+)",
-            MESSAGE_REGEX = "\"message\":\"(<message>.+)\",\"tree\"";
+            MESSAGE_REGEX = "\"message\":\"(?<message>.+)\",\"tree\"";
         }
         public class Downloads
         {

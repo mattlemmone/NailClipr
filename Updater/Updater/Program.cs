@@ -63,7 +63,7 @@ namespace Updater
 
             if (num_fileVer < num_expVer)
             {
-                if (file.title == appName) isUpdated = true;
+                if (file.title == appName + ".exe" ) isUpdated = true;
                 Download(file);
             }
 

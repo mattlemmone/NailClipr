@@ -17,5 +17,5 @@ alias wiki input /echo wiki
 //Etc
 alias accept input /echo accept
 alias req input /echo request
-alias maint input /echo maint
+alias maint input /echo mntn
 alias speed input /echo speed

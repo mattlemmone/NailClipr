@@ -43,7 +43,7 @@ namespace NailClipr
                     //Dict Calls
                     accept = "accept",
                     request = "request",
-                    maintenance = "maint",
+                    maintenance = "mntn",
                     delWarp = "delete",
                     warp = "warp",
                     curWarp = "getwarp",

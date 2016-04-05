@@ -50,7 +50,7 @@ namespace NailClipr
             AssignControls();
             PostInit();
             api = Misc.SelectProcess(api);
-            Text = Structs.App.name + " - " + api.Player.Name;
+            Text = Structs.App.name + " v." + Structs.App.ver + " - " + api.Player.Name;
 
             // Start the background worker..
             bw.DoWork += new DoWorkEventHandler(bw_DoWork);
@@ -93,8 +93,6 @@ namespace NailClipr
             GUI_SEARCH_TARGET = Txt_Search;
             GUI_FIND = Btn_Find;
             GUI_ABORT = Btn_Abort;
-
-            Lbl_Ver.Text = "v." + Structs.App.ver;
         }
 
         #region Threads

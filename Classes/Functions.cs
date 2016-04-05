@@ -8,9 +8,7 @@ using System.Text.RegularExpressions;
 namespace NailClipr
 {
     class Functions
-    {
-        
-
+    {      
         public static void AddZonePoint(Structs.WarpPoint wp)
         {
             NailClipr.GUI_WARP.Items.Add(wp.title);
@@ -58,21 +56,11 @@ namespace NailClipr
                     invalidPlayerName = isPC && (entity.Name.Length < Structs.FFXI.Name.MINLENGTH || entity.Name.Length > Structs.FFXI.Name.MAXLENGTH || !Regex.IsMatch(entity.Name, @"^[a-zA-Z]+$")),
                     inWhitelist = isPC && Structs.Speed.whitelist.IndexOf(entity.Name) != -1;
 
-                if (invalid || dead || outsideRange || !isRendered || isSelf || inWhitelist || invalidPlayerName)
+                if (invalid || dead || outsideRange || !isRendered || isSelf || invalidPlayerName)
                     continue;
 
-                if (isPC && findPlayer)
-                {
-                    count++;
-                    Player.isAlone = false;
-
-                    bool closerPC = Updates.nearestPC.distance == 0 || entity.Distance < Updates.nearestPC.distance || entity.Name == Updates.nearestPC.name;
-                    if (closerPC)
-                    {
-                        Updates.nearestPC.name = entity.Name;
-                        Updates.nearestPC.distance = entity.Distance;
-                    }
-                }
+                if (isPC && findPlayer && !inWhitelist)
+                    PlayerFound(entity, ++count);                   
 
                 if (Player.Search.isSearching) Search(api, entity);
 
@@ -90,14 +78,16 @@ namespace NailClipr
                 if (!Structs.Chat.loaded) { Structs.Chat.loaded = true; Structs.Chat.SendEcho(api, Structs.Chat.loadStr); }
                 return;
             }
+
             if (!Structs.Chat.loaded) return;
 
             const int party = Structs.Chat.Types.partyOut,
                 echo = Structs.Chat.Types.echo;
+
             int chatType = c.ChatType;
 
             if (party == chatType)  ProcessParty(api, c.Text);
-            else if (echo == chatType) ProcessEcho(api, c.Text);   
+            else if (echo == chatType) ProcessEcho(api, c.Text);  
             
         }
         private static void ProcessParty(EliteAPI api, string text)
@@ -113,9 +103,13 @@ namespace NailClipr
             MatchCollection echoMatch = Regex.Matches(text, Structs.Chat.Controller.echoRegex);
             if (echoMatch.Count == 1)
             {
+                Console.WriteLine(text);
                 if (Structs.Chat.Controller.dictOneParam.ContainsKey(text))
+                {
                     Structs.Chat.Controller.dictOneParam[text](api);
-                else return;
+                    Console.WriteLine("2");
+                }
+                else { Console.WriteLine("3"); return; }
             }
             string firstMatch = echoMatch[0].ToString();
             switch (firstMatch)
@@ -197,6 +191,17 @@ namespace NailClipr
             Updates.nearestPC.name = "";
             Updates.nearestPC.distance = 0;
             Player.isAlone = true;
+        }
+        private static void PlayerFound(EliteAPI.XiEntity entity, int numPlayers)
+        {
+            Player.isAlone = false;
+
+            bool closerPC = Updates.nearestPC.distance == 0 || entity.Distance < Updates.nearestPC.distance || entity.Name == Updates.nearestPC.name;
+            if (closerPC)
+            {
+                Updates.nearestPC.name = entity.Name;
+                Updates.nearestPC.distance = entity.Distance;
+            }
         }
     }
 }

@@ -86,6 +86,11 @@
         <Y>-121.015778</Y>
         <Z>-0.1500001</Z>
       </WarpPoint>
+      <WarpPoint title="Home Point">
+        <X>-86.54856</X>
+        <Y>-31.21968</Y>
+        <Z>4</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="260" title="Yahse Hunting Grounds">
       <WarpPoint title="Frontier Station Waypoint">
@@ -391,11 +396,6 @@
       </WarpPoint>
     </Zone>
     <Zone id="50" title="Aht Urhgan Whitegate">
-      <WarpPoint title="Assault Tag">
-        <X>111.902435</X>
-        <Y>-42.1200256</Y>
-        <Z>-0.340000033</Z>
-      </WarpPoint>
       <WarpPoint title="??? Appraiser">
         <X>-85.99673</X>
         <Y>86.1685257</Y>
@@ -410,6 +410,16 @@
         <X>125.015724</X>
         <Y>63.1155472</Y>
         <Z>-4.215</Z>
+      </WarpPoint>
+      <WarpPoint title="Assault Tag">
+        <X>112.133705</X>
+        <Y>-27.8678646</Y>
+        <Z>-0.340000033</Z>
+      </WarpPoint>
+      <WarpPoint title="Home Point #2">
+        <X>129.499725</X>
+        <Y>-13.5654726</Y>
+        <Z>0</Z>
       </WarpPoint>
     </Zone>
     <Zone id="249" title="Mhaura">

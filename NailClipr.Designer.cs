@@ -64,7 +64,6 @@ namespace NailClipr
             this.label5 = new System.Windows.Forms.Label();
             this.Btn_Accept = new System.Windows.Forms.Button();
             this.Btn_Req = new System.Windows.Forms.Button();
-            this.Lbl_Ver = new System.Windows.Forms.Label();
             this.Txt_Search = new System.Windows.Forms.TextBox();
             this.Btn_Find = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -442,16 +441,6 @@ namespace NailClipr
             this.Btn_Req.UseVisualStyleBackColor = true;
             this.Btn_Req.Click += new System.EventHandler(this.Btn_Req_Click);
             // 
-            // Lbl_Ver
-            // 
-            this.Lbl_Ver.AutoSize = true;
-            this.Lbl_Ver.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_Ver.Location = new System.Drawing.Point(260, 435);
-            this.Lbl_Ver.Name = "Lbl_Ver";
-            this.Lbl_Ver.Size = new System.Drawing.Size(42, 14);
-            this.Lbl_Ver.TabIndex = 56;
-            this.Lbl_Ver.Text = "v1.2.3";
-            // 
             // Txt_Search
             // 
             this.Txt_Search.Location = new System.Drawing.Point(66, 363);
@@ -519,7 +508,6 @@ namespace NailClipr
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Btn_Find);
             this.Controls.Add(this.Txt_Search);
-            this.Controls.Add(this.Lbl_Ver);
             this.Controls.Add(this.Btn_Req);
             this.Controls.Add(this.Btn_Accept);
             this.Controls.Add(this.label5);
@@ -590,7 +578,6 @@ namespace NailClipr
         private Label label5;
         private Button Btn_Accept;
         private Button Btn_Req;
-        private Label Lbl_Ver;
         private Button Btn_SE;
         private Button Btn_NE;
         private Button Btn_SW;

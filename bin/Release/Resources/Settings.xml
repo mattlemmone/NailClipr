@@ -807,6 +807,13 @@
         <Z>-40</Z>
       </WarpPoint>
     </Zone>
+    <Zone id="289" title="Escha - Ru'Aun">
+      <WarpPoint title="test">
+        <X>-259.744629</X>
+        <Y>339.213959</Y>
+        <Z>-7.99998951</Z>
+      </WarpPoint>
+    </Zone>
   </Zones>
   <Settings>
     <PlayerDetection>True</PlayerDetection>

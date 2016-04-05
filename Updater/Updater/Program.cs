@@ -10,8 +10,7 @@ namespace Updater
     class Program
     {
 
-        public const string appName = "NailClipr",
-            url = "https://github.com/mattlemmone/NailClipr/raw/master/bin/Release/NailClipr.exe";
+        public const string appName = "NailClipr";
 
         public string fullPath = AppDomain.CurrentDomain.BaseDirectory + appName;
         public static bool wasChecked, isUpdated;
@@ -48,10 +47,9 @@ namespace Updater
 
             //Assign version
             file.ver = File.Exists(file.fullPath) ? FileVersionInfo.GetVersionInfo(file.fullPath).FileVersion : vZero;
-            if (file.title != Structs.Downloads.APP.title)
-                file.expectedVer = GetStringFromUrl(file.verUrl);
-            else
-                file.expectedVer = Regex.Replace(GetStringFromUrl(file.verUrl), @"\t|\n|\r", "");
+
+            if (file.title != Structs.Downloads.APP.title) file.expectedVer = GetStringFromUrl(file.verUrl);
+            else file.expectedVer = Regex.Replace(GetStringFromUrl(file.verUrl), @"\t|\n|\r", "");
 
             string
             fileVer = String.Join("", file.ver.Split('.')),
@@ -63,7 +61,7 @@ namespace Updater
 
             if (num_fileVer < num_expVer)
             {
-                if (file.title == appName + ".exe" ) isUpdated = true;
+                if (file.title == appName + ".exe") isUpdated = true;
                 Download(file);
             }
 
@@ -161,6 +159,5 @@ namespace Updater
 
             }
         }
-
     }
 }

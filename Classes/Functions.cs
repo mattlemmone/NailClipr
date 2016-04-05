@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 namespace NailClipr
 {
     class Functions
-    {      
+    {
         public static void AddZonePoint(Structs.WarpPoint wp)
         {
             NailClipr.GUI_WARP.Items.Add(wp.title);
@@ -36,7 +36,7 @@ namespace NailClipr
             bool findPlayer = Structs.settings.playerDetection;
             int count = 0;
 
-            const Int32 
+            const Int32
             PC = 0x0001,
             NPC = 0x0002,
             Mob = 0x0010,
@@ -60,7 +60,7 @@ namespace NailClipr
                     continue;
 
                 if (isPC && findPlayer && !inWhitelist)
-                    PlayerFound(entity, ++count);                   
+                    PlayerFound(entity, ++count);
 
                 if (Player.Search.isSearching) Search(api, entity);
 
@@ -68,7 +68,7 @@ namespace NailClipr
             //Outside of loop
             if (findPlayer)
                 PlayerFound(count);
-        }        
+        }
         public static void ParseChat(EliteAPI api)
         {
             EliteAPI.ChatEntry c = api.Chat.GetNextChatLine();
@@ -86,9 +86,9 @@ namespace NailClipr
 
             int chatType = c.ChatType;
 
-            if (party == chatType)  ProcessParty(api, c.Text);
-            else if (echo == chatType) ProcessEcho(api, c.Text);  
-            
+            if (party == chatType) ProcessParty(api, c.Text);
+            else if (echo == chatType) ProcessEcho(api, c.Text);
+
         }
         private static void ProcessParty(EliteAPI api, string text)
         {
@@ -99,17 +99,14 @@ namespace NailClipr
                 Player.PartyWarp(api, senderMatch, coordMatch);
         }
         private static void ProcessEcho(EliteAPI api, string text)
-        { 
+        {
             MatchCollection echoMatch = Regex.Matches(text, Structs.Chat.Controller.echoRegex);
             if (echoMatch.Count == 1)
             {
                 Console.WriteLine(text);
-                if (Structs.Chat.Controller.dictOneParam.ContainsKey(text))
-                {
-                    Structs.Chat.Controller.dictOneParam[text](api);
-                    Console.WriteLine("2");
-                }
-                else { Console.WriteLine("3"); return; }
+                if (Structs.Chat.Controller.dictOneParam.ContainsKey(text)) { Structs.Chat.Controller.dictOneParam[text](api); }
+                else { Console.WriteLine("No single param match."); }
+                return;
             }
             string firstMatch = echoMatch[0].ToString();
             switch (firstMatch)

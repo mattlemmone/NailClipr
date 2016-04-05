@@ -63,6 +63,7 @@ namespace NailClipr
                 public static Dictionary<string, Action<EliteAPI>> dictOneParam =
                 new Dictionary<string, Action<EliteAPI>>
                 {
+                    {saveWarp, SharedFunctions.SaveWarp },
                     {accept, SharedFunctions.Accept },
                     {request, SharedFunctions.Request },
                     {abort, SharedFunctions.Abort },
@@ -127,10 +128,6 @@ namespace NailClipr
             public struct Warp
             {
                 public static string parse = "Error parsing request.";
-            }
-            public struct Other
-            {
-                public static string StatusEasterEgg = "Unsupported status type.";
             }
         }
         public class File

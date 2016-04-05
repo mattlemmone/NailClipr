@@ -108,8 +108,15 @@ namespace NailClipr.Classes
                 NailClipr.GUI_WARP.Invoke(new GuiOptStrInvoker(Select), api, key);
             }
             else {
-                int num = int.Parse(key);
-                string selected = NailClipr.GUI_WARP.Items[--num].ToString();
+                int num;
+                bool result = Int32.TryParse(key, out num);
+                num--;
+                if (!result || NailClipr.GUI_WARP.Items.Count <= num || num < 0)
+                {
+                    Structs.Chat.SendEcho(api, "Invalid selection.");
+                    return;
+                }
+                string selected = NailClipr.GUI_WARP.Items[num].ToString();
                 NailClipr.GUI_WARP.Text = selected;
                 Structs.Chat.SendEcho(api, "Selected Warp: " + selected);
             }
@@ -145,6 +152,17 @@ namespace NailClipr.Classes
             else {
                 if (name.Length > 0)
                     NailClipr.GUI_WARP.Text = name;
+                XML.SaveWarp(api);
+            }
+
+        }
+        public static void SaveWarp(EliteAPI api)
+        {
+            if (NailClipr.GUI_WARP.InvokeRequired)
+            {
+                NailClipr.GUI_WARP.Invoke(new GuiInvoker(SaveWarp), api);
+            }
+            else {
                 XML.SaveWarp(api);
             }
 

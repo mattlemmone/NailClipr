@@ -49,6 +49,7 @@ namespace NailClipr
             InitializeComponent();
             AssignControls();
             PostInit();
+
             api = Misc.SelectProcess(api);
             Text = Structs.App.name + " v." + Structs.App.ver + " - " + api.Player.Name;
 
@@ -113,7 +114,7 @@ namespace NailClipr
             while (!worker.CancellationPending)
             {
                 Thread.Sleep(100);
-                Functions.ParseChat(api);
+                Chat.Parse(api);
             }
         }
 
@@ -277,8 +278,8 @@ namespace NailClipr
             }
         }
         #endregion
-        #endregion
 
+        #endregion
 
     }
 }

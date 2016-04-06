@@ -9,109 +9,34 @@ namespace NailClipr
 {
     public class Structs
     {
-        public static Zone Zones = new Zone();
         public static Settings settings = new Settings();
         public static List<WarpPoint> warpPoints = new List<WarpPoint>();
         public static List<WarpPoint> zonePoints = new List<WarpPoint>();
         public static List<Zone> zoneList = new List<Zone>();
+        public static Zone Zones = new Zone();
 
         public struct App
         {
             public static string name = "NailClipr";
             public static string ver;
             public static bool updated;
-        }
-        public struct Chat
+        }        
+        public struct Commit
         {
-            public static bool loaded;
-            public static string loadStr = "Chat Loaded!";
-            public struct Warp
-            {
-                public static string acceptNotify = "i accept <:'^)";
-                public static string acceptSelfNotify = "Accepted.";
-                public static string arrivedNotify = "Arrived.";
-                public static string warmupNotify = "Warming up...";
+            public const string
+            URL = "https://api.github.com/repos/mattlemmone/NailClipr/commits",
+            DATE_REGEX = "\"date\":\"(?<date>[A-z0-9\\-\\:]+)",
+            MESSAGE_REGEX = "\"message\":\"(?<message>.+)\",\"tree\"";
+        }
+        public class Downloads
+        {
+            public static File UPDATER = new File(
+                "Updater.exe",
+                "https://github.com/mattlemmone/NailClipr/raw/master/bin/Release/Updater.exe"
+            );
 
-                public const string senderRegEx = @"\(([A-Za-z]+)\)";
-                public const string coordRegEx = @"[^\[\d:d\]](\-*\d*\.*\d+)+";
-                public const int expectedNumCoords = 4;
-            }
-            public class Controller
-            {
-                public const string echoRegex = @"([^\s])+";
-                public const string
-                    //Dict Calls
-                    accept = "accept",
-                    request = "request",
-                    maintenance = "mntn",
-                    delWarp = "delete",
-                    warp = "warp",
-                    curWarp = "getwarp",
-                    abort = "abort",
-                    listWarps = "getwarps",
+            public static string BASE_PATH = Application.StartupPath + @"\";
 
-                    //Search Calls
-                    searchBG = "bg",
-                    searchWiki = "wiki",
-
-                    //Two param calls
-                    saveWarp = "save",
-                    search = "search",
-                    select = "select",
-                    speed = "speed";
-
-                public static Dictionary<string, Action<EliteAPI>> dictOneParam =
-                new Dictionary<string, Action<EliteAPI>>
-                {
-                    {saveWarp, SharedFunctions.SaveWarp },
-                    {accept, SharedFunctions.Accept },
-                    {request, SharedFunctions.Request },
-                    {abort, SharedFunctions.Abort },
-                    {maintenance, SharedFunctions.MaintenanceToggle },
-                    {delWarp, SharedFunctions.DelWarp },
-                    {warp, SharedFunctions.Warp },
-                    {listWarps, SharedFunctions.ListWarps },
-                    {curWarp, SharedFunctions.GetWarp }
-                };
-
-                /*
-               acc -> Accept
-               req -> Request
-               abrt -> Abort
-               m -> Maintenance toggle
-               save -> Save Warp
-               del -> Delete Warp
-               w -> Warp to Current Selection
-               cur -> Get Current Selection
-
-               Variables
-               sea ... -> Search ...
-               s ... -> Set Speed
-                   + -> + 0.5
-                   - -> - 0.5
-               */
-            }
-            public struct Search
-            {
-                public static string begin = "Searching...";
-                public static string success = "Search success!";
-                public static string abort = "Search aborted.";
-            }
-            public struct Commands
-            {
-                public const string echo = "/echo ";
-                public const string party = "/p ";
-            }
-            public struct Types
-            {
-                public const int partyOut = 13;
-                public const int echo = 206;
-            }
-
-            public static void SendEcho(EliteAPI api, string msg)
-            {
-                api.ThirdParty.SendString(Chat.Commands.echo + App.name + " - " + msg);
-            }
         }
         public struct Error
         {
@@ -151,6 +76,30 @@ namespace NailClipr
             {
                 public const int MAXLENGTH = 15;
                 public const int MINLENGTH = 3;
+            }
+        }
+        public struct FFXIAH
+        {
+            public const string baseUrl = "http://www.ffxiah.com/item/";
+            public class Item
+            {
+                public string name;
+                public bool canStack;
+                public uint id;
+                public Single single;
+                public Stack stack;
+
+                public class Price
+                {
+                    public int
+                    price, median, stock;
+                }
+                public class Single : Price
+                {                  
+                }
+                public class Stack : Price
+                {
+                }
             }
         }
         public struct PC
@@ -213,27 +162,12 @@ namespace NailClipr
                 }
             }
         }
-        public struct Commit
-        {
-            public const string
-            URL = "https://api.github.com/repos/mattlemmone/NailClipr/commits",
-            DATE_REGEX = "\"date\":\"(?<date>[A-z0-9\\-\\:]+)",
-            MESSAGE_REGEX = "\"message\":\"(?<message>.+)\",\"tree\"";
-        }
-        public class Downloads
-        {
-            public static File UPDATER = new File(
-                "Updater.exe",
-                "https://github.com/mattlemmone/NailClipr/raw/master/bin/Release/Updater.exe"
-            );
-
-            public static string BASE_PATH = Application.StartupPath + @"\";
-
-        }
         public class URL
         {
-            public static string blueGartr = "https://www.bg-wiki.com/index.php?search=";
-            public static string wiki = "http://ffxiclopedia.wikia.com/wiki/Special:Search?search=";
+            public static string
+            blueGartr = "https://www.bg-wiki.com/index.php?search=",
+            wiki = "http://ffxiclopedia.wikia.com/wiki/Special:Search?search=",
+            AH = "http://www.ffxiah.com/search/item?name=";
         }
         public struct WarpPoint
         {

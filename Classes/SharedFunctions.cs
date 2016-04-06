@@ -8,26 +8,37 @@ namespace NailClipr.Classes
         delegate void GuiInvoker(EliteAPI api);
         delegate void GuiOptStrInvoker(EliteAPI api, string str);
         delegate void GuiStrOnlyInvoker(string str);
-        public static void MaintenanceToggle(EliteAPI api)
+
+        public static void Abort(EliteAPI api)
         {
-            if (NailClipr.GUI_MAINT.InvokeRequired)
-            {
-                NailClipr.GUI_MAINT.Invoke(new GuiInvoker(MaintenanceToggle), api);
-            }
-            else {
-                NailClipr.GUI_MAINT.Checked = !NailClipr.GUI_MAINT.Checked;
-                Player.MaintenanceMode(api, NailClipr.GUI_MAINT.Checked);
-                Structs.Chat.SendEcho(api, "Maintenance: " + NailClipr.GUI_MAINT.Checked);
-            }
+            Player.Search.isSearching = false;
+            Player.Search.status = Structs.Search.idle;
+            Chat.SendEcho(api, Chat.Search.abort);
+
         }
-        public static void Warp(EliteAPI api)
+        public static void Accept(EliteAPI api)
         {
             if (NailClipr.GUI_WARP.InvokeRequired)
             {
-                NailClipr.GUI_WARP.Invoke(new GuiInvoker(Warp), api);
+                NailClipr.GUI_WARP.Invoke(new GuiInvoker(Accept), api);
             }
             else {
-                Player.Warp(api);
+
+                if (!NailClipr.GUI_ACCEPT.Enabled) return;
+                Chat.SendEcho(api, Chat.Warp.acceptSelfNotify);
+                api.ThirdParty.SendString(Chat.Commands.party + Chat.Warp.acceptNotify);
+                Player.Warp(api, true);
+            }
+
+        }
+        public static void DelWarp(EliteAPI api)
+        {
+            if (NailClipr.GUI_WARP.InvokeRequired)
+            {
+                NailClipr.GUI_WARP.Invoke(new GuiInvoker(DelWarp), api);
+            }
+            else {
+                XML.DeleteWarp(api);
             }
         }
         public static void GetWarp(EliteAPI api)
@@ -51,24 +62,21 @@ namespace NailClipr.Classes
                 foreach (var item in NailClipr.GUI_WARP.Items)
                 {
                     string str = ++count + ": " + item;
-                    Structs.Chat.SendEcho(api, str);
+                    Chat.SendEcho(api, str);
                 }
             }
         }
-        public static void Accept(EliteAPI api)
+        public static void MaintenanceToggle(EliteAPI api)
         {
-            if (NailClipr.GUI_WARP.InvokeRequired)
+            if (NailClipr.GUI_MAINT.InvokeRequired)
             {
-                NailClipr.GUI_WARP.Invoke(new GuiInvoker(Accept), api);
+                NailClipr.GUI_MAINT.Invoke(new GuiInvoker(MaintenanceToggle), api);
             }
             else {
-
-                if (!NailClipr.GUI_ACCEPT.Enabled) return;
-               Structs.Chat.SendEcho(api,  Structs.Chat.Warp.acceptSelfNotify);
-                api.ThirdParty.SendString(Structs.Chat.Commands.party  + Structs.Chat.Warp.acceptNotify);
-                Player.Warp(api, true);
+                NailClipr.GUI_MAINT.Checked = !NailClipr.GUI_MAINT.Checked;
+                Player.MaintenanceMode(api, NailClipr.GUI_MAINT.Checked);
+                Chat.SendEcho(api, "Maintenance: " + NailClipr.GUI_MAINT.Checked);
             }
-
         }
         public static void Request(EliteAPI api)
         {
@@ -78,7 +86,31 @@ namespace NailClipr.Classes
             }
             else {
                 string s = Math.Round(api.Player.X, 5) + " " + Math.Round(api.Player.Z, 5) + " " + Math.Round(api.Player.Y, 5) + " " + api.Player.ZoneId;
-                api.ThirdParty.SendString(Structs.Chat.Commands.party  + s);
+                api.ThirdParty.SendString(Chat.Commands.party  + s);
+            }
+
+        }
+        public static void SaveWarp(EliteAPI api)
+        {
+            if (NailClipr.GUI_WARP.InvokeRequired)
+            {
+                NailClipr.GUI_WARP.Invoke(new GuiInvoker(SaveWarp), api);
+            }
+            else {
+                XML.SaveWarp(api);
+            }
+
+        }
+        public static void SaveWarp(EliteAPI api, string name = "")
+        {
+            if (NailClipr.GUI_WARP.InvokeRequired)
+            {
+                NailClipr.GUI_WARP.Invoke(new GuiOptStrInvoker(SaveWarp), api, name);
+            }
+            else {
+                if (name.Length > 0)
+                    NailClipr.GUI_WARP.Text = name;
+                XML.SaveWarp(api);
             }
 
         }
@@ -89,7 +121,7 @@ namespace NailClipr.Classes
                 NailClipr.GUI_SEARCH_TARGET.Invoke(new GuiOptStrInvoker(Search), api, key);
             }
             else {
-                Structs.Chat.SendEcho(api, Structs.Chat.Search.begin);
+                Chat.SendEcho(api, Chat.Search.begin);
                 if (key != "")
                     NailClipr.GUI_SEARCH_TARGET.Text = key;
 
@@ -113,12 +145,12 @@ namespace NailClipr.Classes
                 num--;
                 if (!result || NailClipr.GUI_WARP.Items.Count <= num || num < 0)
                 {
-                    Structs.Chat.SendEcho(api, "Invalid selection.");
+                    Chat.SendEcho(api, "Invalid selection.");
                     return;
                 }
                 string selected = NailClipr.GUI_WARP.Items[num].ToString();
                 NailClipr.GUI_WARP.Text = selected;
-                Structs.Chat.SendEcho(api, "Selected Warp: " + selected);
+                Chat.SendEcho(api, "Selected Warp: " + selected);
             }
         }
         public static void Speed(EliteAPI api, string op)
@@ -136,45 +168,14 @@ namespace NailClipr.Classes
             }
             Player.Speed.SetSpeed(api, speed);
         }
-        public static void Abort(EliteAPI api)
-        {
-            Player.Search.isSearching = false;
-            Player.Search.status = Structs.Search.idle;
-           Structs.Chat.SendEcho(api,  Structs.Chat.Search.abort);
-
-        }
-        public static void SaveWarp(EliteAPI api, string name = "")
+        public static void Warp(EliteAPI api)
         {
             if (NailClipr.GUI_WARP.InvokeRequired)
             {
-                NailClipr.GUI_WARP.Invoke(new GuiOptStrInvoker(SaveWarp), api, name);
+                NailClipr.GUI_WARP.Invoke(new GuiInvoker(Warp), api);
             }
             else {
-                if (name.Length > 0)
-                    NailClipr.GUI_WARP.Text = name;
-                XML.SaveWarp(api);
-            }
-
-        }
-        public static void SaveWarp(EliteAPI api)
-        {
-            if (NailClipr.GUI_WARP.InvokeRequired)
-            {
-                NailClipr.GUI_WARP.Invoke(new GuiInvoker(SaveWarp), api);
-            }
-            else {
-                XML.SaveWarp(api);
-            }
-
-        }
-        public static void DelWarp(EliteAPI api)
-        {
-            if (NailClipr.GUI_WARP.InvokeRequired)
-            {
-                NailClipr.GUI_WARP.Invoke(new GuiInvoker(DelWarp), api);
-            }
-            else {
-                XML.DeleteWarp(api);
+                Player.Warp(api);
             }
         }
     }

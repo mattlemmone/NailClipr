@@ -20,18 +20,57 @@ namespace NailClipr
             NailClipr.GUI_WARP.Items.Clear();
             Structs.zonePoints.Clear();
         }
-        public static void LoadZonePoints(EliteAPI api)
+        public static void GetPrice(EliteAPI api)
         {
-            Structs.warpPoints.ForEach(wp =>
-            {
-                if (wp.zone == api.Player.ZoneId)
-                {
-                    Structs.zonePoints.Add(wp);
-                    NailClipr.GUI_WARP.Items.Add(wp.title);
-                }
-            });
+            uint itemID = api.Inventory.SelectedItemId;
+            GetPrice(api, itemID);
         }
-        public static void PlayersRendered(EliteAPI api)
+        public static void GetPrice(EliteAPI api, uint itemID)
+        {
+            /*
+            string itemPage = Structs.FFXIAH.baseUrl + itemID;
+
+            //Create an item object.
+            Structs.FFXIAH.Item item = new Structs.FFXIAH.Item();
+
+            //Set these first
+            item.name = ...;
+            item.id = itemID;
+            item.canStack = ...;
+
+            //Set single item info
+            item.single.price = ...;
+            item.single.median = ...;
+            item.single.stock = ...;
+
+            //Output - single
+            Chat.SendEcho(api, ...);
+
+            if (!item.canStack) return;
+
+            //Set stack info
+            item.stack.price = ...;
+            item.stack.median = ...;
+            item.stack.stock = ...;
+            
+            //Output - stack
+            Chat.SendEcho(api, ...);
+            */
+        }
+        public static void GetPrice(EliteAPI api, MatchCollection arguments)
+        {
+            /*
+            //Array of strings from //command.
+            string[] args = Misc.MatchToString(arguments);
+
+            //Search terms. Gives us 'Serket Ring' from //price Serket Ring.
+            string keywords = string.Join(" ", args.Skip(1));
+
+            uint itemID = ...;
+            GetPrice(api, itemID);
+            */
+        }
+        public static void GetRendered(EliteAPI api)
         {
             bool findPlayer = Structs.settings.playerDetection;
             int count = 0;
@@ -69,119 +108,22 @@ namespace NailClipr
             if (findPlayer)
                 PlayerFound(count);
         }
-        public static void ParseChat(EliteAPI api)
+        public static void LoadZonePoints(EliteAPI api)
         {
-            EliteAPI.ChatEntry c = api.Chat.GetNextChatLine();
-            if (string.IsNullOrEmpty(c?.Text))
+            Structs.warpPoints.ForEach(wp =>
             {
-                //Trigged our ChatLoaded bool if no new text is processed.
-                if (!Structs.Chat.loaded) { Structs.Chat.loaded = true; Structs.Chat.SendEcho(api, Structs.Chat.loadStr); }
-                return;
-            }
-
-            if (!Structs.Chat.loaded) return;
-
-            const int party = Structs.Chat.Types.partyOut,
-                echo = Structs.Chat.Types.echo;
-
-            int chatType = c.ChatType;
-
-            if (party == chatType) ProcessParty(api, c.Text);
-            else if (echo == chatType) ProcessEcho(api, c.Text);
-
-        }
-        private static void ProcessParty(EliteAPI api, string text)
-        {
-            MatchCollection senderMatch = Regex.Matches(text, Structs.Chat.Warp.senderRegEx);
-            MatchCollection coordMatch = Regex.Matches(text, Structs.Chat.Warp.coordRegEx);
-
-            if (coordMatch.Count == Structs.Chat.Warp.expectedNumCoords)
-                Player.PartyWarp(api, senderMatch, coordMatch);
-        }
-        private static void ProcessEcho(EliteAPI api, string text)
-        {
-            MatchCollection echoMatch = Regex.Matches(text, Structs.Chat.Controller.echoRegex);
-            if (echoMatch.Count == 1)
-            {
-                Console.WriteLine(text);
-                if (Structs.Chat.Controller.dictOneParam.ContainsKey(text)) { Structs.Chat.Controller.dictOneParam[text](api); }
-                else { Console.WriteLine("No single param match."); }
-                return;
-            }
-            string firstMatch = echoMatch[0].ToString();
-            switch (firstMatch)
-            {
-                case Structs.Chat.Controller.saveWarp:
-                    SaveWarp(api, echoMatch);
-                    break;
-                case Structs.Chat.Controller.search:
-                    Search(api, echoMatch);
-                    break;
-                case Structs.Chat.Controller.speed:
-                    SharedFunctions.Speed(api, echoMatch[1].Value);
-                    break;
-                case Structs.Chat.Controller.select:
-                    SharedFunctions.Select(api, echoMatch[1].Value);
-                    break;
-                case Structs.Chat.Controller.searchBG:
-                    Search(echoMatch, Structs.URL.blueGartr);
-                    break;
-                case Structs.Chat.Controller.searchWiki:
-                    Search(echoMatch, Structs.URL.wiki);
-                    break;
-            }
-        }
-        private static void SaveWarp(EliteAPI api, MatchCollection echoMatch)
-        {
-            string[] s = echoMatch.Cast<Match>()
-                        .Select(m => m.Value)
-                       .ToArray();
-
-            string saveName = string.Join(" ", s.Skip(1));
-            SharedFunctions.SaveWarp(api, saveName);
-        }
-        private static void Search(MatchCollection echoMatch, string url)
-        {
-            string[] s = echoMatch.Cast<Match>()
-                            .Select(m => m.Value)
-                            .ToArray();
-            string term = string.Join(" ", s.Skip(1));
-            OpenURL(url + term);
-        }
-        private static void Search(EliteAPI api, MatchCollection echoMatch)
-        {
-            string[] s = echoMatch.Cast<Match>()
-                        .Select(m => m.Value)
-                       .ToArray();
-
-            string target = string.Join(" ", s.Skip(1));
-            SharedFunctions.Search(api, target);
-        }
-        private static void Search(EliteAPI api, EliteAPI.XiEntity entity)
-        {
-            string target = Player.Search.target.ToLower();
-            Console.WriteLine(entity.Name);
-            //Found target
-            if (entity.Name.ToLower().Contains(target))
-            {
-                Player.Search.isSearching = false;
-                Player.Search.status = Structs.Search.success;
-                Structs.Chat.SendEcho(api, Structs.Chat.Search.success);
-
-                EliteAPI.TargetInfo t = api.Target.GetTargetInfo();
-                if (t.TargetIndex != entity.TargetID)
+                if (wp.zone == api.Player.ZoneId)
                 {
-                    //Not targeted, so set target!
-                    api.Target.SetTarget(Convert.ToInt32(entity.TargetID));
+                    Structs.zonePoints.Add(wp);
+                    NailClipr.GUI_WARP.Items.Add(wp.title);
                 }
-                return;
-            }
+            });
         }
-        private static void OpenURL(string url)
+        public static void OpenURL(string url)
         {
             System.Diagnostics.Process.Start(url);
         }
-        private static void PlayerFound(int numPlayers)
+        public static void PlayerFound(int numPlayers)
         {
             if (numPlayers > 0) return;
 
@@ -189,7 +131,7 @@ namespace NailClipr
             Updates.nearestPC.distance = 0;
             Player.isAlone = true;
         }
-        private static void PlayerFound(EliteAPI.XiEntity entity, int numPlayers)
+        public static void PlayerFound(EliteAPI.XiEntity entity, int numPlayers)
         {
             Player.isAlone = false;
 
@@ -198,6 +140,46 @@ namespace NailClipr
             {
                 Updates.nearestPC.name = entity.Name;
                 Updates.nearestPC.distance = entity.Distance;
+            }
+        }
+        public static void SaveWarp(EliteAPI api, MatchCollection echoMatch)
+        {
+            string[] s = Misc.MatchToString(echoMatch);
+
+            string saveName = string.Join(" ", s.Skip(1));
+            SharedFunctions.SaveWarp(api, saveName);
+        }
+        public static void Search(MatchCollection echoMatch, string url)
+        {
+            string[] s = Misc.MatchToString(echoMatch);
+            string term = string.Join(" ", s.Skip(1));
+            OpenURL(url + term);
+        }
+        public static void Search(EliteAPI api, MatchCollection echoMatch)
+        {
+            string[] s = Misc.MatchToString(echoMatch);
+
+            string target = string.Join(" ", s.Skip(1));
+            SharedFunctions.Search(api, target);
+        }
+        public static void Search(EliteAPI api, EliteAPI.XiEntity entity)
+        {
+            string target = Player.Search.target.ToLower();
+            Console.WriteLine(entity.Name);
+            //Found target
+            if (entity.Name.ToLower().Contains(target))
+            {
+                Player.Search.isSearching = false;
+                Player.Search.status = Structs.Search.success;
+                Chat.SendEcho(api, Chat.Search.success);
+
+                EliteAPI.TargetInfo t = api.Target.GetTargetInfo();
+                if (t.TargetIndex != entity.TargetID)
+                {
+                    //Not targeted, so set target!
+                    api.Target.SetTarget(Convert.ToInt32(entity.TargetID));
+                }
+                return;
             }
         }
     }

@@ -169,6 +169,11 @@
         <Y>9.214854</Y>
         <Z>0</Z>
       </WarpPoint>
+      <WarpPoint title="Sauromugue">
+        <X>47.28939</X>
+        <Y>0.780403256</Y>
+        <Z>0</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="126" title="Qufim Island">
       <WarpPoint title="Jeuno">
@@ -241,6 +246,16 @@
         <X>-99.588</X>
         <Y>-183.416</Y>
         <Z>-4.285574E-05</Z>
+      </WarpPoint>
+      <WarpPoint title="Tenshodo">
+        <X>31.7366</X>
+        <Y>-40.65426</Y>
+        <Z>3.89999771</Z>
+      </WarpPoint>
+      <WarpPoint title="Home Point #2">
+        <X>18.1255474</X>
+        <Y>52.043972</Y>
+        <Z>-0.999992132</Z>
       </WarpPoint>
     </Zone>
     <Zone id="108" title="Konschtat Highlands">
@@ -431,6 +446,16 @@
       <WarpPoint title="Scrolls">
         <X>-50.6611633</X>
         <Y>31.13167</Y>
+        <Z>-4.089674</Z>
+      </WarpPoint>
+      <WarpPoint title="Home Point #1">
+        <X>-12.75</X>
+        <Y>86.286</Y>
+        <Z>-15.7444458</Z>
+      </WarpPoint>
+      <WarpPoint title="RDM Spells">
+        <X>-50.1697769</X>
+        <Y>29.4418869</Y>
         <Z>-4.089674</Z>
       </WarpPoint>
     </Zone>
@@ -812,6 +837,32 @@
         <X>-259.744629</X>
         <Y>339.213959</Y>
         <Z>-7.99998951</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="232" title="Port San d'Oria">
+      <WarpPoint title="Home Point #2">
+        <X>49.4468651</X>
+        <Y>-105.439041</Y>
+        <Z>-12</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="244" title="Upper Jeuno">
+      <WarpPoint title="Batallia">
+        <X>-96.27139</X>
+        <Y>172.9595</Y>
+        <Z>-1.95503235E-05</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="200" title="Garlaige Citadel">
+      <WarpPoint title="Serket">
+        <X>-142.583542</X>
+        <Y>239.6182</Y>
+        <Z>19.6681232</Z>
+      </WarpPoint>
+      <WarpPoint title="Banishing Gate #2">
+        <X>-95.90852</X>
+        <Y>96.49819</Y>
+        <Z>0</Z>
       </WarpPoint>
     </Zone>
   </Zones>

@@ -164,12 +164,12 @@ namespace NailClipr
                 int index = Structs.zonePoints.FindIndex(p => p.title == wp.title);
                 if (index >= 0)
                 {
-                    Structs.Chat.SendEcho(api, " Updating warp point: " + zoneName + " - " + NailClipr.GUI_WARP.Text + ".");
+                    Chat.SendEcho(api, " Updating warp point: " + zoneName + " - " + NailClipr.GUI_WARP.Text + ".");
                     DeleteWarp(api, true);
                 }
                 else
                 {
-                    Structs.Chat.SendEcho(api, " Saving new warp point: " + zoneName + " - " + NailClipr.GUI_WARP.Text + ".");
+                    Chat.SendEcho(api, " Saving new warp point: " + zoneName + " - " + NailClipr.GUI_WARP.Text + ".");
                 }
 
                 Structs.warpPoints.Add(wp);
@@ -213,7 +213,7 @@ namespace NailClipr
 
             if (!updating)
             {
-                Structs.Chat.SendEcho(api, " Deleting warp point: " + zoneName + " - " + delName + ".");
+                Chat.SendEcho(api, " Deleting warp point: " + zoneName + " - " + delName + ".");
                 NailClipr.GUI_WARP.Text = "";
             }
 
@@ -221,7 +221,7 @@ namespace NailClipr
 
             if (delWP.Equals(default(Structs.WarpPoint)))
             {
-                Structs.Chat.SendEcho(api, "No warp point with that name found.");
+                Chat.SendEcho(api, "No warp point with that name found.");
                 return;
             }
 

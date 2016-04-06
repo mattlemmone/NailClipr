@@ -1,4 +1,5 @@
 ﻿using EliteMMO.API;
+using NailClipr.Classes;
 using System;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -14,6 +15,17 @@ namespace NailClipr
         public static bool isWarping;        
 
         //Structs
+        public struct Location
+        {
+            public static int old;
+            public static bool isZoning;
+        }
+        public struct Search
+        {
+            public static bool isSearching;
+            public static string target;
+            public static string status = Structs.Search.idle;
+        }
         public class Speed
         {
             private static float exp, norm;
@@ -41,17 +53,6 @@ namespace NailClipr
                 api.Player.Status = status;
             }
         }
-        public struct Location
-        {
-            public static int old;
-            public static bool isZoning;
-        }
-        public struct Search
-        {
-            public static bool isSearching;
-            public static string target;
-            public static string status = Structs.Search.idle;
-        }
 
         //Functions
         public static void MaintenanceMode(EliteAPI api, bool on)
@@ -78,6 +79,37 @@ namespace NailClipr
             //Maint on.
             api.Player.Status = Structs.Status.MAINT;
         }
+        public static void PartyWarp(EliteAPI api, MatchCollection senderMatch, MatchCollection coordMatch)
+        {
+            string sender = senderMatch[0] + "";
+
+            Structs.Position p = new Structs.Position();
+
+            p.X = float.Parse(coordMatch[0] + "");
+            p.Y = float.Parse(coordMatch[1] + "");
+            p.Z = float.Parse(coordMatch[2] + "");
+            p.Zone = int.Parse(coordMatch[3] + "");
+
+            int endZoneID = p.Zone;
+            string endZone = Structs.Zones.NameFromID(endZoneID);
+
+            int startZoneID = api.Player.ZoneId;
+            string startZone = Structs.Zones.NameFromID(startZoneID);
+
+            if (endZoneID == startZoneID)
+            {
+                string s = "You have been requested by " + sender + " in " + endZone + ". You have until you zone to accept.";
+                Chat.SendEcho(api, s);
+
+                Player.reqPos = p;
+                Player.hasDialogue = true;
+            }
+            else
+            {
+                //endZoneID != startZoneID
+                api.ThirdParty.SendString("/echo Cannot warp to " + endZone + " from " + startZone + ".");
+            }
+        }
         public static async void Warp(EliteAPI api, bool toPlayer = false)
         {
             Structs.WarpPoint nextWP;
@@ -99,7 +131,7 @@ namespace NailClipr
 
             //Mark flag for status gui text update.
             isWarping = true;
-           Structs.Chat.SendEcho(api,  Structs.Chat.Warp.warmupNotify);
+           Chat.SendEcho(api,  Chat.Warp.warmupNotify);
 
             //Start warp.
             MaintenanceMode(api, true);
@@ -117,39 +149,8 @@ namespace NailClipr
             if (warpAccepted)
                 warpAccepted = false;
 
-           Structs.Chat.SendEcho(api,  Structs.Chat.Warp.arrivedNotify);
+           Chat.SendEcho(api,  Chat.Warp.arrivedNotify);
             isWarping = false;
-        }
-        public static void PartyWarp(EliteAPI api, MatchCollection senderMatch, MatchCollection coordMatch)
-        {
-            string sender = senderMatch[0] + "";
-
-            Structs.Position p = new Structs.Position();
-
-            p.X = float.Parse(coordMatch[0] + "");
-            p.Y = float.Parse(coordMatch[1] + "");
-            p.Z = float.Parse(coordMatch[2] + "");
-            p.Zone = int.Parse(coordMatch[3] + "");
-
-            int endZoneID = p.Zone;
-            string endZone = Structs.Zones.NameFromID(endZoneID);
-
-            int startZoneID = api.Player.ZoneId;
-            string startZone = Structs.Zones.NameFromID(startZoneID);
-
-            if (endZoneID == startZoneID)
-            {
-                string s = "You have been requested by " + sender + " in " + endZone + ". You have until you zone to accept.";
-               Structs.Chat.SendEcho(api,  s);
-
-                Player.reqPos = p;
-                Player.hasDialogue = true;
-            }
-            else
-            {
-                //endZoneID != startZoneID
-                api.ThirdParty.SendString("/echo Cannot warp to " + endZone + " from " + startZone + ".");
-            }
         }
     }
 }

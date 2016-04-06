@@ -23,11 +23,10 @@ namespace NailClipr
             }
 
             if (Player.Search.isSearching || Structs.settings.playerDetection)
-                Functions.PlayersRendered(api);
+                Functions.GetRendered(api);
 
             Structs.Speed.PreventOverWrite(api);
         }
-
         public static void Update(EliteAPI api)
         {
             //Update GUI.
@@ -39,7 +38,5 @@ namespace NailClipr
 
             NailClipr.GUI_ACCEPT.Enabled = Player.hasDialogue;
         }
-
-
     }
 }

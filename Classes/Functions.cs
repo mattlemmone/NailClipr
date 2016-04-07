@@ -36,22 +36,29 @@ namespace NailClipr
 
             //Define xPaths
             string xPathTitle = "//span[@class='item-name']/*//text()";
-            //string xPathStock = ...
+            string xPathStock = "//span[contains(@class, 'stock')]//text()";
+            string xPathStack = "//a[contains(@href, '?stack')]//text()";
 
             //Get strings from xPaths
             string titleText = doc.DocumentNode.SelectSingleNode(xPathTitle).InnerText;
+            string stockCount = doc.DocumentNode.SelectSingleNode(xPathStock).InnerText;
+            string stack = doc.DocumentNode.SelectSingleNode(xPathStack).InnerText;
 
             //Console Logs for debugging
             Console.WriteLine(titleText);
+            Console.WriteLine(stockCount);
 
             //Create an item object.
             Structs.FFXIAH.Item item = new Structs.FFXIAH.Item();
 
             //Set these first
             item.name = titleText;
-            /*item.id = itemID;
-            item.canStack = ...;
+            item.id = itemID;
+            item.canStack = (stack == "stack");
 
+            //debug
+            Console.WriteLine(item.canStack);
+            /*
             //Set single item info
             item.single.price = ...;
             item.single.median = ...;

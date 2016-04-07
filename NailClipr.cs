@@ -281,6 +281,11 @@ namespace NailClipr
 
         #endregion
 
+        private void Btn_Test_Click(object sender, EventArgs e)
+        {
+            uint blurredShieldID = 27643;
+            Functions.GetPrice(api, blurredShieldID);
+        }
     }
 }
 

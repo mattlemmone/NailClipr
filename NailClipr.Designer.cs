@@ -70,6 +70,7 @@ namespace NailClipr
             this.label6 = new System.Windows.Forms.Label();
             this.Lbl_Search = new System.Windows.Forms.Label();
             this.Btn_Abort = new System.Windows.Forms.Button();
+            this.Btn_Test = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed_Default)).BeginInit();
@@ -497,11 +498,22 @@ namespace NailClipr
             this.Btn_Abort.UseVisualStyleBackColor = true;
             this.Btn_Abort.Click += new System.EventHandler(this.Btn_Abort_Click);
             // 
+            // Btn_Test
+            // 
+            this.Btn_Test.Location = new System.Drawing.Point(259, 405);
+            this.Btn_Test.Name = "Btn_Test";
+            this.Btn_Test.Size = new System.Drawing.Size(55, 21);
+            this.Btn_Test.TabIndex = 63;
+            this.Btn_Test.Text = "Test";
+            this.Btn_Test.UseVisualStyleBackColor = true;
+            this.Btn_Test.Click += new System.EventHandler(this.Btn_Test_Click);
+            // 
             // NailClipr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(331, 472);
+            this.Controls.Add(this.Btn_Test);
             this.Controls.Add(this.Btn_Abort);
             this.Controls.Add(this.Lbl_Search);
             this.Controls.Add(this.label6);
@@ -588,6 +600,7 @@ namespace NailClipr
         private Label label6;
         private Label Lbl_Search;
         private Button Btn_Abort;
+        private Button Btn_Test;
     }
 }
 

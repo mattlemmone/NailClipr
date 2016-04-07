@@ -27,15 +27,29 @@ namespace NailClipr
         }
         public static void GetPrice(EliteAPI api, uint itemID)
         {
-            /*
+            
             string itemPage = Structs.FFXIAH.baseUrl + itemID;
+
+            //Get Page
+            var Webget = new HtmlWeb();
+            var doc = Webget.Load(itemPage);
+
+            //Define xPaths
+            string xPathTitle = "//span[@class='item-name']/*//text()";
+            //string xPathStock = ...
+
+            //Get strings from xPaths
+            string titleText = doc.DocumentNode.SelectSingleNode(xPathTitle).InnerText;
+
+            //Console Logs for debugging
+            Console.WriteLine(titleText);
 
             //Create an item object.
             Structs.FFXIAH.Item item = new Structs.FFXIAH.Item();
 
             //Set these first
-            item.name = ...;
-            item.id = itemID;
+            item.name = titleText;
+            /*item.id = itemID;
             item.canStack = ...;
 
             //Set single item info

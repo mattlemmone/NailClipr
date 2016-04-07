@@ -4,11 +4,18 @@ using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
+using System.Windows.Forms;
+using mshtml;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace NailClipr
 {
     class Functions
     {
+        private static bool pageLoaded = false;
+        private static string pageDoc;
+
         public static void AddZonePoint(Structs.WarpPoint wp)
         {
             NailClipr.GUI_WARP.Items.Add(wp.title);
@@ -25,53 +32,81 @@ namespace NailClipr
             uint itemID = api.Inventory.SelectedItemId;
             GetPrice(api, itemID);
         }
-        public static void GetPrice(EliteAPI api, uint itemID)
+        public static async void GetPrice(EliteAPI api, uint itemID)
         {
-            
+
             string itemPage = Structs.FFXIAH.baseUrl + itemID;
 
             //Get Page
-            var Webget = new HtmlWeb();
-            var doc = Webget.Load(itemPage);
+            pageLoaded = false;
+            NailClipr.GUI_WEB.Navigate(itemPage);
+
+            //Wait for page load.
+            while (!pageLoaded) await Task.Delay(10);
+
+            var doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(pageDoc);
 
             //Define xPaths
-            string xPathTitle = "//span[@class='item-name']/*//text()";
-            string xPathStock = "//span[contains(@class, 'stock')]//text()";
-            string xPathStack = "//a[contains(@href, '?stack')]//text()";
-            string xPathEX = "//span[@class='ex']//text()";
+            string xPathTitle = "//span[@class='item-name']/*//text()",
+            xPathStock = "//span[contains(@class, 'stock')]//text()",
+            xPathStack = "//a[contains(@href, '?stack')]//text()",
+            xPathEX = "//span[@class='ex']//text()",
+            xPathPrice = "//tr[@class='sales-row']//text()";
 
-            //Get strings from xPaths
-            HtmlNode ex = doc.DocumentNode.SelectSingleNode(xPathEX);
+            string titleText = doc.DocumentNode.SelectSingleNode(xPathTitle).InnerText;
+
+            //Get nodes from xPaths
+            HtmlNode exNode = doc.DocumentNode.SelectSingleNode(xPathEX);
+
             //If item is ex nothing else matters. Return.
-            if (ex != null)
+            if (exNode != null)
             {
-                Chat.SendEcho(api, "Item is EX. No AH data fetched.");
+                Chat.SendEcho(api, titleText + " is EX. No AH data fetched.");
                 return;
             }
-            string titleText = doc.DocumentNode.SelectSingleNode(xPathTitle).InnerText;
+
             string stockCount = doc.DocumentNode.SelectSingleNode(xPathStock).InnerText;
-            HtmlNode stack = doc.DocumentNode.SelectSingleNode(xPathStack);
-       
+            HtmlNodeCollection price = doc.DocumentNode.SelectNodes(xPathPrice);
+            HtmlNode stackNode = doc.DocumentNode.SelectSingleNode(xPathStack);
 
+            List<Structs.FFXIAH.Sale> sales = new List<Structs.FFXIAH.Sale>();
+            if (price != null)
+            {
+                int numSales =
+                price.Count,
+                rowCount = 0,
+                saleCount = 1,
+                maxSales = 3;
 
-            //Console Logs for debugging
+                foreach (HtmlNode node in price)
+                {
+                    if (saleCount >= maxSales - 1) break;
+                    Structs.FFXIAH.Sale sale = new Structs.FFXIAH.Sale();
+                    if (node != null)
+                    {
+                        if (rowCount == 0)
+                            Console.WriteLine(node.InnerText);
+                        else if (rowCount == 1)
+                            Console.WriteLine(node.InnerText);
+                        else if (rowCount == 2)
+                            Console.WriteLine(node.InnerText);
+                        else if (rowCount == 3)
+                            Console.WriteLine(node.InnerText);
+                    }
+                    if (rowCount == 3) { sales.Add(sale); saleCount++; }
 
-            //Create an item object.
+                    rowCount = (rowCount + 1) % 4;
+                }
+            }
+
+            //Create an item object after all nodes created.
             Structs.FFXIAH.Item item = new Structs.FFXIAH.Item();
 
             //Set these first
             item.name = titleText;
             item.id = itemID;
-            item.canStack = (stack != null);
-            Console.WriteLine(item.canStack);
-            Console.WriteLine(item.name);
-            Console.WriteLine(item.id);
-
-            string xPathPrice = "//tr[@class='sales-row'][1]//text()";
-            HtmlNodeCollection price = doc.DocumentNode.SelectNodes(xPathPrice);
-            foreach (HtmlNode node in price)
-                Console.WriteLine(node);
-
+            item.canStack = (stackNode != null);
 
             /*
             //Set single item info
@@ -90,8 +125,20 @@ namespace NailClipr
             item.stack.stock = ...;
             
             //Output - stack
-            Chat.SendEcho(api, ...);
             */
+
+            foreach (var sale in sales)
+            {
+                Console.WriteLine("Date: " + sale.date);
+                Console.WriteLine("Seller: " + sale.seller);
+                Console.WriteLine("Buyer: " + sale.buyer);
+                Console.WriteLine("Price: " + sale.price);
+            }
+
+            //Console Logs for debugging
+            Console.WriteLine(item.canStack);
+            Console.WriteLine(item.name);
+            Console.WriteLine(item.id);
         }
         public static void GetPrice(EliteAPI api, MatchCollection arguments)
         {
@@ -217,6 +264,14 @@ namespace NailClipr
                 }
                 return;
             }
+        }
+        public static void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            pageLoaded = true;
+
+            IHTMLDocument2 currentDoc = (IHTMLDocument2)NailClipr.GUI_WEB.Document.DomDocument;
+
+            pageDoc = currentDoc.activeElement.innerHTML;
         }
     }
 }

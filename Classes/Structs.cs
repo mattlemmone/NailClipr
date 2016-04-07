@@ -101,6 +101,14 @@ namespace NailClipr
                 {
                 }
             }
+            public class Sale
+            {
+                public string
+                date,
+                seller,
+                buyer;
+                public int price;
+            }
         }
         public struct PC
         {

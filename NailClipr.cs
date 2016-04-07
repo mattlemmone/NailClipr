@@ -41,6 +41,8 @@ namespace NailClipr
         public static Button GUI_ABORT;
         public static TextBox GUI_SEARCH_TARGET;
 
+        public static WebBrowser GUI_WEB;
+
         public NailClipr()
         {
             Misc.SetVer();
@@ -94,6 +96,8 @@ namespace NailClipr
             GUI_SEARCH_TARGET = Txt_Search;
             GUI_FIND = Btn_Find;
             GUI_ABORT = Btn_Abort;
+
+            GUI_WEB = webBrowser;
         }
 
         #region Threads

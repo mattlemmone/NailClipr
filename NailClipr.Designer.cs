@@ -1,5 +1,6 @@
 ﻿using EliteMMO.API;
 using System.Windows.Forms;
+using System;
 
 namespace NailClipr
 {
@@ -71,6 +72,7 @@ namespace NailClipr
             this.Lbl_Search = new System.Windows.Forms.Label();
             this.Btn_Abort = new System.Windows.Forms.Button();
             this.Btn_Test = new System.Windows.Forms.Button();
+            this.webBrowser = new System.Windows.Forms.WebBrowser();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed_Default)).BeginInit();
@@ -508,11 +510,22 @@ namespace NailClipr
             this.Btn_Test.UseVisualStyleBackColor = true;
             this.Btn_Test.Click += new System.EventHandler(this.Btn_Test_Click);
             // 
+            // webBrowser
+            // 
+            this.webBrowser.Location = new System.Drawing.Point(69, 13);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser.Name = "webBrowser";
+            this.webBrowser.Size = new System.Drawing.Size(250, 250);
+            this.webBrowser.TabIndex = 64;
+            this.webBrowser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(Functions.webBrowser_DocumentCompleted);
+
+            // 
             // NailClipr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(331, 472);
+            this.Controls.Add(this.webBrowser);
             this.Controls.Add(this.Btn_Test);
             this.Controls.Add(this.Btn_Abort);
             this.Controls.Add(this.Lbl_Search);
@@ -555,6 +568,11 @@ namespace NailClipr
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        private void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
@@ -601,6 +619,7 @@ namespace NailClipr
         private Label Lbl_Search;
         private Button Btn_Abort;
         private Button Btn_Test;
+        private WebBrowser webBrowser;
     }
 }
 

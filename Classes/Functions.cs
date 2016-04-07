@@ -38,15 +38,23 @@ namespace NailClipr
             string xPathTitle = "//span[@class='item-name']/*//text()";
             string xPathStock = "//span[contains(@class, 'stock')]//text()";
             string xPathStack = "//a[contains(@href, '?stack')]//text()";
+            string xPathEX = "//span[@class='ex']//text()";
 
             //Get strings from xPaths
+            HtmlNode ex = doc.DocumentNode.SelectSingleNode(xPathEX);
+            //If item is ex nothing else matters. Return.
+            if (ex != null)
+            {
+                Chat.SendEcho(api, "Item is EX. No AH data fetched.");
+                return;
+            }
             string titleText = doc.DocumentNode.SelectSingleNode(xPathTitle).InnerText;
             string stockCount = doc.DocumentNode.SelectSingleNode(xPathStock).InnerText;
-            string stack = doc.DocumentNode.SelectSingleNode(xPathStack).InnerText;
+            HtmlNode stack = doc.DocumentNode.SelectSingleNode(xPathStack);
+       
+
 
             //Console Logs for debugging
-            Console.WriteLine(titleText);
-            Console.WriteLine(stockCount);
 
             //Create an item object.
             Structs.FFXIAH.Item item = new Structs.FFXIAH.Item();
@@ -54,14 +62,21 @@ namespace NailClipr
             //Set these first
             item.name = titleText;
             item.id = itemID;
-            item.canStack = (stack == "stack");
-
-            //debug
+            item.canStack = (stack != null);
             Console.WriteLine(item.canStack);
+            Console.WriteLine(item.name);
+            Console.WriteLine(item.id);
+
+            string xPathPrice = "//tr[@class='sales-row'][1]//text()";
+            HtmlNodeCollection price = doc.DocumentNode.SelectNodes(xPathPrice);
+            foreach (HtmlNode node in price)
+                Console.WriteLine(node);
+
+
             /*
             //Set single item info
             item.single.price = ...;
-            item.single.median = ...;
+            //item.single.median = ...;
             item.single.stock = ...;
 
             //Output - single

@@ -3,7 +3,7 @@ alias sea input /echo search
 alias abort input /echo abort
 
 //Warps
-alias warp input /echo warp
+alias w input /echo warp
 alias save input /echo save
 alias sel input /echo select
 alias del input /echo delete
@@ -13,6 +13,9 @@ alias getwarps input /echo getwarps
 //Info
 alias bg input /echo bg
 alias wiki input /echo wiki
+
+//FFXIAH
+alias price input /echo price
 
 //Etc
 alias accept input /echo accept

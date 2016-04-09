@@ -84,8 +84,7 @@ namespace NailClipr
                 Console.WriteLine("Seller: " + sale.seller);
                 Console.WriteLine("Buyer: " + sale.buyer);
                 Console.WriteLine("Price: " + sale.price);
-            }
-            
+            }           
 
         }
         public static void GetPrice(EliteAPI api, MatchCollection arguments)

@@ -85,7 +85,6 @@ namespace NailClipr
             public class Item
             {
                 public string name;
-                public bool canStack;
                 public uint id;
 
                 public int

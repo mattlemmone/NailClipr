@@ -27,10 +27,6 @@ namespace Updater
 
         public static void CheckUpdate()
         {
-            //Get Main files if they don't exist.
-            Directory.CreateDirectory("Resources");
-            Download(Structs.Downloads.AREAS, true);
-            Download(Structs.Downloads.ITEMS, true);
 
             //Check Versions
             Structs.File API_DLL = Structs.Downloads.API_DLL;
@@ -122,18 +118,6 @@ namespace Updater
                     "EliteMMO.API.dll",
                     "http://ext.elitemmonetwork.com/downloads/elitemmo_api/EliteMMO.API.dll",
                     "http://ext.elitemmonetwork.com/downloads/elitemmo_api/index.php?v"
-                );
-                public static File AREAS = new File(
-                    "areas.xml",
-                    "https://github.com/mattlemmone/NailClipr/raw/master/bin/Release/Resources/areas.xml",
-                    "",
-                    true
-                );
-                public static File ITEMS = new File(
-                    "ffxiah_items.xml",
-                    "https://github.com/mattlemmone/NailClipr/raw/master/bin/Release/Resources/ffxiah_items.xml",
-                    "",
-                    true
                 );
             }
             public class File

@@ -25,9 +25,15 @@ namespace NailClipr.Classes
             }
             else
             {
+                //App is up to date.
                 bool wasUpdated = bool.Parse(s[2]);
                 if (wasUpdated)
                     UpdateComments();
+
+                //Get resource files if they don't exist.
+                Directory.CreateDirectory("Resources");
+                Download(Structs.Downloads.AREAS, true);
+                Download(Structs.Downloads.ITEMS, true);
             }
         }
         public static void Download(Structs.File file, bool checkExists = false)

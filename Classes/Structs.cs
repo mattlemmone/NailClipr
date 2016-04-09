@@ -35,6 +35,18 @@ namespace NailClipr
                 "https://github.com/mattlemmone/NailClipr/raw/master/bin/Release/Updater.exe"
             );
 
+            public static File AREAS = new File(
+                "areas.xml",
+                "https://github.com/mattlemmone/NailClipr/raw/master/bin/Release/Resources/areas.xml",
+                "",
+                true
+            );
+            public static File ITEMS = new File(
+                "ffxiah_items.xml",
+                "https://github.com/mattlemmone/NailClipr/raw/master/bin/Release/Resources/ffxiah_items.xml",
+                "",
+                true
+            );
             public static string BASE_PATH = Application.StartupPath + @"\";
 
         }
@@ -60,14 +72,22 @@ namespace NailClipr
             public string
             title,
             downloadUrl,
-            fullPath,
-            ver;
+            fullPath;
 
             public File(string t, string down)
             {
                 title = t;
                 downloadUrl = down;
                 fullPath = Structs.Downloads.BASE_PATH + t;
+            }
+            public File(string t, string down, string verU, bool isResource = false)
+            {
+                title = t;
+                downloadUrl = down;
+                if (isResource)
+                    fullPath = fullPath + @"Resources\" + t;
+                else
+                    fullPath = fullPath + t;
             }
         }
         public struct FFXI

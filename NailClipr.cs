@@ -284,11 +284,6 @@ namespace NailClipr
 
         #endregion
 
-        private void Btn_Test_Click(object sender, EventArgs e)
-        {
-            if (api.Menu.IsMenuOpen & ( api.Menu.MenuName.Contains("inven") || api.Menu.MenuName.Contains("ward")) || api.Menu.MenuName.Contains("satch") || api.Menu.MenuName.Contains("sack") || api.Menu.MenuName.Contains("case"))
-                Functions.GetPrice(api, api.Inventory.SelectedItemId);
-        }
     }
 }
 

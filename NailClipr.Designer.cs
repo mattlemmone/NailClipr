@@ -499,16 +499,6 @@ namespace NailClipr
             this.Btn_Abort.UseVisualStyleBackColor = true;
             this.Btn_Abort.Click += new System.EventHandler(this.Btn_Abort_Click);
             // 
-            // Btn_Test
-            // 
-            this.Btn_Test.Location = new System.Drawing.Point(259, 405);
-            this.Btn_Test.Name = "Btn_Test";
-            this.Btn_Test.Size = new System.Drawing.Size(55, 21);
-            this.Btn_Test.TabIndex = 63;
-            this.Btn_Test.Text = "Test";
-            this.Btn_Test.UseVisualStyleBackColor = true;
-            this.Btn_Test.Click += new System.EventHandler(this.Btn_Test_Click);
-            // 
             // NailClipr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);

@@ -77,40 +77,13 @@ namespace NailClipr
                 public const int MAXLENGTH = 15;
                 public const int MINLENGTH = 3;
             }
-        }
-        public struct FFXIAH
+        }        
+        public struct InventoryItem
         {
-            public const string baseUrl = "http://www.ffxiah.com/item/";
-
-            public class Item
-            {
-                public string name;
-                public uint id;
-
-                public int
-                stock;
-            }
-            public class Sale
-            {
-                public string
-                date,
-                seller,
-                buyer;
-                public int price;
-            }
-            public class RegExs
-            {
-                public static List<string> list = new List<string>(new string[] {
-                    date, seller, buyer, price
-                });
-                public const string
-                itemSale = @"Item.sales = \[\{(?<match>.*)\}\]",
-                date = "\"saleon\":(?<match>[0-9]+)",
-                price = "\"price\":(?<match>[0-9]+)",
-                seller = "\"seller_name\":\"(?<match>[A-z]+)\"",
-                buyer = "\"buyer_name\":\"(?<match>[A-z]+)\"",
-                server = "\"seller_server\":(?<match>[0-9]+)";
-            }
+            public string name, singleName, stackName, description;
+            public int stackSize;
+            public uint id;
+            public bool success;
         }
         public struct PC
         {

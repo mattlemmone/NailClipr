@@ -135,7 +135,7 @@ namespace NailClipr.Classes
         public static void UpdateComments()
         {
             string text = ReturnGitResponse(Structs.Commit.URL);
-            
+
             Regex dateRegex = new Regex(Structs.Commit.DATE_REGEX);
             MatchCollection dateMatch = dateRegex.Matches(text);
             string date = dateMatch[0].Groups["date"].Value;
@@ -150,7 +150,7 @@ namespace NailClipr.Classes
         {
             Regex r = new Regex(pattern);
             MatchCollection match = r.Matches(text);
-            return match[index].Groups[group].Value;
+            return match.Count > 0 ? match[index].Groups[group].Value : "null";
         }
         public static MatchCollection RegExMatches(string text, string pattern)
         {

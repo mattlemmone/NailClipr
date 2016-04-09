@@ -10,9 +10,10 @@ namespace NailClipr
     {
         public static Structs.Position reqPos;
         public static bool hasDialogue;
-        public static bool warpAccepted;
-        public static bool isAlone;
-        public static bool isWarping;        
+        public static bool 
+        warpAccepted,
+        isAlone,
+        isWarping;
 
         //Structs
         public struct Location
@@ -131,7 +132,7 @@ namespace NailClipr
 
             //Mark flag for status gui text update.
             isWarping = true;
-           Chat.SendEcho(api,  Chat.Warp.warmupNotify);
+            Chat.SendEcho(api, Chat.Warp.warmupNotify);
 
             //Start warp.
             MaintenanceMode(api, true);
@@ -149,7 +150,7 @@ namespace NailClipr
             if (warpAccepted)
                 warpAccepted = false;
 
-           Chat.SendEcho(api,  Chat.Warp.arrivedNotify);
+            Chat.SendEcho(api, Chat.Warp.arrivedNotify);
             isWarping = false;
         }
     }

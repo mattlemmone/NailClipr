@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Chat.cs" />
+    <Compile Include="Classes\FFXIAH.cs" />
     <Compile Include="Classes\Functions.cs" />
     <Compile Include="Classes\Misc.cs" />
     <Compile Include="Classes\Player.cs" />

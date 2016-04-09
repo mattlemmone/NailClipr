@@ -864,6 +864,25 @@
         <Z>0</Z>
       </WarpPoint>
     </Zone>
+    <Zone id="111" title="Beaucedine Glacier">
+      <WarpPoint title="Outpost">
+        <X>-19.035</X>
+        <Y>-108.748</Y>
+        <Z>-59.73802</Z>
+      </WarpPoint>
+      <WarpPoint title="Fei'Yin">
+        <X>278.525</X>
+        <Y>568.586</Y>
+        <Z>20.0599537</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="204" title="Fei'Yin">
+      <WarpPoint title="Beaucedine Glacier">
+        <X>-180.002</X>
+        <Y>-196.944</Y>
+        <Z>-24</Z>
+      </WarpPoint>
+    </Zone>
   </Zones>
   <Settings>
     <PlayerDetection>True</PlayerDetection>

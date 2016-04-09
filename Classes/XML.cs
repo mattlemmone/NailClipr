@@ -1,10 +1,8 @@
 ﻿using EliteMMO.API;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
 using System.Xml.Linq;
 using NailClipr.Classes;
 
@@ -14,9 +12,66 @@ namespace NailClipr
     {
         public const string SETTINGS = "Resources/Settings.xml";
         public const string AREAS = "Resources/areas.xml";
+        public const string ITEMS = "Resources/ffxiah_items.xml";
 
         public static XDocument xdoc;
+        public static Structs.InventoryItem GetInvItem(uint itemId)
+        {
+            xdoc = XDocument.Load(ITEMS);
+            Structs.InventoryItem item = new Structs.InventoryItem();
+            try
+            {
+                XElement itemNode = xdoc.Descendants("ffxiah")
+                .Elements("item")
+                .Where(x => x.Element("int_id").Value == itemId + "").FirstOrDefault();
 
+                item.description = itemNode.Element("en_description").Value;
+                item.id = itemId;
+                item.name = itemNode.Element("en_name").Value;
+                item.singleName = itemNode.Element("log_name_singular").Value;
+                item.stackName = itemNode.Element("log_name_plural").Value;
+                item.stackSize = int.Parse(itemNode.Element("stack_size").Value);
+                item.success = true;
+            }
+            catch (Exception e)
+            {
+                item.success = false;
+                Console.WriteLine("Couldn't parse by id.");
+                Console.WriteLine(e.Message);
+            }
+            return item;
+        }
+        public static Structs.InventoryItem GetInvItem(string itemName)
+        {
+            xdoc = XDocument.Load(ITEMS);
+            Structs.InventoryItem item = new Structs.InventoryItem();
+
+            try
+            {
+                XElement itemNode = xdoc.Descendants("ffxiah")
+                    .Elements("item")
+                    .Where(x =>
+                    x.Element("en_name").Value == itemName
+                    || x.Element("log_name_singular").Value == itemName
+                    || x.Element("log_name_plural").Value == itemName
+                    ).FirstOrDefault();
+
+                item.description = itemNode.Element("en_description").Value;
+                item.id = uint.Parse(itemNode.Element("int_id").Value);
+                item.name = itemNode.Element("en_name").Value;
+                item.singleName = itemNode.Element("log_name_singular").Value;
+                item.stackName = itemNode.Element("log_name_plural").Value;
+                item.stackSize = int.Parse(itemNode.Element("stack_size").Value);
+                item.success = true;
+            }
+            catch (Exception e)
+            {
+                item.success = false;
+                Console.WriteLine("Couldn't parse by string.");
+                Console.WriteLine(e.Message);
+            }
+            return item;
+        }
         public static void Create()
         {
 
@@ -33,21 +88,6 @@ namespace NailClipr
 
             xmlDocument.Save(SETTINGS);
             xdoc = XDocument.Load(SETTINGS);
-        }
-        public static void SaveSettings()
-        {
-            try
-            {
-                xdoc.Element("NailClipr").Element("Settings").Element("PlayerDetection").Value = Structs.settings.playerDetection + "";
-                xdoc.Element("NailClipr").Element("Settings").Element("StayOnTop").Value = Structs.settings.topMostForm + "";
-                xdoc.Element("NailClipr").Element("Settings").Element("DefaultSpeed").Value = Player.Speed.normal + "";
-                xdoc.Save(SETTINGS);
-            }
-            catch (FileNotFoundException)
-            {
-                XML.Create();
-                XML.SaveSettings();
-            }
         }
         public static void LoadSettings()
         {
@@ -100,7 +140,6 @@ namespace NailClipr
                 });
             }
         }
-
         public static void LoadWarps()
         {
             try
@@ -140,6 +179,21 @@ namespace NailClipr
                 XML.Create();
             }
 
+        }
+        public static void SaveSettings()
+        {
+            try
+            {
+                xdoc.Element("NailClipr").Element("Settings").Element("PlayerDetection").Value = Structs.settings.playerDetection + "";
+                xdoc.Element("NailClipr").Element("Settings").Element("StayOnTop").Value = Structs.settings.topMostForm + "";
+                xdoc.Element("NailClipr").Element("Settings").Element("DefaultSpeed").Value = Player.Speed.normal + "";
+                xdoc.Save(SETTINGS);
+            }
+            catch (FileNotFoundException)
+            {
+                XML.Create();
+                XML.SaveSettings();
+            }
         }
         public static void SaveWarp(EliteAPI api)
         {

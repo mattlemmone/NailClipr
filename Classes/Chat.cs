@@ -125,6 +125,9 @@ namespace NailClipr.Classes
             string firstMatch = echoMatch[0].ToString();
             switch (firstMatch)
             {
+                case Chat.Controller.getPrice:
+                    Functions.GetPrice(api, echoMatch);
+                    break;
                 case Chat.Controller.saveWarp:
                     Functions.SaveWarp(api, echoMatch);
                     break;
@@ -145,9 +148,6 @@ namespace NailClipr.Classes
                     break;
                 case Chat.Controller.searchAH:
                     Functions.Search(echoMatch, Structs.URL.AH);
-                    break;
-                case Chat.Controller.getPrice:
-                    Functions.GetPrice(api, echoMatch);
                     break;
             }
         }

@@ -3,15 +3,11 @@ using NailClipr.Classes;
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Collections.Generic;
-using System.Net;
 
 namespace NailClipr
 {
     class Functions
     {
-        private static string pageDoc;
-
         public static void AddZonePoint(Structs.WarpPoint wp)
         {
             NailClipr.GUI_WARP.Items.Add(wp.title);
@@ -26,79 +22,114 @@ namespace NailClipr
         public static void GetPrice(EliteAPI api)
         {
             uint itemID = api.Inventory.SelectedItemId;
-            GetPrice(api, itemID);
-        }
-        public static void GetPrice(EliteAPI api, uint itemID)
-        {
-            List<Structs.FFXIAH.Sale> sales = new List<Structs.FFXIAH.Sale>();
+            Structs.InventoryItem item = XML.GetInvItem(itemID);
 
-            string itemPage = Structs.FFXIAH.baseUrl + itemID,
+            if (item.success) GetPrice(api, item);
+            else Chat.SendEcho(api, "Couldn't find that item!");
+
+        }
+        public static void GetPrice(EliteAPI api, bool isStack)
+        {
+            uint itemID = api.Inventory.SelectedItemId;
+            Structs.InventoryItem item = XML.GetInvItem(itemID);
+
+            if (item.success) GetPrice(api, item, isStack);
+            else Chat.SendEcho(api, "Couldn't find that item!");
+
+        }
+        public static void GetPrice(EliteAPI api, Structs.InventoryItem invItem, bool isStack = false)
+        {
+            string itemPage = FFXIAH.baseUrl + invItem.id;
+            if (isStack) itemPage += "/?stack=1";
 
             //Get page html.
-            html = GetHTML(itemPage);
+            string html = FFXIAH.GetHTML(itemPage, 12);
 
             //Get itemSale string so that we have less to sift through.
-            string itemSaleStr = Misc.RegExMatch(html, Structs.FFXIAH.RegExs.itemSale);
+            string itemSaleStr = Misc.RegExMatch(html, FFXIAH.RegExs.itemSale);
+            int numSales = 0, maxSales;
 
-            //Get number of sales and server to ensure we're parsing the correct one.
-            int serverValue = int.Parse(Misc.RegExMatch(itemSaleStr, Structs.FFXIAH.RegExs.server));
-            int numSales = Misc.RegExMatches(itemSaleStr, Structs.FFXIAH.RegExs.server).Count;
-
-            int maxSales = 5 > numSales ? numSales : 5;
-
-            for (int i = 0; i < maxSales; i++)
+            //Item isn't EX
+            if (itemSaleStr != "null")
             {
-                var colCount = 0;
-                Structs.FFXIAH.Sale sale = new Structs.FFXIAH.Sale();
-                foreach (string regExStr in Structs.FFXIAH.RegExs.list)
-                {
-                    string matchVal = Misc.RegExMatch(itemSaleStr, regExStr, i);
+                //Get number of sales and server to ensure we're parsing the correct one.
+                int serverValue = int.Parse(Misc.RegExMatch(itemSaleStr, FFXIAH.RegExs.server));
 
-                    if (colCount == 0) sale.date = FromUnixTime(long.Parse(matchVal)).ToShortDateString();
-                    else if (colCount == 1) sale.seller = matchVal;
-                    else if (colCount == 2) sale.buyer = matchVal;
-                    else if (colCount == 3) sale.price = int.Parse(matchVal);
-                    if (colCount == 3) { sales.Add(sale); }
-                    colCount = (colCount + 1) % 4;
+                //Verify server is correct before parsing.
+                /*if (api.Player.ServerId != serverValue)
+                {
+                   Chat.SendEcho(api, "Wrong server being parsed!");
+                    return;
+                }*/
+
+                numSales = Misc.RegExMatches(itemSaleStr, FFXIAH.RegExs.server).Count;
+                maxSales = FFXIAH.maxSales > numSales ? numSales : FFXIAH.maxSales;
+
+                //Store sales
+                for (int i = 0; i < maxSales; i++)
+                {
+                    var colCount = 0;
+                    FFXIAH.Sale sale = new FFXIAH.Sale();
+                    foreach (string regExStr in FFXIAH.RegExs.list)
+                    {
+                        string matchVal = Misc.RegExMatch(itemSaleStr, regExStr, i);
+                        if (colCount == 0) sale.date = FromUnixTime(long.Parse(matchVal)).ToShortDateString();
+                        else if (colCount == 1) sale.seller = matchVal;
+                        else if (colCount == 2) sale.buyer = matchVal;
+                        else if (colCount == 3) sale.price = int.Parse(matchVal);
+                        if (colCount == 3) { FFXIAH.sales.Add(sale); }
+                        colCount = (colCount + 1) % 4;
+                    }
                 }
             }
 
-            //Create an item object after all nodes created.
-            Structs.FFXIAH.Item item = new Structs.FFXIAH.Item();
+            //Create an xiah item object after all info gathered.
+            FFXIAH.Item item = new FFXIAH.Item();
 
-            string sep = "---------------------------";
-            if (numSales == 0)
-            {
-                Chat.SendEcho(api, sep);
-                Chat.SendEcho(api, item.name);
-                Chat.SendEcho(api, "No sales found.");
-                Chat.SendEcho(api, sep);
-                return;
-            }
-            Chat.SendEcho(api, sep);
-            Chat.SendEcho(api, item.name);
-            foreach (var sale in sales)
-            {
+            //Store item info.
+            string stockStr = Misc.RegExMatch(html, FFXIAH.RegExs.stock);
+            item.stock = stockStr != "null" ? int.Parse(stockStr) : 0;
+            item.isStack = isStack;
 
-                Chat.SendEcho(api,
-                    sale.date + " | " + sale.seller + " --> " + sale.buyer + " @ " + sale.price
-                    );
-            }
-            Chat.SendEcho(api, sep);
+            //Print sales list.
+            FFXIAH.PrintSales(api, invItem, item, numSales);
 
+            //Clear sales list.
+            FFXIAH.sales.Clear();
         }
         public static void GetPrice(EliteAPI api, MatchCollection arguments)
         {
-            /*
+
             //Array of strings from //command.
             string[] args = Misc.MatchToString(arguments);
 
+            //Current selected item stack check.
+            if (args.Length == 2 && args[args.Length - 1].ToLower() == "stack")
+            { GetPrice(api, true); return; }
+
             //Search terms. Gives us 'Serket Ring' from //price Serket Ring.
+            bool isStack = false;
             string keywords = string.Join(" ", args.Skip(1));
 
-            uint itemID = ...;
-            GetPrice(api, itemID);
-            */
+            if (args.Length >= 2 && args[args.Length - 1].ToLower() == "stack")
+            {
+                isStack = true;
+                Regex r = new Regex(@"\s?stack\s?");
+                keywords = r.Replace(keywords, string.Empty);
+            }
+
+            Structs.InventoryItem item = XML.GetInvItem(keywords);
+
+            if (item.success)
+            {
+                uint itemID = item.id;
+                GetPrice(api, item, isStack);
+            }
+            else
+            {
+                Chat.SendEcho(api, "Couldn't find that item!");
+            }
+
         }
         public static void GetRendered(EliteAPI api)
         {
@@ -212,17 +243,11 @@ namespace NailClipr
                 return;
             }
         }
-        public static string GetHTML(string url)
-        {
-            WebClient client = new WebClient();
-            {
-                return client.DownloadString(url);
-            }
-        }
         public static DateTime FromUnixTime(long unixTime)
         {
-            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            return epoch.AddSeconds(unixTime);
+            DateTime referenceTimeZero = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+
+            return referenceTimeZero.AddSeconds(unixTime);
         }
     }
 }

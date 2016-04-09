@@ -88,8 +88,6 @@ namespace NailClipr
                 public uint id;
 
                 public int
-                price,
-                median,
                 stock;
             }
             public class Sale

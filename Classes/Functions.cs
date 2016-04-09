@@ -31,7 +31,7 @@ namespace NailClipr
         public static void GetPrice(EliteAPI api, uint itemID)
         {
             List<Structs.FFXIAH.Sale> sales = new List<Structs.FFXIAH.Sale>();
-            
+
             string itemPage = Structs.FFXIAH.baseUrl + itemID,
 
             //Get page html.
@@ -44,7 +44,9 @@ namespace NailClipr
             int serverValue = int.Parse(Misc.RegExMatch(itemSaleStr, Structs.FFXIAH.RegExs.server));
             int numSales = Misc.RegExMatches(itemSaleStr, Structs.FFXIAH.RegExs.server).Count;
 
-            for (int i = 0; i < numSales; i++)
+            int maxSales = 5 > numSales ? numSales : 5;
+
+            for (int i = 0; i < maxSales; i++)
             {
                 var colCount = 0;
                 Structs.FFXIAH.Sale sale = new Structs.FFXIAH.Sale();
@@ -64,27 +66,25 @@ namespace NailClipr
             //Create an item object after all nodes created.
             Structs.FFXIAH.Item item = new Structs.FFXIAH.Item();
 
-            //Set these first
-            /*
-            item.name = titleText;
-            item.id = itemID;
-            item.price = ...;
-            item.median = ...;
-            item.stock = ...;
-
-            //Output - single
-            Chat.SendEcho(api, ...);
-
-            */
-
-            //Console Logs for debugging
+            string sep = "---------------------------";
+            if (numSales == 0)
+            {
+                Chat.SendEcho(api, sep);
+                Chat.SendEcho(api, item.name);
+                Chat.SendEcho(api, "No sales found.");
+                Chat.SendEcho(api, sep);
+                return;
+            }
+            Chat.SendEcho(api, sep);
+            Chat.SendEcho(api, item.name);
             foreach (var sale in sales)
             {
-                Console.WriteLine("Date: " + sale.date);
-                Console.WriteLine("Seller: " + sale.seller);
-                Console.WriteLine("Buyer: " + sale.buyer);
-                Console.WriteLine("Price: " + sale.price);
-            }           
+
+                Chat.SendEcho(api,
+                    sale.date + " | " + sale.seller + " --> " + sale.buyer + " @ " + sale.price
+                    );
+            }
+            Chat.SendEcho(api, sep);
 
         }
         public static void GetPrice(EliteAPI api, MatchCollection arguments)

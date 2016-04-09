@@ -97,7 +97,6 @@ namespace NailClipr
             GUI_FIND = Btn_Find;
             GUI_ABORT = Btn_Abort;
 
-            GUI_WEB = webBrowser;
         }
 
         #region Threads

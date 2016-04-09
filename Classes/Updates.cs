@@ -92,7 +92,7 @@ namespace NailClipr.Classes
         }
         private static void UpdateZonePoints(EliteAPI api)
         {
-            if (Structs.zonePoints.Count == 0 && api.Player.ZoneId != Player.Location.old)
+            if (Structs.zonePoints.Count == 0 && api.Player.ZoneId != Player.Location.old && api.Player.ZoneId != 0)
             {
                 Functions.LoadZonePoints(api);
             }

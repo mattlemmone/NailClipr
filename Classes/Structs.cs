@@ -20,7 +20,7 @@ namespace NailClipr
             public static string name = "NailClipr";
             public static string ver;
             public static bool updated;
-        }        
+        }
         public struct Commit
         {
             public const string
@@ -81,25 +81,17 @@ namespace NailClipr
         public struct FFXIAH
         {
             public const string baseUrl = "http://www.ffxiah.com/item/";
+
             public class Item
             {
                 public string name;
                 public bool canStack;
                 public uint id;
-                public Single single;
-                public Stack stack;
 
-                public class Price
-                {
-                    public int
-                    price, median, stock;
-                }
-                public class Single : Price
-                {                  
-                }
-                public class Stack : Price
-                {
-                }
+                public int
+                price,
+                median,
+                stock;
             }
             public class Sale
             {
@@ -108,6 +100,19 @@ namespace NailClipr
                 seller,
                 buyer;
                 public int price;
+            }
+            public class RegExs
+            {
+                public static List<string> list = new List<string>(new string[] {
+                    date, seller, buyer, price
+                });
+                public const string
+                itemSale = @"Item.sales = \[\{(?<match>.*)\}\]",
+                date = "\"saleon\":(?<match>[0-9]+)",
+                price = "\"price\":(?<match>[0-9]+)",
+                seller = "\"seller_name\":\"(?<match>[A-z]+)\"",
+                buyer = "\"buyer_name\":\"(?<match>[A-z]+)\"",
+                server = "\"seller_server\":(?<match>[0-9]+)";
             }
         }
         public struct PC

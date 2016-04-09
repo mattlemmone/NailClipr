@@ -146,6 +146,17 @@ namespace NailClipr.Classes
 
             MessageBox.Show(msg, "Change Log v." + Structs.App.ver, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+        public static string RegExMatch(string text, string pattern, int index = 0, string group = "match")
+        {
+            Regex r = new Regex(pattern);
+            MatchCollection match = r.Matches(text);
+            return match[index].Groups[group].Value;
+        }
+        public static MatchCollection RegExMatches(string text, string pattern)
+        {
+            Regex r = new Regex(pattern);
+            return r.Matches(text);
+        }
         #endregion
     }
 }

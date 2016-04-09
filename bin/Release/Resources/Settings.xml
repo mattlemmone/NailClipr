@@ -157,6 +157,11 @@
         <Y>-7.18051624</Y>
         <Z>-0.149999976</Z>
       </WarpPoint>
+      <WarpPoint title="Oston">
+        <X>-52.59081</X>
+        <Y>-9.50716</Y>
+        <Z>0</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="246" title="Port Jeuno">
       <WarpPoint title="Joachim">
@@ -438,16 +443,6 @@
       </WarpPoint>
     </Zone>
     <Zone id="249" title="Mhaura">
-      <WarpPoint title="Home Point #1">
-        <X>-11.9579144</X>
-        <Y>85.67905</Y>
-        <Z>-15.7869263</Z>
-      </WarpPoint>
-      <WarpPoint title="Scrolls">
-        <X>-50.6611633</X>
-        <Y>31.13167</Y>
-        <Z>-4.089674</Z>
-      </WarpPoint>
       <WarpPoint title="Home Point #1">
         <X>-12.75</X>
         <Y>86.286</Y>
@@ -792,6 +787,16 @@
         <Y>-380.014526</Y>
         <Z>-5.76754</Z>
       </WarpPoint>
+      <WarpPoint title="Entrance: Coliseum">
+        <X>259.103638</X>
+        <Y>60.0513954</Y>
+        <Z>-5.76754</Z>
+      </WarpPoint>
+      <WarpPoint title="Augural Conveyor">
+        <X>-585.7644</X>
+        <Y>20.0901337</Y>
+        <Z>-7.5</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="266" title="Marjami Ravine">
       <WarpPoint title="Woh Gates">
@@ -832,13 +837,7 @@
         <Z>-40</Z>
       </WarpPoint>
     </Zone>
-    <Zone id="289" title="Escha - Ru'Aun">
-      <WarpPoint title="test">
-        <X>-259.744629</X>
-        <Y>339.213959</Y>
-        <Z>-7.99998951</Z>
-      </WarpPoint>
-    </Zone>
+    <Zone id="289" title="Escha - Ru'Aun" />
     <Zone id="232" title="Port San d'Oria">
       <WarpPoint title="Home Point #2">
         <X>49.4468651</X>

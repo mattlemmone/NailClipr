@@ -3,17 +3,13 @@ using NailClipr.Classes;
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using HtmlAgilityPack;
-using System.Windows.Forms;
-using mshtml;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Net;
 
 namespace NailClipr
 {
     class Functions
     {
-        private static bool pageLoaded = false;
         private static string pageDoc;
 
         public static void AddZonePoint(Structs.WarpPoint wp)
@@ -32,71 +28,36 @@ namespace NailClipr
             uint itemID = api.Inventory.SelectedItemId;
             GetPrice(api, itemID);
         }
-        public static async void GetPrice(EliteAPI api, uint itemID)
+        public static void GetPrice(EliteAPI api, uint itemID)
         {
-
-            string itemPage = Structs.FFXIAH.baseUrl + itemID;
-
-            //Get Page
-            pageLoaded = false;
-            NailClipr.GUI_WEB.Navigate(itemPage);
-
-            //Wait for page load.
-            while (!pageLoaded) await Task.Delay(10);
-
-            var doc = new HtmlAgilityPack.HtmlDocument();
-            doc.LoadHtml(pageDoc);
-
-            //Define xPaths
-            string xPathTitle = "//span[@class='item-name']/*//text()",
-            xPathStock = "//span[contains(@class, 'stock')]//text()",
-            xPathStack = "//a[contains(@href, '?stack')]//text()",
-            xPathEX = "//span[@class='ex']//text()",
-            xPathPrice = "//tr[@class='sales-row']//text()";
-
-            string titleText = doc.DocumentNode.SelectSingleNode(xPathTitle).InnerText;
-
-            //Get nodes from xPaths
-            HtmlNode exNode = doc.DocumentNode.SelectSingleNode(xPathEX);
-
-            //If item is ex nothing else matters. Return.
-            if (exNode != null)
-            {
-                Chat.SendEcho(api, titleText + " is EX. No AH data fetched.");
-                return;
-            }
-
-            string stockCount = doc.DocumentNode.SelectSingleNode(xPathStock).InnerText;
-            HtmlNodeCollection price = doc.DocumentNode.SelectNodes(xPathPrice);
-            HtmlNode stackNode = doc.DocumentNode.SelectSingleNode(xPathStack);
-
             List<Structs.FFXIAH.Sale> sales = new List<Structs.FFXIAH.Sale>();
-            if (price != null)
+            
+            string itemPage = Structs.FFXIAH.baseUrl + itemID,
+
+            //Get page html.
+            html = GetHTML(itemPage);
+
+            //Get itemSale string so that we have less to sift through.
+            string itemSaleStr = Misc.RegExMatch(html, Structs.FFXIAH.RegExs.itemSale);
+
+            //Get number of sales and server to ensure we're parsing the correct one.
+            int serverValue = int.Parse(Misc.RegExMatch(itemSaleStr, Structs.FFXIAH.RegExs.server));
+            int numSales = Misc.RegExMatches(itemSaleStr, Structs.FFXIAH.RegExs.server).Count;
+
+            for (int i = 0; i < numSales; i++)
             {
-                int numSales =
-                price.Count,
-                rowCount = 0,
-                saleCount = 1,
-                maxSales = 3;
-
-                foreach (HtmlNode node in price)
+                var colCount = 0;
+                Structs.FFXIAH.Sale sale = new Structs.FFXIAH.Sale();
+                foreach (string regExStr in Structs.FFXIAH.RegExs.list)
                 {
-                    if (saleCount >= maxSales - 1) break;
-                    Structs.FFXIAH.Sale sale = new Structs.FFXIAH.Sale();
-                    if (node != null)
-                    {
-                        if (rowCount == 0)
-                            Console.WriteLine(node.InnerText);
-                        else if (rowCount == 1)
-                            Console.WriteLine(node.InnerText);
-                        else if (rowCount == 2)
-                            Console.WriteLine(node.InnerText);
-                        else if (rowCount == 3)
-                            Console.WriteLine(node.InnerText);
-                    }
-                    if (rowCount == 3) { sales.Add(sale); saleCount++; }
+                    string matchVal = Misc.RegExMatch(itemSaleStr, regExStr, i);
 
-                    rowCount = (rowCount + 1) % 4;
+                    if (colCount == 0) sale.date = FromUnixTime(long.Parse(matchVal)).ToShortDateString();
+                    else if (colCount == 1) sale.seller = matchVal;
+                    else if (colCount == 2) sale.buyer = matchVal;
+                    else if (colCount == 3) sale.price = int.Parse(matchVal);
+                    if (colCount == 3) { sales.Add(sale); }
+                    colCount = (colCount + 1) % 4;
                 }
             }
 
@@ -104,29 +65,19 @@ namespace NailClipr
             Structs.FFXIAH.Item item = new Structs.FFXIAH.Item();
 
             //Set these first
+            /*
             item.name = titleText;
             item.id = itemID;
-            item.canStack = (stackNode != null);
-
-            /*
-            //Set single item info
-            item.single.price = ...;
-            //item.single.median = ...;
-            item.single.stock = ...;
+            item.price = ...;
+            item.median = ...;
+            item.stock = ...;
 
             //Output - single
             Chat.SendEcho(api, ...);
 
-            if (!item.canStack) return;
-
-            //Set stack info
-            item.stack.price = ...;
-            item.stack.median = ...;
-            item.stack.stock = ...;
-            
-            //Output - stack
             */
 
+            //Console Logs for debugging
             foreach (var sale in sales)
             {
                 Console.WriteLine("Date: " + sale.date);
@@ -134,11 +85,8 @@ namespace NailClipr
                 Console.WriteLine("Buyer: " + sale.buyer);
                 Console.WriteLine("Price: " + sale.price);
             }
+            
 
-            //Console Logs for debugging
-            Console.WriteLine(item.canStack);
-            Console.WriteLine(item.name);
-            Console.WriteLine(item.id);
         }
         public static void GetPrice(EliteAPI api, MatchCollection arguments)
         {
@@ -265,13 +213,17 @@ namespace NailClipr
                 return;
             }
         }
-        public static void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        public static string GetHTML(string url)
         {
-            pageLoaded = true;
-
-            IHTMLDocument2 currentDoc = (IHTMLDocument2)NailClipr.GUI_WEB.Document.DomDocument;
-
-            pageDoc = currentDoc.activeElement.innerHTML;
+            WebClient client = new WebClient();
+            {
+                return client.DownloadString(url);
+            }
+        }
+        public static DateTime FromUnixTime(long unixTime)
+        {
+            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            return epoch.AddSeconds(unixTime);
         }
     }
 }

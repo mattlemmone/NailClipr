@@ -19,6 +19,24 @@ namespace NailClipr
             NailClipr.GUI_WARP.Items.Clear();
             Structs.zonePoints.Clear();
         }
+        public static void GetDesc(EliteAPI api)
+        {
+            uint itemID = api.Inventory.SelectedItemId;
+            Structs.InventoryItem item = XML.GetInvItem(itemID);
+
+            if (!item.success)
+            {
+                Chat.SendEcho(api, "Couldn't find that item!");
+                return;
+            }
+
+            //Get page html.
+            string itemPage = FFXIAH.baseUrl + itemID;
+            string html = FFXIAH.GetHTML(itemPage, 12);
+            string itemName = item.name;
+            string desc = Misc.RegExMatch(html, FFXIAH.RegExs.desc);
+            Chat.SendLinkshell(api, itemName + "\n" + desc);
+        }
         public static void GetPrice(EliteAPI api)
         {
             uint itemID = api.Inventory.SelectedItemId;
@@ -26,7 +44,6 @@ namespace NailClipr
 
             if (item.success) GetPrice(api, item);
             else Chat.SendEcho(api, "Couldn't find that item!");
-
         }
         public static void GetPrice(EliteAPI api, bool isStack)
         {

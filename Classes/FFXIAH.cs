@@ -40,7 +40,8 @@ namespace NailClipr.Classes
             buyer = "\"buyer_name\":\"(?<match>[A-z]+)\"",
             server = "\"seller_server\":(?<match>[0-9]+)",
             stock = @"<span class=stock>(?<match>[0-9]+)<\/span>",
-            name = @"<title>(?<match>[A-z\s]+)";
+            name = @"<title>(?<match>[A-z\s]+)",
+            desc = "<span class=[\'\"]item-stats[\'\"]>(?<match>([^\\/])+)<\\/span>";
         }
 
         public static string GetHTML(string url, int server)

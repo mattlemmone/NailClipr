@@ -16,6 +16,7 @@ alias wiki input /echo wiki
 
 //FFXIAH
 alias price input /echo price
+alias desc input /echo desc
 
 //Etc
 alias accept input /echo accept

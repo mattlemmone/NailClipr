@@ -26,6 +26,7 @@ namespace NailClipr.Classes
                 curWarp = "getwarp",
                 abort = "abort",
                 listWarps = "getwarps",
+                desc = "desc",
 
                 //Search Calls
                 searchBG = "bg",
@@ -43,6 +44,7 @@ namespace NailClipr.Classes
             new Dictionary<string, Action<EliteAPI>>
             {
                     {getPrice, Functions.GetPrice },
+                    {desc, Functions.GetDesc },
                     {saveWarp, SharedFunctions.SaveWarp },
                     {accept, SharedFunctions.Accept },
                     {request, SharedFunctions.Request },
@@ -59,6 +61,7 @@ namespace NailClipr.Classes
         {
             public const string echo = "/echo ";
             public const string party = "/p ";
+            public const string linkshell = "/l ";
         }
         public struct Search
         {
@@ -114,6 +117,7 @@ namespace NailClipr.Classes
         }
         private static void ProcessEcho(EliteAPI api, string text)
         {
+            if (!loaded) return;
             MatchCollection echoMatch = Regex.Matches(text, Chat.Controller.echoRegex);
             if (echoMatch.Count == 1)
             {
@@ -125,35 +129,58 @@ namespace NailClipr.Classes
             string firstMatch = echoMatch[0].ToString();
             switch (firstMatch)
             {
-                case Chat.Controller.getPrice:
+                case Controller.getPrice:
                     Functions.GetPrice(api, echoMatch);
                     break;
-                case Chat.Controller.saveWarp:
+                case Controller.saveWarp:
                     Functions.SaveWarp(api, echoMatch);
                     break;
-                case Chat.Controller.search:
+                case Controller.search:
                     Functions.Search(api, echoMatch);
                     break;
-                case Chat.Controller.speed:
+                case Controller.speed:
                     SharedFunctions.Speed(api, echoMatch[1].Value);
                     break;
-                case Chat.Controller.select:
+                case Controller.select:
                     SharedFunctions.Select(api, echoMatch[1].Value);
                     break;
-                case Chat.Controller.searchBG:
+                case Controller.searchBG:
                     Functions.Search(echoMatch, Structs.URL.blueGartr);
                     break;
-                case Chat.Controller.searchWiki:
+                case Controller.searchWiki:
                     Functions.Search(echoMatch, Structs.URL.wiki);
                     break;
-                case Chat.Controller.searchAH:
+                case Controller.searchAH:
                     Functions.Search(echoMatch, Structs.URL.AH);
                     break;
             }
         }
         public static void SendEcho(EliteAPI api, string msg)
         {
-            api.ThirdParty.SendString(Chat.Commands.echo + Structs.App.name + " - " + msg);
+            api.ThirdParty.SendString(Commands.echo + Structs.App.name + " - " + msg);
         }
+        public static void SendParty(EliteAPI api, string msg)
+        {
+            api.ThirdParty.SendString(Commands.party + msg);
+        }
+        public static async void SendLinkshell(EliteAPI api, string msg)
+        {
+            msg = msg.Replace(Environment.NewLine, " ");
+            msg = msg.Replace("<br>", "\n");
+            int len = msg.Length;
+            int readChars = 0;
+            const int maxChars = 100;
+
+            while (len != readChars)
+            {
+                int nextMsgLen = Math.Min(len - readChars, maxChars);
+                string strOut = msg.Substring(readChars, nextMsgLen);
+                readChars += nextMsgLen;
+                api.ThirdParty.SendString(Commands.linkshell + strOut);
+                await Task.Delay(1500);
+            }
+        }
+
+
     }
 }

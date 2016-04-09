@@ -535,6 +535,7 @@ namespace NailClipr
             this.Controls.Add(this.Bar_Speed);
             this.Controls.Add(this.ChkBox_Maint);
             this.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "NailClipr";
             this.Text = "NailClipr";

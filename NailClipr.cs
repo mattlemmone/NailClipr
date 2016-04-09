@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Diagnostics;
 using System.Windows.Forms;
 using EliteMMO.API;
 using System.ComponentModel;
-using System.IO;
 using System.Threading;
-using System.Net;
-using System.Text.RegularExpressions;
 using NailClipr.Classes;
 
 namespace NailClipr

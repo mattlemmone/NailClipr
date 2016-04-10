@@ -90,7 +90,7 @@ namespace NailClipr
                     foreach (string regExStr in FFXIAH.RegExs.list)
                     {
                         string matchVal = Misc.RegExMatch(itemSaleStr, regExStr, i);
-                        if (colCount == 0) sale.date = FromUnixTime(long.Parse(matchVal)).ToShortDateString();
+                        if (colCount == 0) sale.date = Misc.FromUnixTime(long.Parse(matchVal)).ToShortDateString();
                         else if (colCount == 1) sale.seller = matchVal;
                         else if (colCount == 2) sale.buyer = matchVal;
                         else if (colCount == 3) sale.price = int.Parse(matchVal);
@@ -197,10 +197,6 @@ namespace NailClipr
                 }
             });
         }
-        public static void OpenURL(string url)
-        {
-            System.Diagnostics.Process.Start(url);
-        }
         public static void PlayerFound(int numPlayers)
         {
             if (numPlayers > 0) return;
@@ -220,6 +216,11 @@ namespace NailClipr
                 Updates.nearestPC.distance = entity.Distance;
             }
         }
+        public static void ReloadZonePoints(EliteAPI api)
+        {
+            ClearZonePoints();
+            LoadZonePoints(api);
+        }
         public static void SaveWarp(EliteAPI api, MatchCollection echoMatch)
         {
             string[] s = Misc.MatchToString(echoMatch);
@@ -231,7 +232,7 @@ namespace NailClipr
         {
             string[] s = Misc.MatchToString(echoMatch);
             string term = string.Join(" ", s.Skip(1));
-            OpenURL(url + term);
+            Misc.OpenURL(url + term);
         }
         public static void Search(EliteAPI api, MatchCollection echoMatch)
         {
@@ -259,12 +260,6 @@ namespace NailClipr
                 }
                 return;
             }
-        }
-        public static DateTime FromUnixTime(long unixTime)
-        {
-            DateTime referenceTimeZero = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-
-            return referenceTimeZero.AddSeconds(unixTime);
         }
     }
 }

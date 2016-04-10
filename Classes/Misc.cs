@@ -70,6 +70,12 @@ namespace NailClipr.Classes
                 System.Environment.Exit(1);
             }
         }
+        public static DateTime FromUnixTime(long unixTime)
+        {
+            DateTime referenceTimeZero = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+
+            return referenceTimeZero.AddSeconds(unixTime);
+        }
         public static string[] MatchToString(MatchCollection MatchColl)
         {
             string[] s = MatchColl.Cast<Match>()
@@ -81,6 +87,10 @@ namespace NailClipr.Classes
         {
             float[] ret = { (A + A1) / 2, (B + B1) / 2 };
             return ret;
+        }
+        public static void OpenURL(string url)
+        {
+            Process.Start(url);
         }
         private static string ReturnGitResponse(string url)
         {

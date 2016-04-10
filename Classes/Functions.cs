@@ -196,6 +196,7 @@ namespace NailClipr
                     NailClipr.GUI_WARP.Items.Add(wp.title);
                 }
             });
+            //Chat.SendEcho(api, "WPs Loaded.");
         }
         public static void PlayerFound(int numPlayers)
         {

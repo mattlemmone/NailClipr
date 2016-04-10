@@ -46,8 +46,10 @@ namespace NailClipr.Classes
             UpdateTarget(api);
             UpdateNearestPlayer(api);
             UpdateSearch(api);
-            CheckZone(api);
-            UpdateZonePoints(api);
+
+            if (Player.Location.isZoning) CheckZone(api);
+            else UpdateZonePoints(api);
+
             UpdateTrackSpeed(NailClipr.GUI_SPEED_TRACK, NailClipr.GUI_SPEED, api.Player.Speed, api);
             DisableTrackSpeed();
             UpdateWarp(api);
@@ -96,7 +98,8 @@ namespace NailClipr.Classes
             {
                 Functions.LoadZonePoints(api);
             }
-            Player.Location.old = api.Player.ZoneId;
+            if (Player.Location.old != 0)
+                Player.Location.old = api.Player.ZoneId;
         }
         private static void UpdateZoneStatus(EliteAPI api)
         {

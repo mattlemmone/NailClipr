@@ -101,7 +101,7 @@ namespace NailClipr
             BackgroundWorker worker = sender as BackgroundWorker;
             while (worker.CancellationPending != true)
             {
-                Thread.Sleep(100);
+                Thread.Sleep(50);
                 bw.ReportProgress(0);
 
                 Threads.Overwrites(api);
@@ -112,7 +112,7 @@ namespace NailClipr
             BackgroundWorker worker = sender as BackgroundWorker;
             while (!worker.CancellationPending)
             {
-                Thread.Sleep(100);
+                Thread.Sleep(50);
                 Chat.Parse(api);
             }
         }

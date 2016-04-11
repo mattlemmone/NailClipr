@@ -150,15 +150,10 @@ namespace NailClipr.Classes
         }
         public static void UpdateComments()
         {
-            string text = ReturnGitResponse(Structs.Commit.URL);
-
-            Regex dateRegex = new Regex(Structs.Commit.DATE_REGEX);
-            MatchCollection dateMatch = dateRegex.Matches(text);
-            string date = dateMatch[0].Groups["date"].Value;
-
-            Regex msgRegex = new Regex(Structs.Commit.MESSAGE_REGEX);
-            MatchCollection msgMatch = msgRegex.Matches(text);
-            string msg = msgMatch[0].Groups["message"].Value;
+            string text = ReturnGitResponse(Structs.Commit.URL),
+            date = RegExMatch(text, Structs.Commit.DATE_REGEX),
+            msg = RegExMatch(text, Structs.Commit.MESSAGE_REGEX);
+            msg = msg.Replace(@"\n", Environment.NewLine);
 
             MessageBox.Show(msg, "Change Log v." + Structs.App.ver, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }

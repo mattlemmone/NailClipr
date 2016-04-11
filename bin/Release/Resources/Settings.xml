@@ -76,11 +76,6 @@
         <Y>-49.013</Y>
         <Z>-0.1500001</Z>
       </WarpPoint>
-      <WarpPoint title="GitHub Demo #2">
-        <X>-2.72072</X>
-        <Y>-2.440815</Y>
-        <Z>-0.199992</Z>
-      </WarpPoint>
       <WarpPoint title="Sparks NPC">
         <X>13.9120283</X>
         <Y>-121.015778</Y>
@@ -90,6 +85,11 @@
         <X>-86.54856</X>
         <Y>-31.21968</Y>
         <Z>4</Z>
+      </WarpPoint>
+      <WarpPoint title="Forri-Porri">
+        <X>62.4122238</X>
+        <Y>-68.58728</Y>
+        <Z>-0.1500001</Z>
       </WarpPoint>
     </Zone>
     <Zone id="260" title="Yahse Hunting Grounds">
@@ -161,6 +161,21 @@
         <X>-52.59081</X>
         <Y>-9.50716</Y>
         <Z>0</Z>
+      </WarpPoint>
+      <WarpPoint title="Celennia Memory Library">
+        <X>-88.51983</X>
+        <Y>-78.54799</Y>
+        <Z>-1.71356583</Z>
+      </WarpPoint>
+      <WarpPoint title="Ploh Trishbahk">
+        <X>99.31879</X>
+        <Y>-64.30636</Y>
+        <Z>-40.15</Z>
+      </WarpPoint>
+      <WarpPoint title="Rala Waterways">
+        <X>-128.521988</X>
+        <Y>27.7362175</Y>
+        <Z>8.15</Z>
       </WarpPoint>
     </Zone>
     <Zone id="246" title="Port Jeuno">
@@ -460,10 +475,10 @@
         <Y>2.88250113</Y>
         <Z>-0.0978062153</Z>
       </WarpPoint>
-      <WarpPoint title="srtdsf">
-        <X>-157.892441</X>
-        <Y>582.1101</Y>
-        <Z>-0.07033759</Z>
+      <WarpPoint title="Page 8 Mobs (N)">
+        <X>-175.489487</X>
+        <Y>583.7118</Y>
+        <Z>3.07164836</Z>
       </WarpPoint>
     </Zone>
     <Zone id="172" title="Zeruhn Mines">
@@ -796,6 +811,21 @@
         <X>-585.7644</X>
         <Y>20.0901337</Y>
         <Z>-7.5</Z>
+      </WarpPoint>
+      <WarpPoint title="Sluice Gate">
+        <X>-565.6585</X>
+        <Y>59.6743</Y>
+        <Z>-5.76754</Z>
+      </WarpPoint>
+      <WarpPoint title="Eastern Adoulin">
+        <X>148</X>
+        <Y>139.25</Y>
+        <Z>-5.76754</Z>
+      </WarpPoint>
+      <WarpPoint title="Storage Container">
+        <X>-147.329468</X>
+        <Y>28.69579</Y>
+        <Z>-5.76754</Z>
       </WarpPoint>
     </Zone>
     <Zone id="266" title="Marjami Ravine">

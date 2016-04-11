@@ -1,5 +1,6 @@
 ﻿using EliteMMO.API;
 using NailClipr.Classes;
+using System;
 
 namespace NailClipr
 {

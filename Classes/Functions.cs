@@ -1,6 +1,7 @@
 ﻿using EliteMMO.API;
 using NailClipr.Classes;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -8,6 +9,7 @@ namespace NailClipr
 {
     class Functions
     {
+
         public static void AddZonePoint(Structs.WarpPoint wp)
         {
             NailClipr.GUI_WARP.Items.Add(wp.title);
@@ -185,6 +187,15 @@ namespace NailClipr
             //Outside of loop
             if (findPlayer)
                 PlayerFound(count);
+        }
+        public static void ListCommands(EliteAPI api)
+        {
+            List<string> commands = new List<string>();
+            foreach (var entry in Chat.Controller.dictOneParam){
+                commands.Add(entry.Key);
+            }
+            string msg = "Available Commands:\n" + string.Join(", ", commands.ToArray());
+            Chat.SendEcho(api, msg);
         }
         public static void LoadZonePoints(EliteAPI api)
         {

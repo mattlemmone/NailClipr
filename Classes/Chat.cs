@@ -26,6 +26,7 @@ namespace NailClipr.Classes
                 listWarps = "getwarps",
                 desc = "desc",
                 reload = "reload",
+                help = "help",
 
                 //Search Calls
                 searchBG = "bg",
@@ -42,18 +43,19 @@ namespace NailClipr.Classes
             public static Dictionary<string, Action<EliteAPI>> dictOneParam =
             new Dictionary<string, Action<EliteAPI>>
             {
-                    {reload, Functions.ReloadZonePoints },
-                    {getPrice, Functions.GetPrice },
-                    {desc, Functions.GetDesc },
-                    {saveWarp, SharedFunctions.SaveWarp },
-                    {accept, SharedFunctions.Accept },
-                    {request, SharedFunctions.Request },
                     {abort, SharedFunctions.Abort },
-                    {maintenance, SharedFunctions.MaintenanceToggle },
+                    {accept, SharedFunctions.Accept },
+                    {curWarp, SharedFunctions.GetWarp },
                     {delWarp, SharedFunctions.DelWarp },
-                    {warp, SharedFunctions.Warp },
+                    {desc, Functions.GetDesc },
+                    {getPrice, Functions.GetPrice },
+                    {help, Functions.ListCommands },
                     {listWarps, SharedFunctions.ListWarps },
-                    {curWarp, SharedFunctions.GetWarp }
+                    {maintenance, SharedFunctions.MaintenanceToggle },
+                    {reload, Functions.ReloadZonePoints },
+                    {request, SharedFunctions.Request },
+                    {saveWarp, SharedFunctions.SaveWarp },
+                    {warp, SharedFunctions.Warp }
             };
 
         }

@@ -177,6 +177,16 @@
         <Y>27.7362175</Y>
         <Z>8.15</Z>
       </WarpPoint>
+      <WarpPoint title="Mog House">
+        <X>-57.46561</X>
+        <Y>-123.469086</Y>
+        <Z>0</Z>
+      </WarpPoint>
+      <WarpPoint title="Vendor">
+        <X>-69.58621</X>
+        <Y>-7.520167</Y>
+        <Z>-0.149999976</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="246" title="Port Jeuno">
       <WarpPoint title="Joachim">
@@ -414,11 +424,6 @@
       </WarpPoint>
     </Zone>
     <Zone id="77" title="Nyzul Isle">
-      <WarpPoint title="1">
-        <X>12.3570795</X>
-        <Y>-261.537231</Y>
-        <Z>0.0498999953</Z>
-      </WarpPoint>
       <WarpPoint title="trans">
         <X>-463.008331</X>
         <Y>-340.6182</Y>
@@ -427,6 +432,26 @@
       <WarpPoint title="R">
         <X>620.246</X>
         <Y>-11.079</Y>
+        <Z>0</Z>
+      </WarpPoint>
+      <WarpPoint title="1">
+        <X>-343.535126</X>
+        <Y>-259.715149</Y>
+        <Z>0.0498999953</Z>
+      </WarpPoint>
+      <WarpPoint title="2">
+        <X>-448.972839</X>
+        <Y>-220.483551</Y>
+        <Z>-4</Z>
+      </WarpPoint>
+      <WarpPoint title="3">
+        <X>-472.599365</X>
+        <Y>-178.232941</Y>
+        <Z>-3.94999981</Z>
+      </WarpPoint>
+      <WarpPoint title="by rthing">
+        <X>621.828735</X>
+        <Y>-13.27732</Y>
         <Z>0</Z>
       </WarpPoint>
     </Zone>
@@ -644,6 +669,16 @@
         <Y>-300.560028</Y>
         <Z>-2.63816524</Z>
       </WarpPoint>
+      <WarpPoint title="Shard 5">
+        <X>-383.810516</X>
+        <Y>-182.937241</Y>
+        <Z>-5.59127474</Z>
+      </WarpPoint>
+      <WarpPoint title="Bivouac#4 Administrator">
+        <X>-250.981918</X>
+        <Y>-40.7691536</Y>
+        <Z>-2.34359622</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="33" title="Al'Taieu">
       <WarpPoint title="Home Point #2">
@@ -661,6 +696,11 @@
       <WarpPoint title="Runic Portal">
         <X>202.235352</X>
         <Y>6.377506</Y>
+        <Z>0</Z>
+      </WarpPoint>
+      <WarpPoint title="xd">
+        <X>204.739</X>
+        <Y>11.260232</Y>
         <Z>0</Z>
       </WarpPoint>
     </Zone>
@@ -911,6 +951,107 @@
         <X>-180.002</X>
         <Y>-196.944</Y>
         <Z>-24</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="291" title="Reisenjima">
+      <WarpPoint title="Etched Rock">
+        <X>258.6588</X>
+        <Y>65.40748</Y>
+        <Z>-87</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="102" title="La Theine Plateau">
+      <WarpPoint title="Telepoint">
+        <X>418.614563</X>
+        <Y>17.9499321</Y>
+        <Z>19.1039867</Z>
+      </WarpPoint>
+      <WarpPoint title="Dimensional Portal">
+        <X>419.731323</X>
+        <Y>-141.458786</Y>
+        <Z>19.104002</Z>
+      </WarpPoint>
+      <WarpPoint title="Shattered Telepoint">
+        <X>337.754883</X>
+        <Y>-59.8795547</Y>
+        <Z>19.104</Z>
+      </WarpPoint>
+      <WarpPoint title="Dumbass Circle">
+        <X>-186.723724</X>
+        <Y>256.3985</Y>
+        <Z>8.25012</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="121" title="The Sanctuary of Zi'Tah">
+      <WarpPoint title="Survival Guide">
+        <X>-42.7299271</X>
+        <Y>-149.318787</Y>
+        <Z>0.333016485</Z>
+      </WarpPoint>
+      <WarpPoint title="Ro'Maeve">
+        <X>-246.166824</X>
+        <Y>614.05426</Y>
+        <Z>0.1072174</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="122" title="Ro'Maeve">
+      <WarpPoint title="The Sanctuary of Zi'Tah">
+        <X>-0.011</X>
+        <Y>-146.43</Y>
+        <Z>-8.13</Z>
+      </WarpPoint>
+      <WarpPoint title="Hall of the Gods">
+        <X>-0.0116029335</X>
+        <Y>113.292236</Y>
+        <Z>-29.77778</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="117" title="Tahrongi Canyon">
+      <WarpPoint title="Telepoint">
+        <X>100</X>
+        <Y>340</Y>
+        <Z>35.1506</Z>
+      </WarpPoint>
+      <WarpPoint title="Dimensional Portal">
+        <X>258.9843</X>
+        <Y>340</Y>
+        <Z>35.1506</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="253" title="Abyssea - Uleguerand">
+      <WarpPoint title="Marids">
+        <X>-293.5047</X>
+        <Y>358.782623</Y>
+        <Z>-155.453934</Z>
+      </WarpPoint>
+      <WarpPoint title="Bombs">
+        <X>-247.10199</X>
+        <Y>441.909</Y>
+        <Z>-183.845963</Z>
+      </WarpPoint>
+      <WarpPoint title="Sisyphus">
+        <X>-192.337952</X>
+        <Y>284.834717</Y>
+        <Z>-175.8</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="293" title="Reisenjima Sanctorium">
+      <WarpPoint title="Reisen Crystal">
+        <X>0.167752877</X>
+        <Y>17.4270821</Y>
+        <Z>4</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="288" title="Escha - Zi'Tah">
+      <WarpPoint title="Affi lol npc">
+        <X>-351.655548</X>
+        <Y>-170.898209</Y>
+        <Z>0.358465433</Z>
+      </WarpPoint>
+      <WarpPoint title="???">
+        <X>46.9617577</X>
+        <Y>143.672241</Y>
+        <Z>-0.0467202663</Z>
       </WarpPoint>
     </Zone>
   </Zones>

@@ -287,6 +287,11 @@
         <Y>52.043972</Y>
         <Z>-0.999992132</Z>
       </WarpPoint>
+      <WarpPoint title="Mythic WS">
+        <X>-33.82509</X>
+        <Y>-117.22728</Y>
+        <Z>5.900064</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="108" title="Konschtat Highlands">
       <WarpPoint title="Crag">
@@ -424,34 +429,29 @@
       </WarpPoint>
     </Zone>
     <Zone id="77" title="Nyzul Isle">
-      <WarpPoint title="trans">
-        <X>-463.008331</X>
-        <Y>-340.6182</Y>
-        <Z>-7.724762E-05</Z>
-      </WarpPoint>
-      <WarpPoint title="R">
-        <X>620.246</X>
-        <Y>-11.079</Y>
-        <Z>0</Z>
-      </WarpPoint>
-      <WarpPoint title="1">
-        <X>-343.535126</X>
-        <Y>-259.715149</Y>
+      <WarpPoint title="4">
+        <X>385.6135</X>
+        <Y>-577.823547</Y>
         <Z>0.0498999953</Z>
       </WarpPoint>
       <WarpPoint title="2">
-        <X>-448.972839</X>
-        <Y>-220.483551</Y>
-        <Z>-4</Z>
+        <X>433.310364</X>
+        <Y>-595.887756</Y>
+        <Z>-0.138011888</Z>
       </WarpPoint>
       <WarpPoint title="3">
-        <X>-472.599365</X>
-        <Y>-178.232941</Y>
-        <Z>-3.94999981</Z>
+        <X>473.234</X>
+        <Y>-578.2434</Y>
+        <Z>-1.66893E-05</Z>
       </WarpPoint>
-      <WarpPoint title="by rthing">
-        <X>621.828735</X>
-        <Y>-13.27732</Y>
+      <WarpPoint title="r">
+        <X>19.711</X>
+        <Y>-370.724</Y>
+        <Z>0</Z>
+      </WarpPoint>
+      <WarpPoint title="1">
+        <X>461.1545</X>
+        <Y>88.70736</Y>
         <Z>0</Z>
       </WarpPoint>
     </Zone>
@@ -492,6 +492,11 @@
         <X>-50.1697769</X>
         <Y>29.4418869</Y>
         <Z>-4.089674</Z>
+      </WarpPoint>
+      <WarpPoint title="Buburimu Peninsula">
+        <X>-0.851500034</X>
+        <Y>113.894775</Y>
+        <Z>-4</Z>
       </WarpPoint>
     </Zone>
     <Zone id="191" title="Dangruf Wadi">
@@ -696,11 +701,6 @@
       <WarpPoint title="Runic Portal">
         <X>202.235352</X>
         <Y>6.377506</Y>
-        <Z>0</Z>
-      </WarpPoint>
-      <WarpPoint title="xd">
-        <X>204.739</X>
-        <Y>11.260232</Y>
         <Z>0</Z>
       </WarpPoint>
     </Zone>
@@ -1052,6 +1052,92 @@
         <X>46.9617577</X>
         <Y>143.672241</Y>
         <Z>-0.0467202663</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="118" title="Buburimu Peninsula">
+      <WarpPoint title="Mhaura">
+        <X>183.3536</X>
+        <Y>-219.95665</Y>
+        <Z>-1.76512265</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="40" title="Dynamis - Buburimu">
+      <WarpPoint title="Gob">
+        <X>80.86303</X>
+        <Y>38.09796</Y>
+        <Z>-8</Z>
+      </WarpPoint>
+      <WarpPoint title="Quad">
+        <X>128.945435</X>
+        <Y>77.77111</Y>
+        <Z>-8.913365</Z>
+      </WarpPoint>
+      <WarpPoint title="Birds">
+        <X>381.537231</X>
+        <Y>239.374664</Y>
+        <Z>0.922070742</Z>
+      </WarpPoint>
+      <WarpPoint title="orcs">
+        <X>-144.247528</X>
+        <Y>68.9323959</Y>
+        <Z>-23.881216</Z>
+      </WarpPoint>
+      <WarpPoint title="Yagudo">
+        <X>6.75020647</X>
+        <Y>-60.17447</Y>
+        <Z>-5.71245337</Z>
+      </WarpPoint>
+      <WarpPoint title="Yag/Quad">
+        <X>117.304619</X>
+        <Y>1.264206</Y>
+        <Z>-8</Z>
+      </WarpPoint>
+      <WarpPoint title="Dhalmels">
+        <X>211.687958</X>
+        <Y>175.816223</Y>
+        <Z>-15.9680557</Z>
+      </WarpPoint>
+      <WarpPoint title="Efts">
+        <X>143.232559</X>
+        <Y>171.646729</Y>
+        <Z>-24.9573555</Z>
+      </WarpPoint>
+      <WarpPoint title="Shank Mob">
+        <X>449.9143</X>
+        <Y>-82.16588</Y>
+        <Z>0.968833447</Z>
+      </WarpPoint>
+      <WarpPoint title="Roast Mob">
+        <X>445.85318</X>
+        <Y>-319.572968</Y>
+        <Z>0.3329123</Z>
+      </WarpPoint>
+      <WarpPoint title="Outpost">
+        <X>-510.619324</X>
+        <Y>52.3072472</Y>
+        <Z>-30.8026752</Z>
+      </WarpPoint>
+      <WarpPoint title="Chop Mob">
+        <X>-359.078552</X>
+        <Y>-320.7996</Y>
+        <Z>0</Z>
+      </WarpPoint>
+      <WarpPoint title="Zone Boss">
+        <X>-223.9186</X>
+        <Y>100.135529</Y>
+        <Z>-21.4576683</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="243" title="Ru'Lude Gardens">
+      <WarpPoint title="Upper Jeuno">
+        <X>0.9019002</X>
+        <Y>-104.263313</Y>
+        <Z>0</Z>
+      </WarpPoint>
+      <WarpPoint title="Magian">
+        <X>0.479094118</X>
+        <Y>108.058167</Y>
+        <Z>3.1</Z>
       </WarpPoint>
     </Zone>
   </Zones>

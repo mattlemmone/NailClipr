@@ -10,7 +10,7 @@ namespace NailClipr
     {
         public static Structs.Position reqPos;
         public static bool hasDialogue;
-        public static bool 
+        public static bool
         warpAccepted,
         isAlone,
         isWarping;
@@ -129,6 +129,35 @@ namespace NailClipr
                 nextWP.pos.Y = reqPos.Y;
                 nextWP.pos.Z = reqPos.Z;
             }
+
+            //Mark flag for status gui text update.
+            isWarping = true;
+            Chat.SendEcho(api, Chat.Warp.warmupNotify);
+
+            //Start warp.
+            MaintenanceMode(api, true);
+
+            await Task.Delay(1000);
+
+            api.Player.X = nextWP.pos.X;
+            api.Player.Y = nextWP.pos.Y;
+            api.Player.Z = nextWP.pos.Z;
+
+            //Finish warp.
+            await Task.Delay(2000);
+            MaintenanceMode(api, false);
+
+            if (warpAccepted)
+                warpAccepted = false;
+
+            Chat.SendEcho(api, Chat.Warp.arrivedNotify);
+            isWarping = false;
+        }
+        public static async void Warp(EliteAPI api, Structs.WarpPoint nextWP)
+        {
+
+            if (nextWP.zone == 0)
+                return;
 
             //Mark flag for status gui text update.
             isWarping = true;

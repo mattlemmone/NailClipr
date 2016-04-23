@@ -188,6 +188,47 @@ namespace NailClipr
             if (findPlayer)
                 PlayerFound(count);
         }
+        public static Structs.WarpPoint GetNyzulWP(EliteAPI api)
+        {
+
+            Structs.WarpPoint WP = new Structs.WarpPoint();
+            WP.title = "null";
+
+            const Int32
+            PC = 0x0001,
+            NPC = 0x0002,
+            Mob = 0x0010,
+            Self = 0x000D;
+
+            for (var x = 0; x < 4096; x++)
+            {
+                var entity = api.Entity.GetEntity(x);
+                bool invalid = entity.WarpPointer == 0,
+                    dead = entity.HealthPercent <= 0,
+                    outsideRange = entity.Distance > 50.0f || float.IsNaN(entity.Distance) || entity.Distance <= 0,
+                    isRendered = (entity.Render0000 & 0x200) == 0x200,
+                    isSelf = (entity.SpawnFlags & Self) == Self || entity.Name == api.Player.Name,
+                    isMob = (entity.SpawnFlags & Mob) == Mob,
+                    isNPC = (entity.SpawnFlags & NPC) == NPC,
+                    isPC = (entity.SpawnFlags & PC) == PC,
+                    invalidPlayerName = isPC && (entity.Name.Length < Structs.FFXI.Name.MINLENGTH || entity.Name.Length > Structs.FFXI.Name.MAXLENGTH || !Regex.IsMatch(entity.Name, @"^[a-zA-Z]+$")),
+                    inWhitelist = isPC && Structs.Speed.whitelist.IndexOf(entity.Name) != -1;
+
+                if (invalid || dead || outsideRange || !isRendered || isSelf || invalidPlayerName)
+                    continue;
+
+                if (entity.Name.Contains("Transfer"))
+                {
+                    WP.title = "Rune of Transfer";
+                    WP.zone = api.Player.ZoneId;
+                    WP.pos.X = entity.X;
+                    WP.pos.X = entity.Y;
+                    WP.pos.X = entity.Z;
+                    return WP;
+                }
+            }
+            return WP;
+        }
         public static void ListCommands(EliteAPI api)
         {
             List<string> commands = new List<string>();

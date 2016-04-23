@@ -104,18 +104,11 @@ namespace NailClipr.Classes
                 echo = Chat.Types.echo;
 
             int chatType = c.ChatType;
-
+            
             if (party == chatType) ProcessParty(api, c.Text);
             else if (echo == chatType) ProcessEcho(api, c.Text);
+            else if (api.Player.ZoneId == Nyzul.zoneID /* && systemType == chatType */) ProcessNyzul(api, c.Text);
 
-        }
-        private static void ProcessParty(EliteAPI api, string text)
-        {
-            MatchCollection senderMatch = Regex.Matches(text, Chat.Warp.senderRegEx);
-            MatchCollection coordMatch = Regex.Matches(text, Chat.Warp.coordRegEx);
-
-            if (coordMatch.Count == Chat.Warp.expectedNumCoords)
-                Player.PartyWarp(api, senderMatch, coordMatch);
         }
         private static void ProcessEcho(EliteAPI api, string text)
         {
@@ -156,6 +149,18 @@ namespace NailClipr.Classes
                     Functions.Search(echoMatch, Structs.URL.AH);
                     break;
             }
+        }
+        private static void ProcessParty(EliteAPI api, string text)
+        {
+            MatchCollection senderMatch = Regex.Matches(text, Chat.Warp.senderRegEx);
+            MatchCollection coordMatch = Regex.Matches(text, Chat.Warp.coordRegEx);
+
+            if (coordMatch.Count == Chat.Warp.expectedNumCoords)
+                Player.PartyWarp(api, senderMatch, coordMatch);
+        }
+        private static void ProcessNyzul(EliteAPI api, string text)
+        {
+            Nyzul.Parse(api, text);
         }
         public static void SendEcho(EliteAPI api, string msg)
         {

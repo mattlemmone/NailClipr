@@ -71,6 +71,10 @@ namespace NailClipr
             this.label6 = new System.Windows.Forms.Label();
             this.Lbl_Search = new System.Windows.Forms.Label();
             this.Btn_Abort = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.CB_Players = new System.Windows.Forms.ComboBox();
+            this.Btn_Refresh = new System.Windows.Forms.Button();
+            this.Btn_Attach = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Bar_Speed_Default)).BeginInit();
@@ -81,7 +85,7 @@ namespace NailClipr
             this.ChkBox_Maint.AutoSize = true;
             this.ChkBox_Maint.Location = new System.Drawing.Point(180, 29);
             this.ChkBox_Maint.Name = "ChkBox_Maint";
-            this.ChkBox_Maint.Size = new System.Drawing.Size(126, 18);
+            this.ChkBox_Maint.Size = new System.Drawing.Size(118, 17);
             this.ChkBox_Maint.TabIndex = 0;
             this.ChkBox_Maint.Text = "Maintenance Mode";
             this.ChkBox_Maint.UseVisualStyleBackColor = true;
@@ -100,7 +104,7 @@ namespace NailClipr
             this.Lbl_Speed.AutoSize = true;
             this.Lbl_Speed.Location = new System.Drawing.Point(126, 333);
             this.Lbl_Speed.Name = "Lbl_Speed";
-            this.Lbl_Speed.Size = new System.Drawing.Size(45, 14);
+            this.Lbl_Speed.Size = new System.Drawing.Size(41, 13);
             this.Lbl_Speed.TabIndex = 4;
             this.Lbl_Speed.Text = "Speed:";
             // 
@@ -109,7 +113,7 @@ namespace NailClipr
             this.Lbl_SpeedVar.AutoSize = true;
             this.Lbl_SpeedVar.Location = new System.Drawing.Point(177, 333);
             this.Lbl_SpeedVar.Name = "Lbl_SpeedVar";
-            this.Lbl_SpeedVar.Size = new System.Drawing.Size(31, 14);
+            this.Lbl_SpeedVar.Size = new System.Drawing.Size(27, 13);
             this.Lbl_SpeedVar.TabIndex = 5;
             this.Lbl_SpeedVar.Text = "x1.0";
             // 
@@ -118,7 +122,7 @@ namespace NailClipr
             this.ChkBox_PlayerDetect.AutoSize = true;
             this.ChkBox_PlayerDetect.Location = new System.Drawing.Point(180, 47);
             this.ChkBox_PlayerDetect.Name = "ChkBox_PlayerDetect";
-            this.ChkBox_PlayerDetect.Size = new System.Drawing.Size(114, 18);
+            this.ChkBox_PlayerDetect.Size = new System.Drawing.Size(104, 17);
             this.ChkBox_PlayerDetect.TabIndex = 6;
             this.ChkBox_PlayerDetect.Text = "Player Detection";
             this.ChkBox_PlayerDetect.UseVisualStyleBackColor = true;
@@ -127,46 +131,46 @@ namespace NailClipr
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(260, 449);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 14);
+            this.label2.Size = new System.Drawing.Size(40, 13);
             this.label2.TabIndex = 9;
             this.label2.Text = "Status:";
             // 
             // Lbl_Status
             // 
             this.Lbl_Status.AutoSize = true;
-            this.Lbl_Status.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_Status.Location = new System.Drawing.Point(303, 449);
+            this.Lbl_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Status.Location = new System.Drawing.Point(301, 449);
             this.Lbl_Status.Name = "Lbl_Status";
-            this.Lbl_Status.Size = new System.Drawing.Size(14, 14);
+            this.Lbl_Status.Size = new System.Drawing.Size(13, 13);
             this.Lbl_Status.TabIndex = 10;
             this.Lbl_Status.Text = "0";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(11, 449);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(39, 14);
+            this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 11;
             this.label3.Text = "Zone:";
             // 
             // Lbl_Zone
             // 
             this.Lbl_Zone.AutoSize = true;
-            this.Lbl_Zone.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_Zone.Location = new System.Drawing.Point(48, 449);
+            this.Lbl_Zone.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Zone.Location = new System.Drawing.Point(44, 449);
             this.Lbl_Zone.Name = "Lbl_Zone";
-            this.Lbl_Zone.Size = new System.Drawing.Size(69, 14);
+            this.Lbl_Zone.Size = new System.Drawing.Size(63, 13);
             this.Lbl_Zone.TabIndex = 12;
             this.Lbl_Zone.Text = "Zone Name";
             // 
             // Btn_Plus_X
             // 
-            this.Btn_Plus_X.Font = new System.Drawing.Font("Meiryo", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Plus_X.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Plus_X.Location = new System.Drawing.Point(110, 48);
             this.Btn_Plus_X.Name = "Btn_Plus_X";
             this.Btn_Plus_X.Size = new System.Drawing.Size(41, 25);
@@ -177,7 +181,7 @@ namespace NailClipr
             // 
             // Btn_Minus_X
             // 
-            this.Btn_Minus_X.Font = new System.Drawing.Font("Meiryo", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Minus_X.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Minus_X.Location = new System.Drawing.Point(9, 48);
             this.Btn_Minus_X.Name = "Btn_Minus_X";
             this.Btn_Minus_X.Size = new System.Drawing.Size(41, 25);
@@ -188,7 +192,7 @@ namespace NailClipr
             // 
             // Btn_Minus_Y
             // 
-            this.Btn_Minus_Y.Font = new System.Drawing.Font("Meiryo", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Minus_Y.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Minus_Y.Location = new System.Drawing.Point(59, 79);
             this.Btn_Minus_Y.Name = "Btn_Minus_Y";
             this.Btn_Minus_Y.Size = new System.Drawing.Size(41, 25);
@@ -199,7 +203,7 @@ namespace NailClipr
             // 
             // Btn_Plus_Y
             // 
-            this.Btn_Plus_Y.Font = new System.Drawing.Font("Meiryo", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Plus_Y.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Plus_Y.Location = new System.Drawing.Point(59, 16);
             this.Btn_Plus_Y.Name = "Btn_Plus_Y";
             this.Btn_Plus_Y.Size = new System.Drawing.Size(41, 25);
@@ -210,7 +214,7 @@ namespace NailClipr
             // 
             // Btn_Minus_Z
             // 
-            this.Btn_Minus_Z.Font = new System.Drawing.Font("Meiryo", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Minus_Z.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Minus_Z.Location = new System.Drawing.Point(59, 48);
             this.Btn_Minus_Z.Margin = new System.Windows.Forms.Padding(1);
             this.Btn_Minus_Z.Name = "Btn_Minus_Z";
@@ -222,7 +226,7 @@ namespace NailClipr
             // 
             // Btn_Plus_Z
             // 
-            this.Btn_Plus_Z.Font = new System.Drawing.Font("Meiryo", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Plus_Z.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Plus_Z.Location = new System.Drawing.Point(59, 61);
             this.Btn_Plus_Z.Name = "Btn_Plus_Z";
             this.Btn_Plus_Z.Size = new System.Drawing.Size(41, 12);
@@ -252,7 +256,7 @@ namespace NailClipr
             // 
             // Btn_SE
             // 
-            this.Btn_SE.Font = new System.Drawing.Font("Meiryo", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_SE.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_SE.Location = new System.Drawing.Point(110, 79);
             this.Btn_SE.Name = "Btn_SE";
             this.Btn_SE.Size = new System.Drawing.Size(41, 25);
@@ -263,7 +267,7 @@ namespace NailClipr
             // 
             // Btn_NE
             // 
-            this.Btn_NE.Font = new System.Drawing.Font("Meiryo", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_NE.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_NE.Location = new System.Drawing.Point(110, 16);
             this.Btn_NE.Name = "Btn_NE";
             this.Btn_NE.Size = new System.Drawing.Size(41, 25);
@@ -274,7 +278,7 @@ namespace NailClipr
             // 
             // Btn_SW
             // 
-            this.Btn_SW.Font = new System.Drawing.Font("Meiryo", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_SW.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_SW.Location = new System.Drawing.Point(9, 79);
             this.Btn_SW.Name = "Btn_SW";
             this.Btn_SW.Size = new System.Drawing.Size(41, 25);
@@ -285,7 +289,7 @@ namespace NailClipr
             // 
             // Btn_NW
             // 
-            this.Btn_NW.Font = new System.Drawing.Font("Meiryo", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_NW.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_NW.Location = new System.Drawing.Point(9, 16);
             this.Btn_NW.Name = "Btn_NW";
             this.Btn_NW.Size = new System.Drawing.Size(41, 25);
@@ -300,7 +304,7 @@ namespace NailClipr
             this.CB_Warp.FormattingEnabled = true;
             this.CB_Warp.Location = new System.Drawing.Point(14, 128);
             this.CB_Warp.Name = "CB_Warp";
-            this.CB_Warp.Size = new System.Drawing.Size(303, 22);
+            this.CB_Warp.Size = new System.Drawing.Size(303, 21);
             this.CB_Warp.TabIndex = 33;
             // 
             // Btn_Save
@@ -338,7 +342,7 @@ namespace NailClipr
             this.ChkBox_StayTop.AutoSize = true;
             this.ChkBox_StayTop.Location = new System.Drawing.Point(180, 66);
             this.ChkBox_StayTop.Name = "ChkBox_StayTop";
-            this.ChkBox_StayTop.Size = new System.Drawing.Size(91, 18);
+            this.ChkBox_StayTop.Size = new System.Drawing.Size(84, 17);
             this.ChkBox_StayTop.TabIndex = 37;
             this.ChkBox_StayTop.Text = "Stay on Top";
             this.ChkBox_StayTop.UseVisualStyleBackColor = true;
@@ -350,7 +354,7 @@ namespace NailClipr
             this.label4.Location = new System.Drawing.Point(106, 260);
             this.label4.Name = "label4";
             this.label4.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label4.Size = new System.Drawing.Size(87, 14);
+            this.label4.Size = new System.Drawing.Size(78, 13);
             this.label4.TabIndex = 39;
             this.label4.Text = "Default Speed:";
             // 
@@ -359,7 +363,7 @@ namespace NailClipr
             this.Lbl_DefaultSpeed.AutoSize = true;
             this.Lbl_DefaultSpeed.Location = new System.Drawing.Point(194, 260);
             this.Lbl_DefaultSpeed.Name = "Lbl_DefaultSpeed";
-            this.Lbl_DefaultSpeed.Size = new System.Drawing.Size(31, 14);
+            this.Lbl_DefaultSpeed.Size = new System.Drawing.Size(27, 13);
             this.Lbl_DefaultSpeed.TabIndex = 40;
             this.Lbl_DefaultSpeed.Text = "x1.0";
             // 
@@ -386,38 +390,38 @@ namespace NailClipr
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(11, 435);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(89, 14);
+            this.label11.Size = new System.Drawing.Size(79, 13);
             this.label11.TabIndex = 52;
             this.label11.Text = "Nearest Player:";
             // 
             // Lbl_TargetInfo
             // 
             this.Lbl_TargetInfo.AutoSize = true;
-            this.Lbl_TargetInfo.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_TargetInfo.Location = new System.Drawing.Point(56, 421);
+            this.Lbl_TargetInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_TargetInfo.Location = new System.Drawing.Point(49, 421);
             this.Lbl_TargetInfo.Name = "Lbl_TargetInfo";
-            this.Lbl_TargetInfo.Size = new System.Drawing.Size(114, 14);
+            this.Lbl_TargetInfo.Size = new System.Drawing.Size(101, 13);
             this.Lbl_TargetInfo.TabIndex = 49;
             this.Lbl_TargetInfo.Text = "Name (HPP) @ 123";
             // 
             // Lbl_NearestPlayer
             // 
             this.Lbl_NearestPlayer.AutoSize = true;
-            this.Lbl_NearestPlayer.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_NearestPlayer.Location = new System.Drawing.Point(100, 435);
+            this.Lbl_NearestPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_NearestPlayer.Location = new System.Drawing.Point(88, 436);
             this.Lbl_NearestPlayer.Name = "Lbl_NearestPlayer";
-            this.Lbl_NearestPlayer.Size = new System.Drawing.Size(78, 14);
+            this.Lbl_NearestPlayer.Size = new System.Drawing.Size(70, 13);
             this.Lbl_NearestPlayer.TabIndex = 53;
             this.Lbl_NearestPlayer.Text = "Name @ 123";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(11, 421);
             this.label5.Name = "label5";
             this.label5.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label5.Size = new System.Drawing.Size(46, 14);
+            this.label5.Size = new System.Drawing.Size(41, 13);
             this.label5.TabIndex = 48;
             this.label5.Text = "Target:";
             // 
@@ -446,7 +450,7 @@ namespace NailClipr
             // 
             this.Txt_Search.Location = new System.Drawing.Point(66, 363);
             this.Txt_Search.Name = "Txt_Search";
-            this.Txt_Search.Size = new System.Drawing.Size(180, 21);
+            this.Txt_Search.Size = new System.Drawing.Size(180, 20);
             this.Txt_Search.TabIndex = 57;
             this.Txt_Search.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Txt_Search_KeyDown);
             // 
@@ -465,7 +469,7 @@ namespace NailClipr
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(11, 366);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 14);
+            this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 59;
             this.label1.Text = "Search:";
             // 
@@ -474,7 +478,7 @@ namespace NailClipr
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(12, 387);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(86, 14);
+            this.label6.Size = new System.Drawing.Size(77, 13);
             this.label6.TabIndex = 60;
             this.label6.Text = "Search Status:";
             // 
@@ -483,7 +487,7 @@ namespace NailClipr
             this.Lbl_Search.AutoSize = true;
             this.Lbl_Search.Location = new System.Drawing.Point(100, 387);
             this.Lbl_Search.Name = "Lbl_Search";
-            this.Lbl_Search.Size = new System.Drawing.Size(26, 14);
+            this.Lbl_Search.Size = new System.Drawing.Size(23, 13);
             this.Lbl_Search.TabIndex = 61;
             this.Lbl_Search.Text = "idle";
             // 
@@ -498,11 +502,53 @@ namespace NailClipr
             this.Btn_Abort.UseVisualStyleBackColor = true;
             this.Btn_Abort.Click += new System.EventHandler(this.Btn_Abort_Click);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(11, 477);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(39, 13);
+            this.label7.TabIndex = 63;
+            this.label7.Text = "Player:";
+            // 
+            // CB_Players
+            // 
+            this.CB_Players.FormattingEnabled = true;
+            this.CB_Players.Location = new System.Drawing.Point(51, 474);
+            this.CB_Players.Name = "CB_Players";
+            this.CB_Players.Size = new System.Drawing.Size(153, 21);
+            this.CB_Players.TabIndex = 64;
+            // 
+            // Btn_Refresh
+            // 
+            this.Btn_Refresh.Location = new System.Drawing.Point(210, 472);
+            this.Btn_Refresh.Name = "Btn_Refresh";
+            this.Btn_Refresh.Size = new System.Drawing.Size(52, 23);
+            this.Btn_Refresh.TabIndex = 65;
+            this.Btn_Refresh.Text = "Refresh";
+            this.Btn_Refresh.UseVisualStyleBackColor = true;
+            this.Btn_Refresh.Click += new System.EventHandler(this.Btn_Refresh_Click);
+            // 
+            // Btn_Attach
+            // 
+            this.Btn_Attach.Location = new System.Drawing.Point(262, 472);
+            this.Btn_Attach.Name = "Btn_Attach";
+            this.Btn_Attach.Size = new System.Drawing.Size(52, 23);
+            this.Btn_Attach.TabIndex = 66;
+            this.Btn_Attach.Text = "Attach";
+            this.Btn_Attach.UseVisualStyleBackColor = true;
+            this.Btn_Attach.Click += new System.EventHandler(this.Btn_Attach_Click);
+            // 
             // NailClipr
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(331, 472);
+            this.ClientSize = new System.Drawing.Size(331, 499);
+            this.Controls.Add(this.Btn_Attach);
+            this.Controls.Add(this.Btn_Refresh);
+            this.Controls.Add(this.CB_Players);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.Btn_Abort);
             this.Controls.Add(this.Lbl_Search);
             this.Controls.Add(this.label6);
@@ -534,7 +580,7 @@ namespace NailClipr
             this.Controls.Add(this.Lbl_Speed);
             this.Controls.Add(this.Bar_Speed);
             this.Controls.Add(this.ChkBox_Maint);
-            this.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "NailClipr";
@@ -595,6 +641,10 @@ namespace NailClipr
         private Label label6;
         private Label Lbl_Search;
         private Button Btn_Abort;
+        private Label label7;
+        private ComboBox CB_Players;
+        private Button Btn_Refresh;
+        private Button Btn_Attach;
     }
 }
 

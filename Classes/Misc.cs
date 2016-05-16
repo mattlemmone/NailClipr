@@ -6,11 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace NailClipr.Classes
 {
     public class Misc
     {
+        private static Dictionary<string, int> POL_Processes;
         #region Helpers
         public static void CheckUpdate()
         {
@@ -58,7 +60,9 @@ namespace NailClipr.Classes
         }
         public static void ExitApp(EliteAPI api)
         {
-            api.Player.Speed = Player.Speed.normal;
+            //Reset speed to default before closing.
+            if (api != null)
+                api.Player.Speed = Player.Speed.normal;
             if (System.Windows.Forms.Application.MessageLoop)
             {
                 // WinForms app
@@ -110,37 +114,68 @@ namespace NailClipr.Classes
             string text = String.Join("", block);
             return text;
         }
-        public static EliteAPI SelectProcess(EliteAPI api)
+        public static void RefreshProcess(EliteAPI api)
         {
-            #region Final Fantasy XI [POL]
             var data = Process.GetProcessesByName("pol");
 
-            if (data.Count() != 0)
-            {
-                var proc = Process.GetProcessesByName("pol").First().Id;
-                api = new EliteAPI(proc);
-                string p = api.Entity.GetLocalPlayer().Name;
-                WebClient client = new WebClient();
-                Stream stream = client.OpenRead("https://github.com/mattlemmone/NailClipr/raw/master/auth.txt");
-                StreamReader reader = new StreamReader(stream);
-                String content = reader.ReadToEnd();
-
-                if (content.Length == 0 || p.Length == 0 || !content.Contains(p))
-                {
-                    MessageBox.Show(Structs.Error.Auth.text, Structs.Error.Auth.title, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    ExitApp(api);
-                }
-                Structs.Speed.whitelist = content.Split(',').ToList();
-                return api;
-
-            }
-            else
+            if (data.Count() == 0)
             {
                 MessageBox.Show(Structs.Error.Exit.text, Structs.Error.Exit.title, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 ExitApp(api);
-                return null;
             }
-            #endregion
+
+            POL_Processes = new Dictionary<string, int>();
+
+            foreach (var proc in data)
+            {
+                Console.WriteLine(proc.Id);
+                EliteAPI procAPI = new EliteAPI(proc.Id);
+                string p = procAPI.Player.Name;
+
+                POL_Processes.Add(p, proc.Id);
+            }
+
+            NailClipr.GUI_PLAYERS.DataSource = new BindingSource(POL_Processes, null);
+            NailClipr.GUI_PLAYERS.DisplayMember = "Key";
+            NailClipr.GUI_PLAYERS.ValueMember = "Value";
+        }
+        public static EliteAPI SelectProcess(EliteAPI api, bool firstRun = false)
+        {
+            int proc;
+            if (firstRun)
+            {
+                var data = Process.GetProcessesByName("pol");
+
+                if (data.Count() == 0)
+                {
+                    MessageBox.Show(Structs.Error.Exit.text, Structs.Error.Exit.title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ExitApp(api);
+                    return null;
+                }
+                proc = data.First().Id;
+            }
+            else
+            {
+                proc = (int)NailClipr.GUI_PLAYERS.SelectedValue;
+            }
+
+            api = new EliteAPI(proc);
+            string p = api.Entity.GetLocalPlayer().Name;
+
+            WebClient client = new WebClient();
+            Stream stream = client.OpenRead("https://github.com/mattlemmone/NailClipr/raw/master/auth.txt");
+            StreamReader reader = new StreamReader(stream);
+            String content = reader.ReadToEnd();
+
+            if (content.Length == 0 || p.Length == 0 || !content.Contains(p))
+            {
+                MessageBox.Show(Structs.Error.Auth.text, Structs.Error.Auth.title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ExitApp(api);
+            }
+
+            //Set player detect whitelist
+            Structs.Speed.whitelist = content.Split(',').ToList();
+            return api;
         }
         public static void SetVer()
         {

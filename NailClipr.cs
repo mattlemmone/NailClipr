@@ -37,6 +37,10 @@ namespace NailClipr
         public static Button GUI_ABORT;
         public static TextBox GUI_SEARCH_TARGET;
 
+        public static Button GUI_REFRESH;
+        public static Button GUI_ATTACH;
+        public static ComboBox GUI_PLAYERS;
+
         public static WebBrowser GUI_WEB;
 
         public NailClipr()
@@ -48,7 +52,7 @@ namespace NailClipr
             AssignControls();
             PostInit();
 
-            api = Misc.SelectProcess(api);
+            api = Misc.SelectProcess(api, true);
             Text = Structs.App.name + " v." + Structs.App.ver + " - " + api.Player.Name;
 
             // Start the background worker..
@@ -69,6 +73,7 @@ namespace NailClipr
             XML.LoadAreas();
             XML.LoadWarps();
             XML.LoadSettings();
+            Misc.RefreshProcess(api);
         }
         public void AssignControls()
         {
@@ -92,6 +97,10 @@ namespace NailClipr
             GUI_SEARCH_TARGET = Txt_Search;
             GUI_FIND = Btn_Find;
             GUI_ABORT = Btn_Abort;
+
+            GUI_REFRESH = Btn_Refresh;
+            GUI_ATTACH = Btn_Attach;
+            GUI_PLAYERS = CB_Players;
 
         }
 
@@ -278,7 +287,21 @@ namespace NailClipr
         }
         #endregion
 
+        private void Btn_Refresh_Click(object sender, EventArgs e)
+        {
+            Misc.RefreshProcess(api);
+        }
+
         #endregion
+
+        private void Btn_Attach_Click(object sender, EventArgs e)
+        {
+            api = Misc.SelectProcess(api);
+            Functions.ReloadZonePoints(api);
+            Text = Structs.App.name + " v." + Structs.App.ver + " - " + api.Player.Name;
+            Chat.SendEcho(api, "Attached: " + api.Player.Name);
+            Chat.loaded = false;
+        }
 
     }
 }

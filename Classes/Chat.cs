@@ -91,20 +91,17 @@ namespace NailClipr.Classes
         public static void Parse(EliteAPI api)
         {
             EliteAPI.ChatEntry c = api.Chat.GetNextChatLine();
-            if (string.IsNullOrEmpty(c?.Text))
-            {
-                //Trigged our ChatLoaded bool if no new text is processed.
-                if (!Chat.loaded) { Chat.loaded = true; Chat.SendEcho(api, Chat.loadStr); }
+            if (c == null && !Chat.loaded)
+            { Chat.loaded = true; Chat.SendEcho(api, Chat.loadStr); }
+            
+            if (c == null || !Chat.loaded)
                 return;
-            }
-
-            if (!Chat.loaded) return;
 
             const int party = Chat.Types.partyOut,
                 echo = Chat.Types.echo;
 
             int chatType = c.ChatType;
-            
+
             if (party == chatType) ProcessParty(api, c.Text);
             else if (echo == chatType) ProcessEcho(api, c.Text);
             else if (api.Player.ZoneId == Nyzul.zoneID /* && systemType == chatType */) ProcessNyzul(api, c.Text);

@@ -157,7 +157,10 @@ namespace NailClipr
         {
 
             if (nextWP.zone == 0)
+            {
+                Chat.SendEcho(api, "Error with nextWP! No zone detected.");
                 return;
+            }
 
             //Mark flag for status gui text update.
             isWarping = true;

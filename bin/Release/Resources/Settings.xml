@@ -27,6 +27,26 @@
         <Y>9.75531</Y>
         <Z>-0.199</Z>
       </WarpPoint>
+      <WarpPoint title="Smithing Bottom">
+        <X>-183.0724</X>
+        <Y>150.168884</Y>
+        <Z>12.0015564</Z>
+      </WarpPoint>
+      <WarpPoint title="carpenter top">
+        <X>-173.075943</X>
+        <Y>277.716217</Y>
+        <Z>4</Z>
+      </WarpPoint>
+      <WarpPoint title="carpenter bottom">
+        <X>-178.619522</X>
+        <Y>262.408081</Y>
+        <Z>12</Z>
+      </WarpPoint>
+      <WarpPoint title="Alphollon C Meriard">
+        <X>99.06246</X>
+        <Y>136.288452</Y>
+        <Z>0</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="197" title="Crawlers' Nest">
       <WarpPoint title="Tome">
@@ -56,11 +76,6 @@
       </WarpPoint>
     </Zone>
     <Zone id="256" title="Western Adoulin">
-      <WarpPoint title="Couriers' Coalition">
-        <X>4.78996038</X>
-        <Y>-4.295786</Y>
-        <Z>0</Z>
-      </WarpPoint>
       <WarpPoint title="Pioneers' Coalition">
         <X>-89.10254</X>
         <Y>18.7244549</Y>
@@ -111,6 +126,16 @@
         <Y>-68.58728</Y>
         <Z>-0.1500001</Z>
       </WarpPoint>
+      <WarpPoint title="Mummer's Coalition">
+        <X>-32.147644</X>
+        <Y>-97.9669647</Y>
+        <Z>-0.650005937</Z>
+      </WarpPoint>
+      <WarpPoint title="Couriers' Coalition">
+        <X>-25.1926517</X>
+        <Y>18.2004471</Y>
+        <Z>-0.65</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="260" title="Yahse Hunting Grounds">
       <WarpPoint title="Frontier Station Waypoint">
@@ -132,6 +157,11 @@
         <X>86.5</X>
         <Y>1.5</Y>
         <Z>0</Z>
+      </WarpPoint>
+      <WarpPoint title="Bight Uragnite">
+        <X>325.147034</X>
+        <Y>-23.7331314</Y>
+        <Z>0.6278779</Z>
       </WarpPoint>
     </Zone>
     <Zone id="265" title="Morimar Basalt Fields">
@@ -164,11 +194,6 @@
         <X>579.396</X>
         <Y>-477.706</Y>
         <Z>-7.7</Z>
-      </WarpPoint>
-      <WarpPoint title="Icy Weather Tree ???">
-        <X>494.345642</X>
-        <Y>74.08546</Y>
-        <Z>-16.2454014</Z>
       </WarpPoint>
     </Zone>
     <Zone id="257" title="Eastern Adoulin">
@@ -207,6 +232,31 @@
         <Y>-7.520167</Y>
         <Z>-0.149999976</Z>
       </WarpPoint>
+      <WarpPoint title="Anomaly Expert">
+        <X>-85.45496</X>
+        <Y>-81.9316</Y>
+        <Z>-0.149999321</Z>
+      </WarpPoint>
+      <WarpPoint title="Runje Desaali">
+        <X>64.42934</X>
+        <Y>-110.855774</Y>
+        <Z>-40.15</Z>
+      </WarpPoint>
+      <WarpPoint title="Dimmian">
+        <X>-129.175568</X>
+        <Y>61.3175049</Y>
+        <Z>0.15</Z>
+      </WarpPoint>
+      <WarpPoint title="Door: Boarding House">
+        <X>-40.59173</X>
+        <Y>-38.02899</Y>
+        <Z>-0.399999976</Z>
+      </WarpPoint>
+      <WarpPoint title="Scout's Coalition">
+        <X>-96.08361</X>
+        <Y>-50.6621971</Y>
+        <Z>-0.65</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="246" title="Port Jeuno">
       <WarpPoint title="Joachim">
@@ -223,6 +273,16 @@
         <X>47.28939</X>
         <Y>0.780403256</Y>
         <Z>0</Z>
+      </WarpPoint>
+      <WarpPoint title="Monisette">
+        <X>-5.41239</X>
+        <Y>-8.868642</Y>
+        <Z>0.0009999871</Z>
+      </WarpPoint>
+      <WarpPoint title="Lower Jeuno">
+        <X>-151.340042</X>
+        <Y>-10.6249342</Y>
+        <Z>-1.59814</Z>
       </WarpPoint>
     </Zone>
     <Zone id="126" title="Qufim Island">
@@ -250,6 +310,16 @@
         <X>-252.050812</X>
         <Y>301.285767</Y>
         <Z>-20.0094185</Z>
+      </WarpPoint>
+      <WarpPoint title="Hieroglyphics">
+        <X>15.6291876</X>
+        <Y>162.631851</Y>
+        <Z>-20.1809978</Z>
+      </WarpPoint>
+      <WarpPoint title="Behemoth's Dominion">
+        <X>-612.6662</X>
+        <Y>461.9278</Y>
+        <Z>12.47117</Z>
       </WarpPoint>
     </Zone>
     <Zone id="230" title="Southern San d'Oria">
@@ -292,6 +362,11 @@
         <X>74.34697</X>
         <Y>58.3693237</Y>
         <Z>-0.0100057125</Z>
+      </WarpPoint>
+      <WarpPoint title="Northern San d'Oria">
+        <X>0.709006548</X>
+        <Y>45.8159256</Y>
+        <Z>-2</Z>
       </WarpPoint>
     </Zone>
     <Zone id="100" title="West Ronfaure">
@@ -431,6 +506,11 @@
         <X>-17.289</X>
         <Y>-132.805</Y>
         <Z>-1.50083017</Z>
+      </WarpPoint>
+      <WarpPoint title="Trail Markings">
+        <X>99.57441</X>
+        <Y>-66.7133942</Y>
+        <Z>0.994357</Z>
       </WarpPoint>
     </Zone>
     <Zone id="123" title="Yuhtunga Jungle">
@@ -704,6 +784,21 @@
         <Y>-117.511</Y>
         <Z>-2.026558E-06</Z>
       </WarpPoint>
+      <WarpPoint title="Home Point #1">
+        <X>-107.24218</X>
+        <Y>296.083282</Y>
+        <Z>3.3</Z>
+      </WarpPoint>
+      <WarpPoint title="Urghanites">
+        <X>351.169342</X>
+        <Y>57.5471535</Y>
+        <Z>3.31180358</Z>
+      </WarpPoint>
+      <WarpPoint title="Sih Gates Teleport">
+        <X>-239</X>
+        <Y>-402</Y>
+        <Z>0</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="145" title="Giddeus">
       <WarpPoint title="Saruta">
@@ -757,6 +852,26 @@
         <Y>-364.332245</Y>
         <Z>31.0452538</Z>
       </WarpPoint>
+      <WarpPoint title="i7">
+        <X>261.0455</X>
+        <Y>-107.048294</Y>
+        <Z>29.8393784</Z>
+      </WarpPoint>
+      <WarpPoint title="G8">
+        <X>101.498</X>
+        <Y>-156.914932</Y>
+        <Z>30.1800747</Z>
+      </WarpPoint>
+      <WarpPoint title="Col Reieve">
+        <X>243.08992</X>
+        <Y>-60.8563843</Y>
+        <Z>20.5122871</Z>
+      </WarpPoint>
+      <WarpPoint title="Col Reive">
+        <X>243.08992</X>
+        <Y>-60.8563843</Y>
+        <Z>20.5122871</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="262" title="Foret de Hennetiel">
       <WarpPoint title="Frontier Station">
@@ -779,11 +894,31 @@
         <Y>-40.7691536</Y>
         <Z>-2.34359622</Z>
       </WarpPoint>
+      <WarpPoint title="Home Point #1">
+        <X>-192</X>
+        <Y>-252</Y>
+        <Z>-0.4299395</Z>
+      </WarpPoint>
+      <WarpPoint title="Doh Gates">
+        <X>-446.534454</X>
+        <Y>-295.769623</Y>
+        <Z>8.111764</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="33" title="Al'Taieu">
       <WarpPoint title="Home Point #2">
         <X>-532.3899</X>
         <Y>447.900757</Y>
+        <Z>0</Z>
+      </WarpPoint>
+      <WarpPoint title="White Card">
+        <X>54.8300247</X>
+        <Y>590.5442</Y>
+        <Z>-0.433624268</Z>
+      </WarpPoint>
+      <WarpPoint title="Home Point #1">
+        <X>7.054084</X>
+        <Y>706.8495</Y>
         <Z>0</Z>
       </WarpPoint>
     </Zone>
@@ -832,6 +967,21 @@
         <Y>55.56684</Y>
         <Z>10.05689</Z>
       </WarpPoint>
+      <WarpPoint title="bane">
+        <X>200.114</X>
+        <Y>370.4786</Y>
+        <Z>20.35907</Z>
+      </WarpPoint>
+      <WarpPoint title="Wavering Flux">
+        <X>300.450836</X>
+        <Y>-69.6908646</Y>
+        <Z>29.172863</Z>
+      </WarpPoint>
+      <WarpPoint title="Ra'Kaznar Inner Court Tele">
+        <X>-461.4498</X>
+        <Y>-298.588654</Y>
+        <Z>30.3</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="263" title="Yorcia Weald">
       <WarpPoint title="Cirdas Caverns">
@@ -864,6 +1014,26 @@
         <Y>-264.567261</Y>
         <Z>0.2687996</Z>
       </WarpPoint>
+      <WarpPoint title="Lair Reive (I-5)">
+        <X>81.0226059</X>
+        <Y>474.5149</Y>
+        <Z>-0.09435868</Z>
+      </WarpPoint>
+      <WarpPoint title="Wavering Flux">
+        <X>45.0255623</X>
+        <Y>371.244843</Y>
+        <Z>-0.07871699</Z>
+      </WarpPoint>
+      <WarpPoint title="Home Point #1">
+        <X>-417.68158</X>
+        <Y>-61.1132355</Y>
+        <Z>0.4612878</Z>
+      </WarpPoint>
+      <WarpPoint title="Cirdas Tele">
+        <X>159.660477</X>
+        <Y>-361.2394</Y>
+        <Z>0.00121170282</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="273" title="Woh Gates">
       <WarpPoint title="Cirdas Caverns">
@@ -885,6 +1055,16 @@
         <X>184.2538</X>
         <Y>49.1316681</Y>
         <Z>34.65354</Z>
+      </WarpPoint>
+      <WarpPoint title="Darkened Crevice">
+        <X>184.5541</X>
+        <Y>240.43956</Y>
+        <Z>28.9754162</Z>
+      </WarpPoint>
+      <WarpPoint title="col reieve">
+        <X>259.082153</X>
+        <Y>287.5645</Y>
+        <Z>30.7402554</Z>
       </WarpPoint>
     </Zone>
     <Zone id="267" title="Kamihr Drifts">
@@ -913,12 +1093,42 @@
         <Y>61.4812164</Y>
         <Z>18.9638748</Z>
       </WarpPoint>
+      <WarpPoint title="Hollowed Pathway">
+        <X>-212.244568</X>
+        <Y>-447.918274</Y>
+        <Z>39.83407</Z>
+      </WarpPoint>
+      <WarpPoint title="Crawling Cave">
+        <X>-349.0433</X>
+        <Y>-379.861877</Y>
+        <Z>40.44889</Z>
+      </WarpPoint>
+      <WarpPoint title="Alpine Trail">
+        <X>-11.249588</X>
+        <Y>486.941559</Y>
+        <Z>0.0546402335</Z>
+      </WarpPoint>
+      <WarpPoint title="Blockaded Path">
+        <X>-218.188522</X>
+        <Y>-409.40918</Y>
+        <Z>40.6826134</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="274" title="Outer Ra'Kaznar">
       <WarpPoint title="Kamihr Drifts">
         <X>-38.4731</X>
         <Y>-22.1483517</Y>
         <Z>-179.3335</Z>
+      </WarpPoint>
+      <WarpPoint title="Demonic Architrave">
+        <X>200.437408</X>
+        <Y>-21.5971737</Y>
+        <Z>60.1964836</Z>
+      </WarpPoint>
+      <WarpPoint title="Floor 1 -&gt; 2">
+        <X>-586.0096</X>
+        <Y>255.318954</Y>
+        <Z>-160.102325</Z>
       </WarpPoint>
     </Zone>
     <Zone id="258" title="Rala Waterways">
@@ -935,11 +1145,6 @@
       <WarpPoint title="Western Adoulin">
         <X>-270.485657</X>
         <Y>-380.014526</Y>
-        <Z>-5.76754</Z>
-      </WarpPoint>
-      <WarpPoint title="Entrance: Coliseum">
-        <X>259.103638</X>
-        <Y>60.0513954</Y>
         <Z>-5.76754</Z>
       </WarpPoint>
       <WarpPoint title="Augural Conveyor">
@@ -960,6 +1165,36 @@
       <WarpPoint title="Storage Container">
         <X>-147.329468</X>
         <Y>28.69579</Y>
+        <Z>-5.76754</Z>
+      </WarpPoint>
+      <WarpPoint title="Waterways Overlook">
+        <X>-19.3603725</X>
+        <Y>37.289566</Y>
+        <Z>-5.838544</Z>
+      </WarpPoint>
+      <WarpPoint title="Sainene">
+        <X>307.806458</X>
+        <Y>-67.06687</Y>
+        <Z>-5.76754</Z>
+      </WarpPoint>
+      <WarpPoint title="Stout Weir">
+        <X>-430.575226</X>
+        <Y>-149.348038</Y>
+        <Z>-1.05286956</Z>
+      </WarpPoint>
+      <WarpPoint title="Royal Sepulcher">
+        <X>316.550934</X>
+        <Y>-299.9651</Y>
+        <Z>-5.76754</Z>
+      </WarpPoint>
+      <WarpPoint title="Royal Sepulcher Mobs">
+        <X>218.7341</X>
+        <Y>-287.7188</Y>
+        <Z>-1</Z>
+      </WarpPoint>
+      <WarpPoint title="Entrance: Coliseum">
+        <X>258.6258</X>
+        <Y>60.4622765</Y>
         <Z>-5.76754</Z>
       </WarpPoint>
     </Zone>
@@ -994,6 +1229,11 @@
         <Y>265.282135</Y>
         <Z>-60</Z>
       </WarpPoint>
+      <WarpPoint title="dad">
+        <X>-70.95336</X>
+        <Y>-18.4573669</Y>
+        <Z>0.8403174</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="272" title="Dho Gates">
       <WarpPoint title="Marjami Ravine">
@@ -1001,17 +1241,57 @@
         <Y>339.625</Y>
         <Z>-40</Z>
       </WarpPoint>
+      <WarpPoint title="Cirdas Warp">
+        <X>297.517517</X>
+        <Y>-181.674988</Y>
+        <Z>-19.1692638</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="289" title="Escha - Ru'Aun">
-      <WarpPoint title="Dremi">
-        <X>-8.153341</X>
-        <Y>-458.46283</Y>
-        <Z>-34.0001</Z>
-      </WarpPoint>
       <WarpPoint title="Grind dad">
         <X>-353.101776</X>
         <Y>262.588654</Y>
         <Z>-40.105854</Z>
+      </WarpPoint>
+      <WarpPoint title="Eschan Phuabo">
+        <X>143.4039</X>
+        <Y>-154.856232</Y>
+        <Z>-40.326786</Z>
+      </WarpPoint>
+      <WarpPoint title="Eschan Ghrah">
+        <X>-434.817932</X>
+        <Y>72.23637</Y>
+        <Z>-37.0259323</Z>
+      </WarpPoint>
+      <WarpPoint title="NE Outer">
+        <X>195.800369</X>
+        <Y>521.2112</Y>
+        <Z>-70.01997</Z>
+      </WarpPoint>
+      <WarpPoint title="NW Outer">
+        <X>-389.526</X>
+        <Y>397.551117</Y>
+        <Z>-70.0199661</Z>
+      </WarpPoint>
+      <WarpPoint title="Dremi">
+        <X>-8.306592</X>
+        <Y>-460.470459</Y>
+        <Z>-34.0001</Z>
+      </WarpPoint>
+      <WarpPoint title="Eschan Hpemde">
+        <X>355.750366</X>
+        <Y>260.7515</Y>
+        <Z>-40.1058273</Z>
+      </WarpPoint>
+      <WarpPoint title="Alt Camp">
+        <X>-141.679062</X>
+        <Y>414.97464</Y>
+        <Z>-40.1058578</Z>
+      </WarpPoint>
+      <WarpPoint title="Pop">
+        <X>-453.7262</X>
+        <Y>148.708984</Y>
+        <Z>-40.138134</Z>
       </WarpPoint>
     </Zone>
     <Zone id="232" title="Port San d'Oria">
@@ -1019,6 +1299,11 @@
         <X>49.4468651</X>
         <Y>-105.439041</Y>
         <Z>-12</Z>
+      </WarpPoint>
+      <WarpPoint title="Bonanza Moogle">
+        <X>13.0196838</X>
+        <Y>-85.76848</Y>
+        <Z>-4</Z>
       </WarpPoint>
     </Zone>
     <Zone id="244" title="Upper Jeuno">
@@ -1066,6 +1351,11 @@
         <Y>568.586</Y>
         <Z>20.0599537</Z>
       </WarpPoint>
+      <WarpPoint title="Trail Markings">
+        <X>-278.60434</X>
+        <Y>-417.577118</Y>
+        <Z>-39.8840675</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="204" title="Fei'Yin">
       <WarpPoint title="Beaucedine Glacier">
@@ -1079,6 +1369,21 @@
         <X>258.6588</X>
         <Y>65.40748</Y>
         <Z>-87</Z>
+      </WarpPoint>
+      <WarpPoint title="???">
+        <X>-589.719849</X>
+        <Y>112.84597</Y>
+        <Z>-61.3103065</Z>
+      </WarpPoint>
+      <WarpPoint title="Shiftrix">
+        <X>-499.393555</X>
+        <Y>-486.2248</Y>
+        <Z>-19.2035275</Z>
+      </WarpPoint>
+      <WarpPoint title="??? River">
+        <X>98.43912</X>
+        <Y>602.062134</Y>
+        <Z>-74</Z>
       </WarpPoint>
     </Zone>
     <Zone id="102" title="La Theine Plateau">
@@ -1101,6 +1406,11 @@
         <X>-186.723724</X>
         <Y>256.3985</Y>
         <Z>8.25012</Z>
+      </WarpPoint>
+      <WarpPoint title="Cavernous Maw">
+        <X>-560.24</X>
+        <Y>638.9971</Y>
+        <Z>0</Z>
       </WarpPoint>
     </Zone>
     <Zone id="121" title="The Sanctuary of Zi'Tah">
@@ -1173,6 +1483,26 @@
         <X>46.9617577</X>
         <Y>143.672241</Y>
         <Z>-0.0467202663</Z>
+      </WarpPoint>
+      <WarpPoint title="50-60">
+        <X>-438.67395</X>
+        <Y>-87.1388245</Y>
+        <Z>0.156407535</Z>
+      </WarpPoint>
+      <WarpPoint title="Eschan Coeurl">
+        <X>-292.445068</X>
+        <Y>254.3054</Y>
+        <Z>0.624369144</Z>
+      </WarpPoint>
+      <WarpPoint title="Eschan Portal #4">
+        <X>-109.627563</X>
+        <Y>-238.932251</Y>
+        <Z>0.108314633</Z>
+      </WarpPoint>
+      <WarpPoint title="Vultures">
+        <X>-120.423943</X>
+        <Y>-100.940056</Y>
+        <Z>2.83601332</Z>
       </WarpPoint>
     </Zone>
     <Zone id="118" title="Buburimu Peninsula">
@@ -1260,6 +1590,16 @@
         <Y>108.058167</Y>
         <Z>3.1</Z>
       </WarpPoint>
+      <WarpPoint title="Home Point #1">
+        <X>-6.941434</X>
+        <Y>-1.630174</Y>
+        <Z>3</Z>
+      </WarpPoint>
+      <WarpPoint title="Home Point #2">
+        <X>50.6932335</X>
+        <Y>-58.0914536</Y>
+        <Z>9</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="252" title="Norg">
       <WarpPoint title="Home Point #1">
@@ -1271,6 +1611,11 @@
         <X>99.6811447</X>
         <Y>-11.96801</Y>
         <Z>-7.086256</Z>
+      </WarpPoint>
+      <WarpPoint title="Nolan">
+        <X>11.0770025</X>
+        <Y>20.3382549</Y>
+        <Z>-0.09027493</Z>
       </WarpPoint>
     </Zone>
     <Zone id="103" title="Valkurm Dunes">
@@ -1369,6 +1714,21 @@
         <Y>0.798026443</Y>
         <Z>-2.5</Z>
       </WarpPoint>
+      <WarpPoint title="Windurst Walls">
+        <X>-52.278</X>
+        <Y>78.051</Y>
+        <Z>-3.539837</Z>
+      </WarpPoint>
+      <WarpPoint title="Mog House">
+        <X>-79.4544449</X>
+        <Y>36.2625</Y>
+        <Z>-4.93180275</Z>
+      </WarpPoint>
+      <WarpPoint title="Funtrox">
+        <X>-32.9531937</X>
+        <Y>59.9036179</Y>
+        <Z>-3.94972181</Z>
+      </WarpPoint>
     </Zone>
     <Zone id="250" title="Kazham">
       <WarpPoint title="Home Point #1">
@@ -1382,6 +1742,123 @@
         <X>-91.90349</X>
         <Y>56.549736</Y>
         <Z>-2</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="175" title="The Eldieme Necropolis [S]">
+      <WarpPoint title="Erlene">
+        <X>378.328339</X>
+        <Y>18.2243748</Y>
+        <Z>-40.0000038</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="186" title="Dynamis - Bastok">
+      <WarpPoint title="Ko'Dho Cannonball">
+        <X>56.968956</X>
+        <Y>-14.5953445</Y>
+        <Z>0</Z>
+      </WarpPoint>
+      <WarpPoint title="ass">
+        <X>-126.695023</X>
+        <Y>-3.806116</Y>
+        <Z>-0.09793782</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="14" title="Hall of Transference">
+      <WarpPoint title="Cermet Gate">
+        <X>-219.037933</X>
+        <Y>280.245972</Y>
+        <Z>-6.459539</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="268" title="Sih Gates">
+      <WarpPoint title="Ceizak Battlegrounds Teleport">
+        <X>339.058</X>
+        <Y>381.41</Y>
+        <Z>10.11536</Z>
+      </WarpPoint>
+      <WarpPoint title="SH1">
+        <X>23.3619785</X>
+        <Y>-302.385437</Y>
+        <Z>-2.92955542</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="276" title="Ra'Kaznar Inner Court">
+      <WarpPoint title="Yorcia Weald Tele">
+        <X>821.398865</X>
+        <Y>57.760643</Y>
+        <Z>89.5</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="277" title="Ra'Kaznar Turris">
+      <WarpPoint title="Entrance">
+        <X>70</X>
+        <Y>20</Y>
+        <Z>-29.99954</Z>
+      </WarpPoint>
+      <WarpPoint title="Ominous Postern">
+        <X>122.765663</X>
+        <Y>20.0273628</Y>
+        <Z>39.19625</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="187" title="Dynamis - Windurst">
+      <WarpPoint title="Odious Canteen">
+        <X>-26.1765671</X>
+        <Y>257.57132</Y>
+        <Z>-12.7384224</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="94" title="Windurst Waters [S]">
+      <WarpPoint title="Home Point #1">
+        <X>-33.76406</X>
+        <Y>133.3036</Y>
+        <Z>-5</Z>
+      </WarpPoint>
+      <WarpPoint title="Voidwatch Purveyor">
+        <X>-30.1305</X>
+        <Y>223.156921</Y>
+        <Z>-4.88479471</Z>
+      </WarpPoint>
+      <WarpPoint title="Mog House">
+        <X>159.633041</X>
+        <Y>-26.0956764</Y>
+        <Z>1</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="95" title="West Sarutabaruta [S]">
+      <WarpPoint title="Planar Rift">
+        <X>120.09594</X>
+        <Y>-436.308044</Y>
+        <Z>4</Z>
+      </WarpPoint>
+      <WarpPoint title="Windurst Waters [S]">
+        <X>321.264771</X>
+        <Y>-34.7615433</Y>
+        <Z>-4.079072</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="127" title="Behemoth's Dominion">
+      <WarpPoint title="Tomes">
+        <X>339.150024</X>
+        <Y>-73.24478</Y>
+        <Z>26.7668266</Z>
+      </WarpPoint>
+      <WarpPoint title="King Behemoth">
+        <X>-243.287766</X>
+        <Y>40.1035042</Y>
+        <Z>-20</Z>
+      </WarpPoint>
+    </Zone>
+    <Zone id="45" title="Abyssea - Tahrongi">
+      <WarpPoint title="Serp. Cuffs">
+        <X>-224.013763</X>
+        <Y>558.488647</Y>
+        <Z>40.863</Z>
+      </WarpPoint>
+      <WarpPoint title="Tacky Boy">
+        <X>-218.954</X>
+        <Y>-302.180145</Y>
+        <Z>-1</Z>
       </WarpPoint>
     </Zone>
   </Zones>

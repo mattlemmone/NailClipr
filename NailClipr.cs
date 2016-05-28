@@ -299,7 +299,7 @@ namespace NailClipr
             api = Misc.SelectProcess(api);
             Functions.ReloadZonePoints(api);
             Text = Structs.App.name + " v." + Structs.App.ver + " - " + api.Player.Name;
-            Chat.SendEcho(api, "Attached: " + api.Player.Name);
+            Chat.SendEcho(api, "Attached: " + api.Player.Name + ".");
             Chat.loaded = false;
         }
 

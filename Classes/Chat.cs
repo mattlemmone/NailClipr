@@ -27,6 +27,7 @@ namespace NailClipr.Classes
                 desc = "desc",
                 reload = "reload",
                 help = "help",
+                tpTarget = "tptot",
 
                 //Search Calls
                 searchBG = "bg",
@@ -55,6 +56,7 @@ namespace NailClipr.Classes
                     {reload, Functions.ReloadZonePoints },
                     {request, SharedFunctions.Request },
                     {saveWarp, SharedFunctions.SaveWarp },
+                    {tpTarget, SharedFunctions.TpTarget },
                     {warp, SharedFunctions.Warp }
             };
 

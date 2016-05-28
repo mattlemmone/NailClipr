@@ -130,7 +130,7 @@ namespace NailClipr.Classes
             {
                 Console.WriteLine(proc.Id);
                 EliteAPI procAPI = new EliteAPI(proc.Id);
-                string p = procAPI.Player.Name;
+                string p = procAPI.Player.Name + " - " + proc.Id ;
 
                 POL_Processes.Add(p, proc.Id);
             }

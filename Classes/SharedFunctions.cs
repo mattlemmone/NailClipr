@@ -168,6 +168,22 @@ namespace NailClipr.Classes
             }
             Player.Speed.SetSpeed(api, speed);
         }
+        public static void TpTarget(EliteAPI api)
+        {
+            EliteAPI.TargetInfo t = api.Target.GetTargetInfo();
+            string targetName = t.TargetName;
+            if (targetName.Length == 0) {
+                Chat.SendEcho(api, "Target not selected.");
+                return; 
+            }
+
+            EliteAPI.XiEntity e = api.Entity.GetEntity((int)t.TargetIndex);
+            Structs.WarpPoint wp = new Structs.WarpPoint();
+            Structs.Position p = new Structs.Position();
+            p.X = e.X; p.Y = e.Z; p.Z = e.Y; wp.pos = p; wp.zone = api.Player.ZoneId;
+            Chat.SendEcho(api, "Approaching " + targetName + ".");
+            Player.Warp(api, wp);
+        }
         public static void Warp(EliteAPI api)
         {
             if (NailClipr.GUI_WARP.InvokeRequired)
